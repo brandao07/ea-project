@@ -1,0 +1,15 @@
+Use Case,Nome,Ator Principal,Atores secundários,Pré-Condições,Pós-Condições
+UC01,Criação de Competição,Organizador,Sistema,O sistema está disponível para configuração da competição.,As configurações da competição são salvas no sistema.
+UC02,Criação de Prova,Organizador,Sistema,O sistema está disponível para criar provas.,As provas são criadas e Registadas no sistema.
+UC03,Criação de Competição,Organizador,Sistema,O sistema está disponível para criar uma competição.,A competição é criada e Registada no sistema.
+UC04,Inserção de Resultados,Organizador,Sistema,O sistema está disponível para inserir resultados de competição.,Os resultados da competição são registados no sistema.
+UC05,Publicação de Resultados,Organizador,Sistema,Os resultados da competição estão disponíveis no sistema.,Os resultados são publicados para os participantes e público em geral.
+UC06,Gerir Inscrição de Atletas,Atleta,Sistema,O sistema está disponível para gerir inscrições de atletas.,As inscrições de atletas são registadas no sistema.
+UC07,Gerir Inscrição de Equipas,Equipa,Sistema,O sistema está disponível para gerir inscrições de equipas.,As inscrições de equipas são registadas no sistema.
+UC08,Gerir Inscrição de Clubes,Clube,Sistema,O sistema está disponível para gerir inscrições de clubes.,As inscrições de clubes são registadas no sistema.
+UC09,Inserção e Atualização da Meteorologia,Organizador,Sistema,O sistema está disponível para inserir informações meteorológicas.,As informações meteorológicas são registadas no sistema.
+UC10,Introduzir Horário de Provas e Competições,Organizador,Sistema,O sistema está disponível para inserir horários de provas.,Os horários das provas são registados no sistema.
+UC11,Introdução de Escalões de Provas,Organizador,Sistema,O sistema está disponível para inserir escalões.,Os escalões são registados no sistema.
+UC12,Definição das Categorias de Provas e Competições,Organizador,Sistema,O sistema está disponível para definir categorias de competição.,As categorias são registadas no sistema.
+UC13,Serviço de Email de Notificação,Sistema,Organizador da competição,O sistema está disponível para enviar notificações por email.,As notificações são enviadas por email para os destinatários.
+UC14,Protesto de Resultado,Clube,Organizador da competição,Os resultados da competição estão disponíveis para consulta.,O protesto é registado no sistema e enviado ao organizador da competição.
