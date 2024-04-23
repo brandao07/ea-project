@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Licensee: Eduardo(University of Minho)
+Licensee: User-PC(University of Minho)
 License Type: Academic
 -->
 <project name="AASICProject" default="compile">

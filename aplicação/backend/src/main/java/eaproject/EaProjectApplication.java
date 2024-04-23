@@ -11,8 +11,7 @@ public class EaProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(EaProjectApplication.class);
-		app.setDefaultProperties(Collections
-				.singletonMap("server.port", "7000"));
+		app.setDefaultProperties(Collections.singletonMap("server.port", "7000"));
 		app.run(args);
 	}
 }

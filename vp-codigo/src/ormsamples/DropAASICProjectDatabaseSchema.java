@@ -1,5 +1,5 @@
 /**
- * Licensee: Eduardo(University of Minho)
+ * Licensee: User-PC(University of Minho)
  * License Type: Academic
  */
 package ormsamples;
