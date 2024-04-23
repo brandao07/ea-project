@@ -23,17 +23,17 @@ License Type: Academic
 		<property name="show_sql">false</property>
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
 		<!-- mapping files -->
-		<mapping resource="ormmapping/eaproject/dao/club.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/competition.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/grade.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/location.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/notification.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/result.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/role.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/state.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/team.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/trial.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/type.hbm.xml" />
-		<mapping resource="ormmapping/eaproject/dao/user.hbm.xml" />
+		<mapping resource="ormmapping/club.hbm.xml" />
+		<mapping resource="ormmapping/competition.hbm.xml" />
+		<mapping resource="ormmapping/grade.hbm.xml" />
+		<mapping resource="ormmapping/location.hbm.xml" />
+		<mapping resource="ormmapping/notification.hbm.xml" />
+		<mapping resource="ormmapping/result.hbm.xml" />
+		<mapping resource="ormmapping/role.hbm.xml" />
+		<mapping resource="ormmapping/state.hbm.xml" />
+		<mapping resource="ormmapping/team.hbm.xml" />
+		<mapping resource="ormmapping/trial.hbm.xml" />
+		<mapping resource="ormmapping/type.hbm.xml" />
+		<mapping resource="ormmapping/user.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
