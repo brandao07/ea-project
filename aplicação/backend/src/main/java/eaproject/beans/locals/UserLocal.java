@@ -1,10 +1,10 @@
 package eaproject.beans.locals;
 
-import eaproject.dao.user;
+import eaproject.dao.User;
 
 import javax.ejb.Local;
 
 @Local
 public interface UserLocal {
-    user[] getAllUsers();
+    User[] getAllUsers();
 }

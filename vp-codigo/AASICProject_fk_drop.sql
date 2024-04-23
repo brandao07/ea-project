@@ -1,0 +1,11 @@
+alter table "User" drop constraint Federated;
+alter table Team drop constraint Owns;
+alter table "User" drop constraint Belongs;
+alter table Trial drop constraint Participates;
+alter table Trial drop constraint Occurs;
+alter table Trial drop constraint Restricts;
+alter table Trial drop constraint Requires;
+alter table Trial drop constraint Fulfill;
+alter table Notification drop constraint Issue;
+alter table Result drop constraint Publish;
+alter table Trial drop constraint Changes;

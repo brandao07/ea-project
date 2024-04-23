@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-Licensee: User-PC(University of Minho)
+Licensee: Eduardo(University of Minho)
 License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="eaproject.dao.competition" table="competition" lazy="false">
+	<class name="eaproject.dao.Competition" table="Competition" lazy="false">
 		<id name="CompetitionId" column="CompetitionId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
@@ -17,11 +17,11 @@ License Type: Academic
 		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_Trial" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="CompetitionCompetitionId" not-null="true"/>
-			<one-to-many class="eaproject.dao.trial"/>
+			<one-to-many class="eaproject.dao.Trial"/>
 		</set>
 		<set name="ORM_Notification" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="CompetitionCompetitionId" not-null="true"/>
-			<one-to-many class="eaproject.dao.notification"/>
+			<one-to-many class="eaproject.dao.Notification"/>
 		</set>
 	</class>
 </hibernate-mapping>

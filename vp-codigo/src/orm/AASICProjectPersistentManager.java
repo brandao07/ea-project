@@ -8,7 +8,7 @@
  */
 
 /**
- * Licensee: User-PC(University of Minho)
+ * Licensee: Eduardo(University of Minho)
  * License Type: Academic
  */
 package orm;

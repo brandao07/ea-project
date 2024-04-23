@@ -1,0 +1,226 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * <p>
+ * This is an automatic generated file. It will be regenerated every time
+ * you generate persistence class.
+ * <p>
+ * Modifying its content may cause the program not work, or your work may lost.
+ * <p>
+ * Licensee: Eduardo(University of Minho)
+ * License Type: Academic
+ */
+
+/**
+ * Licensee: Eduardo(University of Minho)
+ * License Type: Academic
+ */
+package eaproject.dao;
+
+import eaproject.constants.ORMConstants;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+    public User() {
+    }
+
+    private java.util.Set this_getSet(int key) {
+        if (key == ORMConstants.KEY_USER_TRIAL) {
+            return ORM_trial;
+        }
+
+        return null;
+    }
+
+    private void this_setOwner(Object owner, int key) {
+        if (key == ORMConstants.KEY_USER_ROLE) {
+            this.role = (Role) owner;
+        } else if (key == ORMConstants.KEY_USER_TEAM) {
+            this.team = (Team) owner;
+        }
+    }
+
+    org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
+        public java.util.Set getSet(int key) {
+            return this_getSet(key);
+        }
+
+        public void setOwner(Object owner, int key) {
+            this_setOwner(owner, key);
+        }
+
+    };
+
+    private int UserId;
+
+    private Role role;
+
+    private Team team;
+
+    private String Name;
+
+    private String Email;
+
+    private String Password;
+
+    private String Gender;
+
+    private int Age;
+
+    private double Height;
+
+    private double Weight;
+
+    private boolean IsActive;
+
+    private java.sql.Timestamp RegisterDate;
+
+    private java.util.Set ORM_trial = new java.util.HashSet();
+
+    private void setUserId(int value) {
+        this.UserId = value;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public int getORMID() {
+        return getUserId();
+    }
+
+    public void setName(String value) {
+        this.Name = value;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setEmail(String value) {
+        this.Email = value;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setPassword(String value) {
+        this.Password = value;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setGender(String value) {
+        this.Gender = value;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setAge(int value) {
+        this.Age = value;
+    }
+
+    public int getAge() {
+        return Age;
+    }
+
+    public void setHeight(double value) {
+        this.Height = value;
+    }
+
+    public double getHeight() {
+        return Height;
+    }
+
+    public void setWeight(double value) {
+        this.Weight = value;
+    }
+
+    public double getWeight() {
+        return Weight;
+    }
+
+    public void setIsActive(boolean value) {
+        this.IsActive = value;
+    }
+
+    public boolean getIsActive() {
+        return IsActive;
+    }
+
+    public void setRegisterDate(java.sql.Timestamp value) {
+        this.RegisterDate = value;
+    }
+
+    public java.sql.Timestamp getRegisterDate() {
+        return RegisterDate;
+    }
+
+    public void setRole(Role value) {
+        if (role != null) {
+            role.user.remove(this);
+        }
+        if (value != null) {
+            value.user.add(this);
+        }
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * This method is for internal use only.
+     */
+    public void setORM_Role(Role value) {
+        this.role = value;
+    }
+
+    private Role getORM_Role() {
+        return role;
+    }
+
+    private void setORM_Trial(java.util.Set value) {
+        this.ORM_trial = value;
+    }
+
+    private java.util.Set getORM_Trial() {
+        return ORM_trial;
+    }
+
+    public final TrialSetCollection trial = new TrialSetCollection(this, _ormAdapter, ORMConstants.KEY_USER_TRIAL, ORMConstants.KEY_TRIAL_USER, ORMConstants.KEY_MUL_ONE_TO_MANY);
+
+    public void setTeam(Team value) {
+        if (team != null) {
+            team.user.remove(this);
+        }
+        if (value != null) {
+            value.user.add(this);
+        }
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    /**
+     * This method is for internal use only.
+     */
+    public void setORM_Team(Team value) {
+        this.team = value;
+    }
+
+    private Team getORM_Team() {
+        return team;
+    }
+
+    public String toString() {
+        return String.valueOf(getUserId());
+    }
+
+}

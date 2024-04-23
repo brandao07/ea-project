@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-Licensee: User-PC(University of Minho)
+Licensee: Eduardo(University of Minho)
 License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="eaproject.dao.type" table="type" lazy="false">
+	<class name="eaproject.dao.Type" table="Type" lazy="false">
 		<id name="TypeId" column="TypeId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
@@ -15,7 +15,7 @@ License Type: Academic
 		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_Trial" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="TypeTypeId" not-null="true"/>
-			<one-to-many class="eaproject.dao.trial"/>
+			<one-to-many class="eaproject.dao.Trial"/>
 		</set>
 	</class>
 </hibernate-mapping>

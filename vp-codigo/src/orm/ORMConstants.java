@@ -8,54 +8,54 @@
  */
 
 /**
- * Licensee: User-PC(University of Minho)
+ * Licensee: Eduardo(University of Minho)
  * License Type: Academic
  */
 package orm;
 
 public interface ORMConstants extends org.orm.util.ORMBaseConstants {
-	final int KEY_CLUB_TEAM = 56285254;
+	final int KEY_CLUB_TEAM = 2060253222;
 	
-	final int KEY_COMPETITION_NOTIFICATION = 1496412011;
+	final int KEY_COMPETITION_NOTIFICATION = -654339189;
 	
-	final int KEY_COMPETITION_TRIAL = -1426098026;
+	final int KEY_COMPETITION_TRIAL = -1782335370;
 	
-	final int KEY_GRADE_TRIAL = -98192210;
+	final int KEY_GRADE_TRIAL = 1569676430;
 	
-	final int KEY_LOCATION_TRIAL = 140031500;
+	final int KEY_LOCATION_TRIAL = -861961684;
 	
-	final int KEY_NOTIFICATION_COMPETITION = -472420245;
+	final int KEY_NOTIFICATION_COMPETITION = 1671795851;
 	
-	final int KEY_RESULT_TRIAL = 530641012;
+	final int KEY_RESULT_TRIAL = 694961300;
 	
-	final int KEY_ROLE_USER = 336068084;
+	final int KEY_ROLE_USER = -1954931244;
 	
-	final int KEY_STATE_TRIAL = 1535362536;
+	final int KEY_STATE_TRIAL = -1091736120;
 	
-	final int KEY_TEAM_CLUB = -176222888;
+	final int KEY_TEAM_CLUB = 1827745080;
 	
-	final int KEY_TEAM_USER = -175680403;
+	final int KEY_TEAM_USER = 1828287565;
 	
-	final int KEY_TRIAL_COMPETITION = -1461842410;
+	final int KEY_TRIAL_COMPETITION = -1818079754;
 	
-	final int KEY_TRIAL_GRADE = 1708591470;
+	final int KEY_TRIAL_GRADE = -918507186;
 	
-	final int KEY_TRIAL_LOCATION = -1492297026;
+	final int KEY_TRIAL_LOCATION = 1800677086;
 	
-	final int KEY_TRIAL_RESULT = 1730195814;
+	final int KEY_TRIAL_RESULT = 1894516102;
 	
-	final int KEY_TRIAL_STATE = 1719733800;
+	final int KEY_TRIAL_STATE = -907364856;
 	
-	final int KEY_TRIAL_TYPE = 471152323;
+	final int KEY_TRIAL_TYPE = -1830350109;
 	
-	final int KEY_TRIAL_USER = 471176020;
+	final int KEY_TRIAL_USER = -1830326412;
 	
-	final int KEY_TYPE_TRIAL = -1079169583;
+	final int KEY_TYPE_TRIAL = 914295281;
 	
-	final int KEY_USER_ROLE = 339473514;
+	final int KEY_USER_ROLE = -1951525814;
 	
-	final int KEY_USER_TEAM = 339523153;
+	final int KEY_USER_TEAM = -1951476175;
 	
-	final int KEY_USER_TRIAL = 1935677858;
+	final int KEY_USER_TRIAL = -365824574;
 	
 }

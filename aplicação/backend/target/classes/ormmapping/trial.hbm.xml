@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-Licensee: User-PC(University of Minho)
+Licensee: Eduardo(University of Minho)
 License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="eaproject.dao.trial" table="trial" lazy="false">
+	<class name="eaproject.dao.Trial" table="Trial" lazy="false">
 		<id name="TrialId" column="TrialId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="state" cascade="lock" column="StateStateId" class="eaproject.dao.state" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="state" cascade="lock" column="StateStateId" class="eaproject.dao.State" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="competition" cascade="lock" column="CompetitionCompetitionId" class="eaproject.dao.competition" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="competition" cascade="lock" column="CompetitionCompetitionId" class="eaproject.dao.Competition" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="grade" cascade="lock" column="GradeGradeId" class="eaproject.dao.grade" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="grade" cascade="lock" column="GradeGradeId" class="eaproject.dao.Grade" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="type" cascade="lock" column="TypeTypeId" class="eaproject.dao.type" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="type" cascade="lock" column="TypeTypeId" class="eaproject.dao.Type" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="location" cascade="lock" column="LocationLocationId" class="eaproject.dao.location" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="location" cascade="lock" column="LocationLocationId" class="eaproject.dao.Location" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="user" cascade="lock" column="UserUserId" class="eaproject.dao.user" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="user" cascade="lock" column="UserUserId" class="eaproject.dao.User" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
 		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="StartDate" column="StartDate" type="timestamp" not-null="false" lazy="false"/>
@@ -31,7 +31,7 @@ License Type: Academic
 		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_Result" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="TrialTrialId" not-null="true"/>
-			<one-to-many class="eaproject.dao.result"/>
+			<one-to-many class="eaproject.dao.Result"/>
 		</set>
 	</class>
 </hibernate-mapping>

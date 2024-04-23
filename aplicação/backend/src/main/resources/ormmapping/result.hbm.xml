@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-Licensee: User-PC(University of Minho)
+Licensee: Eduardo(University of Minho)
 License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="eaproject.dao.result" table="result" lazy="false">
+	<class name="eaproject.dao.Result" table="Result" lazy="false">
 		<id name="ResultId" column="ResultId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="trial" cascade="lock" column="TrialTrialId" class="eaproject.dao.trial" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="trial" cascade="lock" column="TrialTrialId" class="eaproject.dao.Trial" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
 		<property name="Position" column="Position" type="integer" length="10" not-null="true" lazy="false"/>
 		<property name="Time" column="Time" type="timestamp" not-null="false" lazy="false"/>

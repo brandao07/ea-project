@@ -1,5 +1,5 @@
 /**
- * Licensee: User-PC(University of Minho)
+ * Licensee: Eduardo(University of Minho)
  * License Type: Academic
  */
 package ormsamples;
@@ -9,42 +9,42 @@ public class DeleteAASICProjectData {
 	public void deleteTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			eaproject.dao.user leaprojectdaouser = eaproject.dao.userDAO.loadUserByQuery(null, null);
+			dao.User ldaoUser = dao.UserDAO.loadUserByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.userDAO.delete(leaprojectdaouser);
-			eaproject.dao.trial leaprojectdaotrial = eaproject.dao.trialDAO.loadTrialByQuery(null, null);
+			dao.UserDAO.delete(ldaoUser);
+			dao.Trial ldaoTrial = dao.TrialDAO.loadTrialByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.trialDAO.delete(leaprojectdaotrial);
-			eaproject.dao.competition leaprojectdaocompetition = eaproject.dao.competitionDAO.loadCompetitionByQuery(null, null);
+			dao.TrialDAO.delete(ldaoTrial);
+			dao.Competition ldaoCompetition = dao.CompetitionDAO.loadCompetitionByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.competitionDAO.delete(leaprojectdaocompetition);
-			eaproject.dao.result leaprojectdaoresult = eaproject.dao.resultDAO.loadResultByQuery(null, null);
+			dao.CompetitionDAO.delete(ldaoCompetition);
+			dao.Result ldaoResult = dao.ResultDAO.loadResultByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.resultDAO.delete(leaprojectdaoresult);
-			eaproject.dao.grade leaprojectdaograde = eaproject.dao.gradeDAO.loadGradeByQuery(null, null);
+			dao.ResultDAO.delete(ldaoResult);
+			dao.Grade ldaoGrade = dao.GradeDAO.loadGradeByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.gradeDAO.delete(leaprojectdaograde);
-			eaproject.dao.location leaprojectdaolocation = eaproject.dao.locationDAO.loadLocationByQuery(null, null);
+			dao.GradeDAO.delete(ldaoGrade);
+			dao.Location ldaoLocation = dao.LocationDAO.loadLocationByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.locationDAO.delete(leaprojectdaolocation);
-			eaproject.dao.notification leaprojectdaonotification = eaproject.dao.notificationDAO.loadNotificationByQuery(null, null);
+			dao.LocationDAO.delete(ldaoLocation);
+			dao.Notification ldaoNotification = dao.NotificationDAO.loadNotificationByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.notificationDAO.delete(leaprojectdaonotification);
-			eaproject.dao.club leaprojectdaoclub = eaproject.dao.clubDAO.loadClubByQuery(null, null);
+			dao.NotificationDAO.delete(ldaoNotification);
+			dao.Club ldaoClub = dao.ClubDAO.loadClubByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.clubDAO.delete(leaprojectdaoclub);
-			eaproject.dao.team leaprojectdaoteam = eaproject.dao.teamDAO.loadTeamByQuery(null, null);
+			dao.ClubDAO.delete(ldaoClub);
+			dao.Team ldaoTeam = dao.TeamDAO.loadTeamByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.teamDAO.delete(leaprojectdaoteam);
-			eaproject.dao.type leaprojectdaotype = eaproject.dao.typeDAO.loadTypeByQuery(null, null);
+			dao.TeamDAO.delete(ldaoTeam);
+			dao.Type ldaoType = dao.TypeDAO.loadTypeByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.typeDAO.delete(leaprojectdaotype);
-			eaproject.dao.state leaprojectdaostate = eaproject.dao.stateDAO.loadStateByQuery(null, null);
+			dao.TypeDAO.delete(ldaoType);
+			dao.State ldaoState = dao.StateDAO.loadStateByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.stateDAO.delete(leaprojectdaostate);
-			eaproject.dao.role leaprojectdaorole = eaproject.dao.roleDAO.loadRoleByQuery(null, null);
+			dao.StateDAO.delete(ldaoState);
+			dao.Role ldaoRole = dao.RoleDAO.loadRoleByQuery(null, null);
 			// Delete the persistent object
-			eaproject.dao.roleDAO.delete(leaprojectdaorole);
+			dao.RoleDAO.delete(ldaoRole);
 			t.commit();
 		}
 		catch (Exception e) {

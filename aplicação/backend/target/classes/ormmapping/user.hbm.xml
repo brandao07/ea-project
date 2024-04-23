@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-Licensee: User-PC(University of Minho)
+Licensee: Eduardo(University of Minho)
 License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="eaproject.dao.user" table="`user`" lazy="false">
+	<class name="eaproject.dao.User" table="`user`" lazy="false">
 		<id name="UserId" column="UserId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="role" cascade="lock" column="RoleRoleId" class="eaproject.dao.role" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="role" cascade="lock" column="RoleRoleId" class="eaproject.dao.Role" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
-		<many-to-one name="team" cascade="lock" column="TeamTeamId" class="eaproject.dao.team" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="team" cascade="lock" column="TeamTeamId" class="eaproject.dao.Team" not-null="true" lazy="proxy" access="field">
 		</many-to-one>
 		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="Email" column="Email" type="string" length="255" not-null="false" lazy="false"/>
@@ -25,7 +25,7 @@ License Type: Academic
 		<property name="RegisterDate" column="RegisterDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_Trial" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="UserUserId" not-null="true"/>
-			<one-to-many class="eaproject.dao.trial"/>
+			<one-to-many class="eaproject.dao.Trial"/>
 		</set>
 	</class>
 </hibernate-mapping>

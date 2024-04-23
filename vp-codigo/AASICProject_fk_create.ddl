@@ -1,0 +1,11 @@
+ALTER TABLE "User" ADD CONSTRAINT Federated FOREIGN KEY (TeamTeamId) REFERENCES Team (TeamId);
+ALTER TABLE Team ADD CONSTRAINT Owns FOREIGN KEY (ClubClubId) REFERENCES Club (ClubId);
+ALTER TABLE "User" ADD CONSTRAINT Belongs FOREIGN KEY (RoleRoleId) REFERENCES Role (RoleId);
+ALTER TABLE Trial ADD CONSTRAINT Participates FOREIGN KEY (UserUserId) REFERENCES "User" (UserId);
+ALTER TABLE Trial ADD CONSTRAINT Occurs FOREIGN KEY (LocationLocationId) REFERENCES Location (LocationId);
+ALTER TABLE Trial ADD CONSTRAINT Restricts FOREIGN KEY (TypeTypeId) REFERENCES Type (TypeId);
+ALTER TABLE Trial ADD CONSTRAINT Requires FOREIGN KEY (GradeGradeId) REFERENCES Grade (GradeId);
+ALTER TABLE Trial ADD CONSTRAINT Fulfill FOREIGN KEY (CompetitionCompetitionId) REFERENCES Competition (CompetitionId);
+ALTER TABLE Notification ADD CONSTRAINT Issue FOREIGN KEY (CompetitionCompetitionId) REFERENCES Competition (CompetitionId);
+ALTER TABLE Result ADD CONSTRAINT Publish FOREIGN KEY (TrialTrialId) REFERENCES Trial (TrialId);
+ALTER TABLE Trial ADD CONSTRAINT Changes FOREIGN KEY (StateStateId) REFERENCES State (StateId);

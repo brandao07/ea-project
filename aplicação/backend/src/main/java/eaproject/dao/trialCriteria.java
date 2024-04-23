@@ -1,10 +1,13 @@
 /**
  * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
- * 
- * This is an automatic generated file. It will be regenerated every time 
+ * <p>
+ * This is an automatic generated file. It will be regenerated every time
  * you generate persistence class.
- * 
+ * <p>
  * Modifying its content may cause the program not work, or your work may lost.
+ * <p>
+ * Licensee: Eduardo(University of Minho)
+ * License Type: Academic
  */
 
 /**
@@ -18,97 +21,97 @@ import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
-public class trialCriteria extends AbstractORMCriteria {
-	public final IntegerExpression TrialId;
-	public final IntegerExpression stateId;
-	public final AssociationExpression state;
-	public final IntegerExpression competitionId;
-	public final AssociationExpression competition;
-	public final IntegerExpression gradeId;
-	public final AssociationExpression grade;
-	public final IntegerExpression typeId;
-	public final AssociationExpression type;
-	public final IntegerExpression locationId;
-	public final AssociationExpression location;
-	public final IntegerExpression userId;
-	public final AssociationExpression user;
-	public final StringExpression Name;
-	public final TimestampExpression StartDate;
-	public final DoubleExpression Distance;
-	public final StringExpression DistanceUnit;
-	public final IntegerExpression NumberOfCheckpoints;
-	public final BooleanExpression IsActive;
-	public final TimestampExpression CreationDate;
-	public final CollectionExpression result;
-	
-	public trialCriteria(Criteria criteria) {
-		super(criteria);
-		TrialId = new IntegerExpression("TrialId", this);
-		stateId = new IntegerExpression("state.StateId", this);
-		state = new AssociationExpression("state", this);
-		competitionId = new IntegerExpression("competition.CompetitionId", this);
-		competition = new AssociationExpression("competition", this);
-		gradeId = new IntegerExpression("grade.GradeId", this);
-		grade = new AssociationExpression("grade", this);
-		typeId = new IntegerExpression("type.TypeId", this);
-		type = new AssociationExpression("type", this);
-		locationId = new IntegerExpression("location.LocationId", this);
-		location = new AssociationExpression("location", this);
-		userId = new IntegerExpression("user.UserId", this);
-		user = new AssociationExpression("user", this);
-		Name = new StringExpression("Name", this);
-		StartDate = new TimestampExpression("StartDate", this);
-		Distance = new DoubleExpression("Distance", this);
-		DistanceUnit = new StringExpression("DistanceUnit", this);
-		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this);
-		IsActive = new BooleanExpression("IsActive", this);
-		CreationDate = new TimestampExpression("CreationDate", this);
-		result = new CollectionExpression("ORM_Result", this);
-	}
-	
-	public trialCriteria(PersistentSession session) {
-		this(session.createCriteria(trial.class));
-	}
-	
-	public trialCriteria() throws PersistentException {
-		this(AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public stateCriteria createStateCriteria() {
-		return new stateCriteria(createCriteria("state"));
-	}
-	
-	public competitionCriteria createCompetitionCriteria() {
-		return new competitionCriteria(createCriteria("competition"));
-	}
-	
-	public gradeCriteria createGradeCriteria() {
-		return new gradeCriteria(createCriteria("grade"));
-	}
-	
-	public typeCriteria createTypeCriteria() {
-		return new typeCriteria(createCriteria("type"));
-	}
-	
-	public locationCriteria createLocationCriteria() {
-		return new locationCriteria(createCriteria("location"));
-	}
-	
-	public userCriteria createUserCriteria() {
-		return new userCriteria(createCriteria("user"));
-	}
-	
-	public resultCriteria createResultCriteria() {
-		return new resultCriteria(createCriteria("ORM_Result"));
-	}
-	
-	public trial uniqueTrial() {
-		return (trial) super.uniqueResult();
-	}
-	
-	public trial[] listTrial() {
-		java.util.List list = super.list();
-		return (trial[]) list.toArray(new trial[list.size()]);
-	}
+public class TrialCriteria extends AbstractORMCriteria {
+    public final IntegerExpression TrialId;
+    public final IntegerExpression stateId;
+    public final AssociationExpression state;
+    public final IntegerExpression competitionId;
+    public final AssociationExpression competition;
+    public final IntegerExpression gradeId;
+    public final AssociationExpression grade;
+    public final IntegerExpression typeId;
+    public final AssociationExpression type;
+    public final IntegerExpression locationId;
+    public final AssociationExpression location;
+    public final IntegerExpression userId;
+    public final AssociationExpression user;
+    public final StringExpression Name;
+    public final TimestampExpression StartDate;
+    public final DoubleExpression Distance;
+    public final StringExpression DistanceUnit;
+    public final IntegerExpression NumberOfCheckpoints;
+    public final BooleanExpression IsActive;
+    public final TimestampExpression CreationDate;
+    public final CollectionExpression result;
+
+    public TrialCriteria(Criteria criteria) {
+        super(criteria);
+        TrialId = new IntegerExpression("TrialId", this);
+        stateId = new IntegerExpression("state.StateId", this);
+        state = new AssociationExpression("state", this);
+        competitionId = new IntegerExpression("competition.CompetitionId", this);
+        competition = new AssociationExpression("competition", this);
+        gradeId = new IntegerExpression("grade.GradeId", this);
+        grade = new AssociationExpression("grade", this);
+        typeId = new IntegerExpression("type.TypeId", this);
+        type = new AssociationExpression("type", this);
+        locationId = new IntegerExpression("location.LocationId", this);
+        location = new AssociationExpression("location", this);
+        userId = new IntegerExpression("user.UserId", this);
+        user = new AssociationExpression("user", this);
+        Name = new StringExpression("Name", this);
+        StartDate = new TimestampExpression("StartDate", this);
+        Distance = new DoubleExpression("Distance", this);
+        DistanceUnit = new StringExpression("DistanceUnit", this);
+        NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this);
+        IsActive = new BooleanExpression("IsActive", this);
+        CreationDate = new TimestampExpression("CreationDate", this);
+        result = new CollectionExpression("ORM_Result", this);
+    }
+
+    public TrialCriteria(PersistentSession session) {
+        this(session.createCriteria(Trial.class));
+    }
+
+    public TrialCriteria() throws PersistentException {
+        this(AASICProjectPersistentManager.instance().getSession());
+    }
+
+    public StateCriteria createStateCriteria() {
+        return new StateCriteria(createCriteria("state"));
+    }
+
+    public CompetitionCriteria createCompetitionCriteria() {
+        return new CompetitionCriteria(createCriteria("competition"));
+    }
+
+    public GradeCriteria createGradeCriteria() {
+        return new GradeCriteria(createCriteria("grade"));
+    }
+
+    public TypeCriteria createTypeCriteria() {
+        return new TypeCriteria(createCriteria("type"));
+    }
+
+    public LocationCriteria createLocationCriteria() {
+        return new LocationCriteria(createCriteria("location"));
+    }
+
+    public UserCriteria createUserCriteria() {
+        return new UserCriteria(createCriteria("user"));
+    }
+
+    public ResultCriteria createResultCriteria() {
+        return new ResultCriteria(createCriteria("ORM_Result"));
+    }
+
+    public Trial uniqueTrial() {
+        return (Trial) super.uniqueResult();
+    }
+
+    public Trial[] listTrial() {
+        java.util.List list = super.list();
+        return (Trial[]) list.toArray(new Trial[list.size()]);
+    }
 }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Eduardo(University of Minho)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="dao.Club" table="Club" lazy="false">
+		<id name="ClubId" column="ClubId" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="IsActive" column="IsActive" type="boolean" not-null="true" lazy="false"/>
+		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
+		<set name="ORM_Team" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="ClubClubId" not-null="true"/>
+			<one-to-many class="dao.Team"/>
+		</set>
+	</class>
+</hibernate-mapping>

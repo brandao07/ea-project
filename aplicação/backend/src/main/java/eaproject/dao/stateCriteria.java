@@ -1,10 +1,13 @@
 /**
  * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
- * 
- * This is an automatic generated file. It will be regenerated every time 
+ * <p>
+ * This is an automatic generated file. It will be regenerated every time
  * you generate persistence class.
- * 
+ * <p>
  * Modifying its content may cause the program not work, or your work may lost.
+ * <p>
+ * Licensee: Eduardo(University of Minho)
+ * License Type: Academic
  */
 
 /**
@@ -18,39 +21,39 @@ import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
-public class stateCriteria extends AbstractORMCriteria {
-	public final IntegerExpression StateId;
-	public final StringExpression Nome;
-	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
-	
-	public stateCriteria(Criteria criteria) {
-		super(criteria);
-		StateId = new IntegerExpression("StateId", this);
-		Nome = new StringExpression("Nome", this);
-		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
-	}
-	
-	public stateCriteria(PersistentSession session) {
-		this(session.createCriteria(state.class));
-	}
-	
-	public stateCriteria() throws PersistentException {
-		this(AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public trialCriteria createTrialCriteria() {
-		return new trialCriteria(createCriteria("ORM_Trial"));
-	}
-	
-	public state uniqueState() {
-		return (state) super.uniqueResult();
-	}
-	
-	public state[] listState() {
-		java.util.List list = super.list();
-		return (state[]) list.toArray(new state[list.size()]);
-	}
+public class StateCriteria extends AbstractORMCriteria {
+    public final IntegerExpression StateId;
+    public final StringExpression Nome;
+    public final TimestampExpression CreationDate;
+    public final CollectionExpression trial;
+
+    public StateCriteria(Criteria criteria) {
+        super(criteria);
+        StateId = new IntegerExpression("StateId", this);
+        Nome = new StringExpression("Nome", this);
+        CreationDate = new TimestampExpression("CreationDate", this);
+        trial = new CollectionExpression("ORM_Trial", this);
+    }
+
+    public StateCriteria(PersistentSession session) {
+        this(session.createCriteria(State.class));
+    }
+
+    public StateCriteria() throws PersistentException {
+        this(AASICProjectPersistentManager.instance().getSession());
+    }
+
+    public TrialCriteria createTrialCriteria() {
+        return new TrialCriteria(createCriteria("ORM_Trial"));
+    }
+
+    public State uniqueState() {
+        return (State) super.uniqueResult();
+    }
+
+    public State[] listState() {
+        java.util.List list = super.list();
+        return (State[]) list.toArray(new State[list.size()]);
+    }
 }
 

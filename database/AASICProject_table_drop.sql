@@ -1,0 +1,12 @@
+drop table if exists "user" cascade;
+drop table if exists Trial cascade;
+drop table if exists Competition cascade;
+drop table if exists Result cascade;
+drop table if exists Grade cascade;
+drop table if exists Location cascade;
+drop table if exists Notification cascade;
+drop table if exists Club cascade;
+drop table if exists Team cascade;
+drop table if exists Type cascade;
+drop table if exists State cascade;
+drop table if exists Role cascade;
