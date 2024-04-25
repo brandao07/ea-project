@@ -13,9 +13,399 @@
  */
 package dao;
 
+import org.orm.*;
+import org.hibernate.Query;
+import org.hibernate.LockMode;
+import java.util.List;
+
 import java.io.Serializable;
 public class User implements Serializable {
 	public User() {
+	}
+	
+	public static User loadUserByORMID(int UserId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadUserByORMID(session, UserId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User getUserByORMID(int UserId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getUserByORMID(session, UserId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadUserByORMID(session, UserId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User getUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getUserByORMID(session, UserId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByORMID(PersistentSession session, int UserId) throws PersistentException {
+		try {
+			return (User) session.load(dao.User.class, Integer.valueOf(UserId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User getUserByORMID(PersistentSession session, int UserId) throws PersistentException {
+		try {
+			return (User) session.get(dao.User.class, Integer.valueOf(UserId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByORMID(PersistentSession session, int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (User) session.load(dao.User.class, Integer.valueOf(UserId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User getUserByORMID(PersistentSession session, int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (User) session.get(dao.User.class, Integer.valueOf(UserId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryUser(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryUser(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryUser(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryUser(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User[] listUserByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listUserByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User[] listUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listUserByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryUser(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.User as User");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryUser(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.User as User");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("User", lockMode);
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User[] listUserByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		try {
+			List list = queryUser(session, condition, orderBy);
+			return (User[]) list.toArray(new User[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User[] listUserByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			List list = queryUser(session, condition, orderBy, lockMode);
+			return (User[]) list.toArray(new User[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadUserByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadUserByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		User[] users = listUserByQuery(session, condition, orderBy);
+		if (users != null && users.length > 0)
+			return users[0];
+		else
+			return null;
+	}
+	
+	public static User loadUserByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		User[] users = listUserByQuery(session, condition, orderBy, lockMode);
+		if (users != null && users.length > 0)
+			return users[0];
+		else
+			return null;
+	}
+	
+	public static java.util.Iterator iterateUserByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateUserByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateUserByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateUserByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.User as User");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateUserByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.User as User");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("User", lockMode);
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static User loadUserByCriteria(UserCriteria userCriteria) {
+		User[] users = listUserByCriteria(userCriteria);
+		if(users == null || users.length == 0) {
+			return null;
+		}
+		return users[0];
+	}
+	
+	public static User[] listUserByCriteria(UserCriteria userCriteria) {
+		return userCriteria.listUser();
+	}
+	
+	public static User createUser() {
+		return new dao.User();
+	}
+	
+	public boolean save() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().saveObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean delete() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().deleteObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean refresh() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean evict() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().evict(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate()throws PersistentException {
+		try {
+			if(getRole() != null) {
+				getRole().user.remove(this);
+			}
+			
+			if(getTeam() != null) {
+				getTeam().user.remove(this);
+			}
+			
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setUser(null);
+			}
+			return delete();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
+		try {
+			if(getRole() != null) {
+				getRole().user.remove(this);
+			}
+			
+			if(getTeam() != null) {
+				getTeam().user.remove(this);
+			}
+			
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setUser(null);
+			}
+			try {
+				session.delete(this);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
 	}
 	
 	private java.util.Set this_getSet (int key) {
@@ -70,6 +460,8 @@ public class User implements Serializable {
 	private boolean IsActive;
 	
 	private java.sql.Timestamp RegisterDate;
+	
+	private String Photographypath;
 	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
@@ -157,6 +549,14 @@ public class User implements Serializable {
 		return RegisterDate;
 	}
 	
+	public void setPhotographypath(String value) {
+		this.Photographypath = value;
+	}
+	
+	public String getPhotographypath() {
+		return Photographypath;
+	}
+	
 	public void setRole(dao.Role value) {
 		if (role != null) {
 			role.user.remove(this);
@@ -173,7 +573,7 @@ public class User implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Role(dao.Role value) {
+	private void setORM_Role(dao.Role value) {
 		this.role = value;
 	}
 	
@@ -207,7 +607,7 @@ public class User implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Team(dao.Team value) {
+	private void setORM_Team(dao.Team value) {
 		this.team = value;
 	}
 	

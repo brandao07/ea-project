@@ -46,7 +46,7 @@ export default {
             url: "http://localhost:7000/GetAllUsers",
         })
         .then(data => {
-            this.user = data.data[0]; // FIXME: TEST
+            this.user = data.data[0];
         })
         .catch(err => {
             console.log(err)

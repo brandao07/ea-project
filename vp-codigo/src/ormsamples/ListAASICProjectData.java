@@ -10,7 +10,7 @@ public class ListAASICProjectData {
 	
 	public void listTestData() throws PersistentException {
 		System.out.println("Listing User...");
-		dao.User[] daoUsers = dao.UserDAO.listUserByQuery(null, null);
+		dao.User[] daoUsers = dao.User.listUserByQuery(null, null);
 		int length = Math.min(daoUsers.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoUsers[i]);
@@ -18,7 +18,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Trial...");
-		dao.Trial[] daoTrials = dao.TrialDAO.listTrialByQuery(null, null);
+		dao.Trial[] daoTrials = dao.Trial.listTrialByQuery(null, null);
 		length = Math.min(daoTrials.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoTrials[i]);
@@ -26,7 +26,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Competition...");
-		dao.Competition[] daoCompetitions = dao.CompetitionDAO.listCompetitionByQuery(null, null);
+		dao.Competition[] daoCompetitions = dao.Competition.listCompetitionByQuery(null, null);
 		length = Math.min(daoCompetitions.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoCompetitions[i]);
@@ -34,7 +34,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Result...");
-		dao.Result[] daoResults = dao.ResultDAO.listResultByQuery(null, null);
+		dao.Result[] daoResults = dao.Result.listResultByQuery(null, null);
 		length = Math.min(daoResults.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoResults[i]);
@@ -42,7 +42,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Grade...");
-		dao.Grade[] daoGrades = dao.GradeDAO.listGradeByQuery(null, null);
+		dao.Grade[] daoGrades = dao.Grade.listGradeByQuery(null, null);
 		length = Math.min(daoGrades.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoGrades[i]);
@@ -50,7 +50,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Location...");
-		dao.Location[] daoLocations = dao.LocationDAO.listLocationByQuery(null, null);
+		dao.Location[] daoLocations = dao.Location.listLocationByQuery(null, null);
 		length = Math.min(daoLocations.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoLocations[i]);
@@ -58,7 +58,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Notification...");
-		dao.Notification[] daoNotifications = dao.NotificationDAO.listNotificationByQuery(null, null);
+		dao.Notification[] daoNotifications = dao.Notification.listNotificationByQuery(null, null);
 		length = Math.min(daoNotifications.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoNotifications[i]);
@@ -66,7 +66,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Club...");
-		dao.Club[] daoClubs = dao.ClubDAO.listClubByQuery(null, null);
+		dao.Club[] daoClubs = dao.Club.listClubByQuery(null, null);
 		length = Math.min(daoClubs.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoClubs[i]);
@@ -74,7 +74,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Team...");
-		dao.Team[] daoTeams = dao.TeamDAO.listTeamByQuery(null, null);
+		dao.Team[] daoTeams = dao.Team.listTeamByQuery(null, null);
 		length = Math.min(daoTeams.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoTeams[i]);
@@ -82,7 +82,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Type...");
-		dao.Type[] daoTypes = dao.TypeDAO.listTypeByQuery(null, null);
+		dao.Type[] daoTypes = dao.Type.listTypeByQuery(null, null);
 		length = Math.min(daoTypes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoTypes[i]);
@@ -90,7 +90,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing State...");
-		dao.State[] daoStates = dao.StateDAO.listStateByQuery(null, null);
+		dao.State[] daoStates = dao.State.listStateByQuery(null, null);
 		length = Math.min(daoStates.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoStates[i]);
@@ -98,7 +98,7 @@ public class ListAASICProjectData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Role...");
-		dao.Role[] daoRoles = dao.RoleDAO.listRoleByQuery(null, null);
+		dao.Role[] daoRoles = dao.Role.listRoleByQuery(null, null);
 		length = Math.min(daoRoles.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(daoRoles[i]);

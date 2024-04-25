@@ -9,42 +9,42 @@ public class RetrieveAndUpdateAASICProjectData {
 	public void retrieveAndUpdateTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			dao.User ldaoUser = dao.UserDAO.loadUserByQuery(null, null);
+			dao.User ldaoUser = dao.User.loadUserByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.UserDAO.save(ldaoUser);
-			dao.Trial ldaoTrial = dao.TrialDAO.loadTrialByQuery(null, null);
+			ldaoUser.save();
+			dao.Trial ldaoTrial = dao.Trial.loadTrialByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.TrialDAO.save(ldaoTrial);
-			dao.Competition ldaoCompetition = dao.CompetitionDAO.loadCompetitionByQuery(null, null);
+			ldaoTrial.save();
+			dao.Competition ldaoCompetition = dao.Competition.loadCompetitionByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.CompetitionDAO.save(ldaoCompetition);
-			dao.Result ldaoResult = dao.ResultDAO.loadResultByQuery(null, null);
+			ldaoCompetition.save();
+			dao.Result ldaoResult = dao.Result.loadResultByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.ResultDAO.save(ldaoResult);
-			dao.Grade ldaoGrade = dao.GradeDAO.loadGradeByQuery(null, null);
+			ldaoResult.save();
+			dao.Grade ldaoGrade = dao.Grade.loadGradeByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.GradeDAO.save(ldaoGrade);
-			dao.Location ldaoLocation = dao.LocationDAO.loadLocationByQuery(null, null);
+			ldaoGrade.save();
+			dao.Location ldaoLocation = dao.Location.loadLocationByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.LocationDAO.save(ldaoLocation);
-			dao.Notification ldaoNotification = dao.NotificationDAO.loadNotificationByQuery(null, null);
+			ldaoLocation.save();
+			dao.Notification ldaoNotification = dao.Notification.loadNotificationByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.NotificationDAO.save(ldaoNotification);
-			dao.Club ldaoClub = dao.ClubDAO.loadClubByQuery(null, null);
+			ldaoNotification.save();
+			dao.Club ldaoClub = dao.Club.loadClubByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.ClubDAO.save(ldaoClub);
-			dao.Team ldaoTeam = dao.TeamDAO.loadTeamByQuery(null, null);
+			ldaoClub.save();
+			dao.Team ldaoTeam = dao.Team.loadTeamByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.TeamDAO.save(ldaoTeam);
-			dao.Type ldaoType = dao.TypeDAO.loadTypeByQuery(null, null);
+			ldaoTeam.save();
+			dao.Type ldaoType = dao.Type.loadTypeByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.TypeDAO.save(ldaoType);
-			dao.State ldaoState = dao.StateDAO.loadStateByQuery(null, null);
+			ldaoType.save();
+			dao.State ldaoState = dao.State.loadStateByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.StateDAO.save(ldaoState);
-			dao.Role ldaoRole = dao.RoleDAO.loadRoleByQuery(null, null);
+			ldaoState.save();
+			dao.Role ldaoRole = dao.Role.loadRoleByQuery(null, null);
 			// Update the properties of the persistent object
-			dao.RoleDAO.save(ldaoRole);
+			ldaoRole.save();
 			t.commit();
 		}
 		catch (Exception e) {

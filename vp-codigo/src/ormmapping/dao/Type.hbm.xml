@@ -5,7 +5,7 @@ License Type: Academic
 -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="dao.Type" table="Type" lazy="false">
+	<class name="dao.Type" table="type" lazy="false">
 		<id name="TypeId" column="TypeId" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>

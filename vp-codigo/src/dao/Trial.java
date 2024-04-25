@@ -13,9 +13,431 @@
  */
 package dao;
 
+import org.orm.*;
+import org.hibernate.Query;
+import org.hibernate.LockMode;
+import java.util.List;
+
 import java.io.Serializable;
 public class Trial implements Serializable {
 	public Trial() {
+	}
+	
+	public static Trial loadTrialByORMID(int TrialId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTrialByORMID(session, TrialId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial getTrialByORMID(int TrialId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getTrialByORMID(session, TrialId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByORMID(int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTrialByORMID(session, TrialId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial getTrialByORMID(int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getTrialByORMID(session, TrialId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByORMID(PersistentSession session, int TrialId) throws PersistentException {
+		try {
+			return (Trial) session.load(dao.Trial.class, Integer.valueOf(TrialId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial getTrialByORMID(PersistentSession session, int TrialId) throws PersistentException {
+		try {
+			return (Trial) session.get(dao.Trial.class, Integer.valueOf(TrialId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByORMID(PersistentSession session, int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Trial) session.load(dao.Trial.class, Integer.valueOf(TrialId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial getTrialByORMID(PersistentSession session, int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Trial) session.get(dao.Trial.class, Integer.valueOf(TrialId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTrial(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryTrial(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTrial(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryTrial(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial[] listTrialByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listTrialByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial[] listTrialByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listTrialByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTrial(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Trial as Trial");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTrial(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Trial as Trial");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Trial", lockMode);
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial[] listTrialByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		try {
+			List list = queryTrial(session, condition, orderBy);
+			return (Trial[]) list.toArray(new Trial[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial[] listTrialByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			List list = queryTrial(session, condition, orderBy, lockMode);
+			return (Trial[]) list.toArray(new Trial[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTrialByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTrialByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		Trial[] trials = listTrialByQuery(session, condition, orderBy);
+		if (trials != null && trials.length > 0)
+			return trials[0];
+		else
+			return null;
+	}
+	
+	public static Trial loadTrialByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		Trial[] trials = listTrialByQuery(session, condition, orderBy, lockMode);
+		if (trials != null && trials.length > 0)
+			return trials[0];
+		else
+			return null;
+	}
+	
+	public static java.util.Iterator iterateTrialByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateTrialByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTrialByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateTrialByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTrialByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Trial as Trial");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTrialByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Trial as Trial");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Trial", lockMode);
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Trial loadTrialByCriteria(TrialCriteria trialCriteria) {
+		Trial[] trials = listTrialByCriteria(trialCriteria);
+		if(trials == null || trials.length == 0) {
+			return null;
+		}
+		return trials[0];
+	}
+	
+	public static Trial[] listTrialByCriteria(TrialCriteria trialCriteria) {
+		return trialCriteria.listTrial();
+	}
+	
+	public static Trial createTrial() {
+		return new dao.Trial();
+	}
+	
+	public boolean save() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().saveObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean delete() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().deleteObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean refresh() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean evict() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().evict(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate()throws PersistentException {
+		try {
+			if(getState() != null) {
+				getState().trial.remove(this);
+			}
+			
+			if(getCompetition() != null) {
+				getCompetition().trial.remove(this);
+			}
+			
+			if(getGrade() != null) {
+				getGrade().trial.remove(this);
+			}
+			
+			if(getType() != null) {
+				getType().trial.remove(this);
+			}
+			
+			if(getLocation() != null) {
+				getLocation().trial.remove(this);
+			}
+			
+			if(getUser() != null) {
+				getUser().trial.remove(this);
+			}
+			
+			dao.Result[] lResults = result.toArray();
+			for(int i = 0; i < lResults.length; i++) {
+				lResults[i].setTrial(null);
+			}
+			return delete();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
+		try {
+			if(getState() != null) {
+				getState().trial.remove(this);
+			}
+			
+			if(getCompetition() != null) {
+				getCompetition().trial.remove(this);
+			}
+			
+			if(getGrade() != null) {
+				getGrade().trial.remove(this);
+			}
+			
+			if(getType() != null) {
+				getType().trial.remove(this);
+			}
+			
+			if(getLocation() != null) {
+				getLocation().trial.remove(this);
+			}
+			
+			if(getUser() != null) {
+				getUser().trial.remove(this);
+			}
+			
+			dao.Result[] lResults = result.toArray();
+			for(int i = 0; i < lResults.length; i++) {
+				lResults[i].setTrial(null);
+			}
+			try {
+				session.delete(this);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
 	}
 	
 	private java.util.Set this_getSet (int key) {
@@ -177,7 +599,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Location(dao.Location value) {
+	private void setORM_Location(dao.Location value) {
 		this.location = value;
 	}
 	
@@ -211,7 +633,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_User(dao.User value) {
+	private void setORM_User(dao.User value) {
 		this.user = value;
 	}
 	
@@ -235,7 +657,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Type(dao.Type value) {
+	private void setORM_Type(dao.Type value) {
 		this.type = value;
 	}
 	
@@ -259,7 +681,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Grade(dao.Grade value) {
+	private void setORM_Grade(dao.Grade value) {
 		this.grade = value;
 	}
 	
@@ -283,7 +705,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Competition(dao.Competition value) {
+	private void setORM_Competition(dao.Competition value) {
 		this.competition = value;
 	}
 	
@@ -307,7 +729,7 @@ public class Trial implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_State(dao.State value) {
+	private void setORM_State(dao.State value) {
 		this.state = value;
 	}
 	

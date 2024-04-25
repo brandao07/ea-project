@@ -9,42 +9,30 @@ public class DeleteAASICProjectData {
 	public void deleteTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			dao.User ldaoUser = dao.UserDAO.loadUserByQuery(null, null);
-			// Delete the persistent object
-			dao.UserDAO.delete(ldaoUser);
-			dao.Trial ldaoTrial = dao.TrialDAO.loadTrialByQuery(null, null);
-			// Delete the persistent object
-			dao.TrialDAO.delete(ldaoTrial);
-			dao.Competition ldaoCompetition = dao.CompetitionDAO.loadCompetitionByQuery(null, null);
-			// Delete the persistent object
-			dao.CompetitionDAO.delete(ldaoCompetition);
-			dao.Result ldaoResult = dao.ResultDAO.loadResultByQuery(null, null);
-			// Delete the persistent object
-			dao.ResultDAO.delete(ldaoResult);
-			dao.Grade ldaoGrade = dao.GradeDAO.loadGradeByQuery(null, null);
-			// Delete the persistent object
-			dao.GradeDAO.delete(ldaoGrade);
-			dao.Location ldaoLocation = dao.LocationDAO.loadLocationByQuery(null, null);
-			// Delete the persistent object
-			dao.LocationDAO.delete(ldaoLocation);
-			dao.Notification ldaoNotification = dao.NotificationDAO.loadNotificationByQuery(null, null);
-			// Delete the persistent object
-			dao.NotificationDAO.delete(ldaoNotification);
-			dao.Club ldaoClub = dao.ClubDAO.loadClubByQuery(null, null);
-			// Delete the persistent object
-			dao.ClubDAO.delete(ldaoClub);
-			dao.Team ldaoTeam = dao.TeamDAO.loadTeamByQuery(null, null);
-			// Delete the persistent object
-			dao.TeamDAO.delete(ldaoTeam);
-			dao.Type ldaoType = dao.TypeDAO.loadTypeByQuery(null, null);
-			// Delete the persistent object
-			dao.TypeDAO.delete(ldaoType);
-			dao.State ldaoState = dao.StateDAO.loadStateByQuery(null, null);
-			// Delete the persistent object
-			dao.StateDAO.delete(ldaoState);
-			dao.Role ldaoRole = dao.RoleDAO.loadRoleByQuery(null, null);
-			// Delete the persistent object
-			dao.RoleDAO.delete(ldaoRole);
+			dao.User ldaoUser = dao.User.loadUserByQuery(null, null);
+			ldaoUser.delete();
+			dao.Trial ldaoTrial = dao.Trial.loadTrialByQuery(null, null);
+			ldaoTrial.delete();
+			dao.Competition ldaoCompetition = dao.Competition.loadCompetitionByQuery(null, null);
+			ldaoCompetition.delete();
+			dao.Result ldaoResult = dao.Result.loadResultByQuery(null, null);
+			ldaoResult.delete();
+			dao.Grade ldaoGrade = dao.Grade.loadGradeByQuery(null, null);
+			ldaoGrade.delete();
+			dao.Location ldaoLocation = dao.Location.loadLocationByQuery(null, null);
+			ldaoLocation.delete();
+			dao.Notification ldaoNotification = dao.Notification.loadNotificationByQuery(null, null);
+			ldaoNotification.delete();
+			dao.Club ldaoClub = dao.Club.loadClubByQuery(null, null);
+			ldaoClub.delete();
+			dao.Team ldaoTeam = dao.Team.loadTeamByQuery(null, null);
+			ldaoTeam.delete();
+			dao.Type ldaoType = dao.Type.loadTypeByQuery(null, null);
+			ldaoType.delete();
+			dao.State ldaoState = dao.State.loadStateByQuery(null, null);
+			ldaoState.delete();
+			dao.Role ldaoRole = dao.Role.loadRoleByQuery(null, null);
+			ldaoRole.delete();
 			t.commit();
 		}
 		catch (Exception e) {

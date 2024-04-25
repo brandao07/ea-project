@@ -13,9 +13,383 @@
  */
 package dao;
 
+import org.orm.*;
+import org.hibernate.Query;
+import org.hibernate.LockMode;
+import java.util.List;
+
 import java.io.Serializable;
 public class State implements Serializable {
 	public State() {
+	}
+	
+	public static State loadStateByORMID(int StateId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadStateByORMID(session, StateId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State getStateByORMID(int StateId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getStateByORMID(session, StateId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByORMID(int StateId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadStateByORMID(session, StateId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State getStateByORMID(int StateId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getStateByORMID(session, StateId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByORMID(PersistentSession session, int StateId) throws PersistentException {
+		try {
+			return (State) session.load(dao.State.class, Integer.valueOf(StateId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State getStateByORMID(PersistentSession session, int StateId) throws PersistentException {
+		try {
+			return (State) session.get(dao.State.class, Integer.valueOf(StateId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByORMID(PersistentSession session, int StateId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (State) session.load(dao.State.class, Integer.valueOf(StateId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State getStateByORMID(PersistentSession session, int StateId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (State) session.get(dao.State.class, Integer.valueOf(StateId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryState(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryState(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryState(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryState(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State[] listStateByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listStateByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State[] listStateByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listStateByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryState(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.State as State");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryState(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.State as State");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("State", lockMode);
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State[] listStateByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		try {
+			List list = queryState(session, condition, orderBy);
+			return (State[]) list.toArray(new State[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State[] listStateByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			List list = queryState(session, condition, orderBy, lockMode);
+			return (State[]) list.toArray(new State[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadStateByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadStateByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		State[] states = listStateByQuery(session, condition, orderBy);
+		if (states != null && states.length > 0)
+			return states[0];
+		else
+			return null;
+	}
+	
+	public static State loadStateByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		State[] states = listStateByQuery(session, condition, orderBy, lockMode);
+		if (states != null && states.length > 0)
+			return states[0];
+		else
+			return null;
+	}
+	
+	public static java.util.Iterator iterateStateByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateStateByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateStateByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateStateByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateStateByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.State as State");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateStateByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.State as State");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("State", lockMode);
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static State loadStateByCriteria(StateCriteria stateCriteria) {
+		State[] states = listStateByCriteria(stateCriteria);
+		if(states == null || states.length == 0) {
+			return null;
+		}
+		return states[0];
+	}
+	
+	public static State[] listStateByCriteria(StateCriteria stateCriteria) {
+		return stateCriteria.listState();
+	}
+	
+	public static State createState() {
+		return new dao.State();
+	}
+	
+	public boolean save() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().saveObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean delete() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().deleteObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean refresh() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean evict() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().evict(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate()throws PersistentException {
+		try {
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setState(null);
+			}
+			return delete();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
+		try {
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setState(null);
+			}
+			try {
+				session.delete(this);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
 	}
 	
 	private java.util.Set this_getSet (int key) {

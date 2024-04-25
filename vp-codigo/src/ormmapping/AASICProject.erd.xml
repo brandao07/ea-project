@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Model quotesql="1" tablecharset="" mysql_version="504" mssql_version="2005" derby_version="106" ingres_version="9">
-  <Entity name="User" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="user" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="UserId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
-      <Length>10</Length>
+      <Length>0</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -16,7 +16,7 @@
     <Column name="RoleRoleId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Role.RoleId</ReferencedColumn>
+      <ReferencedColumn>dao.role.RoleId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -28,7 +28,7 @@
     <Column name="TeamTeamId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Team.TeamId</ReferencedColumn>
+      <ReferencedColumn>dao.team.TeamId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -136,8 +136,19 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="PhotographyPath">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>255</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
-  <Entity name="Trial" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="trial" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="TrialId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -152,7 +163,7 @@
     <Column name="StateStateId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.State.StateId</ReferencedColumn>
+      <ReferencedColumn>dao.state.StateId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -164,7 +175,7 @@
     <Column name="CompetitionCompetitionId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Competition.CompetitionId</ReferencedColumn>
+      <ReferencedColumn>dao.competition.CompetitionId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -176,7 +187,7 @@
     <Column name="GradeGradeId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Grade.GradeId</ReferencedColumn>
+      <ReferencedColumn>dao.grade.GradeId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -188,7 +199,7 @@
     <Column name="TypeTypeId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Type.TypeId</ReferencedColumn>
+      <ReferencedColumn>dao.type.TypeId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -200,7 +211,7 @@
     <Column name="LocationLocationId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Location.LocationId</ReferencedColumn>
+      <ReferencedColumn>dao.location.LocationId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -212,9 +223,9 @@
     <Column name="UserUserId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.User.UserId</ReferencedColumn>
+      <ReferencedColumn>dao.user.UserId</ReferencedColumn>
       <Type>9</Type>
-      <Length>10</Length>
+      <Length>0</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -299,7 +310,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Competition" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="competition" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="CompetitionId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -367,7 +378,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Result" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="result" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="ResultId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -382,7 +393,7 @@
     <Column name="TrialTrialId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Trial.TrialId</ReferencedColumn>
+      <ReferencedColumn>dao.trial.TrialId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -447,7 +458,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Grade" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="grade" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="GradeId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -559,7 +570,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Location" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="location" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="LocationId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -649,7 +660,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Notification" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="notification" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="NotificationId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -664,7 +675,7 @@
     <Column name="CompetitionCompetitionId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Competition.CompetitionId</ReferencedColumn>
+      <ReferencedColumn>dao.competition.CompetitionId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -718,7 +729,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Club" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="club" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="ClubId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -764,7 +775,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Team" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="team" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="TeamId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -779,7 +790,7 @@
     <Column name="ClubClubId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.Club.ClubId</ReferencedColumn>
+      <ReferencedColumn>dao.club.ClubId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -822,7 +833,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Type" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="type" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="TypeId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -868,7 +879,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="State" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="state" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="StateId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -903,7 +914,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Role" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
+  <Entity name="role" Unlogged="false" PKClustered="0" Temporal="false" TemporalStartTimeColumn="null" TemporalEndTimeColumn="null" TemporalHistoryTable="null">
     <Column name="RoleId">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -950,8 +961,8 @@
     </Column>
   </Entity>
   <ForeignKey name="Federated">
-    <ReferenceTable>User</ReferenceTable>
-    <ReferencedTable>Team</ReferencedTable>
+    <ReferenceTable>user</ReferenceTable>
+    <ReferencedTable>team</ReferencedTable>
     <Columns>
       <Column>TeamTeamId</Column>
     </Columns>
@@ -960,8 +971,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Owns">
-    <ReferenceTable>Team</ReferenceTable>
-    <ReferencedTable>Club</ReferencedTable>
+    <ReferenceTable>team</ReferenceTable>
+    <ReferencedTable>club</ReferencedTable>
     <Columns>
       <Column>ClubClubId</Column>
     </Columns>
@@ -970,8 +981,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Belongs">
-    <ReferenceTable>User</ReferenceTable>
-    <ReferencedTable>Role</ReferencedTable>
+    <ReferenceTable>user</ReferenceTable>
+    <ReferencedTable>role</ReferencedTable>
     <Columns>
       <Column>RoleRoleId</Column>
     </Columns>
@@ -980,8 +991,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Participates">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>User</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>user</ReferencedTable>
     <Columns>
       <Column>UserUserId</Column>
     </Columns>
@@ -990,8 +1001,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Occurs">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>Location</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>location</ReferencedTable>
     <Columns>
       <Column>LocationLocationId</Column>
     </Columns>
@@ -1000,8 +1011,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Restricts">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>Type</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>type</ReferencedTable>
     <Columns>
       <Column>TypeTypeId</Column>
     </Columns>
@@ -1010,8 +1021,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Requires">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>Grade</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>grade</ReferencedTable>
     <Columns>
       <Column>GradeGradeId</Column>
     </Columns>
@@ -1020,8 +1031,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Fulfill">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>Competition</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>competition</ReferencedTable>
     <Columns>
       <Column>CompetitionCompetitionId</Column>
     </Columns>
@@ -1030,8 +1041,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Issue">
-    <ReferenceTable>Notification</ReferenceTable>
-    <ReferencedTable>Competition</ReferencedTable>
+    <ReferenceTable>notification</ReferenceTable>
+    <ReferencedTable>competition</ReferencedTable>
     <Columns>
       <Column>CompetitionCompetitionId</Column>
     </Columns>
@@ -1040,8 +1051,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Publish">
-    <ReferenceTable>Result</ReferenceTable>
-    <ReferencedTable>Trial</ReferencedTable>
+    <ReferenceTable>result</ReferenceTable>
+    <ReferencedTable>trial</ReferencedTable>
     <Columns>
       <Column>TrialTrialId</Column>
     </Columns>
@@ -1050,8 +1061,8 @@
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="Changes">
-    <ReferenceTable>Trial</ReferenceTable>
-    <ReferencedTable>State</ReferencedTable>
+    <ReferenceTable>trial</ReferenceTable>
+    <ReferencedTable>state</ReferencedTable>
     <Columns>
       <Column>StateStateId</Column>
     </Columns>

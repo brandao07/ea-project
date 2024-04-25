@@ -1,6 +1,9 @@
+version: '3.3'
+
 services:
   db:
     image: postgres:latest
+    restart: always
     container_name: postgres
     ports:
       - "5432:5432"
@@ -9,7 +12,4 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: ea-project
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+      - ../database/database.sql:/docker-entrypoint-initdb.d/database.sql

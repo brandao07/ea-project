@@ -9,42 +9,42 @@ public class CreateAASICProjectData {
 	public void createTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			dao.User ldaoUser = dao.UserDAO.createUser();
+			dao.User ldaoUser = dao.User.createUser();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, IsActive, Weight, Height, Age, team, role
-			dao.UserDAO.save(ldaoUser);
-			dao.Trial ldaoTrial = dao.TrialDAO.createTrial();
+			ldaoUser.save();
+			dao.Trial ldaoTrial = dao.Trial.createTrial();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : result, IsActive, NumberOfCheckpoints, Distance, user, location, type, grade, competition, state
-			dao.TrialDAO.save(ldaoTrial);
-			dao.Competition ldaoCompetition = dao.CompetitionDAO.createCompetition();
+			ldaoTrial.save();
+			dao.Competition ldaoCompetition = dao.Competition.createCompetition();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : notification, trial, IsActive
-			dao.CompetitionDAO.save(ldaoCompetition);
-			dao.Result ldaoResult = dao.ResultDAO.createResult();
+			ldaoCompetition.save();
+			dao.Result ldaoResult = dao.Result.createResult();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : Position, trial
-			dao.ResultDAO.save(ldaoResult);
-			dao.Grade ldaoGrade = dao.GradeDAO.createGrade();
+			ldaoResult.save();
+			dao.Grade ldaoGrade = dao.Grade.createGrade();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, MaxHeight, MinHeight, MaxWeight, MinWeight, MaxAge, MinAge
-			dao.GradeDAO.save(ldaoGrade);
-			dao.Location ldaoLocation = dao.LocationDAO.createLocation();
+			ldaoGrade.save();
+			dao.Location ldaoLocation = dao.Location.createLocation();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, Longitude, Latitude
-			dao.LocationDAO.save(ldaoLocation);
-			dao.Notification ldaoNotification = dao.NotificationDAO.createNotification();
+			ldaoLocation.save();
+			dao.Notification ldaoNotification = dao.Notification.createNotification();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : competition
-			dao.NotificationDAO.save(ldaoNotification);
-			dao.Club ldaoClub = dao.ClubDAO.createClub();
+			ldaoNotification.save();
+			dao.Club ldaoClub = dao.Club.createClub();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : team, IsActive
-			dao.ClubDAO.save(ldaoClub);
-			dao.Team ldaoTeam = dao.TeamDAO.createTeam();
+			ldaoClub.save();
+			dao.Team ldaoTeam = dao.Team.createTeam();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : user, IsActive, club
-			dao.TeamDAO.save(ldaoTeam);
-			dao.Type ldaoType = dao.TypeDAO.createType();
+			ldaoTeam.save();
+			dao.Type ldaoType = dao.Type.createType();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, NumberOfPersons
-			dao.TypeDAO.save(ldaoType);
-			dao.State ldaoState = dao.StateDAO.createState();
+			ldaoType.save();
+			dao.State ldaoState = dao.State.createState();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial
-			dao.StateDAO.save(ldaoState);
-			dao.Role ldaoRole = dao.RoleDAO.createRole();
+			ldaoState.save();
+			dao.Role ldaoRole = dao.Role.createRole();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : user
-			dao.RoleDAO.save(ldaoRole);
+			ldaoRole.save();
 			t.commit();
 		}
 		catch (Exception e) {

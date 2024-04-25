@@ -1,0 +1,12 @@
+alter table "user" add primary key (UserId);
+alter table trial add primary key (TrialId);
+alter table competition add primary key (CompetitionId);
+alter table result add primary key (ResultId);
+alter table grade add primary key (GradeId);
+alter table location add primary key (LocationId);
+alter table notification add primary key (NotificationId);
+alter table club add primary key (ClubId);
+alter table team add primary key (TeamId);
+alter table type add primary key (TypeId);
+alter table state add primary key (StateId);
+alter table role add primary key (RoleId);

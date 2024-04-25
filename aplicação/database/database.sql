@@ -1,4 +1,10 @@
-BEGIN TRANSACTION;
+-- Begin transaction
+BEGIN;
+
+-- Create Tables
+DO
+$$
+BEGIN
 
 create table "user" (
   UserId       serial not null, 
@@ -12,7 +18,8 @@ create table "user" (
   Height       float8 not null, 
   Weight       float8 not null, 
   IsActive     bool not null, 
-  RegisterDate timestamp);
+  RegisterDate timestamp,
+  PhotographyPath varchar(255));
 create table Trial (
   TrialId                  serial not null, 
   StateStateId             int4 not null, 
@@ -96,6 +103,14 @@ create table Role (
   Description  varchar(255), 
   CreationDate timestamp);
 
+END
+$$;
+
+-- Add primary keys and constraints
+DO
+$$
+BEGIN
+
 alter table "user" add primary key (UserId);
 alter table Trial add primary key (TrialId);
 alter table Competition add primary key (CompetitionId);
@@ -121,7 +136,13 @@ alter table Notification add constraint Issue foreign key (CompetitionCompetitio
 alter table Result add constraint Publish foreign key (TrialTrialId) references Trial (TrialId);
 alter table Trial add constraint Changes foreign key (StateStateId) references State (StateId);
 
-COMMIT;
+END
+$$;
+
+-- Insert default data
+DO
+$$
+BEGIN
 
 INSERT INTO public.Role(
 	RoleId, Name, Description, CreationDate)
@@ -136,5 +157,16 @@ INSERT INTO public.Team(
 	VALUES (1, 1, 'Test Team', true, CURRENT_TIMESTAMP);
 	
 INSERT INTO public.User(
-	UserId, RoleRoleId, TeamTeamId, Name, Email, Password, Gender, Age, Height, Weight, IsActive, RegisterDate)
-	VALUES (1, 1, 1, 'Manuel Joaquim', 'mj@gmal.com', '1234', 'Male', '35', '185', '84', true, CURRENT_TIMESTAMP);
+    RoleRoleId, TeamTeamId, Name, Email, Password, Gender, Age, Height, Weight, IsActive, RegisterDate, PhotographyPath)
+VALUES 
+    (1, 1, 'Eduardo Oliveira', 'eoliveira@mail.com', 'password', 'Male', '33', '186', '87', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Miguel Senra', 'msenra@mail.com', 'password', 'Male', '28', '180', '75', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Emanuel Silva', 'esilva@mail.com', 'password', 'Male', '20', '175', '70', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Dinis Estrada', 'destrada@mail.com', 'password', 'Male', '18', '178', '78', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'André Brandão', 'abrandao@mail.com', 'password', 'Male', '25', '182', '80', true, CURRENT_TIMESTAMP, null);
+
+END
+$$;
+
+-- Commit the transaction if no errors occurred
+COMMIT;

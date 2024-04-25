@@ -13,9 +13,391 @@
  */
 package dao;
 
+import org.orm.*;
+import org.hibernate.Query;
+import org.hibernate.LockMode;
+import java.util.List;
+
 import java.io.Serializable;
 public class Team implements Serializable {
 	public Team() {
+	}
+	
+	public static Team loadTeamByORMID(int TeamId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTeamByORMID(session, TeamId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team getTeamByORMID(int TeamId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getTeamByORMID(session, TeamId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByORMID(int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTeamByORMID(session, TeamId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team getTeamByORMID(int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getTeamByORMID(session, TeamId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByORMID(PersistentSession session, int TeamId) throws PersistentException {
+		try {
+			return (Team) session.load(dao.Team.class, Integer.valueOf(TeamId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team getTeamByORMID(PersistentSession session, int TeamId) throws PersistentException {
+		try {
+			return (Team) session.get(dao.Team.class, Integer.valueOf(TeamId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByORMID(PersistentSession session, int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Team) session.load(dao.Team.class, Integer.valueOf(TeamId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team getTeamByORMID(PersistentSession session, int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Team) session.get(dao.Team.class, Integer.valueOf(TeamId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTeam(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryTeam(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTeam(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryTeam(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team[] listTeamByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listTeamByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team[] listTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listTeamByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTeam(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Team as Team");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryTeam(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Team as Team");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Team", lockMode);
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team[] listTeamByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		try {
+			List list = queryTeam(session, condition, orderBy);
+			return (Team[]) list.toArray(new Team[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team[] listTeamByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			List list = queryTeam(session, condition, orderBy, lockMode);
+			return (Team[]) list.toArray(new Team[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTeamByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadTeamByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		Team[] teams = listTeamByQuery(session, condition, orderBy);
+		if (teams != null && teams.length > 0)
+			return teams[0];
+		else
+			return null;
+	}
+	
+	public static Team loadTeamByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		Team[] teams = listTeamByQuery(session, condition, orderBy, lockMode);
+		if (teams != null && teams.length > 0)
+			return teams[0];
+		else
+			return null;
+	}
+	
+	public static java.util.Iterator iterateTeamByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateTeamByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateTeamByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTeamByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Team as Team");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateTeamByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Team as Team");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Team", lockMode);
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Team loadTeamByCriteria(TeamCriteria teamCriteria) {
+		Team[] teams = listTeamByCriteria(teamCriteria);
+		if(teams == null || teams.length == 0) {
+			return null;
+		}
+		return teams[0];
+	}
+	
+	public static Team[] listTeamByCriteria(TeamCriteria teamCriteria) {
+		return teamCriteria.listTeam();
+	}
+	
+	public static Team createTeam() {
+		return new dao.Team();
+	}
+	
+	public boolean save() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().saveObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean delete() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().deleteObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean refresh() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean evict() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().evict(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate()throws PersistentException {
+		try {
+			if(getClub() != null) {
+				getClub().team.remove(this);
+			}
+			
+			dao.User[] lUsers = user.toArray();
+			for(int i = 0; i < lUsers.length; i++) {
+				lUsers[i].setTeam(null);
+			}
+			return delete();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
+		try {
+			if(getClub() != null) {
+				getClub().team.remove(this);
+			}
+			
+			dao.User[] lUsers = user.toArray();
+			for(int i = 0; i < lUsers.length; i++) {
+				lUsers[i].setTeam(null);
+			}
+			try {
+				session.delete(this);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
 	}
 	
 	private java.util.Set this_getSet (int key) {
@@ -117,7 +499,7 @@ public class Team implements Serializable {
 	/**
 	 * This method is for internal use only.
 	 */
-	public void setORM_Club(dao.Club value) {
+	private void setORM_Club(dao.Club value) {
 		this.club = value;
 	}
 	

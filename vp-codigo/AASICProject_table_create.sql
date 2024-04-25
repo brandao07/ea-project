@@ -10,7 +10,8 @@ create table "User" (
   Height       float8 not null, 
   Weight       float8 not null, 
   IsActive     bool not null, 
-  RegisterDate timestamp);
+  RegisterDate timestamp,
+  Name         varchar(255));
 create table Trial (
   TrialId                  serial not null, 
   StateStateId             int4 not null, 

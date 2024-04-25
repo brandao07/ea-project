@@ -13,9 +13,391 @@
  */
 package dao;
 
+import org.orm.*;
+import org.hibernate.Query;
+import org.hibernate.LockMode;
+import java.util.List;
+
 import java.io.Serializable;
 public class Competition implements Serializable {
 	public Competition() {
+	}
+	
+	public static Competition loadCompetitionByORMID(int CompetitionId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadCompetitionByORMID(session, CompetitionId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition getCompetitionByORMID(int CompetitionId) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getCompetitionByORMID(session, CompetitionId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByORMID(int CompetitionId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadCompetitionByORMID(session, CompetitionId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition getCompetitionByORMID(int CompetitionId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return getCompetitionByORMID(session, CompetitionId, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByORMID(PersistentSession session, int CompetitionId) throws PersistentException {
+		try {
+			return (Competition) session.load(dao.Competition.class, Integer.valueOf(CompetitionId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition getCompetitionByORMID(PersistentSession session, int CompetitionId) throws PersistentException {
+		try {
+			return (Competition) session.get(dao.Competition.class, Integer.valueOf(CompetitionId));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByORMID(PersistentSession session, int CompetitionId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Competition) session.load(dao.Competition.class, Integer.valueOf(CompetitionId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition getCompetitionByORMID(PersistentSession session, int CompetitionId, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			return (Competition) session.get(dao.Competition.class, Integer.valueOf(CompetitionId), lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryCompetition(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryCompetition(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryCompetition(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return queryCompetition(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition[] listCompetitionByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listCompetitionByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition[] listCompetitionByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return listCompetitionByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryCompetition(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Competition as Competition");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static List queryCompetition(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Competition as Competition");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Competition", lockMode);
+			return query.list();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition[] listCompetitionByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		try {
+			List list = queryCompetition(session, condition, orderBy);
+			return (Competition[]) list.toArray(new Competition[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition[] listCompetitionByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			List list = queryCompetition(session, condition, orderBy, lockMode);
+			return (Competition[]) list.toArray(new Competition[list.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadCompetitionByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return loadCompetitionByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		Competition[] competitions = listCompetitionByQuery(session, condition, orderBy);
+		if (competitions != null && competitions.length > 0)
+			return competitions[0];
+		else
+			return null;
+	}
+	
+	public static Competition loadCompetitionByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		Competition[] competitions = listCompetitionByQuery(session, condition, orderBy, lockMode);
+		if (competitions != null && competitions.length > 0)
+			return competitions[0];
+		else
+			return null;
+	}
+	
+	public static java.util.Iterator iterateCompetitionByQuery(String condition, String orderBy) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateCompetitionByQuery(session, condition, orderBy);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateCompetitionByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		try {
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
+			return iterateCompetitionByQuery(session, condition, orderBy, lockMode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateCompetitionByQuery(PersistentSession session, String condition, String orderBy) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Competition as Competition");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static java.util.Iterator iterateCompetitionByQuery(PersistentSession session, String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
+		StringBuffer sb = new StringBuffer("From dao.Competition as Competition");
+		if (condition != null)
+			sb.append(" Where ").append(condition);
+		if (orderBy != null)
+			sb.append(" Order By ").append(orderBy);
+		try {
+			Query query = session.createQuery(sb.toString());
+			query.setLockMode("Competition", lockMode);
+			return query.iterate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public static Competition loadCompetitionByCriteria(CompetitionCriteria competitionCriteria) {
+		Competition[] competitions = listCompetitionByCriteria(competitionCriteria);
+		if(competitions == null || competitions.length == 0) {
+			return null;
+		}
+		return competitions[0];
+	}
+	
+	public static Competition[] listCompetitionByCriteria(CompetitionCriteria competitionCriteria) {
+		return competitionCriteria.listCompetition();
+	}
+	
+	public static Competition createCompetition() {
+		return new dao.Competition();
+	}
+	
+	public boolean save() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().saveObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean delete() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().deleteObject(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean refresh() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean evict() throws PersistentException {
+		try {
+			orm.AASICProjectPersistentManager.instance().getSession().evict(this);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate()throws PersistentException {
+		try {
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setCompetition(null);
+			}
+			dao.Notification[] lNotifications = notification.toArray();
+			for(int i = 0; i < lNotifications.length; i++) {
+				lNotifications[i].setCompetition(null);
+			}
+			return delete();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
+	}
+	
+	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
+		try {
+			dao.Trial[] lTrials = trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].setCompetition(null);
+			}
+			dao.Notification[] lNotifications = notification.toArray();
+			for(int i = 0; i < lNotifications.length; i++) {
+				lNotifications[i].setCompetition(null);
+			}
+			try {
+				session.delete(this);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new PersistentException(e);
+		}
 	}
 	
 	private java.util.Set this_getSet (int key) {
