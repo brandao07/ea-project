@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <NavigationBar />
+    <router-view></router-view>
   </v-app>
 </template>
 
@@ -10,6 +11,10 @@ import NavigationBar from './components/NavigationBar.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+    }
+  },
   components: {
     NavigationBar
   }
@@ -26,5 +31,9 @@ export default {
   color: #2c3e50;
   margin: 0px;
   top: 0px;
+}
+
+body {
+  background-color: #f8f9fa !important;
 }
 </style>

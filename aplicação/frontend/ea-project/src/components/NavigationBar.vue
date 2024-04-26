@@ -18,8 +18,8 @@
                         <a class="nav-link" href="#">Utilizadores</a>
                     </li>
                 </ul>
-                <span class="navbar-text">
-                    {{this.user.name}}
+                <span class="navbar-text" v-if="user">
+                    {{ user }}
                 </span>
             </div>
         </div>
@@ -27,37 +27,46 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+//import jwt_decode from 'jwt-decode';
 
 export default {
     name: 'NavigationBar',
     data() {
-        return {
-            user: ''
+        /**
+         * FIXME: For test purposes -- Do not use it this way!!
+         */
+        const token = localStorage.getItem('jwt-token');
+        let user = '';
+        if (token) {
+            let decodedToken = JSON.parse(atob(token.split('.')[1]));
+            console.log('Decoded Token:', decodedToken);
+            user = decodedToken.name;
+            console.log('Decoded User:', user);
         }
+        else {
+            user = ""
+        }
+        return {
+            user: user,
+            token: token
+        };
     },
     components: {
         FontAwesomeIcon
     },
-    created() {
-        axios({
-            method: "get",
-            url: "http://localhost:7000/GetAllUsers",
-        })
-        .then(data => {
-            this.user = data.data[0];
-        })
-        .catch(err => {
-            console.log(err)
-        })    
-    },
 };
-
 </script>
 
 <style scoped>
 .icon-color {
     color: #008970;
+}
+
+.navbar-light {
+    background-color: #fcfcfc !important;
+    border: 1px solid #ccc;
 }
 </style>

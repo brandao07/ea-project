@@ -23,6 +23,7 @@ License Type: Academic
 		<property name="Weight" column="Weight" type="double" not-null="true" lazy="false"/>
 		<property name="IsActive" column="IsActive" type="boolean" not-null="true" lazy="false"/>
 		<property name="RegisterDate" column="RegisterDate" type="timestamp" not-null="false" lazy="false"/>
+		<property name="Photographypath" column="PhotographyPath" type="string" length="255" not-null="false" lazy="false"/>
 		<set name="ORM_Trial" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="UserUserId" not-null="true"/>
 			<one-to-many class="eaproject.dao.Trial"/>

@@ -155,15 +155,16 @@ INSERT INTO public.Club(
 INSERT INTO public.Team(
 	TeamId, ClubClubId, Name, IsActive, CreationDate)
 	VALUES (1, 1, 'Test Team', true, CURRENT_TIMESTAMP);
-	
+
+-- password for every user: password
 INSERT INTO public.User(
     RoleRoleId, TeamTeamId, Name, Email, Password, Gender, Age, Height, Weight, IsActive, RegisterDate, PhotographyPath)
 VALUES 
-    (1, 1, 'Eduardo Oliveira', 'eoliveira@mail.com', 'password', 'Male', '33', '186', '87', true, CURRENT_TIMESTAMP, null),
-    (1, 1, 'Miguel Senra', 'msenra@mail.com', 'password', 'Male', '28', '180', '75', true, CURRENT_TIMESTAMP, null),
-    (1, 1, 'Emanuel Silva', 'esilva@mail.com', 'password', 'Male', '20', '175', '70', true, CURRENT_TIMESTAMP, null),
-    (1, 1, 'Dinis Estrada', 'destrada@mail.com', 'password', 'Male', '18', '178', '78', true, CURRENT_TIMESTAMP, null),
-    (1, 1, 'André Brandão', 'abrandao@mail.com', 'password', 'Male', '25', '182', '80', true, CURRENT_TIMESTAMP, null);
+    (1, 1, 'Eduardo Oliveira', 'eoliveira@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Male', '33', '186', '87', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Miguel Senra', 'msenra@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Male', '28', '180', '75', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Emanuel Silva', 'esilva@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Male', '20', '175', '70', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'Dinis Estrada', 'destrada@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Male', '18', '178', '78', true, CURRENT_TIMESTAMP, null),
+    (1, 1, 'André Brandão', 'abrandao@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Male', '25', '182', '80', true, CURRENT_TIMESTAMP, null);
 
 END
 $$;
