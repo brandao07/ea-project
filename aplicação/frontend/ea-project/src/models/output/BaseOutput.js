@@ -1,19 +1,20 @@
-import FeedbackMessage from '../base/FeedbackMessage';
+import FeedbackMessage from "../base/FeedbackMessage";
 
-export default class BaseOutput {
-    constructor() {
-        this.feedbackMessages = [];
-    }
+class BaseOutput {
+  constructor(feedbackMessages = []) {
+    this.feedbackMessages = [];
+    this.setFeedbackMessages(feedbackMessages);
+  }
 
-    addFeedbackMessage(message, severity) {
-        this.feedbackMessages.push(new FeedbackMessage(message, severity));
-    }
+  setFeedbackMessages(feedbackMessages) {
+    this.feedbackMessages = feedbackMessages.map(
+      (msg) => new FeedbackMessage(msg.message, msg.severity)
+    );
+  }
 
-    setFeedbackMessages(feedbackMessages) {
-        this.feedbackMessages = feedbackMessages.map(msg => new FeedbackMessage(msg.message, msg.severity));
-    }
-
-    sortFeedbackMessagesBySeverity() {
-        this.feedbackMessages.sort((a, b) => a.severity.localeCompare(b.severity));
-    }
+  addFeedbackMessage(message, severity) {
+    this.feedbackMessages.push(new FeedbackMessage(message, severity));
+  }
 }
+
+export default BaseOutput;

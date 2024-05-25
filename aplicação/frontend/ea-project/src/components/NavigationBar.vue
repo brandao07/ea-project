@@ -18,9 +18,12 @@
                         <a class="nav-link" href="#">Utilizadores</a>
                     </li>
                 </ul>
-                <span class="navbar-text" v-if="user">
+                <span class="navbar-text mx-2" v-if="user">
                     {{ user }}
                 </span>
+                <a href="#" @click="logout" class="navbar-text" v-if="user">
+                    <font-awesome-icon :icon="['fa', 'sign-out']" />
+                </a>
             </div>
         </div>
     </nav>
@@ -30,29 +33,27 @@
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-//import jwt_decode from 'jwt-decode';
-
 export default {
     name: 'NavigationBar',
     data() {
-        /**
-         * FIXME: For test purposes -- Do not use it this way!!
-         */
-        const token = localStorage.getItem('jwt-token');
-        let user = '';
-        if (token) {
-            let decodedToken = JSON.parse(atob(token.split('.')[1]));
-            console.log('Decoded Token:', decodedToken);
-            user = decodedToken.name;
-            console.log('Decoded User:', user);
-        }
-        else {
-            user = ""
-        }
+        let user = localStorage.getItem('name');
         return {
-            user: user,
-            token: token
+            user: user
         };
+    },
+    methods: {
+        logout() {
+            // Clear localStorage
+            localStorage.removeItem('jwt-token');
+            localStorage.removeItem('idUser');
+            localStorage.removeItem('name');
+            localStorage.removeItem('isActive');
+            localStorage.removeItem('registerDate');
+            localStorage.removeItem('picture');
+            localStorage.removeItem('role');
+            // Redirect to login page
+            this.$router.push('/login');
+        },
     },
     components: {
         FontAwesomeIcon
@@ -68,5 +69,9 @@ export default {
 .navbar-light {
     background-color: #fcfcfc !important;
     border: 1px solid #ccc;
+}
+
+.a {
+  cursor: pointer !important;
 }
 </style>

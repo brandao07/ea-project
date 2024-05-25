@@ -5,11 +5,6 @@ const router = new createRouter({
   routes: [
     {
       path: "/",
-      name: "index",
-      meta: { requiresAuth: true }
-    },
-    {
-      path: "/home",
       name: "home",
       component: () => import('@/views/Home.vue'),
       meta: { requiresAuth: true }

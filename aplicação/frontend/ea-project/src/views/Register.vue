@@ -37,7 +37,7 @@
                                     required>
                             </div>
                             <div class="form-group mb-1">
-                                <label for="height" class="mb-2">Height (m)</label>
+                                <label for="height" class="mb-2">Height (cm)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="height"
                                     v-model="userRegisterInput.height" required>
                             </div>

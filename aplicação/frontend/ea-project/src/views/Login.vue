@@ -22,7 +22,8 @@
                                     v-model="authenticationInput.password" required>
                             </div>
                             <div class="form-group-right mb-1">
-                                <button type="button" class="btn btn-light mx-2" @click="navigateToLogin">Register</button>
+                                <button type="button" class="btn btn-light mx-2"
+                                    @click="navigateToLogin">Register</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
@@ -50,8 +51,25 @@ export default {
         async login() {
             this.authenticationOutput = await UserService.loginUser(this.authenticationInput);
             if (this.authenticationOutput.token) {
+                // Store the token itself
                 localStorage.setItem('jwt-token', this.authenticationOutput.token);
-                this.$router.push('/home');
+
+                // Import JWT Decode
+                const jwt_decode = require('jwt-decode');
+
+                // Decode the token to get the claims
+                const decodedToken = jwt_decode.jwtDecode(this.authenticationOutput.token);
+
+                // Store each claim separately in localStorage or sessionStorage
+                localStorage.setItem('idUser', decodedToken.idUser);
+                localStorage.setItem('name', decodedToken.name);
+                localStorage.setItem('isActive', decodedToken.isActive);
+                localStorage.setItem('registerDate', decodedToken.registerDate);
+                localStorage.setItem('picture', decodedToken.picture);
+                localStorage.setItem('role', decodedToken.role);
+
+                // Redirect to home page or any other page
+                this.$router.push('/');
             }
         },
         navigateToLogin() {
@@ -64,15 +82,15 @@ export default {
 
 <style scoped>
 #login {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: left;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: left;
 }
 
 .div-center {
-  width: 100%;
-  max-width: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .content {
@@ -83,11 +101,11 @@ export default {
 }
 
 .vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .form-group {

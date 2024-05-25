@@ -1,8 +1,8 @@
-import FeedbackSeverity from '../enums/FeedbackSeverity';
+const FeedbackSeverity = Object.freeze({
+    SUCCESS: 'SUCCESS',
+    INFO: 'INFO',
+    WARNING: 'WARNING',
+    DANGER: 'DANGER'
+});
 
-export default class FeedbackMessage {
-    constructor(message = '', severity = FeedbackSeverity.INFO) {
-        this.message = message;
-        this.severity = severity;
-    }
-}
+export default FeedbackSeverity;
