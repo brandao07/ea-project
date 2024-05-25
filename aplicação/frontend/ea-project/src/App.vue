@@ -1,22 +1,16 @@
 <template>
   <v-app id="app">
-    <NavigationBar />
     <router-view></router-view>
   </v-app>
 </template>
 
 <script>
 
-import NavigationBar from './components/NavigationBar.vue';
-
 export default {
-  name: 'App',
+  name: 'app',
   data() {
     return {
     }
-  },
-  components: {
-    NavigationBar
   }
 }
 </script>
@@ -27,10 +21,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 0px;
-  top: 0px;
 }
 
 body {

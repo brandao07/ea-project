@@ -1,24 +1,24 @@
 <template>
     <div id="home">
-        HOME
+        <NavigationBar />
     </div>
-
 </template>
 
-
-
 <script>
+
+import NavigationBar from '../components/NavigationBar.vue';
 
 export default {
     name: 'home',
     data() {
-        return { 
+        return {
         }
+    },
+    components: {
+        NavigationBar
     }
 }
 
 </script>
 
-<style>
-
-</style>
+<style></style>

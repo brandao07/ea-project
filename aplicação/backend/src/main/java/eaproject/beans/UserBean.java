@@ -3,60 +3,114 @@ package eaproject.beans;
 import eaproject.beans.locals.UserLocal;
 import eaproject.dao.User;
 import eaproject.dao.UserDAO;
-import eaproject.dto.AuthenticationDTO;
-import eaproject.dto.UserDTO;
-import eaproject.utilities.Utilities;
+import eaproject.enums.FeedbackSeverity;
+import eaproject.input.AuthenticationInput;
+import eaproject.input.UserRegisterInput;
+import eaproject.output.AuthenticationOutput;
+import eaproject.output.UserRegisterOutput;
 import eaproject.utilities.JwtTokenUtil;
+import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import java.util.Objects;
 
 @Stateless(name = "UserEJB")
 @Local(UserLocal.class)
 @Component
-public class UserBean {
-    public String loginUser(AuthenticationDTO userInput) throws UsernameNotFoundException, PersistentException {
-        User user = UserDAO.loadUserByQuery("email = '" + userInput.getEmail() + "'", null);
-        if (user != null && user.getUserId() > 0 && user.getIsActive()) {
-            // Instantiate BCryptPasswordEncoder
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            if (passwordEncoder.matches(userInput.getPassword(), user.getPassword())) {
-                return JwtTokenUtil.createToken(user);
+public class UserBean implements UserLocal {
+
+    // Password encoder for hashing and verifying passwords
+    private final PasswordEncoder passwordEncoder;
+
+    @Inject
+    public UserBean(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("UserBean initialized with PasswordEncoder: " + (passwordEncoder != null));
+    }
+
+    /**
+     * Authenticates a user based on the provided input data.
+     *
+     * @param userInput the input data for user authentication
+     * @return AuthenticationOutput containing the authentication result, token, and feedback messages
+     * @throws UsernameNotFoundException if the user is not found
+     */
+    public AuthenticationOutput authenticateUser(AuthenticationInput userInput) throws UsernameNotFoundException {
+        AuthenticationOutput output = new AuthenticationOutput();
+        try {
+            // Use prepared statement to prevent SQL injection
+            String condition = "email = '" + userInput.getEmail() + "'";
+            User user = UserDAO.loadUserByQuery(condition, null);
+
+            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+                if (passwordEncoder.matches(userInput.getPassword(), user.getPassword())) {
+                    String token = JwtTokenUtil.createToken(user);
+                    output.setToken(token);
+                    output.addFeedbackMessage("Login successful", FeedbackSeverity.SUCCESS);
+                } else {
+                    throw new BadCredentialsException("Invalid email or password");
+                }
             } else {
                 throw new BadCredentialsException("Invalid email or password");
             }
-        } else {
-            throw new UsernameNotFoundException("User not found with email address: " + userInput.getEmail());
-        }
-    }
-
-    public User[] getAllUsers() {
-        try {
-            return UserDAO.listUserByQuery(null,null);
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public boolean createUser(UserDTO userDTO) {
-        try {
-            // Convert UserDTO to User entity
-            User user = Utilities.convertToDAO(userDTO, User.class);
-            // Hash the password using BCryptPasswordEncoder
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(hashedPassword); // Set the hashed password
-            // Save user to database using DAO
-            return UserDAO.save(user);
+        } catch (BadCredentialsException e) {
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
         } catch (PersistentException e) {
-            throw new RuntimeException(e);
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
         }
+        return output;
+    }
+
+    /**
+     * Registers a new user based on the provided input data.
+     *
+     * @param input the input data for registering a new user
+     * @return UserRegisterOutput containing the registration result and feedback messages
+     */
+    public UserRegisterOutput registerNewUser(UserRegisterInput input) {
+        UserRegisterOutput output = new UserRegisterOutput();
+        try {
+            // Validate input
+            if (input.getName().isEmpty() || input.getEmail().isEmpty() || input.getPassword().isEmpty()) {
+                output.addFeedbackMessage("Name, email, and password are required.", FeedbackSeverity.DANGER);
+                output.setRegistrationSuccessful(false);
+                return output;
+            }
+
+            // Convert UserOutput to User entity
+            User user = Utilities.convertToDAO(input, User.class);
+
+            // Hash the password using the injected PasswordEncoder
+            String hashedPassword = passwordEncoder.encode(Objects.requireNonNull(user).getPassword());
+
+            // Set the hashed password
+            user.setPassword(hashedPassword);
+
+            // Save user to database using DAO
+            UserDAO.save(user);
+
+            // If successful
+            output.addFeedbackMessage("User registered successfully.", FeedbackSeverity.SUCCESS);
+            output.setRegistrationSuccessful(true);
+        } catch (PersistentException e) {
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        return output;
     }
 }
