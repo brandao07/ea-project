@@ -1,10 +1,9 @@
 package eaproject.utilities;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 
 public class Utilities {
     public static <T, U> U convertToDTO(T entity, Class<U> dtoClass) {

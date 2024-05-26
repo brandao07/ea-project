@@ -5,10 +5,7 @@ import eaproject.input.AuthenticationInput;
 import eaproject.input.UserRegisterInput;
 import eaproject.output.AuthenticationOutput;
 import eaproject.output.UserRegisterOutput;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ejb.EJB;
 
