@@ -1,8 +1,7 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.UserLocal;
-import eaproject.dao.User;
-import eaproject.dao.UserDAO;
+import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.AuthenticationInput;
 import eaproject.input.UserRegisterInput;
@@ -20,6 +19,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Stateless(name = "UserEJB")
@@ -99,6 +100,24 @@ public class UserBean implements UserLocal {
 
             // Set the hashed password
             user.setPassword(hashedPassword);
+
+            // Set user active
+            user.setIsActive(true);
+
+            // Set user registration date
+            user.setRegisterDate(Timestamp.valueOf(LocalDateTime.now()));
+
+            // Get base role FIXME: We need to change this to a base role...
+            Role role = RoleDAO.getRoleByORMID(1);
+
+            // Set base role FIXME: See comments above
+            user.setRole(role);
+
+            // Get base team FIXME: We need get the team from another way, maybe perform a select of the team when register?!...
+            Team team = TeamDAO.getTeamByORMID(1);
+
+            // Set base team FIXME: See comments above
+            user.setTeam(team);
 
             // Save user to database using DAO
             UserDAO.save(user);

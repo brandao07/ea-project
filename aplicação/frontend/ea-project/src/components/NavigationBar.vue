@@ -32,6 +32,7 @@
 <script>
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import AuthService from "@/services/AuthService";
 
 export default {
     name: 'NavigationBar',
@@ -43,16 +44,7 @@ export default {
     },
     methods: {
         logout() {
-            // Clear localStorage
-            localStorage.removeItem('jwt-token');
-            localStorage.removeItem('idUser');
-            localStorage.removeItem('name');
-            localStorage.removeItem('isActive');
-            localStorage.removeItem('registerDate');
-            localStorage.removeItem('picture');
-            localStorage.removeItem('role');
-            // Redirect to login page
-            this.$router.push('/login');
+            AuthService.logout(this.$router);
         },
     },
     components: {

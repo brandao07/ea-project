@@ -1,10 +1,10 @@
-import axios from "axios";
 import UserRegisterOutput from "@/models/output/UserRegisterOutput";
 import AuthenticationOutput from "@/models/output/AuthenticationOutput";
 import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import API_ENDPOINTS from "@/config/api";
-import FeedbackMessage from '@/models/base/FeedbackMessage';
-import EventBus from '@/eventBus';
+import FeedbackMessage from "@/models/base/FeedbackMessage";
+import EventBus from "@/eventBus";
+import ApiService from "@/services/ApiService";
 
 class UserService {
   /**
@@ -14,16 +14,25 @@ class UserService {
    */
   async registerUser(userRegisterInput) {
     try {
-      const response = await axios.post(API_ENDPOINTS.REGISTER, userRegisterInput);
-      const output = new UserRegisterOutput(response.data.registrationSuccessful, response.data.feedbackMessages);
-      output.feedbackMessages.forEach(msg => {
-        EventBus.emit('feedback-message', msg);
+      const response = await ApiService.post(
+        API_ENDPOINTS.REGISTER,
+        userRegisterInput
+      );
+      const output = new UserRegisterOutput(
+        response.registrationSuccessful,
+        response.feedbackMessages
+      );
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
-      const errorMessage = new FeedbackMessage('An error occurred during registration.', FeedbackSeverity.DANGER);
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during registration.",
+        FeedbackSeverity.DANGER
+      );
       const output = new UserRegisterOutput(false, [errorMessage]);
-      EventBus.emit('feedback-message', errorMessage);
+      EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
@@ -35,19 +44,27 @@ class UserService {
    */
   async loginUser(authenticationInput) {
     try {
-      const response = await axios.post(API_ENDPOINTS.LOGIN, authenticationInput);
-      const feedbackMessages = response.data.feedbackMessages.map(msg =>
-        new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      const response = await ApiService.post(
+        API_ENDPOINTS.LOGIN,
+        authenticationInput
       );
-      const output = new AuthenticationOutput(response.data.token, feedbackMessages);
-      output.feedbackMessages.forEach(msg => {
-        EventBus.emit('feedback-message', msg);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) =>
+          new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new AuthenticationOutput(response.token, feedbackMessages);
+      ApiService.setToken(response.token); // Store the token
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
-      const errorMessage = new FeedbackMessage('An error occurred during authentication.', FeedbackSeverity.DANGER);
-      const output = new AuthenticationOutput('', [errorMessage]);
-      EventBus.emit('feedback-message', errorMessage);
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during authentication.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new AuthenticationOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }

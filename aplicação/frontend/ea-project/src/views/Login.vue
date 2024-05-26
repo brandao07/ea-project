@@ -38,6 +38,7 @@
 import UserService from '@/services/UserService';
 import AuthenticationInput from '@/models/input/AuthenticationInput';
 import AuthenticationOutput from '@/models/output/AuthenticationOutput';
+import AuthService from "@/services/AuthService";
 
 export default {
     name: 'login',
@@ -51,25 +52,7 @@ export default {
         async login() {
             this.authenticationOutput = await UserService.loginUser(this.authenticationInput);
             if (this.authenticationOutput.token) {
-                // Store the token itself
-                localStorage.setItem('jwt-token', this.authenticationOutput.token);
-
-                // Import JWT Decode
-                const jwt_decode = require('jwt-decode');
-
-                // Decode the token to get the claims
-                const decodedToken = jwt_decode.jwtDecode(this.authenticationOutput.token);
-
-                // Store each claim separately in localStorage or sessionStorage
-                localStorage.setItem('idUser', decodedToken.idUser);
-                localStorage.setItem('name', decodedToken.name);
-                localStorage.setItem('isActive', decodedToken.isActive);
-                localStorage.setItem('registerDate', decodedToken.registerDate);
-                localStorage.setItem('picture', decodedToken.picture);
-                localStorage.setItem('role', decodedToken.role);
-
-                // Redirect to home page or any other page
-                this.$router.push('/');
+                AuthService.login(this.authenticationOutput.token, this.$router);
             }
         },
         navigateToLogin() {
