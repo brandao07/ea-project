@@ -14,7 +14,7 @@ License Type: Academic
 		<property name="IsActive" column="IsActive" type="boolean" not-null="true" lazy="false"/>
 		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_Team" lazy="true" cascade="save-update,lock" inverse="true">
-			<key column="ClubClubId" not-null="true"/>
+			<key column="ClubClubId" not-null="false"/>
 			<one-to-many class="eaproject.dao.Team"/>
 		</set>
 	</class>

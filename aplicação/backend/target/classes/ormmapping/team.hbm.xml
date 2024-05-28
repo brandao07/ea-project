@@ -10,13 +10,13 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="club" cascade="lock" column="ClubClubId" class="eaproject.dao.Club" not-null="true" lazy="proxy" access="field">
+		<many-to-one name="club" cascade="lock" column="ClubClubId" class="eaproject.dao.Club" not-null="false" lazy="proxy" access="field">
 		</many-to-one>
 		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="IsActive" column="IsActive" type="boolean" not-null="true" lazy="false"/>
 		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
 		<set name="ORM_User" lazy="true" cascade="save-update,lock" inverse="true">
-			<key column="TeamTeamId" not-null="true"/>
+			<key column="TeamTeamId" not-null="false"/>
 			<one-to-many class="eaproject.dao.User"/>
 		</set>
 	</class>

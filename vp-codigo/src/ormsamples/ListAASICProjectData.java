@@ -10,98 +10,98 @@ public class ListAASICProjectData {
 	
 	public void listTestData() throws PersistentException {
 		System.out.println("Listing User...");
-		dao.User[] daoUsers = dao.User.listUserByQuery(null, null);
-		int length = Math.min(daoUsers.length, ROW_COUNT);
+		eaproject.dao.User[] eaprojectdaoUsers = eaproject.dao.UserDAO.listUserByQuery(null, null);
+		int length = Math.min(eaprojectdaoUsers.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoUsers[i]);
+			System.out.println(eaprojectdaoUsers[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Trial...");
-		dao.Trial[] daoTrials = dao.Trial.listTrialByQuery(null, null);
-		length = Math.min(daoTrials.length, ROW_COUNT);
+		eaproject.dao.Trial[] eaprojectdaoTrials = eaproject.dao.TrialDAO.listTrialByQuery(null, null);
+		length = Math.min(eaprojectdaoTrials.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoTrials[i]);
+			System.out.println(eaprojectdaoTrials[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Competition...");
-		dao.Competition[] daoCompetitions = dao.Competition.listCompetitionByQuery(null, null);
-		length = Math.min(daoCompetitions.length, ROW_COUNT);
+		eaproject.dao.Competition[] eaprojectdaoCompetitions = eaproject.dao.CompetitionDAO.listCompetitionByQuery(null, null);
+		length = Math.min(eaprojectdaoCompetitions.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoCompetitions[i]);
+			System.out.println(eaprojectdaoCompetitions[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Result...");
-		dao.Result[] daoResults = dao.Result.listResultByQuery(null, null);
-		length = Math.min(daoResults.length, ROW_COUNT);
+		eaproject.dao.Result[] eaprojectdaoResults = eaproject.dao.ResultDAO.listResultByQuery(null, null);
+		length = Math.min(eaprojectdaoResults.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoResults[i]);
+			System.out.println(eaprojectdaoResults[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Grade...");
-		dao.Grade[] daoGrades = dao.Grade.listGradeByQuery(null, null);
-		length = Math.min(daoGrades.length, ROW_COUNT);
+		eaproject.dao.Grade[] eaprojectdaoGrades = eaproject.dao.GradeDAO.listGradeByQuery(null, null);
+		length = Math.min(eaprojectdaoGrades.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoGrades[i]);
+			System.out.println(eaprojectdaoGrades[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Location...");
-		dao.Location[] daoLocations = dao.Location.listLocationByQuery(null, null);
-		length = Math.min(daoLocations.length, ROW_COUNT);
+		eaproject.dao.Location[] eaprojectdaoLocations = eaproject.dao.LocationDAO.listLocationByQuery(null, null);
+		length = Math.min(eaprojectdaoLocations.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoLocations[i]);
+			System.out.println(eaprojectdaoLocations[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Notification...");
-		dao.Notification[] daoNotifications = dao.Notification.listNotificationByQuery(null, null);
-		length = Math.min(daoNotifications.length, ROW_COUNT);
+		eaproject.dao.Notification[] eaprojectdaoNotifications = eaproject.dao.NotificationDAO.listNotificationByQuery(null, null);
+		length = Math.min(eaprojectdaoNotifications.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoNotifications[i]);
+			System.out.println(eaprojectdaoNotifications[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Club...");
-		dao.Club[] daoClubs = dao.Club.listClubByQuery(null, null);
-		length = Math.min(daoClubs.length, ROW_COUNT);
+		eaproject.dao.Club[] eaprojectdaoClubs = eaproject.dao.ClubDAO.listClubByQuery(null, null);
+		length = Math.min(eaprojectdaoClubs.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoClubs[i]);
+			System.out.println(eaprojectdaoClubs[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Team...");
-		dao.Team[] daoTeams = dao.Team.listTeamByQuery(null, null);
-		length = Math.min(daoTeams.length, ROW_COUNT);
+		eaproject.dao.Team[] eaprojectdaoTeams = eaproject.dao.TeamDAO.listTeamByQuery(null, null);
+		length = Math.min(eaprojectdaoTeams.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoTeams[i]);
+			System.out.println(eaprojectdaoTeams[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Type...");
-		dao.Type[] daoTypes = dao.Type.listTypeByQuery(null, null);
-		length = Math.min(daoTypes.length, ROW_COUNT);
+		eaproject.dao.Type[] eaprojectdaoTypes = eaproject.dao.TypeDAO.listTypeByQuery(null, null);
+		length = Math.min(eaprojectdaoTypes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoTypes[i]);
+			System.out.println(eaprojectdaoTypes[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing State...");
-		dao.State[] daoStates = dao.State.listStateByQuery(null, null);
-		length = Math.min(daoStates.length, ROW_COUNT);
+		eaproject.dao.State[] eaprojectdaoStates = eaproject.dao.StateDAO.listStateByQuery(null, null);
+		length = Math.min(eaprojectdaoStates.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoStates[i]);
+			System.out.println(eaprojectdaoStates[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Role...");
-		dao.Role[] daoRoles = dao.Role.listRoleByQuery(null, null);
-		length = Math.min(daoRoles.length, ROW_COUNT);
+		eaproject.dao.Role[] eaprojectdaoRoles = eaproject.dao.RoleDAO.listRoleByQuery(null, null);
+		length = Math.min(eaprojectdaoRoles.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(daoRoles[i]);
+			System.out.println(eaprojectdaoRoles[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
@@ -109,146 +109,146 @@ public class ListAASICProjectData {
 	
 	public void listByCriteria() throws PersistentException {
 		System.out.println("Listing User by Criteria...");
-		dao.UserCriteria ldaoUserCriteria = new dao.UserCriteria();
+		eaproject.dao.UserCriteria leaprojectdaoUserCriteria = new eaproject.dao.UserCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoUserCriteria.UserId.eq();
-		ldaoUserCriteria.setMaxResults(ROW_COUNT);
-		dao.User[] daoUsers = ldaoUserCriteria.listUser();
-		int length =daoUsers== null ? 0 : Math.min(daoUsers.length, ROW_COUNT); 
+		//leaprojectdaoUserCriteria.UserId.eq();
+		leaprojectdaoUserCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.User[] eaprojectdaoUsers = leaprojectdaoUserCriteria.listUser();
+		int length =eaprojectdaoUsers== null ? 0 : Math.min(eaprojectdaoUsers.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoUsers[i]);
+			 System.out.println(eaprojectdaoUsers[i]);
 		}
 		System.out.println(length + " User record(s) retrieved."); 
 		
 		System.out.println("Listing Trial by Criteria...");
-		dao.TrialCriteria ldaoTrialCriteria = new dao.TrialCriteria();
+		eaproject.dao.TrialCriteria leaprojectdaoTrialCriteria = new eaproject.dao.TrialCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoTrialCriteria.TrialId.eq();
-		ldaoTrialCriteria.setMaxResults(ROW_COUNT);
-		dao.Trial[] daoTrials = ldaoTrialCriteria.listTrial();
-		length =daoTrials== null ? 0 : Math.min(daoTrials.length, ROW_COUNT); 
+		//leaprojectdaoTrialCriteria.TrialId.eq();
+		leaprojectdaoTrialCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Trial[] eaprojectdaoTrials = leaprojectdaoTrialCriteria.listTrial();
+		length =eaprojectdaoTrials== null ? 0 : Math.min(eaprojectdaoTrials.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoTrials[i]);
+			 System.out.println(eaprojectdaoTrials[i]);
 		}
 		System.out.println(length + " Trial record(s) retrieved."); 
 		
 		System.out.println("Listing Competition by Criteria...");
-		dao.CompetitionCriteria ldaoCompetitionCriteria = new dao.CompetitionCriteria();
+		eaproject.dao.CompetitionCriteria leaprojectdaoCompetitionCriteria = new eaproject.dao.CompetitionCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoCompetitionCriteria.CompetitionId.eq();
-		ldaoCompetitionCriteria.setMaxResults(ROW_COUNT);
-		dao.Competition[] daoCompetitions = ldaoCompetitionCriteria.listCompetition();
-		length =daoCompetitions== null ? 0 : Math.min(daoCompetitions.length, ROW_COUNT); 
+		//leaprojectdaoCompetitionCriteria.CompetitionId.eq();
+		leaprojectdaoCompetitionCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Competition[] eaprojectdaoCompetitions = leaprojectdaoCompetitionCriteria.listCompetition();
+		length =eaprojectdaoCompetitions== null ? 0 : Math.min(eaprojectdaoCompetitions.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoCompetitions[i]);
+			 System.out.println(eaprojectdaoCompetitions[i]);
 		}
 		System.out.println(length + " Competition record(s) retrieved."); 
 		
 		System.out.println("Listing Result by Criteria...");
-		dao.ResultCriteria ldaoResultCriteria = new dao.ResultCriteria();
+		eaproject.dao.ResultCriteria leaprojectdaoResultCriteria = new eaproject.dao.ResultCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoResultCriteria.ResultId.eq();
-		ldaoResultCriteria.setMaxResults(ROW_COUNT);
-		dao.Result[] daoResults = ldaoResultCriteria.listResult();
-		length =daoResults== null ? 0 : Math.min(daoResults.length, ROW_COUNT); 
+		//leaprojectdaoResultCriteria.ResultId.eq();
+		leaprojectdaoResultCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Result[] eaprojectdaoResults = leaprojectdaoResultCriteria.listResult();
+		length =eaprojectdaoResults== null ? 0 : Math.min(eaprojectdaoResults.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoResults[i]);
+			 System.out.println(eaprojectdaoResults[i]);
 		}
 		System.out.println(length + " Result record(s) retrieved."); 
 		
 		System.out.println("Listing Grade by Criteria...");
-		dao.GradeCriteria ldaoGradeCriteria = new dao.GradeCriteria();
+		eaproject.dao.GradeCriteria leaprojectdaoGradeCriteria = new eaproject.dao.GradeCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoGradeCriteria.GradeId.eq();
-		ldaoGradeCriteria.setMaxResults(ROW_COUNT);
-		dao.Grade[] daoGrades = ldaoGradeCriteria.listGrade();
-		length =daoGrades== null ? 0 : Math.min(daoGrades.length, ROW_COUNT); 
+		//leaprojectdaoGradeCriteria.GradeId.eq();
+		leaprojectdaoGradeCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Grade[] eaprojectdaoGrades = leaprojectdaoGradeCriteria.listGrade();
+		length =eaprojectdaoGrades== null ? 0 : Math.min(eaprojectdaoGrades.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoGrades[i]);
+			 System.out.println(eaprojectdaoGrades[i]);
 		}
 		System.out.println(length + " Grade record(s) retrieved."); 
 		
 		System.out.println("Listing Location by Criteria...");
-		dao.LocationCriteria ldaoLocationCriteria = new dao.LocationCriteria();
+		eaproject.dao.LocationCriteria leaprojectdaoLocationCriteria = new eaproject.dao.LocationCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoLocationCriteria.LocationId.eq();
-		ldaoLocationCriteria.setMaxResults(ROW_COUNT);
-		dao.Location[] daoLocations = ldaoLocationCriteria.listLocation();
-		length =daoLocations== null ? 0 : Math.min(daoLocations.length, ROW_COUNT); 
+		//leaprojectdaoLocationCriteria.LocationId.eq();
+		leaprojectdaoLocationCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Location[] eaprojectdaoLocations = leaprojectdaoLocationCriteria.listLocation();
+		length =eaprojectdaoLocations== null ? 0 : Math.min(eaprojectdaoLocations.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoLocations[i]);
+			 System.out.println(eaprojectdaoLocations[i]);
 		}
 		System.out.println(length + " Location record(s) retrieved."); 
 		
 		System.out.println("Listing Notification by Criteria...");
-		dao.NotificationCriteria ldaoNotificationCriteria = new dao.NotificationCriteria();
+		eaproject.dao.NotificationCriteria leaprojectdaoNotificationCriteria = new eaproject.dao.NotificationCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoNotificationCriteria.NotificationId.eq();
-		ldaoNotificationCriteria.setMaxResults(ROW_COUNT);
-		dao.Notification[] daoNotifications = ldaoNotificationCriteria.listNotification();
-		length =daoNotifications== null ? 0 : Math.min(daoNotifications.length, ROW_COUNT); 
+		//leaprojectdaoNotificationCriteria.NotificationId.eq();
+		leaprojectdaoNotificationCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Notification[] eaprojectdaoNotifications = leaprojectdaoNotificationCriteria.listNotification();
+		length =eaprojectdaoNotifications== null ? 0 : Math.min(eaprojectdaoNotifications.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoNotifications[i]);
+			 System.out.println(eaprojectdaoNotifications[i]);
 		}
 		System.out.println(length + " Notification record(s) retrieved."); 
 		
 		System.out.println("Listing Club by Criteria...");
-		dao.ClubCriteria ldaoClubCriteria = new dao.ClubCriteria();
+		eaproject.dao.ClubCriteria leaprojectdaoClubCriteria = new eaproject.dao.ClubCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoClubCriteria.ClubId.eq();
-		ldaoClubCriteria.setMaxResults(ROW_COUNT);
-		dao.Club[] daoClubs = ldaoClubCriteria.listClub();
-		length =daoClubs== null ? 0 : Math.min(daoClubs.length, ROW_COUNT); 
+		//leaprojectdaoClubCriteria.ClubId.eq();
+		leaprojectdaoClubCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Club[] eaprojectdaoClubs = leaprojectdaoClubCriteria.listClub();
+		length =eaprojectdaoClubs== null ? 0 : Math.min(eaprojectdaoClubs.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoClubs[i]);
+			 System.out.println(eaprojectdaoClubs[i]);
 		}
 		System.out.println(length + " Club record(s) retrieved."); 
 		
 		System.out.println("Listing Team by Criteria...");
-		dao.TeamCriteria ldaoTeamCriteria = new dao.TeamCriteria();
+		eaproject.dao.TeamCriteria leaprojectdaoTeamCriteria = new eaproject.dao.TeamCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoTeamCriteria.TeamId.eq();
-		ldaoTeamCriteria.setMaxResults(ROW_COUNT);
-		dao.Team[] daoTeams = ldaoTeamCriteria.listTeam();
-		length =daoTeams== null ? 0 : Math.min(daoTeams.length, ROW_COUNT); 
+		//leaprojectdaoTeamCriteria.TeamId.eq();
+		leaprojectdaoTeamCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Team[] eaprojectdaoTeams = leaprojectdaoTeamCriteria.listTeam();
+		length =eaprojectdaoTeams== null ? 0 : Math.min(eaprojectdaoTeams.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoTeams[i]);
+			 System.out.println(eaprojectdaoTeams[i]);
 		}
 		System.out.println(length + " Team record(s) retrieved."); 
 		
 		System.out.println("Listing Type by Criteria...");
-		dao.TypeCriteria ldaoTypeCriteria = new dao.TypeCriteria();
+		eaproject.dao.TypeCriteria leaprojectdaoTypeCriteria = new eaproject.dao.TypeCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoTypeCriteria.TypeId.eq();
-		ldaoTypeCriteria.setMaxResults(ROW_COUNT);
-		dao.Type[] daoTypes = ldaoTypeCriteria.listType();
-		length =daoTypes== null ? 0 : Math.min(daoTypes.length, ROW_COUNT); 
+		//leaprojectdaoTypeCriteria.TypeId.eq();
+		leaprojectdaoTypeCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Type[] eaprojectdaoTypes = leaprojectdaoTypeCriteria.listType();
+		length =eaprojectdaoTypes== null ? 0 : Math.min(eaprojectdaoTypes.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoTypes[i]);
+			 System.out.println(eaprojectdaoTypes[i]);
 		}
 		System.out.println(length + " Type record(s) retrieved."); 
 		
 		System.out.println("Listing State by Criteria...");
-		dao.StateCriteria ldaoStateCriteria = new dao.StateCriteria();
+		eaproject.dao.StateCriteria leaprojectdaoStateCriteria = new eaproject.dao.StateCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoStateCriteria.StateId.eq();
-		ldaoStateCriteria.setMaxResults(ROW_COUNT);
-		dao.State[] daoStates = ldaoStateCriteria.listState();
-		length =daoStates== null ? 0 : Math.min(daoStates.length, ROW_COUNT); 
+		//leaprojectdaoStateCriteria.StateId.eq();
+		leaprojectdaoStateCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.State[] eaprojectdaoStates = leaprojectdaoStateCriteria.listState();
+		length =eaprojectdaoStates== null ? 0 : Math.min(eaprojectdaoStates.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoStates[i]);
+			 System.out.println(eaprojectdaoStates[i]);
 		}
 		System.out.println(length + " State record(s) retrieved."); 
 		
 		System.out.println("Listing Role by Criteria...");
-		dao.RoleCriteria ldaoRoleCriteria = new dao.RoleCriteria();
+		eaproject.dao.RoleCriteria leaprojectdaoRoleCriteria = new eaproject.dao.RoleCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldaoRoleCriteria.RoleId.eq();
-		ldaoRoleCriteria.setMaxResults(ROW_COUNT);
-		dao.Role[] daoRoles = ldaoRoleCriteria.listRole();
-		length =daoRoles== null ? 0 : Math.min(daoRoles.length, ROW_COUNT); 
+		//leaprojectdaoRoleCriteria.RoleId.eq();
+		leaprojectdaoRoleCriteria.setMaxResults(ROW_COUNT);
+		eaproject.dao.Role[] eaprojectdaoRoles = leaprojectdaoRoleCriteria.listRole();
+		length =eaprojectdaoRoles== null ? 0 : Math.min(eaprojectdaoRoles.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(daoRoles[i]);
+			 System.out.println(eaprojectdaoRoles[i]);
 		}
 		System.out.println(length + " Role record(s) retrieved."); 
 		

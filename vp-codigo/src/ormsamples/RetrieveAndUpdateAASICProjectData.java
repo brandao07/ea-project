@@ -9,42 +9,42 @@ public class RetrieveAndUpdateAASICProjectData {
 	public void retrieveAndUpdateTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			dao.User ldaoUser = dao.User.loadUserByQuery(null, null);
+			eaproject.dao.User leaprojectdaoUser = eaproject.dao.UserDAO.loadUserByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoUser.save();
-			dao.Trial ldaoTrial = dao.Trial.loadTrialByQuery(null, null);
+			eaproject.dao.UserDAO.save(leaprojectdaoUser);
+			eaproject.dao.Trial leaprojectdaoTrial = eaproject.dao.TrialDAO.loadTrialByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoTrial.save();
-			dao.Competition ldaoCompetition = dao.Competition.loadCompetitionByQuery(null, null);
+			eaproject.dao.TrialDAO.save(leaprojectdaoTrial);
+			eaproject.dao.Competition leaprojectdaoCompetition = eaproject.dao.CompetitionDAO.loadCompetitionByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoCompetition.save();
-			dao.Result ldaoResult = dao.Result.loadResultByQuery(null, null);
+			eaproject.dao.CompetitionDAO.save(leaprojectdaoCompetition);
+			eaproject.dao.Result leaprojectdaoResult = eaproject.dao.ResultDAO.loadResultByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoResult.save();
-			dao.Grade ldaoGrade = dao.Grade.loadGradeByQuery(null, null);
+			eaproject.dao.ResultDAO.save(leaprojectdaoResult);
+			eaproject.dao.Grade leaprojectdaoGrade = eaproject.dao.GradeDAO.loadGradeByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoGrade.save();
-			dao.Location ldaoLocation = dao.Location.loadLocationByQuery(null, null);
+			eaproject.dao.GradeDAO.save(leaprojectdaoGrade);
+			eaproject.dao.Location leaprojectdaoLocation = eaproject.dao.LocationDAO.loadLocationByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoLocation.save();
-			dao.Notification ldaoNotification = dao.Notification.loadNotificationByQuery(null, null);
+			eaproject.dao.LocationDAO.save(leaprojectdaoLocation);
+			eaproject.dao.Notification leaprojectdaoNotification = eaproject.dao.NotificationDAO.loadNotificationByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoNotification.save();
-			dao.Club ldaoClub = dao.Club.loadClubByQuery(null, null);
+			eaproject.dao.NotificationDAO.save(leaprojectdaoNotification);
+			eaproject.dao.Club leaprojectdaoClub = eaproject.dao.ClubDAO.loadClubByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoClub.save();
-			dao.Team ldaoTeam = dao.Team.loadTeamByQuery(null, null);
+			eaproject.dao.ClubDAO.save(leaprojectdaoClub);
+			eaproject.dao.Team leaprojectdaoTeam = eaproject.dao.TeamDAO.loadTeamByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoTeam.save();
-			dao.Type ldaoType = dao.Type.loadTypeByQuery(null, null);
+			eaproject.dao.TeamDAO.save(leaprojectdaoTeam);
+			eaproject.dao.Type leaprojectdaoType = eaproject.dao.TypeDAO.loadTypeByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoType.save();
-			dao.State ldaoState = dao.State.loadStateByQuery(null, null);
+			eaproject.dao.TypeDAO.save(leaprojectdaoType);
+			eaproject.dao.State leaprojectdaoState = eaproject.dao.StateDAO.loadStateByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoState.save();
-			dao.Role ldaoRole = dao.Role.loadRoleByQuery(null, null);
+			eaproject.dao.StateDAO.save(leaprojectdaoState);
+			eaproject.dao.Role leaprojectdaoRole = eaproject.dao.RoleDAO.loadRoleByQuery(null, null);
 			// Update the properties of the persistent object
-			ldaoRole.save();
+			eaproject.dao.RoleDAO.save(leaprojectdaoRole);
 			t.commit();
 		}
 		catch (Exception e) {
@@ -55,76 +55,76 @@ public class RetrieveAndUpdateAASICProjectData {
 	
 	public void retrieveByCriteria() throws PersistentException {
 		System.out.println("Retrieving User by UserCriteria");
-		dao.UserCriteria ldaoUserCriteria = new dao.UserCriteria();
+		eaproject.dao.UserCriteria leaprojectdaoUserCriteria = new eaproject.dao.UserCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoUserCriteria.UserId.eq();
-		System.out.println(ldaoUserCriteria.uniqueUser());
+		//leaprojectdaoUserCriteria.UserId.eq();
+		System.out.println(leaprojectdaoUserCriteria.uniqueUser());
 		
 		System.out.println("Retrieving Trial by TrialCriteria");
-		dao.TrialCriteria ldaoTrialCriteria = new dao.TrialCriteria();
+		eaproject.dao.TrialCriteria leaprojectdaoTrialCriteria = new eaproject.dao.TrialCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoTrialCriteria.TrialId.eq();
-		System.out.println(ldaoTrialCriteria.uniqueTrial());
+		//leaprojectdaoTrialCriteria.TrialId.eq();
+		System.out.println(leaprojectdaoTrialCriteria.uniqueTrial());
 		
 		System.out.println("Retrieving Competition by CompetitionCriteria");
-		dao.CompetitionCriteria ldaoCompetitionCriteria = new dao.CompetitionCriteria();
+		eaproject.dao.CompetitionCriteria leaprojectdaoCompetitionCriteria = new eaproject.dao.CompetitionCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoCompetitionCriteria.CompetitionId.eq();
-		System.out.println(ldaoCompetitionCriteria.uniqueCompetition());
+		//leaprojectdaoCompetitionCriteria.CompetitionId.eq();
+		System.out.println(leaprojectdaoCompetitionCriteria.uniqueCompetition());
 		
 		System.out.println("Retrieving Result by ResultCriteria");
-		dao.ResultCriteria ldaoResultCriteria = new dao.ResultCriteria();
+		eaproject.dao.ResultCriteria leaprojectdaoResultCriteria = new eaproject.dao.ResultCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoResultCriteria.ResultId.eq();
-		System.out.println(ldaoResultCriteria.uniqueResult());
+		//leaprojectdaoResultCriteria.ResultId.eq();
+		System.out.println(leaprojectdaoResultCriteria.uniqueResult());
 		
 		System.out.println("Retrieving Grade by GradeCriteria");
-		dao.GradeCriteria ldaoGradeCriteria = new dao.GradeCriteria();
+		eaproject.dao.GradeCriteria leaprojectdaoGradeCriteria = new eaproject.dao.GradeCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoGradeCriteria.GradeId.eq();
-		System.out.println(ldaoGradeCriteria.uniqueGrade());
+		//leaprojectdaoGradeCriteria.GradeId.eq();
+		System.out.println(leaprojectdaoGradeCriteria.uniqueGrade());
 		
 		System.out.println("Retrieving Location by LocationCriteria");
-		dao.LocationCriteria ldaoLocationCriteria = new dao.LocationCriteria();
+		eaproject.dao.LocationCriteria leaprojectdaoLocationCriteria = new eaproject.dao.LocationCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoLocationCriteria.LocationId.eq();
-		System.out.println(ldaoLocationCriteria.uniqueLocation());
+		//leaprojectdaoLocationCriteria.LocationId.eq();
+		System.out.println(leaprojectdaoLocationCriteria.uniqueLocation());
 		
 		System.out.println("Retrieving Notification by NotificationCriteria");
-		dao.NotificationCriteria ldaoNotificationCriteria = new dao.NotificationCriteria();
+		eaproject.dao.NotificationCriteria leaprojectdaoNotificationCriteria = new eaproject.dao.NotificationCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoNotificationCriteria.NotificationId.eq();
-		System.out.println(ldaoNotificationCriteria.uniqueNotification());
+		//leaprojectdaoNotificationCriteria.NotificationId.eq();
+		System.out.println(leaprojectdaoNotificationCriteria.uniqueNotification());
 		
 		System.out.println("Retrieving Club by ClubCriteria");
-		dao.ClubCriteria ldaoClubCriteria = new dao.ClubCriteria();
+		eaproject.dao.ClubCriteria leaprojectdaoClubCriteria = new eaproject.dao.ClubCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoClubCriteria.ClubId.eq();
-		System.out.println(ldaoClubCriteria.uniqueClub());
+		//leaprojectdaoClubCriteria.ClubId.eq();
+		System.out.println(leaprojectdaoClubCriteria.uniqueClub());
 		
 		System.out.println("Retrieving Team by TeamCriteria");
-		dao.TeamCriteria ldaoTeamCriteria = new dao.TeamCriteria();
+		eaproject.dao.TeamCriteria leaprojectdaoTeamCriteria = new eaproject.dao.TeamCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoTeamCriteria.TeamId.eq();
-		System.out.println(ldaoTeamCriteria.uniqueTeam());
+		//leaprojectdaoTeamCriteria.TeamId.eq();
+		System.out.println(leaprojectdaoTeamCriteria.uniqueTeam());
 		
 		System.out.println("Retrieving Type by TypeCriteria");
-		dao.TypeCriteria ldaoTypeCriteria = new dao.TypeCriteria();
+		eaproject.dao.TypeCriteria leaprojectdaoTypeCriteria = new eaproject.dao.TypeCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoTypeCriteria.TypeId.eq();
-		System.out.println(ldaoTypeCriteria.uniqueType());
+		//leaprojectdaoTypeCriteria.TypeId.eq();
+		System.out.println(leaprojectdaoTypeCriteria.uniqueType());
 		
 		System.out.println("Retrieving State by StateCriteria");
-		dao.StateCriteria ldaoStateCriteria = new dao.StateCriteria();
+		eaproject.dao.StateCriteria leaprojectdaoStateCriteria = new eaproject.dao.StateCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoStateCriteria.StateId.eq();
-		System.out.println(ldaoStateCriteria.uniqueState());
+		//leaprojectdaoStateCriteria.StateId.eq();
+		System.out.println(leaprojectdaoStateCriteria.uniqueState());
 		
 		System.out.println("Retrieving Role by RoleCriteria");
-		dao.RoleCriteria ldaoRoleCriteria = new dao.RoleCriteria();
+		eaproject.dao.RoleCriteria leaprojectdaoRoleCriteria = new eaproject.dao.RoleCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldaoRoleCriteria.RoleId.eq();
-		System.out.println(ldaoRoleCriteria.uniqueRole());
+		//leaprojectdaoRoleCriteria.RoleId.eq();
+		System.out.println(leaprojectdaoRoleCriteria.uniqueRole());
 		
 	}
 	

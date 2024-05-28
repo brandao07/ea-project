@@ -1,13 +1,10 @@
 /**
  * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
- * <p>
- * This is an automatic generated file. It will be regenerated every time
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
  * you generate persistence class.
- * <p>
+ * 
  * Modifying its content may cause the program not work, or your work may lost.
- * <p>
- * Licensee: Eduardo(University of Minho)
- * License Type: Academic
  */
 
 /**
@@ -16,122 +13,121 @@
  */
 package eaproject.dao;
 
-import java.io.Serializable;
-
 import eaproject.constants.ORMConstants;
+import java.io.Serializable;
 public class Team implements Serializable {
-    public Team() {
-    }
-
-    private java.util.Set this_getSet(int key) {
-        if (key == ORMConstants.KEY_TEAM_USER) {
-            return ORM_user;
-        }
-
-        return null;
-    }
-
-    private void this_setOwner(Object owner, int key) {
-        if (key == ORMConstants.KEY_TEAM_CLUB) {
-            this.club = (Club) owner;
-        }
-    }
-
-    org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-        public java.util.Set getSet(int key) {
-            return this_getSet(key);
-        }
-
-        public void setOwner(Object owner, int key) {
-            this_setOwner(owner, key);
-        }
-
-    };
-
-    private int TeamId;
-
-    private Club club;
-
-    private String Name;
-
-    private boolean IsActive;
-
-    private java.sql.Timestamp CreationDate;
-
-    private java.util.Set ORM_user = new java.util.HashSet();
-
-    private void setTeamId(int value) {
-        this.TeamId = value;
-    }
-
-    public int getTeamId() {
-        return TeamId;
-    }
-
-    public int getORMID() {
-        return getTeamId();
-    }
-
-    public void setName(String value) {
-        this.Name = value;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setIsActive(boolean value) {
-        this.IsActive = value;
-    }
-
-    public boolean getIsActive() {
-        return IsActive;
-    }
-
-    public void setCreationDate(java.sql.Timestamp value) {
-        this.CreationDate = value;
-    }
-
-    public java.sql.Timestamp getCreationDate() {
-        return CreationDate;
-    }
-
-    private void setORM_User(java.util.Set value) {
-        this.ORM_user = value;
-    }
-
-    private java.util.Set getORM_User() {
-        return ORM_user;
-    }
-
-    public final UserSetCollection user = new UserSetCollection(this, _ormAdapter, ORMConstants.KEY_TEAM_USER, ORMConstants.KEY_USER_TEAM, ORMConstants.KEY_MUL_ONE_TO_MANY);
-
-    public void setClub(Club value) {
-        if (club != null) {
-            club.team.remove(this);
-        }
-        if (value != null) {
-            value.team.add(this);
-        }
-    }
-
-    public Club getClub() {
-        return club;
-    }
-
-    /**
-     * This method is for internal use only.
-     */
-    public void setORM_Club(Club value) {
-        this.club = value;
-    }
-
-    private Club getORM_Club() {
-        return club;
-    }
-
-    public String toString() {
-        return String.valueOf(getTeamId());
-    }
-
+	public Team() {
+	}
+	
+	private java.util.Set this_getSet (int key) {
+		if (key == ORMConstants.KEY_TEAM_USER) {
+			return ORM_user;
+		}
+		
+		return null;
+	}
+	
+	private void this_setOwner(Object owner, int key) {
+		if (key == ORMConstants.KEY_TEAM_CLUB) {
+			this.club = (eaproject.dao.Club) owner;
+		}
+	}
+	
+	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
+		public java.util.Set getSet(int key) {
+			return this_getSet(key);
+		}
+		
+		public void setOwner(Object owner, int key) {
+			this_setOwner(owner, key);
+		}
+		
+	};
+	
+	private int TeamId;
+	
+	private eaproject.dao.Club club;
+	
+	private String Name;
+	
+	private boolean IsActive;
+	
+	private java.sql.Timestamp CreationDate;
+	
+	private java.util.Set ORM_user = new java.util.HashSet();
+	
+	private void setTeamId(int value) {
+		this.TeamId = value;
+	}
+	
+	public int getTeamId() {
+		return TeamId;
+	}
+	
+	public int getORMID() {
+		return getTeamId();
+	}
+	
+	public void setName(String value) {
+		this.Name = value;
+	}
+	
+	public String getName() {
+		return Name;
+	}
+	
+	public void setIsActive(boolean value) {
+		this.IsActive = value;
+	}
+	
+	public boolean getIsActive() {
+		return IsActive;
+	}
+	
+	public void setCreationDate(java.sql.Timestamp value) {
+		this.CreationDate = value;
+	}
+	
+	public java.sql.Timestamp getCreationDate() {
+		return CreationDate;
+	}
+	
+	private void setORM_User(java.util.Set value) {
+		this.ORM_user = value;
+	}
+	
+	private java.util.Set getORM_User() {
+		return ORM_user;
+	}
+	
+	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, ORMConstants.KEY_TEAM_USER, ORMConstants.KEY_USER_TEAM, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	public void setClub(eaproject.dao.Club value) {
+		if (club != null) {
+			club.team.remove(this);
+		}
+		if (value != null) {
+			value.team.add(this);
+		}
+	}
+	
+	public eaproject.dao.Club getClub() {
+		return club;
+	}
+	
+	/**
+	 * This method is for internal use only.
+	 */
+	public void setORM_Club(eaproject.dao.Club value) {
+		this.club = value;
+	}
+	
+	private eaproject.dao.Club getORM_Club() {
+		return club;
+	}
+	
+	public String toString() {
+		return String.valueOf(getTeamId());
+	}
+	
 }

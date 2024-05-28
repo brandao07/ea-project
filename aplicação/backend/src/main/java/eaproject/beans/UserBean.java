@@ -113,12 +113,6 @@ public class UserBean implements UserLocal {
             // Set base role FIXME: See comments above
             user.setRole(role);
 
-            // Get base team FIXME: We need get the team from another way, maybe perform a select of the team when register?!...
-            Team team = TeamDAO.getTeamByORMID(1);
-
-            // Set base team FIXME: See comments above
-            user.setTeam(team);
-
             // Save user to database using DAO
             UserDAO.save(user);
 

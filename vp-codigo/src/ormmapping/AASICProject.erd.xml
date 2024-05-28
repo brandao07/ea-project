@@ -16,7 +16,7 @@
     <Column name="RoleRoleId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.role.RoleId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.role.RoleId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -28,10 +28,10 @@
     <Column name="TeamTeamId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.team.TeamId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.team.TeamId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -163,7 +163,7 @@
     <Column name="StateStateId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.state.StateId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.state.StateId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -175,7 +175,7 @@
     <Column name="CompetitionCompetitionId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.competition.CompetitionId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.competition.CompetitionId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -187,7 +187,7 @@
     <Column name="GradeGradeId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.grade.GradeId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.grade.GradeId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -199,7 +199,7 @@
     <Column name="TypeTypeId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.type.TypeId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.type.TypeId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -211,7 +211,7 @@
     <Column name="LocationLocationId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.location.LocationId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.location.LocationId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -223,7 +223,7 @@
     <Column name="UserUserId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.user.UserId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.user.UserId</ReferencedColumn>
       <Type>9</Type>
       <Length>0</Length>
       <Nullable>false</Nullable>
@@ -393,7 +393,7 @@
     <Column name="TrialTrialId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.trial.TrialId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.trial.TrialId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -675,7 +675,7 @@
     <Column name="CompetitionCompetitionId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.competition.CompetitionId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.competition.CompetitionId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -790,10 +790,10 @@
     <Column name="ClubClubId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>dao.club.ClubId</ReferencedColumn>
+      <ReferencedColumn>eaproject.dao.club.ClubId</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>

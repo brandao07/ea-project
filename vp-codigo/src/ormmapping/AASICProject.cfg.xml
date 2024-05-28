@@ -11,7 +11,7 @@ License Type: Academic
    	<!-- properties -->
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="connection.url">jdbc:postgresql://localhost:5432/pgdb</property>
+		<property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
 		<property name="connection.username">postgres</property>
 		<property name="connection.password">postgres</property>
 		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
@@ -23,17 +23,17 @@ License Type: Academic
 		<property name="show_sql">false</property>
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
 		<!-- mapping files -->
-		<mapping resource="ormmapping/dao/Club.hbm.xml" />
-		<mapping resource="ormmapping/dao/Competition.hbm.xml" />
-		<mapping resource="ormmapping/dao/Grade.hbm.xml" />
-		<mapping resource="ormmapping/dao/Location.hbm.xml" />
-		<mapping resource="ormmapping/dao/Notification.hbm.xml" />
-		<mapping resource="ormmapping/dao/Result.hbm.xml" />
-		<mapping resource="ormmapping/dao/Role.hbm.xml" />
-		<mapping resource="ormmapping/dao/State.hbm.xml" />
-		<mapping resource="ormmapping/dao/Team.hbm.xml" />
-		<mapping resource="ormmapping/dao/Trial.hbm.xml" />
-		<mapping resource="ormmapping/dao/Type.hbm.xml" />
-		<mapping resource="ormmapping/dao/User.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Club.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Competition.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Grade.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Location.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Notification.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Result.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Role.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/State.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Team.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Trial.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/Type.hbm.xml" />
+		<mapping resource="ormmapping/eaproject/dao/User.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

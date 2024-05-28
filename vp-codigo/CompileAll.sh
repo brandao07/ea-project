@@ -33,4 +33,4 @@ if [ "$SOURCEPATH" != "$CLASSES" ] ; then
 	cp -r "$SOURCEPATH/ormmapping" "$CLASSES"
 fi
 
-eval ""$JAVACCMD" -d "$CLASSES" -classpath "$CLASSPATH" "$SOURCEPATH"/dao/*.java "$SOURCEPATH"/orm/*.java "$SOURCEPATH"/ormsamples/*.java "
+eval ""$JAVACCMD" -d "$CLASSES" -classpath "$CLASSPATH" "$SOURCEPATH"/eaproject\dao/*.java "$SOURCEPATH"/orm/*.java "$SOURCEPATH"/ormsamples/*.java "

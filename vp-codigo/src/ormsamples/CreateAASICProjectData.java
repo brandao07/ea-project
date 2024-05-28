@@ -9,42 +9,42 @@ public class CreateAASICProjectData {
 	public void createTestData() throws PersistentException {
 		PersistentTransaction t = orm.AASICProjectPersistentManager.instance().getSession().beginTransaction();
 		try {
-			dao.User ldaoUser = dao.User.createUser();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, IsActive, Weight, Height, Age, team, role
-			ldaoUser.save();
-			dao.Trial ldaoTrial = dao.Trial.createTrial();
+			eaproject.dao.User leaprojectdaoUser = eaproject.dao.UserDAO.createUser();
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, IsActive, Weight, Height, Age, role
+			eaproject.dao.UserDAO.save(leaprojectdaoUser);
+			eaproject.dao.Trial leaprojectdaoTrial = eaproject.dao.TrialDAO.createTrial();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : result, IsActive, NumberOfCheckpoints, Distance, user, location, type, grade, competition, state
-			ldaoTrial.save();
-			dao.Competition ldaoCompetition = dao.Competition.createCompetition();
+			eaproject.dao.TrialDAO.save(leaprojectdaoTrial);
+			eaproject.dao.Competition leaprojectdaoCompetition = eaproject.dao.CompetitionDAO.createCompetition();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : notification, trial, IsActive
-			ldaoCompetition.save();
-			dao.Result ldaoResult = dao.Result.createResult();
+			eaproject.dao.CompetitionDAO.save(leaprojectdaoCompetition);
+			eaproject.dao.Result leaprojectdaoResult = eaproject.dao.ResultDAO.createResult();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : Position, trial
-			ldaoResult.save();
-			dao.Grade ldaoGrade = dao.Grade.createGrade();
+			eaproject.dao.ResultDAO.save(leaprojectdaoResult);
+			eaproject.dao.Grade leaprojectdaoGrade = eaproject.dao.GradeDAO.createGrade();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, MaxHeight, MinHeight, MaxWeight, MinWeight, MaxAge, MinAge
-			ldaoGrade.save();
-			dao.Location ldaoLocation = dao.Location.createLocation();
+			eaproject.dao.GradeDAO.save(leaprojectdaoGrade);
+			eaproject.dao.Location leaprojectdaoLocation = eaproject.dao.LocationDAO.createLocation();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, Longitude, Latitude
-			ldaoLocation.save();
-			dao.Notification ldaoNotification = dao.Notification.createNotification();
+			eaproject.dao.LocationDAO.save(leaprojectdaoLocation);
+			eaproject.dao.Notification leaprojectdaoNotification = eaproject.dao.NotificationDAO.createNotification();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : competition
-			ldaoNotification.save();
-			dao.Club ldaoClub = dao.Club.createClub();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : team, IsActive
-			ldaoClub.save();
-			dao.Team ldaoTeam = dao.Team.createTeam();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : user, IsActive, club
-			ldaoTeam.save();
-			dao.Type ldaoType = dao.Type.createType();
+			eaproject.dao.NotificationDAO.save(leaprojectdaoNotification);
+			eaproject.dao.Club leaprojectdaoClub = eaproject.dao.ClubDAO.createClub();
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : IsActive
+			eaproject.dao.ClubDAO.save(leaprojectdaoClub);
+			eaproject.dao.Team leaprojectdaoTeam = eaproject.dao.TeamDAO.createTeam();
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : IsActive
+			eaproject.dao.TeamDAO.save(leaprojectdaoTeam);
+			eaproject.dao.Type leaprojectdaoType = eaproject.dao.TypeDAO.createType();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial, NumberOfPersons
-			ldaoType.save();
-			dao.State ldaoState = dao.State.createState();
+			eaproject.dao.TypeDAO.save(leaprojectdaoType);
+			eaproject.dao.State leaprojectdaoState = eaproject.dao.StateDAO.createState();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : trial
-			ldaoState.save();
-			dao.Role ldaoRole = dao.Role.createRole();
+			eaproject.dao.StateDAO.save(leaprojectdaoState);
+			eaproject.dao.Role leaprojectdaoRole = eaproject.dao.RoleDAO.createRole();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : user
-			ldaoRole.save();
+			eaproject.dao.RoleDAO.save(leaprojectdaoRole);
 			t.commit();
 		}
 		catch (Exception e) {

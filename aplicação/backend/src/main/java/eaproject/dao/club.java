@@ -14,9 +14,7 @@
 package eaproject.dao;
 
 import eaproject.constants.ORMConstants;
-
 import java.io.Serializable;
-
 public class Club implements Serializable {
 	public Club() {
 	}
@@ -35,13 +33,13 @@ public class Club implements Serializable {
 		}
 		
 	};
-
+	
 	private int ClubId;
-
+	
 	private String Name;
-
+	
 	private boolean IsActive;
-
+	
 	private java.sql.Timestamp CreationDate;
 	
 	private java.util.Set ORM_team = new java.util.HashSet();
@@ -90,7 +88,7 @@ public class Club implements Serializable {
 		return ORM_team;
 	}
 	
-	public final TeamSetCollection team = new TeamSetCollection(this, _ormAdapter, ORMConstants.KEY_CLUB_TEAM, ORMConstants.KEY_TEAM_CLUB, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.TeamSetCollection team = new eaproject.dao.TeamSetCollection(this, _ormAdapter, ORMConstants.KEY_CLUB_TEAM, ORMConstants.KEY_TEAM_CLUB, ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getClubId());
