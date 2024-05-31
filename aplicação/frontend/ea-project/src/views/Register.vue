@@ -33,8 +33,8 @@
                             </div>
                             <div class="form-group mb-1">
                                 <label for="age" class="mb-2">Age</label>
-                                <input type="number" class="form-control" id="age" min="0" v-model="userRegisterInput.age"
-                                    required>
+                                <input type="number" class="form-control" id="age" min="0"
+                                    v-model="userRegisterInput.age" required>
                             </div>
                             <div class="form-group mb-1">
                                 <label for="height" class="mb-2">Height (cm)</label>
@@ -91,47 +91,5 @@ export default {
     display: flex;
     justify-content: center;
     align-items: left;
-}
-
-.div-center {
-  width: 100%;
-  max-width: 400px;
-}
-
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.content {
-    padding: 2em;
-    background: #fff;
-    border-radius: 0.5em;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    padding: 10px 5px;
-    display: block;
-    text-align: justify;
-}
-
-.form-group-right {
-    padding: 10px 5px;
-    display: block;
-    text-align: right !important;
-}
-
-.form-group-center {
-    padding: 10px 5px;
-    display: block;
-    text-align: center !important;
-}
-
-.icon-color {
-    color: #008970;
 }
 </style>

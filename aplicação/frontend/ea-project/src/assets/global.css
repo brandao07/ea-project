@@ -1,0 +1,26 @@
+:root {
+  --icon-primary: #008970;
+  --bs-primary: #008970;
+  --bs-primary-darker: #006d5d;
+}
+
+body {
+  background-color: #f8f9fa !important;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--bs-primary) !important;
+}
+
+a:active {
+  color: var(--bs-primary-darker) !important;
+}

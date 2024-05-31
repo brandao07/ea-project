@@ -4,12 +4,19 @@ import eaproject.beans.locals.UserLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.AuthenticationInput;
+import eaproject.input.BasicUserInfoInput;
+import eaproject.input.UpdateUserInfoInput;
 import eaproject.input.UserRegisterInput;
 import eaproject.output.AuthenticationOutput;
+import eaproject.output.BasicUserInfoOutput;
+import eaproject.output.UpdateUserInfoOutput;
 import eaproject.output.UserRegisterOutput;
 import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
+import io.jsonwebtoken.Claims;
 import org.orm.PersistentException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,9 +26,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
 
 @Stateless(name = "UserEJB")
 @Local(UserLocal.class)
@@ -35,6 +45,9 @@ public class UserBean implements UserLocal {
     public UserBean(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
+
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
     @PostConstruct
     public void init() {
@@ -51,7 +64,7 @@ public class UserBean implements UserLocal {
     public AuthenticationOutput authenticateUser(AuthenticationInput userInput) throws UsernameNotFoundException {
         AuthenticationOutput output = new AuthenticationOutput();
         try {
-            // Use prepared statement to prevent SQL injection
+            // Set query parameters
             String condition = "email = '" + userInput.getEmail() + "'";
             User user = UserDAO.loadUserByQuery(condition, null);
 
@@ -64,7 +77,7 @@ public class UserBean implements UserLocal {
                     throw new BadCredentialsException("Invalid email or password");
                 }
             } else {
-                throw new BadCredentialsException("Invalid email or password");
+                throw new BadCredentialsException("User not found in our database");
             }
         } catch (BadCredentialsException e) {
             output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
@@ -92,7 +105,7 @@ public class UserBean implements UserLocal {
                 return output;
             }
 
-            // Convert UserOutput to User entity
+            // Convert object into an entity
             User user = Utilities.convertToDAO(input, User.class);
 
             // Hash the password using the injected PasswordEncoder
@@ -107,10 +120,13 @@ public class UserBean implements UserLocal {
             // Set user registration date
             user.setRegisterDate(Timestamp.valueOf(LocalDateTime.now()));
 
-            // Get base role FIXME: We need to change this to a base role...
-            Role role = RoleDAO.getRoleByORMID(1);
+            // Set query parameters
+            String condition = "name = '" + ROLE_DEFAULT + "'";
 
-            // Set base role FIXME: See comments above
+            // Get base role
+            Role role = RoleDAO.loadRoleByQuery(condition, null);
+
+            // Set base role
             user.setRole(role);
 
             // Save user to database using DAO
@@ -124,6 +140,120 @@ public class UserBean implements UserLocal {
         } catch (Exception e) {
             output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
         }
+        return output;
+    }
+
+    /**
+     * Method to retrieve basic user information.
+     *
+     * @param userInfoInput The input object containing the user ID.
+     * @return BasicUserInfoOutput The output object containing user information.
+     * @throws UsernameNotFoundException if the user cannot be found.
+     */
+    public BasicUserInfoOutput basicUserInfo(BasicUserInfoInput userInfoInput, HttpServletRequest request) throws UsernameNotFoundException {
+        BasicUserInfoOutput output = new BasicUserInfoOutput();
+        try {
+            // Extract the JWT token from the request
+            String token = jwtTokenUtil.resolveToken(request);
+
+            // Decode the JWT token to extract claims
+            Claims claims = jwtTokenUtil.decodeToken(token);
+
+            // Get the user ID from the claims
+            int tokenUserId = claims.get("idUser", Integer.class);
+
+            // Check if the user ID from the token matches the user ID from the input
+            if (tokenUserId != userInfoInput.getUserId()) {
+                output.addFeedbackMessage("You are not authorized to access this user's information.", FeedbackSeverity.DANGER);
+            }
+
+            // Load the user from the database using the provided user ID
+            User user = UserDAO.loadUserByORMID(userInfoInput.getUserId());
+
+            // Check if the user exists and is active
+            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+                // Convert entity into an object
+                output = Utilities.convertToDTO(user, BasicUserInfoOutput.class);
+            } else {
+                output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // Add feedback message for bad credentials
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // Add feedback message for database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // Add feedback message for unexpected errors
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        return output;
+    }
+
+    /**
+     * Updates user information.
+     *
+     * @param userInfoInput The input object containing user information to be updated.
+     * @param request The HTTP request containing the JWT token.
+     * @return An output object containing the result of the update operation.
+     * @throws UsernameNotFoundException If the user is not found.
+     */
+    public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput userInfoInput, HttpServletRequest request) {
+        // Create a new output object to store the result of the update operation
+        UpdateUserInfoOutput output = new UpdateUserInfoOutput();
+        try {
+            // Extract the JWT token from the HTTP request
+            String token = jwtTokenUtil.resolveToken(request);
+
+            // Decode the JWT token to extract the claims
+            Claims claims = jwtTokenUtil.decodeToken(token);
+
+            // Get the user ID from the claims in the token
+            int tokenUserId = claims.get("idUser", Integer.class);
+
+            // Check if the user ID from the token matches the user ID from the input
+            if (tokenUserId != userInfoInput.getUserId()) {
+                output.addFeedbackMessage("You are not authorized to update this user's information.", FeedbackSeverity.DANGER);
+            }
+
+            // Load the user from the database using the provided user ID
+            User user = UserDAO.loadUserByORMID(userInfoInput.getUserId());
+
+            // Check if the user exists and is active
+            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+                // Convert object into an entity
+                User userToUpdate = Utilities.convertToDAO(userInfoInput, User.class);
+
+                // Set all items to update
+                user.setName(userToUpdate.getName());
+                user.setEmail(userToUpdate.getEmail());
+                user.setGender(userToUpdate.getGender());
+                user.setAge(userToUpdate.getAge());
+                user.setHeight(userToUpdate.getHeight());
+                user.setWeight(userToUpdate.getWeight());
+
+                // Save the User entity to the database using the DAO
+                UserDAO.save(user);
+
+                // If the save operation is successful, add a success feedback message
+                output.addFeedbackMessage("User updated successfully.", FeedbackSeverity.SUCCESS);
+                // Indicate that the update was successful
+                output.setUpdateSuccessful(true);
+            } else {
+                output.setUpdateSuccessful(false);
+                output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with the result of the update operation
         return output;
     }
 }

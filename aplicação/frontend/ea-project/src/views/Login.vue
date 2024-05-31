@@ -70,46 +70,4 @@ export default {
     justify-content: center;
     align-items: left;
 }
-
-.div-center {
-    width: 100%;
-    max-width: 400px;
-}
-
-.content {
-    padding: 2em;
-    background: #fff;
-    border-radius: 0.5em;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
-}
-
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.form-group {
-    padding: 10px 5px;
-    display: block;
-    text-align: justify;
-}
-
-.form-group-right {
-    padding: 10px 5px;
-    display: block;
-    text-align: right !important;
-}
-
-.form-group-center {
-    padding: 10px 5px;
-    display: block;
-    text-align: center !important;
-}
-
-.icon-color {
-    color: #008970;
-}
 </style>

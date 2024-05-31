@@ -34,7 +34,7 @@ class ApiService {
       Accept: "application/json, text/plain, */*",
     };
     if (this.token) {
-      headers["Authorization"] = `Bearer ${this.token}`;
+      headers["Authorization"] = this.token;
     }
     return headers;
   }

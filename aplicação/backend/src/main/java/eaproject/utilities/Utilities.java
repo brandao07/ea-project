@@ -18,8 +18,28 @@ public class Utilities {
      */
     public static <T, U> U convertToDTO(T entity, Class<U> dtoClass) {
         try {
-            Constructor<U> constructor = dtoClass.getDeclaredConstructor(entity.getClass());
-            return constructor.newInstance(entity);
+            // Create a new instance of the DTO class
+            U dto = dtoClass.getDeclaredConstructor().newInstance();
+
+            // Get all fields from the entity (DAO) class
+            Field[] entityFields = entity.getClass().getDeclaredFields();
+
+            // Get all fields from the DTO class
+            Field[] dtoFields = dtoClass.getDeclaredFields();
+
+            for (Field entityField : entityFields) {
+                entityField.setAccessible(true); // Make private fields accessible
+                Object value = entityField.get(entity); // Get the value from the entity
+
+                for (Field dtoField : dtoFields) {
+                    if (compareFieldTypes(dtoField, entityField)) {
+                        dtoField.setAccessible(true); // Make private fields accessible
+                        dtoField.set(dto, value); // Set the value in the DTO
+                        break;
+                    }
+                }
+            }
+            return dto;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
