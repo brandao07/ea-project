@@ -28,8 +28,11 @@
                             </div>
                             <div class="form-group mb-1">
                                 <label for="gender" class="mb-2">Gender</label>
-                                <input type="text" class="form-control" id="gender" v-model="userRegisterInput.gender"
-                                    required>
+                                <select class="form-select" v-model="userRegisterInput.gender" id="gender" required>
+                                    <option v-for="(label, value) in genderEnum" :key="value" :value="value">
+                                        {{ label }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="form-group mb-1">
                                 <label for="age" class="mb-2">Age</label>
@@ -62,11 +65,13 @@
 import UserService from '@/services/UserService';
 import UserRegisterInput from '@/models/input/UserRegisterInput';
 import UserRegisterOutput from '@/models/output/UserRegisterOutput';
+import GenderEnumerator from '@/models/enums/Gender';
 
 export default {
     name: 'register',
     data() {
         return {
+            genderEnum: GenderEnumerator,
             userRegisterInput: new UserRegisterInput(),
             userRegisterOutput: new UserRegisterOutput(),
         };

@@ -2,17 +2,21 @@
     <div id="profile">
         <Modal :isVisible="modalVisible" @cancel="cancelEdit" @save="saveProfile" title="Edit Profile">
             <template v-slot>
-                <div class="form-group mb-1 justify-content-start">
+                <div class="form-group mb-1">
                     <label for="name" class="mb-2">Name</label>
                     <input type="text" class="form-control" id="name" v-model="userRegisterInput.name" required>
                 </div>
-                <div class="form-group mb-1 justify-content-start">
+                <div class="form-group mb-1">
                     <label for="email" class="mb-2">Email address</label>
                     <input type="email" class="form-control" id="email" v-model="userRegisterInput.email" required>
                 </div>
                 <div class="form-group mb-1">
                     <label for="gender" class="mb-2">Gender</label>
-                    <input type="text" class="form-control" id="gender" v-model="userRegisterInput.gender" required>
+                    <select class="form-select" v-model="userRegisterInput.gender" id="gender" required>
+                        <option v-for="(label, value) in genderEnum" :key="value" :value="value">
+                            {{ label }}
+                        </option>
+                    </select>
                 </div>
                 <div class="form-group mb-1">
                     <label for="age" class="mb-2">Age</label>
@@ -34,7 +38,8 @@
 </template>
 
 <script>
-import Modal from '../components/Modal.vue';
+import Modal from '@/components/Modal.vue';
+import GenderEnumerator from '@/models/enums/Gender';
 import UserService from '@/services/UserService';
 import UpdateUserInfoInput from '@/models/input/UpdateUserInfoInput';
 import UpdateUserInfoOutput from '@/models/output/UpdateUserInfoOutput';
@@ -54,6 +59,7 @@ export default {
     },
     data() {
         return {
+            genderEnum: GenderEnumerator,
             userId: Number(localStorage.getItem('idUser')),
             userRegisterInput: new UpdateUserInfoInput(),
             updateUserInfoOutput: new UpdateUserInfoOutput(),
@@ -97,6 +103,7 @@ export default {
         },
         modalVisible(val) {
             if (!val) {
+                this.basicUserInfoOutput = null;
                 this.$emit('close');
             }
         }

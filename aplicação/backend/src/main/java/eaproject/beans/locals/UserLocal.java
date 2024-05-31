@@ -1,19 +1,29 @@
 package eaproject.beans.locals;
 
-import eaproject.input.AuthenticationInput;
-import eaproject.input.BasicUserInfoInput;
-import eaproject.input.UpdateUserInfoInput;
-import eaproject.input.UserRegisterInput;
-import eaproject.output.AuthenticationOutput;
-import eaproject.output.BasicUserInfoOutput;
-import eaproject.output.UpdateUserInfoOutput;
-import eaproject.output.UserRegisterOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
 
 @Local
 public interface UserLocal {
+
+    /**
+     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     *
+     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @return An object containing the users retrieved from the database.
+     */
+    GetUsersOutput getAllUsers(GetUsersInput usersInput);
+
+    /**
+     * Updates the role of a user based on the provided input.
+     *
+     * @param userRoleInput An object containing the user ID and the new role ID.
+     * @return An output object containing the result of the update operation.
+     */
+    UpdateUserRoleOutput updateUserRole(UpdateUserRoleInput userRoleInput);
 
     /**
      * Updates user information.

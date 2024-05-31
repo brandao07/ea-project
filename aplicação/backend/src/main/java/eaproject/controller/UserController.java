@@ -1,14 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.UserBean;
-import eaproject.input.AuthenticationInput;
-import eaproject.input.BasicUserInfoInput;
-import eaproject.input.UpdateUserInfoInput;
-import eaproject.input.UserRegisterInput;
-import eaproject.output.AuthenticationOutput;
-import eaproject.output.BasicUserInfoOutput;
-import eaproject.output.UpdateUserInfoOutput;
-import eaproject.output.UserRegisterOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @EJB
     UserBean userBean;
+
+    /**
+     * Endpoint to update the current role of a user.
+     *
+     * @param userRoleInput A JSON object (in the request body) containing the user ID and the new role ID.
+     * @return An output object containing the result of the update operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/UpdateUserCurrentRole")
+    public UpdateUserRoleOutput updateUserCurrentRole(@RequestBody UpdateUserRoleInput userRoleInput) {
+        return userBean.updateUserRole(userRoleInput);
+    }
 
     /**
      * Updates basic user information.

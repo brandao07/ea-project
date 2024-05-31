@@ -147,7 +147,9 @@ BEGIN
 INSERT INTO public.Role(
 	RoleId, Name, Description, CreationDate)
 	VALUES (1, 'Administrator', 'Admin Role', CURRENT_TIMESTAMP),
-         (2, 'Default', 'Default Role', CURRENT_TIMESTAMP);
+         (2, 'Default', 'Default Role', CURRENT_TIMESTAMP),
+         (3, 'TeamOwner', 'Team Owner Role', CURRENT_TIMESTAMP),
+         (4, 'ClubOwner', 'Club Owner Role', CURRENT_TIMESTAMP);
 	
 INSERT INTO public.Club(
 	ClubId, Name, IsActive, CreationDate)

@@ -3,20 +3,13 @@ package eaproject.beans;
 import eaproject.beans.locals.UserLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.AuthenticationInput;
-import eaproject.input.BasicUserInfoInput;
-import eaproject.input.UpdateUserInfoInput;
-import eaproject.input.UserRegisterInput;
-import eaproject.output.AuthenticationOutput;
-import eaproject.output.BasicUserInfoOutput;
-import eaproject.output.UpdateUserInfoOutput;
-import eaproject.output.UserRegisterOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
 import io.jsonwebtoken.Claims;
 import org.orm.PersistentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -254,6 +247,97 @@ public class UserBean implements UserLocal {
             output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
         }
         // Return the output object with the result of the update operation
+        return output;
+    }
+
+    /**
+     * Updates the role of a user based on the provided input.
+     *
+     * @param userRoleInput An object containing the user ID and the new role ID.
+     * @return An output object containing the result of the update operation.
+     */
+    public UpdateUserRoleOutput updateUserRole(UpdateUserRoleInput userRoleInput) {
+        // Create a new output object to store the result of the update operation
+        UpdateUserRoleOutput output = new UpdateUserRoleOutput();
+
+        try {
+            // Load the user from the database using the provided user ID
+            User user = UserDAO.loadUserByORMID(userRoleInput.getUserId());
+
+            // Check if the user exists and is active
+            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+                // Load the role from the database using the provided role ID
+                Role role = RoleDAO.getRoleByORMID(userRoleInput.getRoleId());
+
+                // Check if the role exists
+                if (role != null && role.getRoleId() > 0) {
+                    // Set the new role for the user
+                    user.setRole(role);
+
+                    // Save the User entity to the database using the DAO
+                    UserDAO.save(user);
+
+                    // If the save operation is successful, add a success feedback message
+                    output.addFeedbackMessage("User updated successfully.", FeedbackSeverity.SUCCESS);
+
+                    // Indicate that the update was successful
+                    output.setUpdateSuccessful(true);
+                } else {
+                    // If the role does not exist, indicate the failure and add a feedback message
+                    output.setUpdateSuccessful(false);
+                    output.addFeedbackMessage("Role not found in our database.", FeedbackSeverity.DANGER);
+                }
+            } else {
+                // If the user does not exist or is not active, indicate the failure and add a feedback message
+                output.setUpdateSuccessful(false);
+                output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+
+        // Return the output object with the result of the update operation
+        return output;
+    }
+
+    /**
+     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     *
+     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @return An object containing the users retrieved from the database.
+     */
+    public GetUsersOutput getAllUsers(GetUsersInput usersInput) {
+        GetUsersOutput output = new GetUsersOutput();
+        try {
+            // Fetch users from the database using UserDAO
+            User[] users = UserDAO.listUserByQuery(null, null);
+
+            // Check if users are retrieved successfully
+            if (users.length > 0) {
+                // Assign retrieved users to the output object
+                output.setUserArray(users);
+            } else {
+                // Add feedback message if no roles are found
+                output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // Add feedback message for bad credentials
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // Add feedback message for database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // Add feedback message for unexpected errors
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with users and feedback messages
         return output;
     }
 }

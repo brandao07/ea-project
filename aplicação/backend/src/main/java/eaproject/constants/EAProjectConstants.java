@@ -10,5 +10,7 @@ public final class EAProjectConstants {
     // <editor-fold desc="Role">
     public static final String ROLE_DEFAULT = "Default";
     public static final String ROLE_ADMIN = "Administrator";
+    public static final String ROLE_TEAM_OWNER = "TeamOwner";
+    public static final String ROLE_CLUB_OWNER = "ClubOwner";
     // </editor-fold>
 }
