@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Eduardo(University of Minho)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="eaproject.dao.Grade" table="grade" lazy="false">
+		<id name="GradeId" column="GradeId" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="MinAge" column="MinAge" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="MaxAge" column="MaxAge" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="MinWeight" column="MinWeight" type="double" not-null="true" lazy="false"/>
+		<property name="MaxWeight" column="MaxWeight" type="double" not-null="true" lazy="false"/>
+		<property name="MinHeight" column="MinHeight" type="double" not-null="true" lazy="false"/>
+		<property name="MaxHeight" column="MaxHeight" type="double" not-null="true" lazy="false"/>
+		<property name="Gender" column="Gender" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
+		<set name="ORM_Trial" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="GradeGradeId" not-null="true"/>
+			<one-to-many class="eaproject.dao.Trial"/>
+		</set>
+	</class>
+</hibernate-mapping>

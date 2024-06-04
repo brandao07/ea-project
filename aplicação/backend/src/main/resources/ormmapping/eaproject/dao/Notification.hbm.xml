@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Eduardo(University of Minho)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="eaproject.dao.Notification" table="notification" lazy="false">
+		<id name="NotificationId" column="NotificationId" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="competition" cascade="lock" column="CompetitionCompetitionId" class="eaproject.dao.Competition" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="MessageHeader" column="MessageHeader" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="MessageBody" column="MessageBody" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="MessageType" column="MessageType" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

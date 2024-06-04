@@ -13,14 +13,13 @@
  */
 package eaproject.dao;
 
-import eaproject.constants.ORMConstants;
 import java.io.Serializable;
 public class Team implements Serializable {
 	public Team() {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == ORMConstants.KEY_TEAM_USER) {
+		if (key == orm.ORMConstants.KEY_TEAM_USER) {
 			return ORM_user;
 		}
 		
@@ -28,7 +27,7 @@ public class Team implements Serializable {
 	}
 	
 	private void this_setOwner(Object owner, int key) {
-		if (key == ORMConstants.KEY_TEAM_CLUB) {
+		if (key == orm.ORMConstants.KEY_TEAM_CLUB) {
 			this.club = (eaproject.dao.Club) owner;
 		}
 	}
@@ -100,7 +99,7 @@ public class Team implements Serializable {
 		return ORM_user;
 	}
 	
-	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, ORMConstants.KEY_TEAM_USER, ORMConstants.KEY_USER_TEAM, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TEAM_USER, orm.ORMConstants.KEY_USER_TEAM, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public void setClub(eaproject.dao.Club value) {
 		if (club != null) {

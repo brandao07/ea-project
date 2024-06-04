@@ -21,7 +21,7 @@ import java.util.List;
 public class TeamDAO {
 	public static Team loadTeamByORMID(int TeamId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByORMID(session, TeamId);
 		}
 		catch (Exception e) {
@@ -32,7 +32,7 @@ public class TeamDAO {
 	
 	public static Team getTeamByORMID(int TeamId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTeamByORMID(session, TeamId);
 		}
 		catch (Exception e) {
@@ -43,7 +43,7 @@ public class TeamDAO {
 	
 	public static Team loadTeamByORMID(int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByORMID(session, TeamId, lockMode);
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class TeamDAO {
 	
 	public static Team getTeamByORMID(int TeamId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTeamByORMID(session, TeamId, lockMode);
 		}
 		catch (Exception e) {
@@ -105,7 +105,7 @@ public class TeamDAO {
 	
 	public static List queryTeam(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryTeam(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -116,7 +116,7 @@ public class TeamDAO {
 	
 	public static List queryTeam(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryTeam(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -127,7 +127,7 @@ public class TeamDAO {
 	
 	public static Team[] listTeamByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listTeamByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -138,7 +138,7 @@ public class TeamDAO {
 	
 	public static Team[] listTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listTeamByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -204,7 +204,7 @@ public class TeamDAO {
 	
 	public static Team loadTeamByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -215,7 +215,7 @@ public class TeamDAO {
 	
 	public static Team loadTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -242,7 +242,7 @@ public class TeamDAO {
 	
 	public static java.util.Iterator iterateTeamByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateTeamByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -253,7 +253,7 @@ public class TeamDAO {
 	
 	public static java.util.Iterator iterateTeamByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateTeamByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -301,7 +301,7 @@ public class TeamDAO {
 	
 	public static boolean save(eaproject.dao.Team team) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().saveObject(team);
+			orm.AASICProjectPersistentManager.instance().saveObject(team);
 			return true;
 		}
 		catch (Exception e) {
@@ -312,7 +312,7 @@ public class TeamDAO {
 	
 	public static boolean delete(eaproject.dao.Team team) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().deleteObject(team);
+			orm.AASICProjectPersistentManager.instance().deleteObject(team);
 			return true;
 		}
 		catch (Exception e) {
@@ -364,7 +364,7 @@ public class TeamDAO {
 	
 	public static boolean refresh(eaproject.dao.Team team) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().refresh(team);
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(team);
 			return true;
 		}
 		catch (Exception e) {
@@ -375,7 +375,7 @@ public class TeamDAO {
 	
 	public static boolean evict(eaproject.dao.Team team) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().evict(team);
+			orm.AASICProjectPersistentManager.instance().getSession().evict(team);
 			return true;
 		}
 		catch (Exception e) {

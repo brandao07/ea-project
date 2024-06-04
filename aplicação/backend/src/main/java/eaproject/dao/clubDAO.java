@@ -21,7 +21,7 @@ import java.util.List;
 public class ClubDAO {
 	public static Club loadClubByORMID(int ClubId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadClubByORMID(session, ClubId);
 		}
 		catch (Exception e) {
@@ -32,7 +32,7 @@ public class ClubDAO {
 	
 	public static Club getClubByORMID(int ClubId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getClubByORMID(session, ClubId);
 		}
 		catch (Exception e) {
@@ -43,7 +43,7 @@ public class ClubDAO {
 	
 	public static Club loadClubByORMID(int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadClubByORMID(session, ClubId, lockMode);
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class ClubDAO {
 	
 	public static Club getClubByORMID(int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getClubByORMID(session, ClubId, lockMode);
 		}
 		catch (Exception e) {
@@ -105,7 +105,7 @@ public class ClubDAO {
 	
 	public static List queryClub(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryClub(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -116,7 +116,7 @@ public class ClubDAO {
 	
 	public static List queryClub(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryClub(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -127,7 +127,7 @@ public class ClubDAO {
 	
 	public static Club[] listClubByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listClubByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -138,7 +138,7 @@ public class ClubDAO {
 	
 	public static Club[] listClubByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listClubByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -204,7 +204,7 @@ public class ClubDAO {
 	
 	public static Club loadClubByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadClubByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -215,7 +215,7 @@ public class ClubDAO {
 	
 	public static Club loadClubByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadClubByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -242,7 +242,7 @@ public class ClubDAO {
 	
 	public static java.util.Iterator iterateClubByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateClubByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -253,7 +253,7 @@ public class ClubDAO {
 	
 	public static java.util.Iterator iterateClubByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateClubByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -301,7 +301,7 @@ public class ClubDAO {
 	
 	public static boolean save(eaproject.dao.Club club) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().saveObject(club);
+			orm.AASICProjectPersistentManager.instance().saveObject(club);
 			return true;
 		}
 		catch (Exception e) {
@@ -312,7 +312,7 @@ public class ClubDAO {
 	
 	public static boolean delete(eaproject.dao.Club club) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().deleteObject(club);
+			orm.AASICProjectPersistentManager.instance().deleteObject(club);
 			return true;
 		}
 		catch (Exception e) {
@@ -356,7 +356,7 @@ public class ClubDAO {
 	
 	public static boolean refresh(eaproject.dao.Club club) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().refresh(club);
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(club);
 			return true;
 		}
 		catch (Exception e) {
@@ -367,7 +367,7 @@ public class ClubDAO {
 	
 	public static boolean evict(eaproject.dao.Club club) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().evict(club);
+			orm.AASICProjectPersistentManager.instance().getSession().evict(club);
 			return true;
 		}
 		catch (Exception e) {

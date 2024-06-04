@@ -21,7 +21,7 @@ import java.util.List;
 public class UserDAO {
 	public static User loadUserByORMID(int UserId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByORMID(session, UserId);
 		}
 		catch (Exception e) {
@@ -32,7 +32,7 @@ public class UserDAO {
 	
 	public static User getUserByORMID(int UserId) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getUserByORMID(session, UserId);
 		}
 		catch (Exception e) {
@@ -43,7 +43,7 @@ public class UserDAO {
 	
 	public static User loadUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByORMID(session, UserId, lockMode);
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class UserDAO {
 	
 	public static User getUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getUserByORMID(session, UserId, lockMode);
 		}
 		catch (Exception e) {
@@ -105,7 +105,7 @@ public class UserDAO {
 	
 	public static List queryUser(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryUser(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -116,7 +116,7 @@ public class UserDAO {
 	
 	public static List queryUser(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return queryUser(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -127,7 +127,7 @@ public class UserDAO {
 	
 	public static User[] listUserByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listUserByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -138,7 +138,7 @@ public class UserDAO {
 	
 	public static User[] listUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return listUserByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -204,7 +204,7 @@ public class UserDAO {
 	
 	public static User loadUserByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -215,7 +215,7 @@ public class UserDAO {
 	
 	public static User loadUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -242,7 +242,7 @@ public class UserDAO {
 	
 	public static java.util.Iterator iterateUserByQuery(String condition, String orderBy) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateUserByQuery(session, condition, orderBy);
 		}
 		catch (Exception e) {
@@ -253,7 +253,7 @@ public class UserDAO {
 	
 	public static java.util.Iterator iterateUserByQuery(String condition, String orderBy, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			PersistentSession session = AASICProjectPersistentManager.instance().getSession();
+			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return iterateUserByQuery(session, condition, orderBy, lockMode);
 		}
 		catch (Exception e) {
@@ -301,7 +301,7 @@ public class UserDAO {
 	
 	public static boolean save(eaproject.dao.User user) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().saveObject(user);
+			orm.AASICProjectPersistentManager.instance().saveObject(user);
 			return true;
 		}
 		catch (Exception e) {
@@ -312,7 +312,7 @@ public class UserDAO {
 	
 	public static boolean delete(eaproject.dao.User user) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().deleteObject(user);
+			orm.AASICProjectPersistentManager.instance().deleteObject(user);
 			return true;
 		}
 		catch (Exception e) {
@@ -372,7 +372,7 @@ public class UserDAO {
 	
 	public static boolean refresh(eaproject.dao.User user) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().refresh(user);
+			orm.AASICProjectPersistentManager.instance().getSession().refresh(user);
 			return true;
 		}
 		catch (Exception e) {
@@ -383,7 +383,7 @@ public class UserDAO {
 	
 	public static boolean evict(eaproject.dao.User user) throws PersistentException {
 		try {
-			AASICProjectPersistentManager.instance().getSession().evict(user);
+			orm.AASICProjectPersistentManager.instance().getSession().evict(user);
 			return true;
 		}
 		catch (Exception e) {

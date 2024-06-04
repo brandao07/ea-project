@@ -38,11 +38,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.orm</groupId>
+			<groupId>org</groupId>
 			<artifactId>orm</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/orm.jar</systemPath>
+			<systemPath>${project.basedir}/src/main/java/lib/orm.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

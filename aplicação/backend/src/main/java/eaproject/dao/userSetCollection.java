@@ -111,7 +111,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	protected PersistentManager getPersistentManager() throws PersistentException {
-		return AASICProjectPersistentManager.instance();
+		return orm.AASICProjectPersistentManager.instance();
 	}
 	
 }

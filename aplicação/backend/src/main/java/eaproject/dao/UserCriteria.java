@@ -61,7 +61,7 @@ public class UserCriteria extends AbstractORMCriteria {
 	}
 	
 	public UserCriteria() throws PersistentException {
-		this(AASICProjectPersistentManager.instance().getSession());
+		this(orm.AASICProjectPersistentManager.instance().getSession());
 	}
 	
 	public RoleCriteria createRoleCriteria() {

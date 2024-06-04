@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Eduardo(University of Minho)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="eaproject.dao.Trial" table="trial" lazy="false">
+		<id name="TrialId" column="TrialId" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="state" cascade="lock" column="StateStateId" class="eaproject.dao.State" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="competition" cascade="lock" column="CompetitionCompetitionId" class="eaproject.dao.Competition" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="grade" cascade="lock" column="GradeGradeId" class="eaproject.dao.Grade" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="type" cascade="lock" column="TypeTypeId" class="eaproject.dao.Type" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="location" cascade="lock" column="LocationLocationId" class="eaproject.dao.Location" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="user" cascade="lock" column="UserUserId" class="eaproject.dao.User" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="Name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="StartDate" column="StartDate" type="timestamp" not-null="false" lazy="false"/>
+		<property name="Distance" column="Distance" type="double" not-null="true" lazy="false"/>
+		<property name="DistanceUnit" column="DistanceUnit" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="NumberOfCheckpoints" column="NumberOfCheckpoints" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="IsActive" column="IsActive" type="boolean" not-null="true" lazy="false"/>
+		<property name="CreationDate" column="CreationDate" type="timestamp" not-null="false" lazy="false"/>
+		<set name="ORM_Result" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="TrialTrialId" not-null="true"/>
+			<one-to-many class="eaproject.dao.Result"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -43,7 +43,7 @@ public class TeamCriteria extends AbstractORMCriteria {
 	}
 	
 	public TeamCriteria() throws PersistentException {
-		this(AASICProjectPersistentManager.instance().getSession());
+		this(orm.AASICProjectPersistentManager.instance().getSession());
 	}
 	
 	public ClubCriteria createClubCriteria() {

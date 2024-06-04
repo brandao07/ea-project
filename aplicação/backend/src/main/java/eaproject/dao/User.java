@@ -13,14 +13,13 @@
  */
 package eaproject.dao;
 
-import eaproject.constants.ORMConstants;
 import java.io.Serializable;
 public class User implements Serializable {
 	public User() {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == ORMConstants.KEY_USER_TRIAL) {
+		if (key == orm.ORMConstants.KEY_USER_TRIAL) {
 			return ORM_trial;
 		}
 		
@@ -28,11 +27,11 @@ public class User implements Serializable {
 	}
 	
 	private void this_setOwner(Object owner, int key) {
-		if (key == ORMConstants.KEY_USER_ROLE) {
+		if (key == orm.ORMConstants.KEY_USER_ROLE) {
 			this.role = (eaproject.dao.Role) owner;
 		}
 		
-		else if (key == ORMConstants.KEY_USER_TEAM) {
+		else if (key == orm.ORMConstants.KEY_USER_TEAM) {
 			this.team = (eaproject.dao.Team) owner;
 		}
 	}
@@ -200,7 +199,7 @@ public class User implements Serializable {
 		return ORM_trial;
 	}
 	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, ORMConstants.KEY_USER_TRIAL, ORMConstants.KEY_TRIAL_USER, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public void setTeam(eaproject.dao.Team value) {
 		if (team != null) {
