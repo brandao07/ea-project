@@ -31,7 +31,7 @@ public class RoleCriteria extends AbstractORMCriteria {
 		Name = new StringExpression("Name", this);
 		Description = new StringExpression("Description", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		user = new CollectionExpression("ORM_User", this);
+		user = new CollectionExpression("ORM_user", this);
 	}
 	
 	public RoleCriteria(PersistentSession session) {
@@ -43,7 +43,7 @@ public class RoleCriteria extends AbstractORMCriteria {
 	}
 	
 	public UserCriteria createUserCriteria() {
-		return new UserCriteria(createCriteria("ORM_User"));
+		return new UserCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Role uniqueRole() {

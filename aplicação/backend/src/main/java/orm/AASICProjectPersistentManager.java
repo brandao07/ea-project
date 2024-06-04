@@ -17,6 +17,8 @@ import org.orm.*;
 import org.orm.cfg.JDBCConnectionSetting;
 import org.hibernate.*;
 import java.util.Properties;
+import org.hibernate.cfg.*;
+import org.hibernate.boot.MetadataSources;
 
 public class AASICProjectPersistentManager extends PersistentManager {
 	private static final String PROJECT_NAME = "AASICProject";
@@ -30,6 +32,23 @@ public class AASICProjectPersistentManager extends PersistentManager {
 	private AASICProjectPersistentManager() throws PersistentException {
 		super(_connectionSetting, _sessionType, _timeToAlive, new String[] {}, _extraProperties, _configurationFile);
 		setFlushMode(FlushMode.AUTO);
+	}
+	
+	@Override
+	protected void configureMetadataSources(MetadataSources aMetadataSources) {
+		super.configureMetadataSources(aMetadataSources);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.User.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Trial.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Competition.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Result.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Grade.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Location.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Notification.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Club.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Team.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Type.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.State.class);
+		aMetadataSources.addAnnotatedClass(eaproject.dao.Role.class);
 	}
 	
 	public String getProjectName() {

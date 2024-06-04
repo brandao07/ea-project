@@ -63,7 +63,7 @@ public class TrialCriteria extends AbstractORMCriteria {
 		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		result = new CollectionExpression("ORM_Result", this);
+		result = new CollectionExpression("ORM_result", this);
 	}
 	
 	public TrialCriteria(PersistentSession session) {
@@ -99,7 +99,7 @@ public class TrialCriteria extends AbstractORMCriteria {
 	}
 	
 	public ResultCriteria createResultCriteria() {
-		return new ResultCriteria(createCriteria("ORM_Result"));
+		return new ResultCriteria(createCriteria("ORM_result"));
 	}
 	
 	public Trial uniqueTrial() {

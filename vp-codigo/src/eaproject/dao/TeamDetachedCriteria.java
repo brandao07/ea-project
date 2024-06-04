@@ -35,7 +35,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_User", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public TeamDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -46,7 +46,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_User", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public ClubDetachedCriteria createClubCriteria() {
@@ -54,7 +54,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 	}
 	
 	public UserDetachedCriteria createUserCriteria() {
-		return new UserDetachedCriteria(createCriteria("ORM_User"));
+		return new UserDetachedCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Team uniqueTeam(PersistentSession session) {

@@ -16,6 +16,18 @@ public class UserController {
     UserBean userBean;
 
     /**
+     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     *
+     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @return An object containing the users retrieved from the database.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/GetAllUsers")
+    public GetUsersOutput getAllUsers(@RequestBody GetUsersInput usersInput) {
+        return userBean.getAllUsers(usersInput);
+    }
+
+    /**
      * Endpoint to update the current role of a user.
      *
      * @param userRoleInput A JSON object (in the request body) containing the user ID and the new role ID.

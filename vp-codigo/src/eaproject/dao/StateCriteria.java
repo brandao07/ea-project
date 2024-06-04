@@ -29,7 +29,7 @@ public class StateCriteria extends AbstractORMCriteria {
 		StateId = new IntegerExpression("StateId", this);
 		Nome = new StringExpression("Nome", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public StateCriteria(PersistentSession session) {
@@ -41,7 +41,7 @@ public class StateCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public State uniqueState() {

@@ -1,20 +1,61 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import eaproject.dao.Role;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class GetRolesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    public Role[] rolesArray;
+    private List<RoleProperties> rolesList;
 
-    public Role[] getRolesArray() {
-        return rolesArray;
+    public List<RoleProperties> getRolesList() {
+        return rolesList;
     }
 
-    public void setRolesArray(Role[] rolesArray) {
-        this.rolesArray = rolesArray;
+    public void setRolesList(List<RoleProperties> rolesList) {
+        this.rolesList = rolesList;
+    }
+
+    public static class RoleProperties implements Serializable {
+        private int roleId;
+        private String name;
+        private String description;
+        private Timestamp creationDate;
+
+        // Getters and setters
+        public int getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(int roleId) {
+            this.roleId = roleId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public Timestamp getCreationDate() {
+            return creationDate;
+        }
+
+        public void setCreationDate(Timestamp creationDate) {
+            this.creationDate = creationDate;
+        }
     }
 }

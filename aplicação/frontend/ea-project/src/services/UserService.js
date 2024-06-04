@@ -2,6 +2,8 @@ import UserRegisterOutput from "@/models/output/UserRegisterOutput";
 import AuthenticationOutput from "@/models/output/AuthenticationOutput";
 import BasicUserInfoOutput from "@/models/output/BasicUserInfoOutput";
 import UpdateUserInfoOutput from "@/models/output/UpdateUserInfoOutput";
+import UpdateUserRoleOutput from "@/models/output/UpdateUserRoleOutput";
+import GetUsersOutput from "@/models/output/GetUsersOutput";
 import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import API_ENDPOINTS from "@/config/api";
 import FeedbackMessage from "@/models/base/FeedbackMessage";
@@ -135,6 +137,66 @@ class UserService {
         FeedbackSeverity.DANGER
       );
       const output = new UserRegisterOutput(false, [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+  
+  /**
+   * Updates an existing user role
+   * @param {UpdateUserRoleInput} userRoleInput - The update user role input
+   * @returns {Promise<UpdateUserRoleOutput>} The update user role output
+   */
+  async updateUserCurrentRole(userRoleInput) {
+    try {
+      const response = await ApiService.post(
+        API_ENDPOINTS.UPDATE_CURRENT_USER_ROLE,
+        userRoleInput
+      );
+      const output = new UpdateUserRoleOutput(
+        response.updateSuccessful,
+        response.feedbackMessages
+      );
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during update.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new UpdateUserRoleOutput(false, [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Retrieves all users from the database
+   * @param {GetUsersInput} usersInput - The get users input
+   * @returns {Promise<GetUsersOutput>} The get users output
+   */
+  async getAllUsers(usersInput) {
+    try {
+      const response = await ApiService.post(
+        API_ENDPOINTS.GET_ALL_USERS,
+        usersInput
+      );
+      const output = new GetUsersOutput(
+        response.usersList,
+        response.feedbackMessages
+      );
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during update.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new GetUsersOutput(false, [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }

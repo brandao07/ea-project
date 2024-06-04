@@ -72,7 +72,7 @@ public class JwtTokenUtil {
                 .claim("password", user.getPassword())
                 .claim("isActive", user.getIsActive())
                 .claim("registerDate", user.getRegisterDate())
-                .claim("picture", user.getPhotographypath())
+                .claim("picture", user.getPhotographyPath())
                 .claim("role", user.getRole().getName())
                 .setExpiration(expiration)
                 .signWith(signingKey, signatureAlgorithm)

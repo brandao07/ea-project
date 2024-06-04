@@ -36,8 +36,8 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 		EndDate = new TimestampExpression("EndDate", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
-		notification = new CollectionExpression("ORM_Notification", this);
+		trial = new CollectionExpression("ORM_trial", this);
+		notification = new CollectionExpression("ORM_notification", this);
 	}
 	
 	public CompetitionCriteria(PersistentSession session) {
@@ -49,11 +49,11 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public NotificationCriteria createNotificationCriteria() {
-		return new NotificationCriteria(createCriteria("ORM_Notification"));
+		return new NotificationCriteria(createCriteria("ORM_notification"));
 	}
 	
 	public Competition uniqueCompetition() {

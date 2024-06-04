@@ -33,7 +33,7 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final DoubleExpression Weight;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression RegisterDate;
-	public final StringExpression Photographypath;
+	public final StringExpression PhotographyPath;
 	public final CollectionExpression trial;
 	
 	public UserDetachedCriteria() {
@@ -52,8 +52,8 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		Weight = new DoubleExpression("Weight", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		RegisterDate = new TimestampExpression("RegisterDate", this.getDetachedCriteria());
-		Photographypath = new StringExpression("Photographypath", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public UserDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -72,8 +72,8 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		Weight = new DoubleExpression("Weight", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		RegisterDate = new TimestampExpression("RegisterDate", this.getDetachedCriteria());
-		Photographypath = new StringExpression("Photographypath", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public RoleDetachedCriteria createRoleCriteria() {
@@ -85,7 +85,7 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_Trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public User uniqueUser(PersistentSession session) {

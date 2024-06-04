@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=true)
+@Table(name="notification")
 public class Notification implements Serializable {
 	public Notification() {
 	}
@@ -24,6 +28,7 @@ public class Notification implements Serializable {
 		}
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public void setOwner(Object owner, int key) {
 			this_setOwner(owner, key);
@@ -31,16 +36,27 @@ public class Notification implements Serializable {
 		
 	};
 	
+	@Column(name="NotificationId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_NOTIFICATION_NOTIFICATIONID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_NOTIFICATION_NOTIFICATIONID_GENERATOR", strategy="native")	
 	private int NotificationId;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="CompetitionId", nullable=false) }, foreignKey=@ForeignKey(name="Issue"))	
 	private eaproject.dao.Competition competition;
 	
+	@Column(name="MessageHeader", nullable=true, length=255)	
 	private String MessageHeader;
 	
+	@Column(name="MessageBody", nullable=true, length=255)	
 	private String MessageBody;
 	
+	@Column(name="MessageType", nullable=true, length=255)	
 	private String MessageType;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	private void setNotificationId(int value) {

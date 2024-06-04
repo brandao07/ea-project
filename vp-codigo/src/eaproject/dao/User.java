@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=true)
+@Table(name="`user`")
 public class User implements Serializable {
 	public User() {
 	}
@@ -36,6 +40,7 @@ public class User implements Serializable {
 		}
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
@@ -47,32 +52,55 @@ public class User implements Serializable {
 		
 	};
 	
+	@Column(name="UserId", nullable=false)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_USER_USERID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_USERID_GENERATOR", strategy="native")	
 	private int UserId;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Role.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="RoleRoleId", referencedColumnName="RoleId", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
 	private eaproject.dao.Role role;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Team.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="TeamTeamId", referencedColumnName="TeamId") }, foreignKey=@ForeignKey(name="Federated"))	
 	private eaproject.dao.Team team;
 	
+	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
+	@Column(name="Email", nullable=true, length=255)	
 	private String Email;
 	
+	@Column(name="Password", nullable=true, length=255)	
 	private String Password;
 	
+	@Column(name="Gender", nullable=true, length=255)	
 	private String Gender;
 	
+	@Column(name="Age", nullable=false, length=10)	
 	private int Age;
 	
+	@Column(name="Height", nullable=false)	
 	private double Height;
 	
+	@Column(name="Weight", nullable=false)	
 	private double Weight;
 	
+	@Column(name="IsActive", nullable=false)	
 	private boolean IsActive;
 	
+	@Column(name="RegisterDate", nullable=true)	
 	private java.sql.Timestamp RegisterDate;
 	
-	private String Photographypath;
+	@Column(name="PhotographyPath", nullable=true, length=255)	
+	private String PhotographyPath;
 	
+	@OneToMany(mappedBy="user", targetEntity=eaproject.dao.Trial.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	private void setUserId(int value) {
@@ -159,12 +187,12 @@ public class User implements Serializable {
 		return RegisterDate;
 	}
 	
-	public void setPhotographypath(String value) {
-		this.Photographypath = value;
+	public void setPhotographyPath(String value) {
+		this.PhotographyPath = value;
 	}
 	
-	public String getPhotographypath() {
-		return Photographypath;
+	public String getPhotographyPath() {
+		return PhotographyPath;
 	}
 	
 	public void setRole(eaproject.dao.Role value) {
@@ -199,6 +227,7 @@ public class User implements Serializable {
 		return ORM_trial;
 	}
 	
+	@Transient	
 	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public void setTeam(eaproject.dao.Team value) {

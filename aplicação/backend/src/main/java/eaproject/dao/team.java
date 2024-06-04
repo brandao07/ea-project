@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="team")
 public class Team implements Serializable {
 	public Team() {
 	}
@@ -32,6 +36,7 @@ public class Team implements Serializable {
 		}
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
@@ -43,16 +48,29 @@ public class Team implements Serializable {
 		
 	};
 	
+	@Column(name="TeamId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_TEAM_TEAMID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TEAM_TEAMID_GENERATOR", strategy="native")	
 	private int TeamId;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Club.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="ClubClubId", referencedColumnName="ClubId") }, foreignKey=@ForeignKey(name="Owns"))	
 	private eaproject.dao.Club club;
 	
+	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
+	@Column(name="IsActive", nullable=false)	
 	private boolean IsActive;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
+	@OneToMany(mappedBy="team", targetEntity=eaproject.dao.User.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_user = new java.util.HashSet();
 	
 	private void setTeamId(int value) {
@@ -99,6 +117,7 @@ public class Team implements Serializable {
 		return ORM_user;
 	}
 	
+	@Transient	
 	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TEAM_USER, orm.ORMConstants.KEY_USER_TEAM, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public void setClub(eaproject.dao.Club value) {

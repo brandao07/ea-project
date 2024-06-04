@@ -39,7 +39,7 @@ public class LocationCriteria extends AbstractORMCriteria {
 		Country = new StringExpression("Country", this);
 		PostalCode = new StringExpression("PostalCode", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public LocationCriteria(PersistentSession session) {
@@ -51,7 +51,7 @@ public class LocationCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Location uniqueLocation() {

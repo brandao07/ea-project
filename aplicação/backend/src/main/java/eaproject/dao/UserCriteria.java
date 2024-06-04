@@ -33,7 +33,7 @@ public class UserCriteria extends AbstractORMCriteria {
 	public final DoubleExpression Weight;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression RegisterDate;
-	public final StringExpression Photographypath;
+	public final StringExpression PhotographyPath;
 	public final CollectionExpression trial;
 	
 	public UserCriteria(Criteria criteria) {
@@ -52,8 +52,8 @@ public class UserCriteria extends AbstractORMCriteria {
 		Weight = new DoubleExpression("Weight", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		RegisterDate = new TimestampExpression("RegisterDate", this);
-		Photographypath = new StringExpression("Photographypath", this);
-		trial = new CollectionExpression("ORM_Trial", this);
+		PhotographyPath = new StringExpression("PhotographyPath", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public UserCriteria(PersistentSession session) {
@@ -73,7 +73,7 @@ public class UserCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public User uniqueUser() {

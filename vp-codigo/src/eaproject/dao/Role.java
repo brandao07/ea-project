@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=true)
+@Table(name="role")
 public class Role implements Serializable {
 	public Role() {
 	}
@@ -26,6 +30,7 @@ public class Role implements Serializable {
 		return null;
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
@@ -33,14 +38,24 @@ public class Role implements Serializable {
 		
 	};
 	
+	@Column(name="RoleId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_ROLE_ROLEID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_ROLE_ROLEID_GENERATOR", strategy="native")	
 	private int RoleId;
 	
+	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
+	@Column(name="Description", nullable=true, length=255)	
 	private String Description;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
+	@OneToMany(mappedBy="role", targetEntity=eaproject.dao.User.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_user = new java.util.HashSet();
 	
 	private void setRoleId(int value) {
@@ -87,6 +102,7 @@ public class Role implements Serializable {
 		return ORM_user;
 	}
 	
+	@Transient	
 	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_ROLE_USER, orm.ORMConstants.KEY_USER_ROLE, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {

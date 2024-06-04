@@ -39,7 +39,7 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 		Country = new StringExpression("Country", this.getDetachedCriteria());
 		PostalCode = new StringExpression("PostalCode", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public LocationDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -52,11 +52,11 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 		Country = new StringExpression("Country", this.getDetachedCriteria());
 		PostalCode = new StringExpression("PostalCode", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_Trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Location uniqueLocation(PersistentSession session) {

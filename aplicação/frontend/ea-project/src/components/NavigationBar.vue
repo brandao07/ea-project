@@ -12,10 +12,10 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <router-link class="nav-link" to="/">Home</router-link>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Utilizadores</a>
+                    <li class="nav-item" v-if="role == roleEnum.Administrator">
+                        <router-link class="nav-link" to="/administration">Administração</router-link>
                     </li>
                 </ul>
                 <div class="dropdown" v-if="user">
@@ -61,13 +61,17 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AuthService from "@/services/AuthService";
 import UserProfile from '../views/UserProfile.vue';
+import RoleEnumerator from '@/models/enums/Roles';
 
 export default {
     name: 'NavigationBar',
     data() {
         let user = localStorage.getItem('name');
+        let role = localStorage.getItem('role');
         return {
+            roleEnum: RoleEnumerator,
             user: user,
+            role: role,
             showProfileModal: false
         };
     },

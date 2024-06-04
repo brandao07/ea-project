@@ -43,7 +43,7 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		MaxHeight = new DoubleExpression("MaxHeight", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public GradeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -58,11 +58,11 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		MaxHeight = new DoubleExpression("MaxHeight", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_Trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Grade uniqueGrade(PersistentSession session) {

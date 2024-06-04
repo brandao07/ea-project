@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="result")
 public class Result implements Serializable {
 	public Result() {
 	}
@@ -24,6 +28,7 @@ public class Result implements Serializable {
 		}
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public void setOwner(Object owner, int key) {
 			this_setOwner(owner, key);
@@ -31,18 +36,30 @@ public class Result implements Serializable {
 		
 	};
 	
+	@Column(name="ResultId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_RESULT_RESULTID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_RESULTID_GENERATOR", strategy="native")	
 	private int ResultId;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Trial.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="TrialTrialId", referencedColumnName="TrialId", nullable=false) }, foreignKey=@ForeignKey(name="Publish"))	
 	private eaproject.dao.Trial trial;
 	
+	@Column(name="Position", nullable=false, length=10)	
 	private int Position;
 	
+	@Column(name="Time", nullable=true)	
 	private java.sql.Timestamp Time;
 	
+	@Column(name="Observations", nullable=true, length=255)	
 	private String Observations;
 	
+	@Column(name="PenaltyTime", nullable=true)	
 	private java.sql.Timestamp PenaltyTime;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	private void setResultId(int value) {

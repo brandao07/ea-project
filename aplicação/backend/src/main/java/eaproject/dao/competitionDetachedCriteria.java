@@ -36,8 +36,8 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
-		notification = new CollectionExpression("ORM_Notification", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
+		notification = new CollectionExpression("ORM_notification", this.getDetachedCriteria());
 	}
 	
 	public CompetitionDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -48,16 +48,16 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
-		notification = new CollectionExpression("ORM_Notification", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
+		notification = new CollectionExpression("ORM_notification", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_Trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public NotificationDetachedCriteria createNotificationCriteria() {
-		return new NotificationDetachedCriteria(createCriteria("ORM_Notification"));
+		return new NotificationDetachedCriteria(createCriteria("ORM_notification"));
 	}
 	
 	public Competition uniqueCompetition(PersistentSession session) {

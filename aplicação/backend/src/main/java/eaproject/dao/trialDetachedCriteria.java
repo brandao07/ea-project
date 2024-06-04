@@ -63,7 +63,7 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		result = new CollectionExpression("ORM_Result", this.getDetachedCriteria());
+		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -88,7 +88,7 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		result = new CollectionExpression("ORM_Result", this.getDetachedCriteria());
+		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
 	}
 	
 	public StateDetachedCriteria createStateCriteria() {
@@ -116,7 +116,7 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 	}
 	
 	public ResultDetachedCriteria createResultCriteria() {
-		return new ResultDetachedCriteria(createCriteria("ORM_Result"));
+		return new ResultDetachedCriteria(createCriteria("ORM_result"));
 	}
 	
 	public Trial uniqueTrial(PersistentSession session) {

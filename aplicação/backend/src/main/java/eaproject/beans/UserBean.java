@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
@@ -322,7 +323,7 @@ public class UserBean implements UserLocal {
             // Check if users are retrieved successfully
             if (users.length > 0) {
                 // Assign retrieved users to the output object
-                output.setUserArray(users);
+                output.setUsersList(Utilities.convertToDTOList(Arrays.stream(users).toList(), GetUsersOutput.UserProperties.class));
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

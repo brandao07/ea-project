@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=true)
+@Table(name="trial")
 public class Trial implements Serializable {
 	public Trial() {
 	}
@@ -52,6 +56,7 @@ public class Trial implements Serializable {
 		}
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
@@ -63,34 +68,66 @@ public class Trial implements Serializable {
 		
 	};
 	
+	@Column(name="TrialId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_TRIAL_TRIALID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_TRIALID_GENERATOR", strategy="native")	
 	private int TrialId;
 	
+	@ManyToOne(targetEntity=eaproject.dao.State.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="StateStateId", referencedColumnName="StateId", nullable=false) }, foreignKey=@ForeignKey(name="Changes"))	
 	private eaproject.dao.State state;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="CompetitionId", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
 	private eaproject.dao.Competition competition;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Grade.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="GradeGradeId", referencedColumnName="GradeId", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
 	private eaproject.dao.Grade grade;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Type.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="TypeTypeId", referencedColumnName="TypeId", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
 	private eaproject.dao.Type type;
 	
+	@ManyToOne(targetEntity=eaproject.dao.Location.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="LocationLocationId", referencedColumnName="LocationId", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
 	private eaproject.dao.Location location;
 	
+	@ManyToOne(targetEntity=eaproject.dao.User.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="UserUserId", referencedColumnName="UserId", nullable=false) }, foreignKey=@ForeignKey(name="Participates"))	
 	private eaproject.dao.User user;
 	
+	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
+	@Column(name="StartDate", nullable=true)	
 	private java.sql.Timestamp StartDate;
 	
+	@Column(name="Distance", nullable=false)	
 	private double Distance;
 	
+	@Column(name="DistanceUnit", nullable=true, length=255)	
 	private String DistanceUnit;
 	
+	@Column(name="NumberOfCheckpoints", nullable=false, length=10)	
 	private int NumberOfCheckpoints;
 	
+	@Column(name="IsActive", nullable=false)	
 	private boolean IsActive;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
+	@OneToMany(mappedBy="trial", targetEntity=eaproject.dao.Result.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_result = new java.util.HashSet();
 	
 	private void setTrialId(int value) {
@@ -193,6 +230,7 @@ public class Trial implements Serializable {
 		return ORM_result;
 	}
 	
+	@Transient	
 	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public void setUser(eaproject.dao.User value) {

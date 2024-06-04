@@ -80,7 +80,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	 * <li>Weight</li>
 	 * <li>IsActive</li>
 	 * <li>RegisterDate</li>
-	 * <li>Photographypath</li>
+	 * <li>PhotographyPath</li>
 	 * </ul>
 	 * @return The persistent objects sorted array
 	 */
@@ -101,7 +101,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	 * <li>Weight</li>
 	 * <li>IsActive</li>
 	 * <li>RegisterDate</li>
-	 * <li>Photographypath</li>
+	 * <li>PhotographyPath</li>
 	 * </ul>
 	 * @param ascending true for ascending, false for descending
 	 * @return The persistent objects sorted array

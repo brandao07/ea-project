@@ -29,7 +29,7 @@ public class StateDetachedCriteria extends AbstractORMDetachedCriteria {
 		StateId = new IntegerExpression("StateId", this.getDetachedCriteria());
 		Nome = new StringExpression("Nome", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public StateDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -37,11 +37,11 @@ public class StateDetachedCriteria extends AbstractORMDetachedCriteria {
 		StateId = new IntegerExpression("StateId", this.getDetachedCriteria());
 		Nome = new StringExpression("Nome", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_Trial", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_Trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public State uniqueState(PersistentSession session) {

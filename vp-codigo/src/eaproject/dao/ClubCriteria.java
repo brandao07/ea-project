@@ -31,7 +31,7 @@ public class ClubCriteria extends AbstractORMCriteria {
 		Name = new StringExpression("Name", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		team = new CollectionExpression("ORM_Team", this);
+		team = new CollectionExpression("ORM_team", this);
 	}
 	
 	public ClubCriteria(PersistentSession session) {
@@ -43,7 +43,7 @@ public class ClubCriteria extends AbstractORMCriteria {
 	}
 	
 	public TeamCriteria createTeamCriteria() {
-		return new TeamCriteria(createCriteria("ORM_Team"));
+		return new TeamCriteria(createCriteria("ORM_team"));
 	}
 	
 	public Club uniqueClub() {

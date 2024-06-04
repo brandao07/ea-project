@@ -31,7 +31,7 @@ public class TypeCriteria extends AbstractORMCriteria {
 		Name = new StringExpression("Name", this);
 		NumberOfPersons = new IntegerExpression("NumberOfPersons", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public TypeCriteria(PersistentSession session) {
@@ -43,7 +43,7 @@ public class TypeCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Type uniqueType() {

@@ -14,6 +14,10 @@
 package eaproject.dao;
 
 import java.io.Serializable;
+import javax.persistence.*;
+@Entity
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="state")
 public class State implements Serializable {
 	public State() {
 	}
@@ -26,6 +30,7 @@ public class State implements Serializable {
 		return null;
 	}
 	
+	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
@@ -33,12 +38,21 @@ public class State implements Serializable {
 		
 	};
 	
+	@Column(name="StateId", nullable=false, length=10)	
+	@Id	
+	@GeneratedValue(generator="EAPROJECT_DAO_STATE_STATEID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_STATE_STATEID_GENERATOR", strategy="native")	
 	private int StateId;
 	
+	@Column(name="Nome", nullable=true, length=255)	
 	private String Nome;
 	
+	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
+	@OneToMany(mappedBy="state", targetEntity=eaproject.dao.Trial.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	private void setStateId(int value) {
@@ -77,6 +91,7 @@ public class State implements Serializable {
 		return ORM_trial;
 	}
 	
+	@Transient	
 	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_STATE_TRIAL, orm.ORMConstants.KEY_TRIAL_STATE, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {

@@ -43,7 +43,7 @@ public class GradeCriteria extends AbstractORMCriteria {
 		MaxHeight = new DoubleExpression("MaxHeight", this);
 		Gender = new StringExpression("Gender", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_Trial", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public GradeCriteria(PersistentSession session) {
@@ -55,7 +55,7 @@ public class GradeCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_Trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Grade uniqueGrade() {

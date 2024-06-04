@@ -31,7 +31,7 @@ public class RoleDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Description = new StringExpression("Description", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_User", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public RoleDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -40,11 +40,11 @@ public class RoleDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Description = new StringExpression("Description", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_User", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public UserDetachedCriteria createUserCriteria() {
-		return new UserDetachedCriteria(createCriteria("ORM_User"));
+		return new UserDetachedCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Role uniqueRole(PersistentSession session) {
