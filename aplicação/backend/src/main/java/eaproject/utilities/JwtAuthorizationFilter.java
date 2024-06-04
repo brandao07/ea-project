@@ -58,7 +58,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (claims != null && jwtUtil.validateClaims(claims)) {
                 // Extract the email (subject) from the claims.
-                String email = claims.getSubject();
+                String email = claims.get("email", String.class);
                 System.out.println("email : " + email);
 
                 // Extract authorities (roles) from the claims.
