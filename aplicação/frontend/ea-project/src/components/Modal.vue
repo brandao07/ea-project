@@ -11,8 +11,12 @@
                 <slot></slot>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-light mx-2" @click="cancel">Cancel</button>
-                <button class="btn btn-primary mx-0" @click="save">Save</button>
+                <div class="col">
+                    <button class="btn btn-light" @click="cancel">Cancel</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" @click="save">Save</button>
+                </div>
             </div>
         </div>
     </div>
@@ -47,6 +51,7 @@ export default {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 
 .modal-overlay {
@@ -63,10 +68,11 @@ export default {
 
 .modal {
     background: white;
-    padding: 20px;
+    padding: 2em 1em;
     border-radius: 8px;
     position: relative;
     display: block;
+    min-width: 400px;
     width: auto;
     height: auto;
 }

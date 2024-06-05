@@ -11,7 +11,7 @@ class RoleService {
    * @param {GetRolesInput} rolesInput - The get roles input
    * @returns {Promise<GetRolesOutput>} The get roles output
    */
-  async getAllUsers(rolesInput) {
+  async getAllRoles(rolesInput) {
     try {
       const response = await ApiService.post(
         API_ENDPOINTS.GET_ALL_ROLES,

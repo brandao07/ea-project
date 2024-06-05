@@ -15,7 +15,7 @@
                         <router-link class="nav-link" to="/">Home</router-link>
                     </li>
                     <li class="nav-item" v-if="role == roleEnum.Administrator">
-                        <router-link class="nav-link" to="/administration">Administração</router-link>
+                        <router-link class="nav-link" to="/administration">Administration</router-link>
                     </li>
                 </ul>
                 <div class="dropdown" v-if="user">
@@ -43,10 +43,13 @@
                                 </span>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <li><a class="list-group-item list-group-item-action" href="#" @click="showProfileModal = true"><font-awesome-icon :icon="['fas', 'user']" /> Profile</a></li>
-                            <li><a class="list-group-item list-group-item-action" href="#"><font-awesome-icon :icon="['fas', 'cog']" /> Settings</a></li>
+                            <li><a class="list-group-item list-group-item-action" href="#"
+                                    @click="showProfileModal = true"><font-awesome-icon :icon="['fas', 'user']" />
+                                    Profile</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a class="list-group-item list-group-item-action" href="#" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a></li>
+                            <li><a class="list-group-item list-group-item-action" href="#"
+                                    @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a>
+                            </li>
                         </div>
                     </ul>
                 </div>
@@ -60,7 +63,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AuthService from "@/services/AuthService";
-import UserProfile from '../views/UserProfile.vue';
+import UserProfile from '@/views/UserProfile.vue';
 import RoleEnumerator from '@/models/enums/Roles';
 
 export default {
@@ -106,76 +109,77 @@ export default {
 
 <style scoped>
 .navbar-light {
-    background-color: #fcfcfc !important;
-    border: 1px solid #ccc;
+  background-color: var(--navbar-bg-color) !important;
+  border: 1px solid var(--color-grey);
 }
 
 .nav-link img {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .user-avatar {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 8px;
-    font-size: small;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  font-size: small;
 
-    &.user-initials {
-        background-color: #6c757d;
-        color: #fff;
-    }
+  &.user-initials {
+    background-color: var(--user-initials-bg-color);
+    color: var(--color-white);
+  }
 
-    &.user-photo {
-        img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
+  &.user-photo {
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
     }
+  }
 }
 
 .action {
-    position: absolute;
-    top: 48px;
-    right: -10px;
-    padding: 10px 20px;
-    background: #fff;
-    width: auto;
-    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  position: absolute;
+  top: 48px;
+  right: -10px;
+  padding: 10px 20px;
+  width: auto;
+  background: var(--color-white);
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em var(--color-black-rgba);
+  border: 0px;
 }
 
 .action .menu ul li a {
-    display: inline-block;
-    text-decoration: none;
+  display: inline-block;
+  text-decoration: none;
 }
 
 ul li a svg {
-    width: 24px;
+  width: 24px;
 }
 
 .menu li {
-    position: relative;
-    display: block;
-    padding: 5px 0px;
+  position: relative;
+  display: block;
+  padding: 5px 0px;
 }
 
 .action .menu .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 15px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 0px;
 }
 
 .action .menu .profile .user-avatar {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-    font-size: xx-large;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  font-size: xx-large;
 }
 </style>

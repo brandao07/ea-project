@@ -5,18 +5,18 @@
                 <form @submit.prevent="register">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group-center mb-3 mt-3">
+                            <div class="form-group-center my-3">
                                 <font-awesome-icon :icon="['fas', 'trophy']" class="icon-color fa-lg" /> | Canoeing
                             </div>
-                            <div class="row mb-3 mt-3">
+                            <div class="row my-3">
                                 <h3 class="card-title">Register</h3>
                             </div>
-                            <div class="form-group mb-1 justify-content-start">
+                            <div class="form-group mb-1">
                                 <label for="name" class="mb-2">Name</label>
                                 <input type="text" class="form-control" id="name" v-model="userRegisterInput.name"
                                     required>
                             </div>
-                            <div class="form-group mb-1 justify-content-start">
+                            <div class="form-group mb-1">
                                 <label for="email" class="mb-2">Email address</label>
                                 <input type="email" class="form-control" id="email" v-model="userRegisterInput.email"
                                     required>
@@ -44,14 +44,18 @@
                                 <input type="number" step="0.01" min="0" class="form-control" id="height"
                                     v-model="userRegisterInput.height" required>
                             </div>
-                            <div class="form-group mb-1">
+                            <div class="form-group mb-4">
                                 <label for="weight" class="mb-2">Weight (kg)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="weight"
                                     v-model="userRegisterInput.weight" required>
                             </div>
-                            <div class="form-group-right mb-1">
-                                <button type="button" class="btn btn-light mx-2" @click="navigateToLogin">Login</button>
-                                <button type="submit" class="btn btn-primary">Register</button>
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <button type="button" class="btn btn-light" @click="navigateToLogin">Login</button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,6 +96,7 @@ export default {
 
 <style scoped>
 #register {
+    min-width: 400px;
     height: 100vh;
     display: flex;
     justify-content: center;

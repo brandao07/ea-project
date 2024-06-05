@@ -1,13 +1,7 @@
+/* Positioning */
 .div-center {
   width: 100%;
   max-width: 400px;
-}
-
-.content {
-  padding: 2em;
-  background: #fff;
-  border-radius: 0.5em;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
 .vertical-center {
@@ -18,40 +12,90 @@
   transform: translateY(-50%);
 }
 
+/* Wrappers */
+.content {
+  padding: 2em;
+  background: var(--color-white);
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em var(--color-black-rgba);
+}
+
+/* Grid container */
+.grid {
+  padding-top: 20px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.grid .row {
+  padding: 10px 0px;
+}
+
+/* Form */
 .form-group {
-  padding: 10px 5px;
+  padding: 10px 0px;
   display: block;
   text-align: justify;
 }
 
 .form-group-right {
-  padding: 10px 5px;
+  padding: 10px 0px;
   display: block;
   text-align: right !important;
 }
 
 .form-group-center {
-  padding: 10px 5px;
+  padding: 10px 0px;
   display: block;
   text-align: center !important;
 }
 
+/* Icons */
 .icon-color {
   color: var(--icon-primary);
 }
 
+/* Buttons */
 .btn {
-  min-width: 150px;
+  width: 100%;
 }
 
 .btn-primary {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
+  background-color: var(--button-primary);
+  border-color: var(--button-primary);
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: var(--bs-primary-darker) !important;
-  border-color: var(--bs-primary-darker) !important;
+  background-color: var(--button-primary-darker) !important;
+  border-color: var(--button-primary-darker) !important;
+}
+
+.btn-squared {
+  width: 125px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  background: var(--color-white);
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em var(--color-black-rgba);
+  color: var(--button-sqared);
+}
+
+.btn-squared:hover,
+.btn-squared:focus,
+.btn-squared:active {
+  background-color: var(--color-white) !important;
+}
+
+.btn-squared .icon {
+  margin: 15px 0px;
+  font-size: 24px;
 }

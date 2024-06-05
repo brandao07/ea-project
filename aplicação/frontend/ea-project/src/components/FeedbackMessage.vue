@@ -30,7 +30,7 @@ export default {
         addMessage(message) {
             this.messages.push(message);
 
-            const timeout = message.severity === 'DANGER' ? 10000 : 5000; // 10 seconds for error messages, 5 seconds for others
+            const timeout = message.severity === 'DANGER' ? 100000 : 3000; // 3 seconds for error messages, 10 seconds for others
 
             setTimeout(() => {
                 this.removeMessage(this.messages.indexOf(message));
@@ -63,17 +63,13 @@ export default {
 .feedback-messages {
     position: fixed;
     top: 10px;
-    /* Position near the top of the viewport */
     left: 50%;
     transform: translateX(-50%);
-    /* Center horizontally */
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 1000;
-    /* Responsive width */
     max-width: 800px;
-    /* Maximum width */
 }
 
 .alert {

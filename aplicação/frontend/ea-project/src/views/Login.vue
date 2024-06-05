@@ -5,26 +5,30 @@
                 <form @submit.prevent="login">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group-center mb-3 mt-3">
+                            <div class="form-group-center my-3">
                                 <font-awesome-icon :icon="['fas', 'trophy']" class="icon-color fa-lg" /> | Canoeing
                             </div>
-                            <div class="row mb-3 mt-3">
+                            <div class="row my-3">
                                 <h3 class="card-title">Login</h3>
                             </div>
-                            <div class="form-group mb-1 justify-content-start">
-                                <label for="emailId" class="mb-2">Email address</label>
+                            <div class="form-group mb-1">
+                                <label for="emailId" class="mb-1">Email address</label>
                                 <input type="email" class="form-control" id="emailId" placeholder="Enter email"
                                     v-model="authenticationInput.email" required>
                             </div>
-                            <div class="form-group mb-1">
-                                <label for="passwordId" class="mb-2">Password</label>
+                            <div class="form-group mb-4">
+                                <label for="passwordId" class="mb-1">Password</label>
                                 <input type="password" class="form-control" id="passwordId" placeholder="Password"
                                     v-model="authenticationInput.password" required>
                             </div>
-                            <div class="form-group-right mb-1">
-                                <button type="button" class="btn btn-light mx-2"
-                                    @click="navigateToLogin">Register</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <button type="button" class="btn btn-light"
+                                        @click="navigateToLogin">Register</button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,6 +69,7 @@ export default {
 
 <style scoped>
 #login {
+    min-width: 400px;
     height: 100vh;
     display: flex;
     justify-content: center;
