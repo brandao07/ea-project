@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class GradeDAO {
-	public static Grade loadGradeByORMID(int GradeId) throws PersistentException {
+	public static Grade loadGradeByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadGradeByORMID(session, GradeId);
+			return loadGradeByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade getGradeByORMID(int GradeId) throws PersistentException {
+	public static Grade getGradeByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getGradeByORMID(session, GradeId);
+			return getGradeByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade loadGradeByORMID(int GradeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Grade loadGradeByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadGradeByORMID(session, GradeId, lockMode);
+			return loadGradeByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade getGradeByORMID(int GradeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Grade getGradeByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getGradeByORMID(session, GradeId, lockMode);
+			return getGradeByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade loadGradeByORMID(PersistentSession session, int GradeId) throws PersistentException {
+	public static Grade loadGradeByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Grade) session.load(eaproject.dao.Grade.class, Integer.valueOf(GradeId));
+			return (Grade) session.load(eaproject.dao.Grade.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade getGradeByORMID(PersistentSession session, int GradeId) throws PersistentException {
+	public static Grade getGradeByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Grade) session.get(eaproject.dao.Grade.class, Integer.valueOf(GradeId));
+			return (Grade) session.get(eaproject.dao.Grade.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade loadGradeByORMID(PersistentSession session, int GradeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Grade loadGradeByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Grade) session.load(eaproject.dao.Grade.class, Integer.valueOf(GradeId), lockMode);
+			return (Grade) session.load(eaproject.dao.Grade.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class GradeDAO {
 		}
 	}
 	
-	public static Grade getGradeByORMID(PersistentSession session, int GradeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Grade getGradeByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Grade) session.get(eaproject.dao.Grade.class, Integer.valueOf(GradeId), lockMode);
+			return (Grade) session.get(eaproject.dao.Grade.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -5,7 +5,7 @@ export default class GetUsersOutput extends BaseOutput {
     super(feedbackMessages);
     this.usersList = usersList.map(
       (user) => new GetUsersOutput.UserProperties(
-        user.userId,
+        user.id,
         user.email
       )
     );
@@ -13,10 +13,10 @@ export default class GetUsersOutput extends BaseOutput {
 
   static UserProperties = class {
     constructor(
-      userId,
+      id,
       email,
     ) {
-      this.userId = userId;
+      this.id = id;
       this.email = email;
     }
   };

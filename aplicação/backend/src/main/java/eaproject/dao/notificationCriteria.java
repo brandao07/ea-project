@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class NotificationCriteria extends AbstractORMCriteria {
-	public final IntegerExpression NotificationId;
+	public final IntegerExpression Id;
 	public final IntegerExpression competitionId;
 	public final AssociationExpression competition;
 	public final StringExpression MessageHeader;
@@ -29,8 +29,8 @@ public class NotificationCriteria extends AbstractORMCriteria {
 	
 	public NotificationCriteria(Criteria criteria) {
 		super(criteria);
-		NotificationId = new IntegerExpression("NotificationId", this);
-		competitionId = new IntegerExpression("competition.CompetitionId", this);
+		Id = new IntegerExpression("Id", this);
+		competitionId = new IntegerExpression("competition.Id", this);
 		competition = new AssociationExpression("competition", this);
 		MessageHeader = new StringExpression("MessageHeader", this);
 		MessageBody = new StringExpression("MessageBody", this);

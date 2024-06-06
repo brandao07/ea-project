@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression TrialId;
+	public final IntegerExpression Id;
 	public final IntegerExpression stateId;
 	public final AssociationExpression state;
 	public final IntegerExpression competitionId;
@@ -30,8 +30,6 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression type;
 	public final IntegerExpression locationId;
 	public final AssociationExpression location;
-	public final IntegerExpression userId;
-	public final AssociationExpression user;
 	public final StringExpression Name;
 	public final TimestampExpression StartDate;
 	public final DoubleExpression Distance;
@@ -40,22 +38,21 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression result;
+	public final CollectionExpression user;
 	
 	public TrialDetachedCriteria() {
 		super(eaproject.dao.Trial.class, eaproject.dao.TrialCriteria.class);
-		TrialId = new IntegerExpression("TrialId", this.getDetachedCriteria());
-		stateId = new IntegerExpression("state.StateId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		stateId = new IntegerExpression("state.Id", this.getDetachedCriteria());
 		state = new AssociationExpression("state", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.CompetitionId", this.getDetachedCriteria());
+		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
 		competition = new AssociationExpression("competition", this.getDetachedCriteria());
-		gradeId = new IntegerExpression("grade.GradeId", this.getDetachedCriteria());
+		gradeId = new IntegerExpression("grade.Id", this.getDetachedCriteria());
 		grade = new AssociationExpression("grade", this.getDetachedCriteria());
-		typeId = new IntegerExpression("type.TypeId", this.getDetachedCriteria());
+		typeId = new IntegerExpression("type.Id", this.getDetachedCriteria());
 		type = new AssociationExpression("type", this.getDetachedCriteria());
-		locationId = new IntegerExpression("location.LocationId", this.getDetachedCriteria());
+		locationId = new IntegerExpression("location.Id", this.getDetachedCriteria());
 		location = new AssociationExpression("location", this.getDetachedCriteria());
-		userId = new IntegerExpression("user.UserId", this.getDetachedCriteria());
-		user = new AssociationExpression("user", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		Distance = new DoubleExpression("Distance", this.getDetachedCriteria());
@@ -64,23 +61,22 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.TrialCriteria.class);
-		TrialId = new IntegerExpression("TrialId", this.getDetachedCriteria());
-		stateId = new IntegerExpression("state.StateId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		stateId = new IntegerExpression("state.Id", this.getDetachedCriteria());
 		state = new AssociationExpression("state", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.CompetitionId", this.getDetachedCriteria());
+		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
 		competition = new AssociationExpression("competition", this.getDetachedCriteria());
-		gradeId = new IntegerExpression("grade.GradeId", this.getDetachedCriteria());
+		gradeId = new IntegerExpression("grade.Id", this.getDetachedCriteria());
 		grade = new AssociationExpression("grade", this.getDetachedCriteria());
-		typeId = new IntegerExpression("type.TypeId", this.getDetachedCriteria());
+		typeId = new IntegerExpression("type.Id", this.getDetachedCriteria());
 		type = new AssociationExpression("type", this.getDetachedCriteria());
-		locationId = new IntegerExpression("location.LocationId", this.getDetachedCriteria());
+		locationId = new IntegerExpression("location.Id", this.getDetachedCriteria());
 		location = new AssociationExpression("location", this.getDetachedCriteria());
-		userId = new IntegerExpression("user.UserId", this.getDetachedCriteria());
-		user = new AssociationExpression("user", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		Distance = new DoubleExpression("Distance", this.getDetachedCriteria());
@@ -89,6 +85,7 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
+		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public StateDetachedCriteria createStateCriteria() {
@@ -111,12 +108,12 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new LocationDetachedCriteria(createCriteria("location"));
 	}
 	
-	public UserDetachedCriteria createUserCriteria() {
-		return new UserDetachedCriteria(createCriteria("user"));
-	}
-	
 	public ResultDetachedCriteria createResultCriteria() {
 		return new ResultDetachedCriteria(createCriteria("ORM_result"));
+	}
+	
+	public UserDetachedCriteria createUserCriteria() {
+		return new UserDetachedCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Trial uniqueTrial(PersistentSession session) {

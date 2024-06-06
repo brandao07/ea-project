@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class ResultCriteria extends AbstractORMCriteria {
-	public final IntegerExpression ResultId;
+	public final IntegerExpression Id;
 	public final IntegerExpression trialId;
 	public final AssociationExpression trial;
 	public final IntegerExpression Position;
@@ -30,8 +30,8 @@ public class ResultCriteria extends AbstractORMCriteria {
 	
 	public ResultCriteria(Criteria criteria) {
 		super(criteria);
-		ResultId = new IntegerExpression("ResultId", this);
-		trialId = new IntegerExpression("trial.TrialId", this);
+		Id = new IntegerExpression("Id", this);
+		trialId = new IntegerExpression("trial.Id", this);
 		trial = new AssociationExpression("trial", this);
 		Position = new IntegerExpression("Position", this);
 		Time = new TimestampExpression("Time", this);

@@ -20,7 +20,7 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
     }
 
     public static class UserProperties implements Serializable {
-        private int userId;
+        private int id;
         private String name;
         private String email;
         private String gender;
@@ -31,12 +31,12 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
         private String photographyPath;
 
         // Getters and setters
-        public int getUserId() {
-            return userId;
+        public int getId() {
+            return id;
         }
 
-        public void setUserId(int userId) {
-            this.userId = userId;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getName() {

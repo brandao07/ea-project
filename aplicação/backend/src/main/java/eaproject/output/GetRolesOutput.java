@@ -20,18 +20,18 @@ public class GetRolesOutput extends BaseOutput implements Serializable {
     }
 
     public static class RoleProperties implements Serializable {
-        private int roleId;
+        private int id;
         private String name;
         private String description;
         private Timestamp creationDate;
 
         // Getters and setters
-        public int getRoleId() {
-            return roleId;
+        public int getId() {
+            return id;
         }
 
-        public void setRoleId(int roleId) {
-            this.roleId = roleId;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getName() {

@@ -1,7 +1,7 @@
 package eaproject.beans.locals;
 
-import eaproject.input.*;
 import eaproject.output.*;
+import eaproject.input.GetRolesInput;
 
 import javax.ejb.Local;
 

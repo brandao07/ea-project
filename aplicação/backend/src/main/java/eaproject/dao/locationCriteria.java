@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class LocationCriteria extends AbstractORMCriteria {
-	public final IntegerExpression LocationId;
+	public final IntegerExpression Id;
 	public final FloatExpression Latitude;
 	public final FloatExpression Longitude;
 	public final StringExpression Address;
@@ -27,11 +27,10 @@ public class LocationCriteria extends AbstractORMCriteria {
 	public final StringExpression Country;
 	public final StringExpression PostalCode;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public LocationCriteria(Criteria criteria) {
 		super(criteria);
-		LocationId = new IntegerExpression("LocationId", this);
+		Id = new IntegerExpression("Id", this);
 		Latitude = new FloatExpression("Latitude", this);
 		Longitude = new FloatExpression("Longitude", this);
 		Address = new StringExpression("Address", this);
@@ -39,7 +38,6 @@ public class LocationCriteria extends AbstractORMCriteria {
 		Country = new StringExpression("Country", this);
 		PostalCode = new StringExpression("PostalCode", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public LocationCriteria(PersistentSession session) {
@@ -48,10 +46,6 @@ public class LocationCriteria extends AbstractORMCriteria {
 	
 	public LocationCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Location uniqueLocation() {

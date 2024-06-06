@@ -16,7 +16,7 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="notification")
 public class Notification implements Serializable {
 	public Notification() {
@@ -36,15 +36,15 @@ public class Notification implements Serializable {
 		
 	};
 	
-	@Column(name="NotificationId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_NOTIFICATION_NOTIFICATIONID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_NOTIFICATION_NOTIFICATIONID_GENERATOR", strategy="native")	
-	private int NotificationId;
+	@GeneratedValue(generator="EAPROJECT_DAO_NOTIFICATION_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_NOTIFICATION_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="CompetitionId", nullable=false) }, foreignKey=@ForeignKey(name="Issue"))	
+	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Issue"))	
 	private eaproject.dao.Competition competition;
 	
 	@Column(name="MessageHeader", nullable=true, length=255)	
@@ -59,16 +59,16 @@ public class Notification implements Serializable {
 	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
-	private void setNotificationId(int value) {
-		this.NotificationId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getNotificationId() {
-		return NotificationId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getNotificationId();
+		return getId();
 	}
 	
 	public void setMessageHeader(String value) {
@@ -128,7 +128,7 @@ public class Notification implements Serializable {
 	}
 	
 	public String toString() {
-		return String.valueOf(getNotificationId());
+		return String.valueOf(getId());
 	}
 	
 }

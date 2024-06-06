@@ -62,7 +62,7 @@ public class UserBean implements UserLocal {
             String condition = "email = '" + userInput.getEmail() + "'";
             User user = UserDAO.loadUserByQuery(condition, null);
 
-            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+            if (user != null && user.getId() > 0 && user.getIsActive()) {
                 if (passwordEncoder.matches(userInput.getPassword(), user.getPassword())) {
                     String token = JwtTokenUtil.createToken(user);
                     output.setToken(token);
@@ -157,15 +157,15 @@ public class UserBean implements UserLocal {
             int tokenUserId = claims.get("idUser", Integer.class);
 
             // Check if the user ID from the token matches the user ID from the input
-            if (tokenUserId != userInfoInput.getUserId()) {
+            if (tokenUserId != userInfoInput.getId()) {
                 output.addFeedbackMessage("You are not authorized to access this user's information.", FeedbackSeverity.DANGER);
             }
 
             // Load the user from the database using the provided user ID
-            User user = UserDAO.loadUserByORMID(userInfoInput.getUserId());
+            User user = UserDAO.loadUserByORMID(userInfoInput.getId());
 
             // Check if the user exists and is active
-            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+            if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Convert entity into an object
                 output = Utilities.convertToDTO(user, BasicUserInfoOutput.class);
             } else {
@@ -206,15 +206,15 @@ public class UserBean implements UserLocal {
             int tokenUserId = claims.get("idUser", Integer.class);
 
             // Check if the user ID from the token matches the user ID from the input
-            if (tokenUserId != userInfoInput.getUserId()) {
+            if (tokenUserId != userInfoInput.getId()) {
                 output.addFeedbackMessage("You are not authorized to update this user's information.", FeedbackSeverity.DANGER);
             }
 
             // Load the user from the database using the provided user ID
-            User user = UserDAO.loadUserByORMID(userInfoInput.getUserId());
+            User user = UserDAO.loadUserByORMID(userInfoInput.getId());
 
             // Check if the user exists and is active
-            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+            if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Convert object into an entity
                 User userToUpdate = Utilities.convertToDAO(userInfoInput, User.class);
 
@@ -266,12 +266,12 @@ public class UserBean implements UserLocal {
             User user = UserDAO.loadUserByORMID(userRoleInput.getUserId());
 
             // Check if the user exists and is active
-            if (user != null && user.getUserId() > 0 && user.getIsActive()) {
+            if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Load the role from the database using the provided role ID
                 Role role = RoleDAO.getRoleByORMID(userRoleInput.getRoleId());
 
                 // Check if the role exists
-                if (role != null && role.getRoleId() > 0) {
+                if (role != null && role.getId() > 0) {
                     // Set the new role for the user
                     user.setRole(role);
 

@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression LocationId;
+	public final IntegerExpression Id;
 	public final FloatExpression Latitude;
 	public final FloatExpression Longitude;
 	public final StringExpression Address;
@@ -27,11 +27,10 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression Country;
 	public final StringExpression PostalCode;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public LocationDetachedCriteria() {
 		super(eaproject.dao.Location.class, eaproject.dao.LocationCriteria.class);
-		LocationId = new IntegerExpression("LocationId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Latitude = new FloatExpression("Latitude", this.getDetachedCriteria());
 		Longitude = new FloatExpression("Longitude", this.getDetachedCriteria());
 		Address = new StringExpression("Address", this.getDetachedCriteria());
@@ -39,12 +38,11 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 		Country = new StringExpression("Country", this.getDetachedCriteria());
 		PostalCode = new StringExpression("PostalCode", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public LocationDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.LocationCriteria.class);
-		LocationId = new IntegerExpression("LocationId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Latitude = new FloatExpression("Latitude", this.getDetachedCriteria());
 		Longitude = new FloatExpression("Longitude", this.getDetachedCriteria());
 		Address = new StringExpression("Address", this.getDetachedCriteria());
@@ -52,11 +50,6 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 		Country = new StringExpression("Country", this.getDetachedCriteria());
 		PostalCode = new StringExpression("PostalCode", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Location uniqueLocation(PersistentSession session) {

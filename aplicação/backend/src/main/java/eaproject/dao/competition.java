@@ -16,18 +16,23 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="competition")
 public class Competition implements Serializable {
 	public Competition() {
 	}
 	
+	private java.util.List this_getList (int key) {
+		if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
+			return ORM_notification;
+		}
+		
+		return null;
+	}
+	
 	private java.util.Set this_getSet (int key) {
 		if (key == orm.ORMConstants.KEY_COMPETITION_TRIAL) {
 			return ORM_trial;
-		}
-		else if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
-			return ORM_notification;
 		}
 		
 		return null;
@@ -39,13 +44,17 @@ public class Competition implements Serializable {
 			return this_getSet(key);
 		}
 		
+		public java.util.List getList(int key) {
+			return this_getList(key);
+		}
+		
 	};
 	
-	@Column(name="CompetitionId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_COMPETITION_COMPETITIONID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_COMPETITION_COMPETITIONID_GENERATOR", strategy="native")	
-	private int CompetitionId;
+	@GeneratedValue(generator="EAPROJECT_DAO_COMPETITION_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_COMPETITION_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -69,19 +78,20 @@ public class Competition implements Serializable {
 	
 	@OneToMany(mappedBy="competition", targetEntity=eaproject.dao.Notification.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.IndexColumn(name="competitionIndex")	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_notification = new java.util.HashSet();
+	private java.util.List ORM_notification = new java.util.ArrayList();
 	
-	private void setCompetitionId(int value) {
-		this.CompetitionId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getCompetitionId() {
-		return CompetitionId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getCompetitionId();
+		return getId();
 	}
 	
 	public void setName(String value) {
@@ -135,19 +145,19 @@ public class Competition implements Serializable {
 	@Transient	
 	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_TRIAL, orm.ORMConstants.KEY_TRIAL_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
-	private void setORM_Notification(java.util.Set value) {
+	private void setORM_Notification(java.util.List value) {
 		this.ORM_notification = value;
 	}
 	
-	private java.util.Set getORM_Notification() {
+	private java.util.List getORM_Notification() {
 		return ORM_notification;
 	}
 	
 	@Transient	
-	public final eaproject.dao.NotificationSetCollection notification = new eaproject.dao.NotificationSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_NOTIFICATION, orm.ORMConstants.KEY_NOTIFICATION_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.NotificationListCollection notification = new eaproject.dao.NotificationListCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_NOTIFICATION, orm.ORMConstants.KEY_NOTIFICATION_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
-		return String.valueOf(getCompetitionId());
+		return String.valueOf(getId());
 	}
 	
 }

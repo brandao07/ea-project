@@ -19,19 +19,17 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class TypeCriteria extends AbstractORMCriteria {
-	public final IntegerExpression TypeId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final IntegerExpression NumberOfPersons;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public TypeCriteria(Criteria criteria) {
 		super(criteria);
-		TypeId = new IntegerExpression("TypeId", this);
+		Id = new IntegerExpression("Id", this);
 		Name = new StringExpression("Name", this);
 		NumberOfPersons = new IntegerExpression("NumberOfPersons", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public TypeCriteria(PersistentSession session) {
@@ -40,10 +38,6 @@ public class TypeCriteria extends AbstractORMCriteria {
 	
 	public TypeCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Type uniqueType() {

@@ -7,27 +7,26 @@ $$
 BEGIN
 
 create table "user" (
-  UserId       serial not null, 
-  RoleRoleId   int4 not null, 
-  TeamTeamId   int4,
-  Name         varchar(255), 
-  Email        varchar(255), 
-  Password     varchar(255), 
-  Gender       varchar(255), 
-  Age          int4 not null, 
-  Height       float8 not null, 
-  Weight       float8 not null, 
-  IsActive     bool not null, 
-  RegisterDate timestamp,
+  Id              serial not null, 
+  RoleRoleId      int4 not null, 
+  TeamTeamId      int4, 
+  Name            varchar(255), 
+  Email           varchar(255), 
+  Password        varchar(255), 
+  Gender          varchar(255), 
+  Age             int4 not null, 
+  Height          float8 not null, 
+  Weight          float8 not null, 
+  IsActive        bool not null, 
+  RegisterDate    timestamp, 
   PhotographyPath varchar(255));
-create table Trial (
-  TrialId                  serial not null, 
+create table trial (
+  Id                       serial not null, 
   StateStateId             int4 not null, 
   CompetitionCompetitionId int4 not null, 
   GradeGradeId             int4 not null, 
   TypeTypeId               int4 not null, 
   LocationLocationId       int4 not null, 
-  UserUserId               int4 not null, 
   Name                     varchar(255), 
   StartDate                timestamp, 
   Distance                 float8 not null, 
@@ -35,23 +34,23 @@ create table Trial (
   NumberOfCheckpoints      int4 not null, 
   IsActive                 bool not null, 
   CreationDate             timestamp);
-create table Competition (
-  CompetitionId serial not null, 
-  Name          varchar(255), 
-  StartDate     timestamp, 
-  EndDate       timestamp, 
-  IsActive      bool not null, 
-  CreationDate  timestamp);
-create table Result (
-  ResultId     serial not null, 
+create table competition (
+  Id           serial not null, 
+  Name         varchar(255), 
+  StartDate    timestamp, 
+  EndDate      timestamp, 
+  IsActive     bool not null, 
+  CreationDate timestamp);
+create table result (
+  Id           serial not null, 
   TrialTrialId int4 not null, 
   Position     int4 not null, 
   Time         timestamp, 
   Observations varchar(255), 
   PenaltyTime  timestamp, 
   CreationDate timestamp);
-create table Grade (
-  GradeId      serial not null, 
+create table grade (
+  Id           serial not null, 
   Name         varchar(255), 
   MinAge       int4 not null, 
   MaxAge       int4 not null, 
@@ -61,8 +60,8 @@ create table Grade (
   MaxHeight    float8 not null, 
   Gender       varchar(255), 
   CreationDate timestamp);
-create table Location (
-  LocationId   serial not null, 
+create table location (
+  Id           serial not null, 
   Latitude     float4 not null, 
   Longitude    float4 not null, 
   Address      varchar(255), 
@@ -70,38 +69,42 @@ create table Location (
   Country      varchar(255), 
   PostalCode   varchar(255), 
   CreationDate timestamp);
-create table Notification (
-  NotificationId           serial not null, 
+create table notification (
+  Id                       serial not null, 
   CompetitionCompetitionId int4 not null, 
   MessageHeader            varchar(255), 
   MessageBody              varchar(255), 
   MessageType              varchar(255), 
-  CreationDate             timestamp);
-create table Club (
-  ClubId       serial not null, 
+  CreationDate             timestamp, 
+  competitionIndex         int4);
+create table club (
+  Id           serial not null, 
   Name         varchar(255), 
   IsActive     bool not null, 
   CreationDate timestamp);
-create table Team (
-  TeamId       serial not null, 
+create table team (
+  Id           serial not null, 
   ClubClubId   int4, 
   Name         varchar(255), 
   IsActive     bool not null, 
   CreationDate timestamp);
-create table Type (
-  TypeId          serial not null, 
+create table type (
+  Id              serial not null, 
   Name            varchar(255), 
   NumberOfPersons int4 not null, 
   CreationDate    timestamp);
-create table State (
-  StateId      serial not null, 
-  Nome         varchar(255), 
+create table state (
+  Id           serial not null, 
+  name         varchar(255), 
   CreationDate timestamp);
-create table Role (
-  RoleId       serial not null, 
+create table role (
+  Id           serial not null, 
   Name         varchar(255), 
   Description  varchar(255), 
   CreationDate timestamp);
+create table trial_user (
+  TrialId int4 not null, 
+  UserId  int4 not null);
 
 END
 $$;
@@ -111,30 +114,32 @@ DO
 $$
 BEGIN
 
-alter table "user" add primary key (UserId);
-alter table Trial add primary key (TrialId);
-alter table Competition add primary key (CompetitionId);
-alter table Result add primary key (ResultId);
-alter table Grade add primary key (GradeId);
-alter table Location add primary key (LocationId);
-alter table Notification add primary key (NotificationId);
-alter table Club add primary key (ClubId);
-alter table Team add primary key (TeamId);
-alter table Type add primary key (TypeId);
-alter table State add primary key (StateId);
-alter table Role add primary key (RoleId);
+alter table "user" add primary key (Id);
+alter table trial add primary key (Id);
+alter table competition add primary key (Id);
+alter table result add primary key (Id);
+alter table grade add primary key (Id);
+alter table location add primary key (Id);
+alter table notification add primary key (Id);
+alter table club add primary key (Id);
+alter table team add primary key (Id);
+alter table type add primary key (Id);
+alter table state add primary key (Id);
+alter table role add primary key (Id);
+alter table trial_user add primary key (TrialId, UserId);
 
-alter table "user" add constraint Federated foreign key (TeamTeamId) references Team (TeamId);
-alter table Team add constraint Owns foreign key (ClubClubId) references Club (ClubId);
-alter table "user" add constraint Belongs foreign key (RoleRoleId) references Role (RoleId);
-alter table Trial add constraint Participates foreign key (UserUserId) references "user" (UserId);
-alter table Trial add constraint Occurs foreign key (LocationLocationId) references Location (LocationId);
-alter table Trial add constraint Restricts foreign key (TypeTypeId) references Type (TypeId);
-alter table Trial add constraint Requires foreign key (GradeGradeId) references Grade (GradeId);
-alter table Trial add constraint Fulfill foreign key (CompetitionCompetitionId) references Competition (CompetitionId);
-alter table Notification add constraint Issue foreign key (CompetitionCompetitionId) references Competition (CompetitionId);
-alter table Result add constraint Publish foreign key (TrialTrialId) references Trial (TrialId);
-alter table Trial add constraint Changes foreign key (StateStateId) references State (StateId);
+alter table "user" add constraint Federated foreign key (TeamTeamId) references team (Id);
+alter table team add constraint Owns foreign key (ClubClubId) references club (Id);
+alter table "user" add constraint Belongs foreign key (RoleRoleId) references role (Id);
+alter table trial add constraint Occurs foreign key (LocationLocationId) references location (Id);
+alter table trial add constraint Restricts foreign key (TypeTypeId) references type (Id);
+alter table trial add constraint Requires foreign key (GradeGradeId) references grade (Id);
+alter table trial add constraint Fulfill foreign key (CompetitionCompetitionId) references competition (Id);
+alter table notification add constraint Issue foreign key (CompetitionCompetitionId) references competition (Id);
+alter table result add constraint Publish foreign key (TrialTrialId) references trial (Id);
+alter table trial add constraint Changes foreign key (StateStateId) references state (Id);
+alter table trial_user add constraint Participates foreign key (TrialId) references trial (Id);
+alter table trial_user add constraint Participates2 foreign key (UserId) references "user" (Id);
 
 END
 $$;
@@ -145,18 +150,18 @@ $$
 BEGIN
 
 INSERT INTO public.Role(
-	RoleId, Name, Description, CreationDate)
+	Id, Name, Description, CreationDate)
 	VALUES (1, 'Administrator', 'Admin Role', CURRENT_TIMESTAMP),
          (2, 'Default', 'Default Role', CURRENT_TIMESTAMP),
          (3, 'TeamOwner', 'Team Owner Role', CURRENT_TIMESTAMP),
          (4, 'ClubOwner', 'Club Owner Role', CURRENT_TIMESTAMP);
 	
 INSERT INTO public.Club(
-	ClubId, Name, IsActive, CreationDate)
+	Id, Name, IsActive, CreationDate)
 	VALUES (1, 'Test Club', true, CURRENT_TIMESTAMP);
 	
 INSERT INTO public.Team(
-	TeamId, ClubClubId, Name, IsActive, CreationDate)
+	Id, ClubClubId, Name, IsActive, CreationDate)
 	VALUES (1, 1, 'Test Team', true, CURRENT_TIMESTAMP);
 
 -- password for every user: password

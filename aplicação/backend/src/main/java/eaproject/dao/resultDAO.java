@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class ResultDAO {
-	public static Result loadResultByORMID(int ResultId) throws PersistentException {
+	public static Result loadResultByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadResultByORMID(session, ResultId);
+			return loadResultByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result getResultByORMID(int ResultId) throws PersistentException {
+	public static Result getResultByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getResultByORMID(session, ResultId);
+			return getResultByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result loadResultByORMID(int ResultId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Result loadResultByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadResultByORMID(session, ResultId, lockMode);
+			return loadResultByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result getResultByORMID(int ResultId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Result getResultByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getResultByORMID(session, ResultId, lockMode);
+			return getResultByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result loadResultByORMID(PersistentSession session, int ResultId) throws PersistentException {
+	public static Result loadResultByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Result) session.load(eaproject.dao.Result.class, Integer.valueOf(ResultId));
+			return (Result) session.load(eaproject.dao.Result.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result getResultByORMID(PersistentSession session, int ResultId) throws PersistentException {
+	public static Result getResultByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Result) session.get(eaproject.dao.Result.class, Integer.valueOf(ResultId));
+			return (Result) session.get(eaproject.dao.Result.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result loadResultByORMID(PersistentSession session, int ResultId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Result loadResultByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Result) session.load(eaproject.dao.Result.class, Integer.valueOf(ResultId), lockMode);
+			return (Result) session.load(eaproject.dao.Result.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class ResultDAO {
 		}
 	}
 	
-	public static Result getResultByORMID(PersistentSession session, int ResultId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Result getResultByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Result) session.get(eaproject.dao.Result.class, Integer.valueOf(ResultId), lockMode);
+			return (Result) session.get(eaproject.dao.Result.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

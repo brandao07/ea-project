@@ -19,32 +19,25 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class ClubDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression ClubId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression team;
 	
 	public ClubDetachedCriteria() {
 		super(eaproject.dao.Club.class, eaproject.dao.ClubCriteria.class);
-		ClubId = new IntegerExpression("ClubId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		team = new CollectionExpression("ORM_team", this.getDetachedCriteria());
 	}
 	
 	public ClubDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.ClubCriteria.class);
-		ClubId = new IntegerExpression("ClubId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		team = new CollectionExpression("ORM_team", this.getDetachedCriteria());
-	}
-	
-	public TeamDetachedCriteria createTeamCriteria() {
-		return new TeamDetachedCriteria(createCriteria("ORM_team"));
 	}
 	
 	public Club uniqueClub(PersistentSession session) {

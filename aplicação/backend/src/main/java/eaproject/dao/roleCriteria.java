@@ -19,19 +19,17 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class RoleCriteria extends AbstractORMCriteria {
-	public final IntegerExpression RoleId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final StringExpression Description;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression user;
 	
 	public RoleCriteria(Criteria criteria) {
 		super(criteria);
-		RoleId = new IntegerExpression("RoleId", this);
+		Id = new IntegerExpression("Id", this);
 		Name = new StringExpression("Name", this);
 		Description = new StringExpression("Description", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		user = new CollectionExpression("ORM_user", this);
 	}
 	
 	public RoleCriteria(PersistentSession session) {
@@ -40,10 +38,6 @@ public class RoleCriteria extends AbstractORMCriteria {
 	
 	public RoleCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public UserCriteria createUserCriteria() {
-		return new UserCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Role uniqueRole() {

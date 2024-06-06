@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class GradeCriteria extends AbstractORMCriteria {
-	public final IntegerExpression GradeId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
@@ -33,7 +33,7 @@ public class GradeCriteria extends AbstractORMCriteria {
 	
 	public GradeCriteria(Criteria criteria) {
 		super(criteria);
-		GradeId = new IntegerExpression("GradeId", this);
+		Id = new IntegerExpression("Id", this);
 		Name = new StringExpression("Name", this);
 		MinAge = new IntegerExpression("MinAge", this);
 		MaxAge = new IntegerExpression("MaxAge", this);

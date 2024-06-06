@@ -70,7 +70,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	/**
 	 * Return an sorted array containing all of the persistent objects in ORMSet
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>UserId</li>
+	 * <li>Id</li>
 	 * <li>Name</li>
 	 * <li>Email</li>
 	 * <li>Password</li>
@@ -91,7 +91,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	/**
 	 * Return an sorted array containing all of the persistent objects in ORMSet
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>UserId</li>
+	 * <li>Id</li>
 	 * <li>Name</li>
 	 * <li>Email</li>
 	 * <li>Password</li>

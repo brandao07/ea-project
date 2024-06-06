@@ -16,7 +16,7 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="trial")
 public class Trial implements Serializable {
 	public Trial() {
@@ -26,6 +26,9 @@ public class Trial implements Serializable {
 		if (key == orm.ORMConstants.KEY_TRIAL_RESULT) {
 			return ORM_result;
 		}
+		else if (key == orm.ORMConstants.KEY_TRIAL_USER) {
+			return ORM_user;
+		}
 		
 		return null;
 	}
@@ -33,10 +36,6 @@ public class Trial implements Serializable {
 	private void this_setOwner(Object owner, int key) {
 		if (key == orm.ORMConstants.KEY_TRIAL_LOCATION) {
 			this.location = (eaproject.dao.Location) owner;
-		}
-		
-		else if (key == orm.ORMConstants.KEY_TRIAL_USER) {
-			this.user = (eaproject.dao.User) owner;
 		}
 		
 		else if (key == orm.ORMConstants.KEY_TRIAL_TYPE) {
@@ -68,41 +67,36 @@ public class Trial implements Serializable {
 		
 	};
 	
-	@Column(name="TrialId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_TRIAL_TRIALID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_TRIALID_GENERATOR", strategy="native")	
-	private int TrialId;
+	@GeneratedValue(generator="EAPROJECT_DAO_TRIAL_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.State.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="StateStateId", referencedColumnName="StateId", nullable=false) }, foreignKey=@ForeignKey(name="Changes"))	
+	@JoinColumns(value={ @JoinColumn(name="StateStateId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Changes"))	
 	private eaproject.dao.State state;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="CompetitionId", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
+	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
 	private eaproject.dao.Competition competition;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Grade.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="GradeGradeId", referencedColumnName="GradeId", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
+	@JoinColumns(value={ @JoinColumn(name="GradeGradeId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
 	private eaproject.dao.Grade grade;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Type.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TypeTypeId", referencedColumnName="TypeId", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
+	@JoinColumns(value={ @JoinColumn(name="TypeTypeId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
 	private eaproject.dao.Type type;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Location.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="LocationLocationId", referencedColumnName="LocationId", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
+	@JoinColumns(value={ @JoinColumn(name="LocationLocationId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
 	private eaproject.dao.Location location;
-	
-	@ManyToOne(targetEntity=eaproject.dao.User.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="UserUserId", referencedColumnName="UserId", nullable=false) }, foreignKey=@ForeignKey(name="Participates"))	
-	private eaproject.dao.User user;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -130,16 +124,21 @@ public class Trial implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_result = new java.util.HashSet();
 	
-	private void setTrialId(int value) {
-		this.TrialId = value;
+	@ManyToMany(mappedBy="ORM_trial", targetEntity=eaproject.dao.User.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	private java.util.Set ORM_user = new java.util.HashSet();
+	
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getTrialId() {
-		return TrialId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getTrialId();
+		return getId();
 	}
 	
 	public void setName(String value) {
@@ -199,26 +198,10 @@ public class Trial implements Serializable {
 	}
 	
 	public void setLocation(eaproject.dao.Location value) {
-		if (location != null) {
-			location.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
-	}
-	
-	public eaproject.dao.Location getLocation() {
-		return location;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Location(eaproject.dao.Location value) {
 		this.location = value;
 	}
 	
-	private eaproject.dao.Location getORM_Location() {
+	public eaproject.dao.Location getLocation() {
 		return location;
 	}
 	
@@ -233,51 +216,22 @@ public class Trial implements Serializable {
 	@Transient	
 	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
-	public void setUser(eaproject.dao.User value) {
-		if (user != null) {
-			user.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
+	private void setORM_User(java.util.Set value) {
+		this.ORM_user = value;
 	}
 	
-	public eaproject.dao.User getUser() {
-		return user;
+	private java.util.Set getORM_User() {
+		return ORM_user;
 	}
 	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_User(eaproject.dao.User value) {
-		this.user = value;
-	}
-	
-	private eaproject.dao.User getORM_User() {
-		return user;
-	}
+	@Transient	
+	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public void setType(eaproject.dao.Type value) {
-		if (type != null) {
-			type.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
-	}
-	
-	public eaproject.dao.Type getType() {
-		return type;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Type(eaproject.dao.Type value) {
 		this.type = value;
 	}
 	
-	private eaproject.dao.Type getORM_Type() {
+	public eaproject.dao.Type getType() {
 		return type;
 	}
 	
@@ -330,31 +284,15 @@ public class Trial implements Serializable {
 	}
 	
 	public void setState(eaproject.dao.State value) {
-		if (state != null) {
-			state.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
+		this.state = value;
 	}
 	
 	public eaproject.dao.State getState() {
 		return state;
 	}
 	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_State(eaproject.dao.State value) {
-		this.state = value;
-	}
-	
-	private eaproject.dao.State getORM_State() {
-		return state;
-	}
-	
 	public String toString() {
-		return String.valueOf(getTrialId());
+		return String.valueOf(getId());
 	}
 	
 }

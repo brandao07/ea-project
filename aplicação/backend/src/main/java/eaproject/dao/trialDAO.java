@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class TrialDAO {
-	public static Trial loadTrialByORMID(int TrialId) throws PersistentException {
+	public static Trial loadTrialByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadTrialByORMID(session, TrialId);
+			return loadTrialByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(int TrialId) throws PersistentException {
+	public static Trial getTrialByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getTrialByORMID(session, TrialId);
+			return getTrialByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial loadTrialByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadTrialByORMID(session, TrialId, lockMode);
+			return loadTrialByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial getTrialByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getTrialByORMID(session, TrialId, lockMode);
+			return getTrialByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(PersistentSession session, int TrialId) throws PersistentException {
+	public static Trial loadTrialByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(TrialId));
+			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(PersistentSession session, int TrialId) throws PersistentException {
+	public static Trial getTrialByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(TrialId));
+			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(PersistentSession session, int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial loadTrialByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(TrialId), lockMode);
+			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(PersistentSession session, int TrialId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial getTrialByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(TrialId), lockMode);
+			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -323,10 +323,6 @@ public class TrialDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.Trial trial)throws PersistentException {
 		try {
-			if (trial.getState() != null) {
-				trial.getState().trial.remove(trial);
-			}
-			
 			if (trial.getCompetition() != null) {
 				trial.getCompetition().trial.remove(trial);
 			}
@@ -335,21 +331,13 @@ public class TrialDAO {
 				trial.getGrade().trial.remove(trial);
 			}
 			
-			if (trial.getType() != null) {
-				trial.getType().trial.remove(trial);
-			}
-			
-			if (trial.getLocation() != null) {
-				trial.getLocation().trial.remove(trial);
-			}
-			
-			if (trial.getUser() != null) {
-				trial.getUser().trial.remove(trial);
-			}
-			
 			eaproject.dao.Result[] lResults = trial.result.toArray();
 			for(int i = 0; i < lResults.length; i++) {
 				lResults[i].setTrial(null);
+			}
+			eaproject.dao.User[] lUsers = trial.user.toArray();
+			for(int i = 0; i < lUsers.length; i++) {
+				lUsers[i].trial.remove(trial);
 			}
 			return delete(trial);
 		}
@@ -361,10 +349,6 @@ public class TrialDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.Trial trial, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if (trial.getState() != null) {
-				trial.getState().trial.remove(trial);
-			}
-			
 			if (trial.getCompetition() != null) {
 				trial.getCompetition().trial.remove(trial);
 			}
@@ -373,21 +357,13 @@ public class TrialDAO {
 				trial.getGrade().trial.remove(trial);
 			}
 			
-			if (trial.getType() != null) {
-				trial.getType().trial.remove(trial);
-			}
-			
-			if (trial.getLocation() != null) {
-				trial.getLocation().trial.remove(trial);
-			}
-			
-			if (trial.getUser() != null) {
-				trial.getUser().trial.remove(trial);
-			}
-			
 			eaproject.dao.Result[] lResults = trial.result.toArray();
 			for(int i = 0; i < lResults.length; i++) {
 				lResults[i].setTrial(null);
+			}
+			eaproject.dao.User[] lUsers = trial.user.toArray();
+			for(int i = 0; i < lUsers.length; i++) {
+				lUsers[i].trial.remove(trial);
 			}
 			try {
 				session.delete(trial);

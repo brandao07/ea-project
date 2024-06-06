@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression CompetitionId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final TimestampExpression StartDate;
 	public final TimestampExpression EndDate;
@@ -30,7 +30,7 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public CompetitionDetachedCriteria() {
 		super(eaproject.dao.Competition.class, eaproject.dao.CompetitionCriteria.class);
-		CompetitionId = new IntegerExpression("CompetitionId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());
@@ -42,7 +42,7 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public CompetitionDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.CompetitionCriteria.class);
-		CompetitionId = new IntegerExpression("CompetitionId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());

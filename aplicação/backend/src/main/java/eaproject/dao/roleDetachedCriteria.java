@@ -19,32 +19,25 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class RoleDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression RoleId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final StringExpression Description;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression user;
 	
 	public RoleDetachedCriteria() {
 		super(eaproject.dao.Role.class, eaproject.dao.RoleCriteria.class);
-		RoleId = new IntegerExpression("RoleId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Description = new StringExpression("Description", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
 	}
 	
 	public RoleDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.RoleCriteria.class);
-		RoleId = new IntegerExpression("RoleId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Description = new StringExpression("Description", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
-	}
-	
-	public UserDetachedCriteria createUserCriteria() {
-		return new UserDetachedCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Role uniqueRole(PersistentSession session) {

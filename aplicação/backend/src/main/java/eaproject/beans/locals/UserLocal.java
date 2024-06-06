@@ -2,6 +2,7 @@ package eaproject.beans.locals;
 
 import eaproject.input.*;
 import eaproject.output.*;
+import eaproject.input.*;
 
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;

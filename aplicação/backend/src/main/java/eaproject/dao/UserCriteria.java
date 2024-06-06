@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class UserCriteria extends AbstractORMCriteria {
-	public final IntegerExpression UserId;
+	public final IntegerExpression Id;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
 	public final IntegerExpression teamId;
@@ -38,10 +38,10 @@ public class UserCriteria extends AbstractORMCriteria {
 	
 	public UserCriteria(Criteria criteria) {
 		super(criteria);
-		UserId = new IntegerExpression("UserId", this);
-		roleId = new IntegerExpression("role.RoleId", this);
+		Id = new IntegerExpression("Id", this);
+		roleId = new IntegerExpression("role.Id", this);
 		role = new AssociationExpression("role", this);
-		teamId = new IntegerExpression("team.TeamId", this);
+		teamId = new IntegerExpression("team.Id", this);
 		team = new AssociationExpression("team", this);
 		Name = new StringExpression("Name", this);
 		Email = new StringExpression("Email", this);

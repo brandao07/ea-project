@@ -16,7 +16,7 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="grade")
 public class Grade implements Serializable {
 	public Grade() {
@@ -38,11 +38,11 @@ public class Grade implements Serializable {
 		
 	};
 	
-	@Column(name="GradeId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_GRADE_GRADEID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_GRADE_GRADEID_GENERATOR", strategy="native")	
-	private int GradeId;
+	@GeneratedValue(generator="EAPROJECT_DAO_GRADE_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_GRADE_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -76,16 +76,16 @@ public class Grade implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
-	private void setGradeId(int value) {
-		this.GradeId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getGradeId() {
-		return GradeId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getGradeId();
+		return getId();
 	}
 	
 	public void setName(String value) {
@@ -172,7 +172,7 @@ public class Grade implements Serializable {
 	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_GRADE_TRIAL, orm.ORMConstants.KEY_TRIAL_GRADE, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
-		return String.valueOf(getGradeId());
+		return String.valueOf(getId());
 	}
 	
 }

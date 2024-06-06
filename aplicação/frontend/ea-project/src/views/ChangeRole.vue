@@ -6,7 +6,7 @@
                     <div class="form-group mb-1">
                         <label for="user" class="mb-2">User</label>
                         <select class="form-control" id="user" v-model="updateUserRoleInput.userId" required>
-                            <option v-for="user in getUsersOutput.usersList" :key="user.email" :value="user.userId">
+                            <option v-for="user in getUsersOutput.usersList" :key="user.email" :value="user.id">
                                 {{ user.email }}
                             </option>
                         </select>
@@ -14,7 +14,7 @@
                     <div class="form-group mb-1">
                         <label for="role" class="mb-2">Role</label>
                         <select class="form-control" id="role" v-model="updateUserRoleInput.roleId" required>
-                            <option v-for="role in getRolesOutput.rolesList" :key="role.name" :value="role.roleId">
+                            <option v-for="role in getRolesOutput.rolesList" :key="role.name" :value="role.id">
                                 {{ role.name }}
                             </option>
                         </select>

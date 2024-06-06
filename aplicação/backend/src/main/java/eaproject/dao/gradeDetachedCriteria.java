@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression GradeId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
@@ -33,7 +33,7 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public GradeDetachedCriteria() {
 		super(eaproject.dao.Grade.class, eaproject.dao.GradeCriteria.class);
-		GradeId = new IntegerExpression("GradeId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
@@ -48,7 +48,7 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public GradeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.GradeCriteria.class);
-		GradeId = new IntegerExpression("GradeId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());

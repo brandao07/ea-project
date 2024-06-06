@@ -16,7 +16,7 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="result")
 public class Result implements Serializable {
 	public Result() {
@@ -36,15 +36,15 @@ public class Result implements Serializable {
 		
 	};
 	
-	@Column(name="ResultId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_RESULT_RESULTID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_RESULTID_GENERATOR", strategy="native")	
-	private int ResultId;
+	@GeneratedValue(generator="EAPROJECT_DAO_RESULT_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Trial.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TrialTrialId", referencedColumnName="TrialId", nullable=false) }, foreignKey=@ForeignKey(name="Publish"))	
+	@JoinColumns(value={ @JoinColumn(name="TrialTrialId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Publish"))	
 	private eaproject.dao.Trial trial;
 	
 	@Column(name="Position", nullable=false, length=10)	
@@ -62,16 +62,16 @@ public class Result implements Serializable {
 	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
-	private void setResultId(int value) {
-		this.ResultId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getResultId() {
-		return ResultId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getResultId();
+		return getId();
 	}
 	
 	public void setPosition(int value) {
@@ -139,7 +139,7 @@ public class Result implements Serializable {
 	}
 	
 	public String toString() {
-		return String.valueOf(getResultId());
+		return String.valueOf(getId());
 	}
 	
 }

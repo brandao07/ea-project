@@ -3,13 +3,13 @@ package eaproject.input;
 import java.io.Serializable;
 
 public class BasicUserInfoInput extends BaseInput implements Serializable {
-    private int userId;
+    private int id;
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 }

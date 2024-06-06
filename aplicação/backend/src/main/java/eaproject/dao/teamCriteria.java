@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class TeamCriteria extends AbstractORMCriteria {
-	public final IntegerExpression TeamId;
+	public final IntegerExpression Id;
 	public final IntegerExpression clubId;
 	public final AssociationExpression club;
 	public final StringExpression Name;
@@ -29,8 +29,8 @@ public class TeamCriteria extends AbstractORMCriteria {
 	
 	public TeamCriteria(Criteria criteria) {
 		super(criteria);
-		TeamId = new IntegerExpression("TeamId", this);
-		clubId = new IntegerExpression("club.ClubId", this);
+		Id = new IntegerExpression("Id", this);
+		clubId = new IntegerExpression("club.Id", this);
 		club = new AssociationExpression("club", this);
 		Name = new StringExpression("Name", this);
 		IsActive = new BooleanExpression("IsActive", this);

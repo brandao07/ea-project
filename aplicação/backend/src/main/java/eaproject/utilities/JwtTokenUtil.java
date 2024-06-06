@@ -66,7 +66,7 @@ public class JwtTokenUtil {
                 .setIssuer(ISSUER)
                 .setIssuedAt(now)
                 .setSubject(SUBJECT)
-                .claim("idUser", user.getUserId())
+                .claim("idUser", user.getId())
                 .claim("name", user.getName())
                 .claim("email", user.getEmail())
                 .claim("password", user.getPassword())

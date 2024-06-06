@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression TeamId;
+	public final IntegerExpression Id;
 	public final IntegerExpression clubId;
 	public final AssociationExpression club;
 	public final StringExpression Name;
@@ -29,8 +29,8 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public TeamDetachedCriteria() {
 		super(eaproject.dao.Team.class, eaproject.dao.TeamCriteria.class);
-		TeamId = new IntegerExpression("TeamId", this.getDetachedCriteria());
-		clubId = new IntegerExpression("club.ClubId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		clubId = new IntegerExpression("club.Id", this.getDetachedCriteria());
 		club = new AssociationExpression("club", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
@@ -40,8 +40,8 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public TeamDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.TeamCriteria.class);
-		TeamId = new IntegerExpression("TeamId", this.getDetachedCriteria());
-		clubId = new IntegerExpression("club.ClubId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		clubId = new IntegerExpression("club.Id", this.getDetachedCriteria());
 		club = new AssociationExpression("club", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());

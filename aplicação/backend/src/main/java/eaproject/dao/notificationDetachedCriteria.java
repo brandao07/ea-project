@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class NotificationDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression NotificationId;
+	public final IntegerExpression Id;
 	public final IntegerExpression competitionId;
 	public final AssociationExpression competition;
 	public final StringExpression MessageHeader;
@@ -29,8 +29,8 @@ public class NotificationDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public NotificationDetachedCriteria() {
 		super(eaproject.dao.Notification.class, eaproject.dao.NotificationCriteria.class);
-		NotificationId = new IntegerExpression("NotificationId", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.CompetitionId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
 		competition = new AssociationExpression("competition", this.getDetachedCriteria());
 		MessageHeader = new StringExpression("MessageHeader", this.getDetachedCriteria());
 		MessageBody = new StringExpression("MessageBody", this.getDetachedCriteria());
@@ -40,8 +40,8 @@ public class NotificationDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public NotificationDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.NotificationCriteria.class);
-		NotificationId = new IntegerExpression("NotificationId", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.CompetitionId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
 		competition = new AssociationExpression("competition", this.getDetachedCriteria());
 		MessageHeader = new StringExpression("MessageHeader", this.getDetachedCriteria());
 		MessageBody = new StringExpression("MessageBody", this.getDetachedCriteria());

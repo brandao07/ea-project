@@ -6,7 +6,6 @@ import eaproject.dao.Role;
 import eaproject.dao.RoleDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.GetRolesInput;
-import eaproject.output.BasicUserInfoOutput;
 import eaproject.output.GetRolesOutput;
 import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
@@ -19,7 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import java.util.Arrays;
-import java.util.Collections;
 
 @Stateless(name = "RoleEJB")
 @Local(UserLocal.class)

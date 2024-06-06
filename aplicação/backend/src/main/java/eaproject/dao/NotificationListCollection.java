@@ -15,12 +15,12 @@ package eaproject.dao;
 
 import org.orm.*;
 
-public class NotificationSetCollection extends org.orm.util.ORMSet {
-	public NotificationSetCollection(Object owner, org.orm.util.ORMAdapter adapter, int ownerKey, int targetKey, int collType) {
+public class NotificationListCollection extends org.orm.util.ORMList {
+	public NotificationListCollection(Object owner, org.orm.util.ORMAdapter adapter, int ownerKey, int targetKey, int collType) {
 		super(owner, adapter, ownerKey, targetKey, true, collType);
 	}
 	
-	public NotificationSetCollection(Object owner, org.orm.util.ORMAdapter adapter, int ownerKey, int collType) {
+	public NotificationListCollection(Object owner, org.orm.util.ORMAdapter adapter, int ownerKey, int collType) {
 		super(owner, adapter, ownerKey, -1, false, collType);
 	}
 	
@@ -33,7 +33,7 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Add the specified persistent object to ORMSet
+	 * Add the specified persistent object to ORMList
 	 * @param value the persistent object
 	 */
 	public void add(Notification value) {
@@ -43,7 +43,7 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Remove the specified persistent object from ORMSet
+	 * Remove the specified persistent object from ORMList
 	 * @param value the persistent object
 	 */
 	public void remove(Notification value) {
@@ -51,7 +51,7 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Return true if ORMSet contains the specified persistent object
+	 * Return true if ORMList contains the specified persistent object
 	 * @param value the persistent object
 	 * @return True if this contains the specified persistent object
 	 */
@@ -60,7 +60,7 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Return an array containing all of the persistent objects in ORMSet
+	 * Return an array containing all of the persistent objects in ORMList
 	 * @return The persistent objects array
 	 */
 	public Notification[] toArray() {
@@ -68,9 +68,9 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Return an sorted array containing all of the persistent objects in ORMSet
+	 * Return an sorted array containing all of the persistent objects in ORMList
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>NotificationId</li>
+	 * <li>Id</li>
 	 * <li>MessageHeader</li>
 	 * <li>MessageBody</li>
 	 * <li>MessageType</li>
@@ -83,9 +83,9 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	}
 	
 	/**
-	 * Return an sorted array containing all of the persistent objects in ORMSet
+	 * Return an sorted array containing all of the persistent objects in ORMList
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>NotificationId</li>
+	 * <li>Id</li>
 	 * <li>MessageHeader</li>
 	 * <li>MessageBody</li>
 	 * <li>MessageType</li>
@@ -96,6 +96,57 @@ public class NotificationSetCollection extends org.orm.util.ORMSet {
 	 */
 	public Notification[] toArray(String propertyName, boolean ascending) {
 		return (Notification[]) super.toArray(new Notification[size()], propertyName, ascending);
+	}
+	
+	/**
+	 * Return the persistent object at the specified position in ORMList.
+	 * @param index - The specified position
+	 * @return - The persistent object
+	 */
+	public Notification get(int index) {
+		return (Notification) super.getImpl(index);
+	}
+	
+	/**
+	 * Remove the persistent object at the specified position in ORMList.
+	 * @param index The specified position
+	 * @return Removed persistent object
+	 */
+	public Notification remove(int index) {
+		Notification value = get(index);
+		if (value != null) {
+			return (Notification) super.removeImpl(index, value._ormAdapter);
+		}
+		return null;
+	}
+	
+	/**
+	 * Insert the specified persistent object at the specified position in ORMList.
+	 * @param index The specified position
+	 * @param value The specified persistent object
+	 */
+	public void add(int index, Notification value) {
+		if (value != null) {
+			super.add(index, value, value._ormAdapter);
+		}
+	}
+	
+	/**
+	 * Find the specified position of specified persistent object ORMList.
+	 * @param value The persistent object
+	 */
+	public int indexOf(Notification value) {
+		return super.indexOf(value);
+	}
+	
+	/**
+	 * Replace the persistent object at the specified position in ORMList with the specified persistent object.
+	 * @param index The specified position
+	 * @param value The persistent object
+	 * @return Return replaced object
+	 */
+	public Notification set(int index, Notification value) {
+		return (Notification) super.set(index, value);
 	}
 	
 	protected PersistentManager getPersistentManager() throws PersistentException {

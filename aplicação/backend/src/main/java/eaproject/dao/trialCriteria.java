@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class TrialCriteria extends AbstractORMCriteria {
-	public final IntegerExpression TrialId;
+	public final IntegerExpression Id;
 	public final IntegerExpression stateId;
 	public final AssociationExpression state;
 	public final IntegerExpression competitionId;
@@ -30,8 +30,6 @@ public class TrialCriteria extends AbstractORMCriteria {
 	public final AssociationExpression type;
 	public final IntegerExpression locationId;
 	public final AssociationExpression location;
-	public final IntegerExpression userId;
-	public final AssociationExpression user;
 	public final StringExpression Name;
 	public final TimestampExpression StartDate;
 	public final DoubleExpression Distance;
@@ -40,22 +38,21 @@ public class TrialCriteria extends AbstractORMCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression result;
+	public final CollectionExpression user;
 	
 	public TrialCriteria(Criteria criteria) {
 		super(criteria);
-		TrialId = new IntegerExpression("TrialId", this);
-		stateId = new IntegerExpression("state.StateId", this);
+		Id = new IntegerExpression("Id", this);
+		stateId = new IntegerExpression("state.Id", this);
 		state = new AssociationExpression("state", this);
-		competitionId = new IntegerExpression("competition.CompetitionId", this);
+		competitionId = new IntegerExpression("competition.Id", this);
 		competition = new AssociationExpression("competition", this);
-		gradeId = new IntegerExpression("grade.GradeId", this);
+		gradeId = new IntegerExpression("grade.Id", this);
 		grade = new AssociationExpression("grade", this);
-		typeId = new IntegerExpression("type.TypeId", this);
+		typeId = new IntegerExpression("type.Id", this);
 		type = new AssociationExpression("type", this);
-		locationId = new IntegerExpression("location.LocationId", this);
+		locationId = new IntegerExpression("location.Id", this);
 		location = new AssociationExpression("location", this);
-		userId = new IntegerExpression("user.UserId", this);
-		user = new AssociationExpression("user", this);
 		Name = new StringExpression("Name", this);
 		StartDate = new TimestampExpression("StartDate", this);
 		Distance = new DoubleExpression("Distance", this);
@@ -64,6 +61,7 @@ public class TrialCriteria extends AbstractORMCriteria {
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 		result = new CollectionExpression("ORM_result", this);
+		user = new CollectionExpression("ORM_user", this);
 	}
 	
 	public TrialCriteria(PersistentSession session) {
@@ -94,12 +92,12 @@ public class TrialCriteria extends AbstractORMCriteria {
 		return new LocationCriteria(createCriteria("location"));
 	}
 	
-	public UserCriteria createUserCriteria() {
-		return new UserCriteria(createCriteria("user"));
-	}
-	
 	public ResultCriteria createResultCriteria() {
 		return new ResultCriteria(createCriteria("ORM_result"));
+	}
+	
+	public UserCriteria createUserCriteria() {
+		return new UserCriteria(createCriteria("ORM_user"));
 	}
 	
 	public Trial uniqueTrial() {

@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class TypeDAO {
-	public static Type loadTypeByORMID(int TypeId) throws PersistentException {
+	public static Type loadTypeByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadTypeByORMID(session, TypeId);
+			return loadTypeByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type getTypeByORMID(int TypeId) throws PersistentException {
+	public static Type getTypeByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getTypeByORMID(session, TypeId);
+			return getTypeByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type loadTypeByORMID(int TypeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Type loadTypeByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadTypeByORMID(session, TypeId, lockMode);
+			return loadTypeByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type getTypeByORMID(int TypeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Type getTypeByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getTypeByORMID(session, TypeId, lockMode);
+			return getTypeByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type loadTypeByORMID(PersistentSession session, int TypeId) throws PersistentException {
+	public static Type loadTypeByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Type) session.load(eaproject.dao.Type.class, Integer.valueOf(TypeId));
+			return (Type) session.load(eaproject.dao.Type.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type getTypeByORMID(PersistentSession session, int TypeId) throws PersistentException {
+	public static Type getTypeByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Type) session.get(eaproject.dao.Type.class, Integer.valueOf(TypeId));
+			return (Type) session.get(eaproject.dao.Type.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type loadTypeByORMID(PersistentSession session, int TypeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Type loadTypeByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Type) session.load(eaproject.dao.Type.class, Integer.valueOf(TypeId), lockMode);
+			return (Type) session.load(eaproject.dao.Type.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class TypeDAO {
 		}
 	}
 	
-	public static Type getTypeByORMID(PersistentSession session, int TypeId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Type getTypeByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Type) session.get(eaproject.dao.Type.class, Integer.valueOf(TypeId), lockMode);
+			return (Type) session.get(eaproject.dao.Type.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -316,39 +316,6 @@ public class TypeDAO {
 			return true;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Type type)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = type.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setType(null);
-			}
-			return delete(type);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Type type, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = type.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setType(null);
-			}
-			try {
-				session.delete(type);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
 			e.printStackTrace();
 			throw new PersistentException(e);
 		}

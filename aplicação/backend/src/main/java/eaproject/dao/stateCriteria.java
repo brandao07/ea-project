@@ -19,17 +19,15 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class StateCriteria extends AbstractORMCriteria {
-	public final IntegerExpression StateId;
-	public final StringExpression Nome;
+	public final IntegerExpression Id;
+	public final StringExpression Name;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public StateCriteria(Criteria criteria) {
 		super(criteria);
-		StateId = new IntegerExpression("StateId", this);
-		Nome = new StringExpression("Nome", this);
+		Id = new IntegerExpression("Id", this);
+		Name = new StringExpression("Name", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public StateCriteria(PersistentSession session) {
@@ -38,10 +36,6 @@ public class StateCriteria extends AbstractORMCriteria {
 	
 	public StateCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public State uniqueState() {

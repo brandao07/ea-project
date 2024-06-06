@@ -70,7 +70,7 @@ public class TrialSetCollection extends org.orm.util.ORMSet {
 	/**
 	 * Return an sorted array containing all of the persistent objects in ORMSet
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>TrialId</li>
+	 * <li>Id</li>
 	 * <li>Name</li>
 	 * <li>StartDate</li>
 	 * <li>Distance</li>
@@ -88,7 +88,7 @@ public class TrialSetCollection extends org.orm.util.ORMSet {
 	/**
 	 * Return an sorted array containing all of the persistent objects in ORMSet
 	 * @param propertyName Name of the property for sorting:<ul>
-	 * <li>TrialId</li>
+	 * <li>Id</li>
 	 * <li>Name</li>
 	 * <li>StartDate</li>
 	 * <li>Distance</li>

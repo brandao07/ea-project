@@ -2,7 +2,7 @@ import BaseInput from "./BaseInput";
 
 export default class UpdateUserInfoInput extends BaseInput {
   constructor(
-    userId = 0,
+    id = 0,
     name = "",
     email = "",
     gender = "",
@@ -11,7 +11,7 @@ export default class UpdateUserInfoInput extends BaseInput {
     weight = 0.0
   ) {
     super();
-    this.userId = userId;
+    this.id = id;
     this.name = name;
     this.email = email;
     this.gender = gender;

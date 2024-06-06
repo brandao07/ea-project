@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression UserId;
+	public final IntegerExpression Id;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
 	public final IntegerExpression teamId;
@@ -38,10 +38,10 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public UserDetachedCriteria() {
 		super(eaproject.dao.User.class, eaproject.dao.UserCriteria.class);
-		UserId = new IntegerExpression("UserId", this.getDetachedCriteria());
-		roleId = new IntegerExpression("role.RoleId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
-		teamId = new IntegerExpression("team.TeamId", this.getDetachedCriteria());
+		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
 		team = new AssociationExpression("team", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Email = new StringExpression("Email", this.getDetachedCriteria());
@@ -58,10 +58,10 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public UserDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.UserCriteria.class);
-		UserId = new IntegerExpression("UserId", this.getDetachedCriteria());
-		roleId = new IntegerExpression("role.RoleId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
-		teamId = new IntegerExpression("team.TeamId", this.getDetachedCriteria());
+		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
 		team = new AssociationExpression("team", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Email = new StringExpression("Email", this.getDetachedCriteria());

@@ -16,33 +16,17 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="type")
 public class Type implements Serializable {
 	public Type() {
 	}
 	
-	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_TYPE_TRIAL) {
-			return ORM_trial;
-		}
-		
-		return null;
-	}
-	
-	@Transient	
-	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public java.util.Set getSet(int key) {
-			return this_getSet(key);
-		}
-		
-	};
-	
-	@Column(name="TypeId", nullable=false, length=10)	
+	@Column(name="id", nullable=false, length=10)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_TYPE_TYPEID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TYPE_TYPEID_GENERATOR", strategy="native")	
-	private int TypeId;
+	@GeneratedValue(generator="EAPROJECT_DAO_TYPE_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TYPE_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -53,21 +37,16 @@ public class Type implements Serializable {
 	@Column(name="CreationDate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
-	@OneToMany(mappedBy="type", targetEntity=eaproject.dao.Trial.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_trial = new java.util.HashSet();
-	
-	private void setTypeId(int value) {
-		this.TypeId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getTypeId() {
-		return TypeId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getTypeId();
+		return getId();
 	}
 	
 	public void setName(String value) {
@@ -94,19 +73,8 @@ public class Type implements Serializable {
 		return CreationDate;
 	}
 	
-	private void setORM_Trial(java.util.Set value) {
-		this.ORM_trial = value;
-	}
-	
-	private java.util.Set getORM_Trial() {
-		return ORM_trial;
-	}
-	
-	@Transient	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TYPE_TRIAL, orm.ORMConstants.KEY_TRIAL_TYPE, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
-	
 	public String toString() {
-		return String.valueOf(getTypeId());
+		return String.valueOf(getId());
 	}
 	
 }

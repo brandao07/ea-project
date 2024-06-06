@@ -16,7 +16,7 @@ package eaproject.dao;
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
+@org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="`user`")
 public class User implements Serializable {
 	public User() {
@@ -52,20 +52,20 @@ public class User implements Serializable {
 		
 	};
 	
-	@Column(name="UserId", nullable=false)	
+	@Column(name="id", nullable=false)	
 	@Id	
-	@GeneratedValue(generator="EAPROJECT_DAO_USER_USERID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_USERID_GENERATOR", strategy="native")	
-	private int UserId;
+	@GeneratedValue(generator="EAPROJECT_DAO_USER_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_ID_GENERATOR", strategy="native")	
+	private int Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Role.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="RoleRoleId", referencedColumnName="RoleId", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
+	@JoinColumns(value={ @JoinColumn(name="RoleRoleId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
 	private eaproject.dao.Role role;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Team.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TeamTeamId", referencedColumnName="TeamId") }, foreignKey=@ForeignKey(name="Federated"))	
+	@JoinColumns(value={ @JoinColumn(name="TeamTeamId", referencedColumnName="id") }, foreignKey=@ForeignKey(name="Federated"))	
 	private eaproject.dao.Team team;
 	
 	@Column(name="Name", nullable=true, length=255)	
@@ -98,21 +98,22 @@ public class User implements Serializable {
 	@Column(name="PhotographyPath", nullable=true, length=255)	
 	private String PhotographyPath;
 	
-	@OneToMany(mappedBy="user", targetEntity=eaproject.dao.Trial.class)	
+	@ManyToMany(targetEntity=eaproject.dao.Trial.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinTable(name="trial_user", joinColumns={ @JoinColumn(name="userid") }, inverseJoinColumns={ @JoinColumn(name="trialid") })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
-	private void setUserId(int value) {
-		this.UserId = value;
+	private void setId(int value) {
+		this.Id = value;
 	}
 	
-	public int getUserId() {
-		return UserId;
+	public int getId() {
+		return Id;
 	}
 	
 	public int getORMID() {
-		return getUserId();
+		return getId();
 	}
 	
 	public void setName(String value) {
@@ -196,26 +197,10 @@ public class User implements Serializable {
 	}
 	
 	public void setRole(eaproject.dao.Role value) {
-		if (role != null) {
-			role.user.remove(this);
-		}
-		if (value != null) {
-			value.user.add(this);
-		}
-	}
-	
-	public eaproject.dao.Role getRole() {
-		return role;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Role(eaproject.dao.Role value) {
 		this.role = value;
 	}
 	
-	private eaproject.dao.Role getORM_Role() {
+	public eaproject.dao.Role getRole() {
 		return role;
 	}
 	
@@ -228,7 +213,7 @@ public class User implements Serializable {
 	}
 	
 	@Transient	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public void setTeam(eaproject.dao.Team value) {
 		if (team != null) {
@@ -255,7 +240,7 @@ public class User implements Serializable {
 	}
 	
 	public String toString() {
-		return String.valueOf(getUserId());
+		return String.valueOf(getId());
 	}
 	
 }

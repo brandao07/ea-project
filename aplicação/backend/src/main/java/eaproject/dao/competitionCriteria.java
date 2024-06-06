@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class CompetitionCriteria extends AbstractORMCriteria {
-	public final IntegerExpression CompetitionId;
+	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final TimestampExpression StartDate;
 	public final TimestampExpression EndDate;
@@ -30,7 +30,7 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 	
 	public CompetitionCriteria(Criteria criteria) {
 		super(criteria);
-		CompetitionId = new IntegerExpression("CompetitionId", this);
+		Id = new IntegerExpression("Id", this);
 		Name = new StringExpression("Name", this);
 		StartDate = new TimestampExpression("StartDate", this);
 		EndDate = new TimestampExpression("EndDate", this);

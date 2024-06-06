@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class UserDAO {
-	public static User loadUserByORMID(int UserId) throws PersistentException {
+	public static User loadUserByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadUserByORMID(session, UserId);
+			return loadUserByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(int UserId) throws PersistentException {
+	public static User getUserByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getUserByORMID(session, UserId);
+			return getUserByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User loadUserByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadUserByORMID(session, UserId, lockMode);
+			return loadUserByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User getUserByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getUserByORMID(session, UserId, lockMode);
+			return getUserByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(PersistentSession session, int UserId) throws PersistentException {
+	public static User loadUserByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(UserId));
+			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(PersistentSession session, int UserId) throws PersistentException {
+	public static User getUserByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(UserId));
+			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(PersistentSession session, int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User loadUserByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(UserId), lockMode);
+			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(PersistentSession session, int UserId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User getUserByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(UserId), lockMode);
+			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -323,17 +323,13 @@ public class UserDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.User user)throws PersistentException {
 		try {
-			if (user.getRole() != null) {
-				user.getRole().user.remove(user);
-			}
-			
 			if (user.getTeam() != null) {
 				user.getTeam().user.remove(user);
 			}
 			
 			eaproject.dao.Trial[] lTrials = user.trial.toArray();
 			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setUser(null);
+				lTrials[i].user.remove(user);
 			}
 			return delete(user);
 		}
@@ -345,17 +341,13 @@ public class UserDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.User user, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if (user.getRole() != null) {
-				user.getRole().user.remove(user);
-			}
-			
 			if (user.getTeam() != null) {
 				user.getTeam().user.remove(user);
 			}
 			
 			eaproject.dao.Trial[] lTrials = user.trial.toArray();
 			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setUser(null);
+				lTrials[i].user.remove(user);
 			}
 			try {
 				session.delete(user);

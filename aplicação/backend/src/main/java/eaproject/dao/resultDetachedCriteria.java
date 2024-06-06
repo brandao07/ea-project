@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression ResultId;
+	public final IntegerExpression Id;
 	public final IntegerExpression trialId;
 	public final AssociationExpression trial;
 	public final IntegerExpression Position;
@@ -30,8 +30,8 @@ public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public ResultDetachedCriteria() {
 		super(eaproject.dao.Result.class, eaproject.dao.ResultCriteria.class);
-		ResultId = new IntegerExpression("ResultId", this.getDetachedCriteria());
-		trialId = new IntegerExpression("trial.TrialId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		trialId = new IntegerExpression("trial.Id", this.getDetachedCriteria());
 		trial = new AssociationExpression("trial", this.getDetachedCriteria());
 		Position = new IntegerExpression("Position", this.getDetachedCriteria());
 		Time = new TimestampExpression("Time", this.getDetachedCriteria());
@@ -42,8 +42,8 @@ public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public ResultDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.ResultCriteria.class);
-		ResultId = new IntegerExpression("ResultId", this.getDetachedCriteria());
-		trialId = new IntegerExpression("trial.TrialId", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		trialId = new IntegerExpression("trial.Id", this.getDetachedCriteria());
 		trial = new AssociationExpression("trial", this.getDetachedCriteria());
 		Position = new IntegerExpression("Position", this.getDetachedCriteria());
 		Time = new TimestampExpression("Time", this.getDetachedCriteria());

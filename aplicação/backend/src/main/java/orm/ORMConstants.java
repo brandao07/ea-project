@@ -14,23 +14,15 @@
 package orm;
 
 public interface ORMConstants extends org.orm.util.ORMBaseConstants {
-	final int KEY_CLUB_TEAM = 2060253222;
-	
 	final int KEY_COMPETITION_NOTIFICATION = -654339189;
 	
 	final int KEY_COMPETITION_TRIAL = -1782335370;
 	
 	final int KEY_GRADE_TRIAL = 1569676430;
 	
-	final int KEY_LOCATION_TRIAL = -861961684;
-	
 	final int KEY_NOTIFICATION_COMPETITION = 1671795851;
 	
 	final int KEY_RESULT_TRIAL = 694961300;
-	
-	final int KEY_ROLE_USER = -1954931244;
-	
-	final int KEY_STATE_TRIAL = -1091736120;
 	
 	final int KEY_TEAM_CLUB = 1827745080;
 	
@@ -49,8 +41,6 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	final int KEY_TRIAL_TYPE = -1830350109;
 	
 	final int KEY_TRIAL_USER = -1830326412;
-	
-	final int KEY_TYPE_TRIAL = 914295281;
 	
 	final int KEY_USER_ROLE = -1951525814;
 	

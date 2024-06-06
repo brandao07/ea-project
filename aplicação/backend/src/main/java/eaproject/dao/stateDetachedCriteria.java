@@ -19,29 +19,22 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class StateDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression StateId;
-	public final StringExpression Nome;
+	public final IntegerExpression Id;
+	public final StringExpression Name;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public StateDetachedCriteria() {
 		super(eaproject.dao.State.class, eaproject.dao.StateCriteria.class);
-		StateId = new IntegerExpression("StateId", this.getDetachedCriteria());
-		Nome = new StringExpression("Nome", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		Name = new StringExpression("Name", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public StateDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.StateCriteria.class);
-		StateId = new IntegerExpression("StateId", this.getDetachedCriteria());
-		Nome = new StringExpression("Nome", this.getDetachedCriteria());
+		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		Name = new StringExpression("Name", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public State uniqueState(PersistentSession session) {

@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class ClubDAO {
-	public static Club loadClubByORMID(int ClubId) throws PersistentException {
+	public static Club loadClubByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadClubByORMID(session, ClubId);
+			return loadClubByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club getClubByORMID(int ClubId) throws PersistentException {
+	public static Club getClubByORMID(int Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getClubByORMID(session, ClubId);
+			return getClubByORMID(session, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club loadClubByORMID(int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Club loadClubByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return loadClubByORMID(session, ClubId, lockMode);
+			return loadClubByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club getClubByORMID(int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Club getClubByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
-			return getClubByORMID(session, ClubId, lockMode);
+			return getClubByORMID(session, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club loadClubByORMID(PersistentSession session, int ClubId) throws PersistentException {
+	public static Club loadClubByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Club) session.load(eaproject.dao.Club.class, Integer.valueOf(ClubId));
+			return (Club) session.load(eaproject.dao.Club.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club getClubByORMID(PersistentSession session, int ClubId) throws PersistentException {
+	public static Club getClubByORMID(PersistentSession session, int Id) throws PersistentException {
 		try {
-			return (Club) session.get(eaproject.dao.Club.class, Integer.valueOf(ClubId));
+			return (Club) session.get(eaproject.dao.Club.class, Integer.valueOf(Id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club loadClubByORMID(PersistentSession session, int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Club loadClubByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Club) session.load(eaproject.dao.Club.class, Integer.valueOf(ClubId), lockMode);
+			return (Club) session.load(eaproject.dao.Club.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class ClubDAO {
 		}
 	}
 	
-	public static Club getClubByORMID(PersistentSession session, int ClubId, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Club getClubByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Club) session.get(eaproject.dao.Club.class, Integer.valueOf(ClubId), lockMode);
+			return (Club) session.get(eaproject.dao.Club.class, Integer.valueOf(Id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -316,39 +316,6 @@ public class ClubDAO {
 			return true;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Club club)throws PersistentException {
-		try {
-			eaproject.dao.Team[] lTeams = club.team.toArray();
-			for(int i = 0; i < lTeams.length; i++) {
-				lTeams[i].setClub(null);
-			}
-			return delete(club);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Club club, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.Team[] lTeams = club.team.toArray();
-			for(int i = 0; i < lTeams.length; i++) {
-				lTeams[i].setClub(null);
-			}
-			try {
-				session.delete(club);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
 			e.printStackTrace();
 			throw new PersistentException(e);
 		}
