@@ -184,7 +184,9 @@ Temporary Items
 /.vs
 
 # Custom
-/vp-codigo/**/.sql
-/vp-codigo/**/.java
-/vp-codigo/**/.xml
-/vp-codigo/**/.jar
+vp-codigo/*.sql
+vp-codigo/lib/*.jar
+vp-codigo/src/eaproject/dao/*.java
+vp-codigo/src/ormmapping/*.*.xml
+vp-codigo/src/orm/*.java
+vp-codigo/src/ormsamples/*.java
