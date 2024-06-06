@@ -182,3 +182,6 @@ Temporary Items
 /backend/target
 
 /.vs
+
+# Custom
+/vp-codigo/
