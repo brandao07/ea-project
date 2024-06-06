@@ -35,13 +35,9 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
             return id;
         }
 
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
+        public void setId(int id) { this.id = id; }
+        
+        public String getName() { return name; }
 
         public void setName(String name) {
             this.name = name;
@@ -75,7 +71,7 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
             return height;
         }
 
-        public void setHeight(float height) {
+        public void setHeight(double height) {
             this.height = height;
         }
 
@@ -83,7 +79,7 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
             return weight;
         }
 
-        public void setWeight(float weight) {
+        public void setWeight(double weight) {
             this.weight = weight;
         }
 
