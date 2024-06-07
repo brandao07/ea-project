@@ -8,6 +8,10 @@ public class UserRegisterOutput extends BaseOutput implements Serializable {
     @JsonProperty
     public boolean registrationSuccessful;
 
+    public boolean isRegistrationSuccessful() {
+        return registrationSuccessful;
+    }
+
     public void setRegistrationSuccessful(boolean registrationSuccessful) {
         this.registrationSuccessful = registrationSuccessful;
     }
