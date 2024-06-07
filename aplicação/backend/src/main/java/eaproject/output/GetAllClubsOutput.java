@@ -24,7 +24,7 @@ public class GetAllClubsOutput extends BaseOutput implements Serializable {
         private boolean isActive;
         private Timestamp creationDate;
 
-        // Getters e setters
+        // Getters and setters
         public int getId() {
             return id;
         }

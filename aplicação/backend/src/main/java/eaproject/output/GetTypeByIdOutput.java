@@ -23,7 +23,7 @@ public class GetTypeByIdOutput extends BaseOutput implements Serializable {
         private int numberOfPersons;
         private Timestamp creationDate;
 
-        // Getters e setters
+        // Getters and setters
         public int getId() {
             return id;
         }

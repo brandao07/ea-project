@@ -27,7 +27,7 @@ public class GetLocationByIdOutput extends BaseOutput implements Serializable {
         private String postalCode;
         private Timestamp creationDate;
 
-        // Getters e setters
+        // Getters and setters
         public int getId() {
             return id;
         }

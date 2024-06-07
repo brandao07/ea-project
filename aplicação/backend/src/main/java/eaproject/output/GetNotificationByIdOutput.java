@@ -25,7 +25,7 @@ public class GetNotificationByIdOutput extends BaseOutput implements Serializabl
         private String photographyPath;
         private Timestamp creationDate;
 
-        // Getters e setters
+        // Getters and setters
         public int getId() {
             return id;
         }

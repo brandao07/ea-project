@@ -2,13 +2,16 @@ package eaproject.input;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
-public class UpdateClubInput extends BaseInput implements Serializable {
+public class UpdateTeamInput extends BaseInput implements Serializable {
 
     private int id;
     private String name;
     private boolean isActive;
     private Timestamp creationDate;
+    private int clubId; // ID do Club para abordagem LAZY
+    private List<Integer> userIds; // IDs dos usuários para abordagem LAZY
 
     // Getters and setters
     public int getId() {
@@ -41,5 +44,21 @@ public class UpdateClubInput extends BaseInput implements Serializable {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public int getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(int clubId) {
+        this.clubId = clubId;
+    }
+
+    public List<Integer> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<Integer> userIds) {
+        this.userIds = userIds;
     }
 }

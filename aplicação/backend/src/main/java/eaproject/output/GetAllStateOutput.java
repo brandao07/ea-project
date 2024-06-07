@@ -23,7 +23,7 @@ public class GetAllStateOutput extends BaseOutput implements Serializable {
         private String name;
         private Timestamp creationDate;
 
-        // Getters e setters
+        // Getters and setters
         public int getId() {
             return id;
         }

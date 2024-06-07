@@ -3,11 +3,13 @@ package eaproject.input;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UpdateTypeInput extends BaseInput implements Serializable {
+public class UpdateGradeInput extends BaseInput implements Serializable {
 
     private int id;
     private String name;
-    private int numberOfPersons;
+    private int minAge;
+    private int maxAge;
+    private String gender;
     private Timestamp creationDate;
 
     // Getters and setters
@@ -27,12 +29,28 @@ public class UpdateTypeInput extends BaseInput implements Serializable {
         this.name = name;
     }
 
-    public int getNumberOfPersons() {
-        return numberOfPersons;
+    public int getMinAge() {
+        return minAge;
     }
 
-    public void setNumberOfPersons(int numberOfPersons) {
-        this.numberOfPersons = numberOfPersons;
+    public void setMinAge(int minAge) {
+        this.minAge = minAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Timestamp getCreationDate() {

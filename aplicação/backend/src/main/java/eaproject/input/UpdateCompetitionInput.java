@@ -2,13 +2,17 @@ package eaproject.input;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
-public class UpdateClubInput extends BaseInput implements Serializable {
+public class UpdateCompetitionInput extends BaseInput implements Serializable {
 
     private int id;
     private String name;
+    private Timestamp startDate;
+    private Timestamp endDate;
     private boolean isActive;
     private Timestamp creationDate;
+    private List<Integer> notificationIds; // LAZY
 
     // Getters and setters
     public int getId() {
@@ -27,6 +31,22 @@ public class UpdateClubInput extends BaseInput implements Serializable {
         this.name = name;
     }
 
+    public Timestamp getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
+    }
+
+    public Timestamp getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
+    }
+
     public boolean getIsActive() {
         return isActive;
     }
@@ -41,5 +61,13 @@ public class UpdateClubInput extends BaseInput implements Serializable {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public List<Integer> getNotificationIds() {
+        return notificationIds;
+    }
+
+    public void setNotificationIds(List<Integer> notificationIds) {
+        this.notificationIds = notificationIds;
     }
 }
