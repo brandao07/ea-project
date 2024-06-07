@@ -1,4 +1,5 @@
 export default class BaseInput {
-    constructor() {
+    constructor(lazyLoad = false) {
+        this.lazyLoad = lazyLoad;
     }
 }

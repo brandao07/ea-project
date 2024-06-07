@@ -1,9 +1,9 @@
-import BaseInput from "./BaseInput";
+import BaseInput from './BaseInput';
 
 export default class UpdateUserRoleInput extends BaseInput {
-  constructor(userId = 0, roleId = 0) {
-    super();
-    this.userId = userId;
-    this.roleId = roleId;
-  }
+    constructor(roleId = 0, userId = 0, lazyLoad = false) {
+        super(lazyLoad);
+        this.roleId = roleId;
+        this.userId = userId;
+    }
 }
