@@ -38,37 +38,25 @@ public class Grade implements Serializable {
 		
 	};
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_GRADE_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_GRADE_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_GRADE_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
-	@Column(name="MinAge", nullable=false, length=10)	
+	@Column(name="Minage", nullable=false, length=10)	
 	private int MinAge;
 	
-	@Column(name="MaxAge", nullable=false, length=10)	
+	@Column(name="Maxage", nullable=false, length=10)	
 	private int MaxAge;
-	
-	@Column(name="MinWeight", nullable=false)	
-	private double MinWeight;
-	
-	@Column(name="MaxWeight", nullable=false)	
-	private double MaxWeight;
-	
-	@Column(name="MinHeight", nullable=false)	
-	private double MinHeight;
-	
-	@Column(name="MaxHeight", nullable=false)	
-	private double MaxHeight;
 	
 	@Column(name="Gender", nullable=true, length=255)	
 	private String Gender;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	@OneToMany(mappedBy="grade", targetEntity=eaproject.dao.Trial.class)	
@@ -110,38 +98,6 @@ public class Grade implements Serializable {
 	
 	public int getMaxAge() {
 		return MaxAge;
-	}
-	
-	public void setMinWeight(double value) {
-		this.MinWeight = value;
-	}
-	
-	public double getMinWeight() {
-		return MinWeight;
-	}
-	
-	public void setMaxWeight(double value) {
-		this.MaxWeight = value;
-	}
-	
-	public double getMaxWeight() {
-		return MaxWeight;
-	}
-	
-	public void setMinHeight(double value) {
-		this.MinHeight = value;
-	}
-	
-	public double getMinHeight() {
-		return MinHeight;
-	}
-	
-	public void setMaxHeight(double value) {
-		this.MaxHeight = value;
-	}
-	
-	public double getMaxHeight() {
-		return MaxHeight;
 	}
 	
 	public void setGender(String value) {

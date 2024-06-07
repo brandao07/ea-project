@@ -22,16 +22,16 @@ public class State implements Serializable {
 	public State() {
 	}
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_STATE_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_STATE_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_STATE_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
-	@Column(name="name", nullable=true, length=255)	
+	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {

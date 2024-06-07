@@ -327,10 +327,6 @@ public class CompetitionDAO {
 			for(int i = 0; i < lTrials.length; i++) {
 				lTrials[i].setCompetition(null);
 			}
-			eaproject.dao.Notification[] lNotifications = competition.notification.toArray();
-			for(int i = 0; i < lNotifications.length; i++) {
-				lNotifications[i].setCompetition(null);
-			}
 			return delete(competition);
 		}
 		catch(Exception e) {
@@ -344,10 +340,6 @@ public class CompetitionDAO {
 			eaproject.dao.Trial[] lTrials = competition.trial.toArray();
 			for(int i = 0; i < lTrials.length; i++) {
 				lTrials[i].setCompetition(null);
-			}
-			eaproject.dao.Notification[] lNotifications = competition.notification.toArray();
-			for(int i = 0; i < lNotifications.length; i++) {
-				lNotifications[i].setCompetition(null);
 			}
 			try {
 				session.delete(competition);

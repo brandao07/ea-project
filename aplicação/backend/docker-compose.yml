@@ -13,3 +13,8 @@ services:
       POSTGRES_DB: ea-project
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

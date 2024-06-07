@@ -321,39 +321,6 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Notification notification)throws PersistentException {
-		try {
-			if (notification.getCompetition() != null) {
-				notification.getCompetition().notification.remove(notification);
-			}
-			
-			return delete(notification);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Notification notification, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			if (notification.getCompetition() != null) {
-				notification.getCompetition().notification.remove(notification);
-			}
-			
-			try {
-				session.delete(notification);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Notification notification) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(notification);

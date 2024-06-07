@@ -75,7 +75,6 @@ public class TrialSetCollection extends org.orm.util.ORMSet {
 	 * <li>StartDate</li>
 	 * <li>Distance</li>
 	 * <li>DistanceUnit</li>
-	 * <li>NumberOfCheckpoints</li>
 	 * <li>IsActive</li>
 	 * <li>CreationDate</li>
 	 * </ul>
@@ -93,7 +92,6 @@ public class TrialSetCollection extends org.orm.util.ORMSet {
 	 * <li>StartDate</li>
 	 * <li>Distance</li>
 	 * <li>DistanceUnit</li>
-	 * <li>NumberOfCheckpoints</li>
 	 * <li>IsActive</li>
 	 * <li>CreationDate</li>
 	 * </ul>

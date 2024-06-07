@@ -22,10 +22,10 @@ public class Location implements Serializable {
 	public Location() {
 	}
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_LOCATION_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_LOCATION_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_LOCATION_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
 	@Column(name="Latitude", nullable=false)	
@@ -43,10 +43,10 @@ public class Location implements Serializable {
 	@Column(name="Country", nullable=true, length=255)	
 	private String Country;
 	
-	@Column(name="PostalCode", nullable=true, length=255)	
+	@Column(name="Postalcode", nullable=true, length=255)	
 	private String PostalCode;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {

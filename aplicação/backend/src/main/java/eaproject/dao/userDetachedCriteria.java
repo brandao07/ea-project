@@ -20,6 +20,8 @@ import org.orm.criteria.*;
 
 public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression Id;
+	public final IntegerExpression clubId;
+	public final AssociationExpression club;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
 	public final IntegerExpression teamId;
@@ -34,11 +36,12 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression RegisterDate;
 	public final StringExpression PhotographyPath;
-	public final CollectionExpression trial;
 	
 	public UserDetachedCriteria() {
 		super(eaproject.dao.User.class, eaproject.dao.UserCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		clubId = new IntegerExpression("club.Id", this.getDetachedCriteria());
+		club = new AssociationExpression("club", this.getDetachedCriteria());
 		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
 		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
@@ -53,12 +56,13 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		RegisterDate = new TimestampExpression("RegisterDate", this.getDetachedCriteria());
 		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public UserDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.UserCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
+		clubId = new IntegerExpression("club.Id", this.getDetachedCriteria());
+		club = new AssociationExpression("club", this.getDetachedCriteria());
 		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
 		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
@@ -73,7 +77,10 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		RegisterDate = new TimestampExpression("RegisterDate", this.getDetachedCriteria());
 		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
+	}
+	
+	public ClubDetachedCriteria createClubCriteria() {
+		return new ClubDetachedCriteria(createCriteria("club"));
 	}
 	
 	public RoleDetachedCriteria createRoleCriteria() {
@@ -82,10 +89,6 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public TeamDetachedCriteria createTeamCriteria() {
 		return new TeamDetachedCriteria(createCriteria("team"));
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public User uniqueUser(PersistentSession session) {

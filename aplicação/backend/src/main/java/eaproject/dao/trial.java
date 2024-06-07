@@ -26,8 +26,8 @@ public class Trial implements Serializable {
 		if (key == orm.ORMConstants.KEY_TRIAL_RESULT) {
 			return ORM_result;
 		}
-		else if (key == orm.ORMConstants.KEY_TRIAL_USER) {
-			return ORM_user;
+		else if (key == orm.ORMConstants.KEY_TRIAL_TEAM) {
+			return ORM_team;
 		}
 		
 		return null;
@@ -67,67 +67,65 @@ public class Trial implements Serializable {
 		
 	};
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_TRIAL_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.State.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="StateStateId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Changes"))	
+	@JoinColumns(value={ @JoinColumn(name="stateId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Changes"))	
 	private eaproject.dao.State state;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
+	@JoinColumns(value={ @JoinColumn(name="competitionId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
 	private eaproject.dao.Competition competition;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Grade.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="GradeGradeId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
+	@JoinColumns(value={ @JoinColumn(name="gradeId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
 	private eaproject.dao.Grade grade;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Type.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TypeTypeId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
+	@JoinColumns(value={ @JoinColumn(name="typeId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
 	private eaproject.dao.Type type;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Location.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="LocationLocationId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
+	@JoinColumns(value={ @JoinColumn(name="locationId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
 	private eaproject.dao.Location location;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
-	@Column(name="StartDate", nullable=true)	
+	@Column(name="Startdate", nullable=true)	
 	private java.sql.Timestamp StartDate;
 	
 	@Column(name="Distance", nullable=false)	
 	private double Distance;
 	
-	@Column(name="DistanceUnit", nullable=true, length=255)	
+	@Column(name="Distanceunit", nullable=true, length=255)	
 	private String DistanceUnit;
 	
-	@Column(name="NumberOfCheckpoints", nullable=false, length=10)	
-	private int NumberOfCheckpoints;
-	
-	@Column(name="IsActive", nullable=false)	
+	@Column(name="Isactive", nullable=false)	
 	private boolean IsActive;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
-	@OneToMany(mappedBy="trial", targetEntity=eaproject.dao.Result.class)	
+	@ManyToMany(targetEntity=eaproject.dao.Result.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinTable(name="result_trial", joinColumns={ @JoinColumn(name="TrialId") }, inverseJoinColumns={ @JoinColumn(name="ResultId") })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_result = new java.util.HashSet();
 	
-	@ManyToMany(mappedBy="ORM_trial", targetEntity=eaproject.dao.User.class)	
+	@ManyToMany(mappedBy="ORM_trial", targetEntity=eaproject.dao.Team.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_user = new java.util.HashSet();
+	private java.util.Set ORM_team = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.Id = value;
@@ -173,14 +171,6 @@ public class Trial implements Serializable {
 		return DistanceUnit;
 	}
 	
-	public void setNumberOfCheckpoints(int value) {
-		this.NumberOfCheckpoints = value;
-	}
-	
-	public int getNumberOfCheckpoints() {
-		return NumberOfCheckpoints;
-	}
-	
 	public void setIsActive(boolean value) {
 		this.IsActive = value;
 	}
@@ -214,18 +204,7 @@ public class Trial implements Serializable {
 	}
 	
 	@Transient	
-	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
-	
-	private void setORM_User(java.util.Set value) {
-		this.ORM_user = value;
-	}
-	
-	private java.util.Set getORM_User() {
-		return ORM_user;
-	}
-	
-	@Transient	
-	public final eaproject.dao.UserSetCollection user = new eaproject.dao.UserSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
+	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public void setType(eaproject.dao.Type value) {
 		this.type = value;
@@ -290,6 +269,17 @@ public class Trial implements Serializable {
 	public eaproject.dao.State getState() {
 		return state;
 	}
+	
+	private void setORM_Team(java.util.Set value) {
+		this.ORM_team = value;
+	}
+	
+	private java.util.Set getORM_Team() {
+		return ORM_team;
+	}
+	
+	@Transient	
+	public final eaproject.dao.TeamSetCollection team = new eaproject.dao.TeamSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_TEAM, orm.ORMConstants.KEY_TEAM_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

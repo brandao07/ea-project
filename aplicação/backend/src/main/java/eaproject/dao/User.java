@@ -22,14 +22,6 @@ public class User implements Serializable {
 	public User() {
 	}
 	
-	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_USER_TRIAL) {
-			return ORM_trial;
-		}
-		
-		return null;
-	}
-	
 	private void this_setOwner(Object owner, int key) {
 		if (key == orm.ORMConstants.KEY_USER_ROLE) {
 			this.role = (eaproject.dao.Role) owner;
@@ -38,34 +30,39 @@ public class User implements Serializable {
 		else if (key == orm.ORMConstants.KEY_USER_TEAM) {
 			this.team = (eaproject.dao.Team) owner;
 		}
+		
+		else if (key == orm.ORMConstants.KEY_USER_CLUB) {
+			this.club = (eaproject.dao.Club) owner;
+		}
 	}
 	
 	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public java.util.Set getSet(int key) {
-			return this_getSet(key);
-		}
-		
 		public void setOwner(Object owner, int key) {
 			this_setOwner(owner, key);
 		}
 		
 	};
 	
-	@Column(name="id", nullable=false)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_USER_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_ID_GENERATOR", strategy="increment")	
 	private int Id;
+	
+	@ManyToOne(targetEntity=eaproject.dao.Club.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns(value={ @JoinColumn(name="clubId", referencedColumnName="Id") }, foreignKey=@ForeignKey(name="Owns2"))	
+	private eaproject.dao.Club club;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Role.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="RoleRoleId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
+	@JoinColumns(value={ @JoinColumn(name="roleId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
 	private eaproject.dao.Role role;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Team.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TeamTeamId", referencedColumnName="id") }, foreignKey=@ForeignKey(name="Federated"))	
+	@JoinColumns(value={ @JoinColumn(name="teamId", referencedColumnName="Id") }, foreignKey=@ForeignKey(name="Federated"))	
 	private eaproject.dao.Team team;
 	
 	@Column(name="Name", nullable=true, length=255)	
@@ -89,20 +86,14 @@ public class User implements Serializable {
 	@Column(name="Weight", nullable=false)	
 	private double Weight;
 	
-	@Column(name="IsActive", nullable=false)	
+	@Column(name="Isactive", nullable=false)	
 	private boolean IsActive;
 	
-	@Column(name="RegisterDate", nullable=true)	
+	@Column(name="Registerdate", nullable=true)	
 	private java.sql.Timestamp RegisterDate;
 	
-	@Column(name="PhotographyPath", nullable=true, length=255)	
+	@Column(name="Photographypath", nullable=true, length=255)	
 	private String PhotographyPath;
-	
-	@ManyToMany(targetEntity=eaproject.dao.Trial.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinTable(name="trial_user", joinColumns={ @JoinColumn(name="userid") }, inverseJoinColumns={ @JoinColumn(name="trialid") })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.Id = value;
@@ -204,17 +195,6 @@ public class User implements Serializable {
 		return role;
 	}
 	
-	private void setORM_Trial(java.util.Set value) {
-		this.ORM_trial = value;
-	}
-	
-	private java.util.Set getORM_Trial() {
-		return ORM_trial;
-	}
-	
-	@Transient	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_USER_TRIAL, orm.ORMConstants.KEY_TRIAL_USER, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
 	public void setTeam(eaproject.dao.Team value) {
 		if (team != null) {
 			team.user.remove(this);
@@ -237,6 +217,14 @@ public class User implements Serializable {
 	
 	private eaproject.dao.Team getORM_Team() {
 		return team;
+	}
+	
+	public void setClub(eaproject.dao.Club value) {
+		this.club = value;
+	}
+	
+	public eaproject.dao.Club getClub() {
+		return club;
 	}
 	
 	public String toString() {

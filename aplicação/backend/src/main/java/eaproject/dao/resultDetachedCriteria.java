@@ -20,40 +20,37 @@ import org.orm.criteria.*;
 
 public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression Id;
-	public final IntegerExpression trialId;
-	public final AssociationExpression trial;
 	public final IntegerExpression Position;
 	public final TimestampExpression Time;
 	public final StringExpression Observations;
 	public final TimestampExpression PenaltyTime;
 	public final TimestampExpression CreationDate;
+	public final CollectionExpression trial;
 	
 	public ResultDetachedCriteria() {
 		super(eaproject.dao.Result.class, eaproject.dao.ResultCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		trialId = new IntegerExpression("trial.Id", this.getDetachedCriteria());
-		trial = new AssociationExpression("trial", this.getDetachedCriteria());
 		Position = new IntegerExpression("Position", this.getDetachedCriteria());
 		Time = new TimestampExpression("Time", this.getDetachedCriteria());
 		Observations = new StringExpression("Observations", this.getDetachedCriteria());
 		PenaltyTime = new TimestampExpression("PenaltyTime", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public ResultDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.ResultCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		trialId = new IntegerExpression("trial.Id", this.getDetachedCriteria());
-		trial = new AssociationExpression("trial", this.getDetachedCriteria());
 		Position = new IntegerExpression("Position", this.getDetachedCriteria());
 		Time = new TimestampExpression("Time", this.getDetachedCriteria());
 		Observations = new StringExpression("Observations", this.getDetachedCriteria());
 		PenaltyTime = new TimestampExpression("PenaltyTime", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("trial"));
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Result uniqueResult2(PersistentSession session) {

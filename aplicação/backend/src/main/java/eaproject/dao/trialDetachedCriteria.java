@@ -34,11 +34,10 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression StartDate;
 	public final DoubleExpression Distance;
 	public final StringExpression DistanceUnit;
-	public final IntegerExpression NumberOfCheckpoints;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression result;
-	public final CollectionExpression user;
+	public final CollectionExpression team;
 	
 	public TrialDetachedCriteria() {
 		super(eaproject.dao.Trial.class, eaproject.dao.TrialCriteria.class);
@@ -57,11 +56,10 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		Distance = new DoubleExpression("Distance", this.getDetachedCriteria());
 		DistanceUnit = new StringExpression("DistanceUnit", this.getDetachedCriteria());
-		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
+		team = new CollectionExpression("ORM_team", this.getDetachedCriteria());
 	}
 	
 	public TrialDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -81,11 +79,10 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		StartDate = new TimestampExpression("StartDate", this.getDetachedCriteria());
 		Distance = new DoubleExpression("Distance", this.getDetachedCriteria());
 		DistanceUnit = new StringExpression("DistanceUnit", this.getDetachedCriteria());
-		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		result = new CollectionExpression("ORM_result", this.getDetachedCriteria());
-		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
+		team = new CollectionExpression("ORM_team", this.getDetachedCriteria());
 	}
 	
 	public StateDetachedCriteria createStateCriteria() {
@@ -112,8 +109,8 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new ResultDetachedCriteria(createCriteria("ORM_result"));
 	}
 	
-	public UserDetachedCriteria createUserCriteria() {
-		return new UserDetachedCriteria(createCriteria("ORM_user"));
+	public TeamDetachedCriteria createTeamCriteria() {
+		return new TeamDetachedCriteria(createCriteria("ORM_team"));
 	}
 	
 	public Trial uniqueTrial(PersistentSession session) {

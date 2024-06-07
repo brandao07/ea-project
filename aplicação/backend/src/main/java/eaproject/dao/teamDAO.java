@@ -327,6 +327,10 @@ public class TeamDAO {
 			for(int i = 0; i < lUsers.length; i++) {
 				lUsers[i].setTeam(null);
 			}
+			eaproject.dao.Trial[] lTrials = team.trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].team.remove(team);
+			}
 			return delete(team);
 		}
 		catch(Exception e) {
@@ -340,6 +344,10 @@ public class TeamDAO {
 			eaproject.dao.User[] lUsers = team.user.toArray();
 			for(int i = 0; i < lUsers.length; i++) {
 				lUsers[i].setTeam(null);
+			}
+			eaproject.dao.Trial[] lTrials = team.trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].team.remove(team);
 			}
 			try {
 				session.delete(team);

@@ -20,21 +20,19 @@ import org.orm.criteria.*;
 
 public class NotificationCriteria extends AbstractORMCriteria {
 	public final IntegerExpression Id;
-	public final IntegerExpression competitionId;
-	public final AssociationExpression competition;
 	public final StringExpression MessageHeader;
 	public final StringExpression MessageBody;
 	public final StringExpression MessageType;
+	public final StringExpression PhotographyPath;
 	public final TimestampExpression CreationDate;
 	
 	public NotificationCriteria(Criteria criteria) {
 		super(criteria);
 		Id = new IntegerExpression("Id", this);
-		competitionId = new IntegerExpression("competition.Id", this);
-		competition = new AssociationExpression("competition", this);
 		MessageHeader = new StringExpression("MessageHeader", this);
 		MessageBody = new StringExpression("MessageBody", this);
 		MessageType = new StringExpression("MessageType", this);
+		PhotographyPath = new StringExpression("PhotographyPath", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 	}
 	
@@ -44,10 +42,6 @@ public class NotificationCriteria extends AbstractORMCriteria {
 	
 	public NotificationCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public CompetitionCriteria createCompetitionCriteria() {
-		return new CompetitionCriteria(createCriteria("competition"));
 	}
 	
 	public Notification uniqueNotification() {

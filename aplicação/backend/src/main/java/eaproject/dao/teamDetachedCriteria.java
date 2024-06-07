@@ -26,6 +26,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression user;
+	public final CollectionExpression trial;
 	
 	public TeamDetachedCriteria() {
 		super(eaproject.dao.Team.class, eaproject.dao.TeamCriteria.class);
@@ -36,6 +37,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public TeamDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -47,6 +49,7 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		user = new CollectionExpression("ORM_user", this.getDetachedCriteria());
+		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public ClubDetachedCriteria createClubCriteria() {
@@ -55,6 +58,10 @@ public class TeamDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public UserDetachedCriteria createUserCriteria() {
 		return new UserDetachedCriteria(createCriteria("ORM_user"));
+	}
+	
+	public TrialDetachedCriteria createTrialCriteria() {
+		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Team uniqueTeam(PersistentSession session) {

@@ -23,10 +23,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
-	public final DoubleExpression MinWeight;
-	public final DoubleExpression MaxWeight;
-	public final DoubleExpression MinHeight;
-	public final DoubleExpression MaxHeight;
 	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression trial;
@@ -37,10 +33,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 		Name = new StringExpression("Name", this);
 		MinAge = new IntegerExpression("MinAge", this);
 		MaxAge = new IntegerExpression("MaxAge", this);
-		MinWeight = new DoubleExpression("MinWeight", this);
-		MaxWeight = new DoubleExpression("MaxWeight", this);
-		MinHeight = new DoubleExpression("MinHeight", this);
-		MaxHeight = new DoubleExpression("MaxHeight", this);
 		Gender = new StringExpression("Gender", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 		trial = new CollectionExpression("ORM_trial", this);

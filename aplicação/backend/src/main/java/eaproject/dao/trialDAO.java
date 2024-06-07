@@ -333,11 +333,11 @@ public class TrialDAO {
 			
 			eaproject.dao.Result[] lResults = trial.result.toArray();
 			for(int i = 0; i < lResults.length; i++) {
-				lResults[i].setTrial(null);
+				lResults[i].trial.remove(trial);
 			}
-			eaproject.dao.User[] lUsers = trial.user.toArray();
-			for(int i = 0; i < lUsers.length; i++) {
-				lUsers[i].trial.remove(trial);
+			eaproject.dao.Team[] lTeams = trial.team.toArray();
+			for(int i = 0; i < lTeams.length; i++) {
+				lTeams[i].trial.remove(trial);
 			}
 			return delete(trial);
 		}
@@ -359,11 +359,11 @@ public class TrialDAO {
 			
 			eaproject.dao.Result[] lResults = trial.result.toArray();
 			for(int i = 0; i < lResults.length; i++) {
-				lResults[i].setTrial(null);
+				lResults[i].trial.remove(trial);
 			}
-			eaproject.dao.User[] lUsers = trial.user.toArray();
-			for(int i = 0; i < lUsers.length; i++) {
-				lUsers[i].trial.remove(trial);
+			eaproject.dao.Team[] lTeams = trial.team.toArray();
+			for(int i = 0; i < lTeams.length; i++) {
+				lTeams[i].trial.remove(trial);
 			}
 			try {
 				session.delete(trial);

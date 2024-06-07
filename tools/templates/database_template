@@ -1,0 +1,27 @@
+-- Begin transaction
+BEGIN;
+
+-- Create Tables
+DO
+$$
+BEGIN
+
+{{@Tables}}
+
+END
+$$;
+
+-- Add primary keys and constraints
+DO
+$$
+BEGIN
+
+{{@PrimaryKeys}}
+
+{{@ForeignKeys}}
+
+END
+$$;
+
+-- Commit the transaction if no errors occurred
+COMMIT;

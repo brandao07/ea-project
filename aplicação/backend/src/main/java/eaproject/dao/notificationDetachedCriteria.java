@@ -20,37 +20,30 @@ import org.orm.criteria.*;
 
 public class NotificationDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression Id;
-	public final IntegerExpression competitionId;
-	public final AssociationExpression competition;
 	public final StringExpression MessageHeader;
 	public final StringExpression MessageBody;
 	public final StringExpression MessageType;
+	public final StringExpression PhotographyPath;
 	public final TimestampExpression CreationDate;
 	
 	public NotificationDetachedCriteria() {
 		super(eaproject.dao.Notification.class, eaproject.dao.NotificationCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
-		competition = new AssociationExpression("competition", this.getDetachedCriteria());
 		MessageHeader = new StringExpression("MessageHeader", this.getDetachedCriteria());
 		MessageBody = new StringExpression("MessageBody", this.getDetachedCriteria());
 		MessageType = new StringExpression("MessageType", this.getDetachedCriteria());
+		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 	}
 	
 	public NotificationDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.NotificationCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		competitionId = new IntegerExpression("competition.Id", this.getDetachedCriteria());
-		competition = new AssociationExpression("competition", this.getDetachedCriteria());
 		MessageHeader = new StringExpression("MessageHeader", this.getDetachedCriteria());
 		MessageBody = new StringExpression("MessageBody", this.getDetachedCriteria());
 		MessageType = new StringExpression("MessageType", this.getDetachedCriteria());
+		PhotographyPath = new StringExpression("PhotographyPath", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-	}
-	
-	public CompetitionDetachedCriteria createCompetitionCriteria() {
-		return new CompetitionDetachedCriteria(createCriteria("competition"));
 	}
 	
 	public Notification uniqueNotification(PersistentSession session) {

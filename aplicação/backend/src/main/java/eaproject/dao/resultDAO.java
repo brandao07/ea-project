@@ -323,10 +323,10 @@ public class ResultDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.Result result)throws PersistentException {
 		try {
-			if (result.getTrial() != null) {
-				result.getTrial().result.remove(result);
+			eaproject.dao.Trial[] lTrials = result.trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].result.remove(result);
 			}
-			
 			return delete(result);
 		}
 		catch(Exception e) {
@@ -337,10 +337,10 @@ public class ResultDAO {
 	
 	public static boolean deleteAndDissociate(eaproject.dao.Result result, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if (result.getTrial() != null) {
-				result.getTrial().result.remove(result);
+			eaproject.dao.Trial[] lTrials = result.trial.toArray();
+			for(int i = 0; i < lTrials.length; i++) {
+				lTrials[i].result.remove(result);
 			}
-			
 			try {
 				session.delete(result);
 				return true;

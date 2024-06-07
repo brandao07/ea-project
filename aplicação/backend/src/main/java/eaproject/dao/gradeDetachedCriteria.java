@@ -23,10 +23,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
-	public final DoubleExpression MinWeight;
-	public final DoubleExpression MaxWeight;
-	public final DoubleExpression MinHeight;
-	public final DoubleExpression MaxHeight;
 	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression trial;
@@ -37,10 +33,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
-		MinWeight = new DoubleExpression("MinWeight", this.getDetachedCriteria());
-		MaxWeight = new DoubleExpression("MaxWeight", this.getDetachedCriteria());
-		MinHeight = new DoubleExpression("MinHeight", this.getDetachedCriteria());
-		MaxHeight = new DoubleExpression("MaxHeight", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
@@ -52,10 +44,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
-		MinWeight = new DoubleExpression("MinWeight", this.getDetachedCriteria());
-		MaxWeight = new DoubleExpression("MaxWeight", this.getDetachedCriteria());
-		MinHeight = new DoubleExpression("MinHeight", this.getDetachedCriteria());
-		MaxHeight = new DoubleExpression("MaxHeight", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());

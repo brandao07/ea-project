@@ -26,6 +26,7 @@ public class TeamCriteria extends AbstractORMCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression user;
+	public final CollectionExpression trial;
 	
 	public TeamCriteria(Criteria criteria) {
 		super(criteria);
@@ -36,6 +37,7 @@ public class TeamCriteria extends AbstractORMCriteria {
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 		user = new CollectionExpression("ORM_user", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public TeamCriteria(PersistentSession session) {
@@ -52,6 +54,10 @@ public class TeamCriteria extends AbstractORMCriteria {
 	
 	public UserCriteria createUserCriteria() {
 		return new UserCriteria(createCriteria("ORM_user"));
+	}
+	
+	public TrialCriteria createTrialCriteria() {
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Team uniqueTeam() {

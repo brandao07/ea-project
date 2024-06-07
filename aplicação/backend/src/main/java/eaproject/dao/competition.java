@@ -22,17 +22,12 @@ public class Competition implements Serializable {
 	public Competition() {
 	}
 	
-	private java.util.List this_getList (int key) {
-		if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
-			return ORM_notification;
-		}
-		
-		return null;
-	}
-	
 	private java.util.Set this_getSet (int key) {
 		if (key == orm.ORMConstants.KEY_COMPETITION_TRIAL) {
 			return ORM_trial;
+		}
+		else if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
+			return ORM_notification;
 		}
 		
 		return null;
@@ -44,31 +39,27 @@ public class Competition implements Serializable {
 			return this_getSet(key);
 		}
 		
-		public java.util.List getList(int key) {
-			return this_getList(key);
-		}
-		
 	};
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_COMPETITION_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_COMPETITION_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_COMPETITION_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
-	@Column(name="StartDate", nullable=true)	
+	@Column(name="Startdate", nullable=true)	
 	private java.sql.Timestamp StartDate;
 	
-	@Column(name="EndDate", nullable=true)	
+	@Column(name="Enddate", nullable=true)	
 	private java.sql.Timestamp EndDate;
 	
-	@Column(name="IsActive", nullable=false)	
+	@Column(name="Isactive", nullable=false)	
 	private boolean IsActive;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	@OneToMany(mappedBy="competition", targetEntity=eaproject.dao.Trial.class)	
@@ -76,11 +67,11 @@ public class Competition implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_trial = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="competition", targetEntity=eaproject.dao.Notification.class)	
+	@OneToMany(targetEntity=eaproject.dao.Notification.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.IndexColumn(name="competitionIndex")	
+	@JoinColumns({ @JoinColumn(name="competitionId", nullable=false) })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.List ORM_notification = new java.util.ArrayList();
+	private java.util.Set ORM_notification = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.Id = value;
@@ -145,16 +136,16 @@ public class Competition implements Serializable {
 	@Transient	
 	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_TRIAL, orm.ORMConstants.KEY_TRIAL_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
-	private void setORM_Notification(java.util.List value) {
+	private void setORM_Notification(java.util.Set value) {
 		this.ORM_notification = value;
 	}
 	
-	private java.util.List getORM_Notification() {
+	private java.util.Set getORM_Notification() {
 		return ORM_notification;
 	}
 	
 	@Transient	
-	public final eaproject.dao.NotificationListCollection notification = new eaproject.dao.NotificationListCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_NOTIFICATION, orm.ORMConstants.KEY_NOTIFICATION_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final eaproject.dao.NotificationSetCollection notification = new eaproject.dao.NotificationSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_NOTIFICATION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

@@ -20,6 +20,8 @@ import org.orm.criteria.*;
 
 public class UserCriteria extends AbstractORMCriteria {
 	public final IntegerExpression Id;
+	public final IntegerExpression clubId;
+	public final AssociationExpression club;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
 	public final IntegerExpression teamId;
@@ -34,11 +36,12 @@ public class UserCriteria extends AbstractORMCriteria {
 	public final BooleanExpression IsActive;
 	public final TimestampExpression RegisterDate;
 	public final StringExpression PhotographyPath;
-	public final CollectionExpression trial;
 	
 	public UserCriteria(Criteria criteria) {
 		super(criteria);
 		Id = new IntegerExpression("Id", this);
+		clubId = new IntegerExpression("club.Id", this);
+		club = new AssociationExpression("club", this);
 		roleId = new IntegerExpression("role.Id", this);
 		role = new AssociationExpression("role", this);
 		teamId = new IntegerExpression("team.Id", this);
@@ -53,7 +56,6 @@ public class UserCriteria extends AbstractORMCriteria {
 		IsActive = new BooleanExpression("IsActive", this);
 		RegisterDate = new TimestampExpression("RegisterDate", this);
 		PhotographyPath = new StringExpression("PhotographyPath", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public UserCriteria(PersistentSession session) {
@@ -64,16 +66,16 @@ public class UserCriteria extends AbstractORMCriteria {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
 	}
 	
+	public ClubCriteria createClubCriteria() {
+		return new ClubCriteria(createCriteria("club"));
+	}
+	
 	public RoleCriteria createRoleCriteria() {
 		return new RoleCriteria(createCriteria("role"));
 	}
 	
 	public TeamCriteria createTeamCriteria() {
 		return new TeamCriteria(createCriteria("team"));
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public User uniqueUser() {

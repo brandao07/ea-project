@@ -22,30 +22,27 @@ public class Result implements Serializable {
 	public Result() {
 	}
 	
-	private void this_setOwner(Object owner, int key) {
+	private java.util.Set this_getSet (int key) {
 		if (key == orm.ORMConstants.KEY_RESULT_TRIAL) {
-			this.trial = (eaproject.dao.Trial) owner;
+			return ORM_trial;
 		}
+		
+		return null;
 	}
 	
 	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public void setOwner(Object owner, int key) {
-			this_setOwner(owner, key);
+		public java.util.Set getSet(int key) {
+			return this_getSet(key);
 		}
 		
 	};
 	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_RESULT_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_ID_GENERATOR", strategy="increment")	
 	private int Id;
-	
-	@ManyToOne(targetEntity=eaproject.dao.Trial.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="TrialTrialId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Publish"))	
-	private eaproject.dao.Trial trial;
 	
 	@Column(name="Position", nullable=false, length=10)	
 	private int Position;
@@ -56,11 +53,16 @@ public class Result implements Serializable {
 	@Column(name="Observations", nullable=true, length=255)	
 	private String Observations;
 	
-	@Column(name="PenaltyTime", nullable=true)	
+	@Column(name="Penaltytime", nullable=true)	
 	private java.sql.Timestamp PenaltyTime;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
+	
+	@ManyToMany(mappedBy="ORM_result", targetEntity=eaproject.dao.Trial.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
+	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.Id = value;
@@ -114,29 +116,16 @@ public class Result implements Serializable {
 		return CreationDate;
 	}
 	
-	public void setTrial(eaproject.dao.Trial value) {
-		if (trial != null) {
-			trial.result.remove(this);
-		}
-		if (value != null) {
-			value.result.add(this);
-		}
+	private void setORM_Trial(java.util.Set value) {
+		this.ORM_trial = value;
 	}
 	
-	public eaproject.dao.Trial getTrial() {
-		return trial;
+	private java.util.Set getORM_Trial() {
+		return ORM_trial;
 	}
 	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Trial(eaproject.dao.Trial value) {
-		this.trial = value;
-	}
-	
-	private eaproject.dao.Trial getORM_Trial() {
-		return trial;
-	}
+	@Transient	
+	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

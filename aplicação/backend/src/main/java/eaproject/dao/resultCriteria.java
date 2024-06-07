@@ -20,24 +20,22 @@ import org.orm.criteria.*;
 
 public class ResultCriteria extends AbstractORMCriteria {
 	public final IntegerExpression Id;
-	public final IntegerExpression trialId;
-	public final AssociationExpression trial;
 	public final IntegerExpression Position;
 	public final TimestampExpression Time;
 	public final StringExpression Observations;
 	public final TimestampExpression PenaltyTime;
 	public final TimestampExpression CreationDate;
+	public final CollectionExpression trial;
 	
 	public ResultCriteria(Criteria criteria) {
 		super(criteria);
 		Id = new IntegerExpression("Id", this);
-		trialId = new IntegerExpression("trial.Id", this);
-		trial = new AssociationExpression("trial", this);
 		Position = new IntegerExpression("Position", this);
 		Time = new TimestampExpression("Time", this);
 		Observations = new StringExpression("Observations", this);
 		PenaltyTime = new TimestampExpression("PenaltyTime", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
+		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public ResultCriteria(PersistentSession session) {
@@ -49,7 +47,7 @@ public class ResultCriteria extends AbstractORMCriteria {
 	}
 	
 	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("trial"));
+		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Result uniqueResult2() {

@@ -34,11 +34,10 @@ public class TrialCriteria extends AbstractORMCriteria {
 	public final TimestampExpression StartDate;
 	public final DoubleExpression Distance;
 	public final StringExpression DistanceUnit;
-	public final IntegerExpression NumberOfCheckpoints;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
 	public final CollectionExpression result;
-	public final CollectionExpression user;
+	public final CollectionExpression team;
 	
 	public TrialCriteria(Criteria criteria) {
 		super(criteria);
@@ -57,11 +56,10 @@ public class TrialCriteria extends AbstractORMCriteria {
 		StartDate = new TimestampExpression("StartDate", this);
 		Distance = new DoubleExpression("Distance", this);
 		DistanceUnit = new StringExpression("DistanceUnit", this);
-		NumberOfCheckpoints = new IntegerExpression("NumberOfCheckpoints", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 		result = new CollectionExpression("ORM_result", this);
-		user = new CollectionExpression("ORM_user", this);
+		team = new CollectionExpression("ORM_team", this);
 	}
 	
 	public TrialCriteria(PersistentSession session) {
@@ -96,8 +94,8 @@ public class TrialCriteria extends AbstractORMCriteria {
 		return new ResultCriteria(createCriteria("ORM_result"));
 	}
 	
-	public UserCriteria createUserCriteria() {
-		return new UserCriteria(createCriteria("ORM_user"));
+	public TeamCriteria createTeamCriteria() {
+		return new TeamCriteria(createCriteria("ORM_team"));
 	}
 	
 	public Trial uniqueTrial() {

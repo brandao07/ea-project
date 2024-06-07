@@ -22,41 +22,25 @@ public class Notification implements Serializable {
 	public Notification() {
 	}
 	
-	private void this_setOwner(Object owner, int key) {
-		if (key == orm.ORMConstants.KEY_NOTIFICATION_COMPETITION) {
-			this.competition = (eaproject.dao.Competition) owner;
-		}
-	}
-	
-	@Transient	
-	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public void setOwner(Object owner, int key) {
-			this_setOwner(owner, key);
-		}
-		
-	};
-	
-	@Column(name="id", nullable=false, length=10)	
+	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_NOTIFICATION_ID_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_NOTIFICATION_ID_GENERATOR", strategy="native")	
+	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_NOTIFICATION_ID_GENERATOR", strategy="increment")	
 	private int Id;
 	
-	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="CompetitionCompetitionId", referencedColumnName="id", nullable=false) }, foreignKey=@ForeignKey(name="Issue"))	
-	private eaproject.dao.Competition competition;
-	
-	@Column(name="MessageHeader", nullable=true, length=255)	
+	@Column(name="Messageheader", nullable=true, length=255)	
 	private String MessageHeader;
 	
-	@Column(name="MessageBody", nullable=true, length=255)	
+	@Column(name="Messagebody", nullable=true, length=255)	
 	private String MessageBody;
 	
-	@Column(name="MessageType", nullable=true, length=255)	
+	@Column(name="Messagetype", nullable=true, length=255)	
 	private String MessageType;
 	
-	@Column(name="CreationDate", nullable=true)	
+	@Column(name="Photographypath", nullable=true, length=255)	
+	private String PhotographyPath;
+	
+	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {
@@ -95,36 +79,20 @@ public class Notification implements Serializable {
 		return MessageType;
 	}
 	
+	public void setPhotographyPath(String value) {
+		this.PhotographyPath = value;
+	}
+	
+	public String getPhotographyPath() {
+		return PhotographyPath;
+	}
+	
 	public void setCreationDate(java.sql.Timestamp value) {
 		this.CreationDate = value;
 	}
 	
 	public java.sql.Timestamp getCreationDate() {
 		return CreationDate;
-	}
-	
-	public void setCompetition(eaproject.dao.Competition value) {
-		if (competition != null) {
-			competition.notification.remove(this);
-		}
-		if (value != null) {
-			value.notification.add(this);
-		}
-	}
-	
-	public eaproject.dao.Competition getCompetition() {
-		return competition;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Competition(eaproject.dao.Competition value) {
-		this.competition = value;
-	}
-	
-	private eaproject.dao.Competition getORM_Competition() {
-		return competition;
 	}
 	
 	public String toString() {
