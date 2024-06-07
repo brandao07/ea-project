@@ -24,8 +24,6 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression club;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
-	public final IntegerExpression teamId;
-	public final AssociationExpression team;
 	public final StringExpression Name;
 	public final StringExpression Email;
 	public final StringExpression Password;
@@ -44,8 +42,6 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		club = new AssociationExpression("club", this.getDetachedCriteria());
 		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
-		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
-		team = new AssociationExpression("team", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Email = new StringExpression("Email", this.getDetachedCriteria());
 		Password = new StringExpression("Password", this.getDetachedCriteria());
@@ -65,8 +61,6 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		club = new AssociationExpression("club", this.getDetachedCriteria());
 		roleId = new IntegerExpression("role.Id", this.getDetachedCriteria());
 		role = new AssociationExpression("role", this.getDetachedCriteria());
-		teamId = new IntegerExpression("team.Id", this.getDetachedCriteria());
-		team = new AssociationExpression("team", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		Email = new StringExpression("Email", this.getDetachedCriteria());
 		Password = new StringExpression("Password", this.getDetachedCriteria());
@@ -85,10 +79,6 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public RoleDetachedCriteria createRoleCriteria() {
 		return new RoleDetachedCriteria(createCriteria("role"));
-	}
-	
-	public TeamDetachedCriteria createTeamCriteria() {
-		return new TeamDetachedCriteria(createCriteria("team"));
 	}
 	
 	public User uniqueUser(PersistentSession session) {

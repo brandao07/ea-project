@@ -27,10 +27,6 @@ public class User implements Serializable {
 			this.role = (eaproject.dao.Role) owner;
 		}
 		
-		else if (key == orm.ORMConstants.KEY_USER_TEAM) {
-			this.team = (eaproject.dao.Team) owner;
-		}
-		
 		else if (key == orm.ORMConstants.KEY_USER_CLUB) {
 			this.club = (eaproject.dao.Club) owner;
 		}
@@ -59,11 +55,6 @@ public class User implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="roleId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Belongs"))	
 	private eaproject.dao.Role role;
-	
-	@ManyToOne(targetEntity=eaproject.dao.Team.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="teamId", referencedColumnName="Id") }, foreignKey=@ForeignKey(name="Federated"))	
-	private eaproject.dao.Team team;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -193,30 +184,6 @@ public class User implements Serializable {
 	
 	public eaproject.dao.Role getRole() {
 		return role;
-	}
-	
-	public void setTeam(eaproject.dao.Team value) {
-		if (team != null) {
-			team.user.remove(this);
-		}
-		if (value != null) {
-			value.user.add(this);
-		}
-	}
-	
-	public eaproject.dao.Team getTeam() {
-		return team;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Team(eaproject.dao.Team value) {
-		this.team = value;
-	}
-	
-	private eaproject.dao.Team getORM_Team() {
-		return team;
 	}
 	
 	public void setClub(eaproject.dao.Club value) {

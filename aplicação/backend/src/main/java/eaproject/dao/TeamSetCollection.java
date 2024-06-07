@@ -38,7 +38,7 @@ public class TeamSetCollection extends org.orm.util.ORMSet {
 	 */
 	public void add(Team value) {
 		if (value != null) {
-			super.add(value, value._ormAdapter);
+			super.add(value, null);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class TeamSetCollection extends org.orm.util.ORMSet {
 	 * @param value the persistent object
 	 */
 	public void remove(Team value) {
-		super.remove(value, value._ormAdapter);
+		super.remove(value, null);
 	}
 	
 	/**

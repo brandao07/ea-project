@@ -23,10 +23,7 @@ public class Competition implements Serializable {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_COMPETITION_TRIAL) {
-			return ORM_trial;
-		}
-		else if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
+		if (key == orm.ORMConstants.KEY_COMPETITION_NOTIFICATION) {
 			return ORM_notification;
 		}
 		
@@ -61,11 +58,6 @@ public class Competition implements Serializable {
 	
 	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
-	
-	@OneToMany(mappedBy="competition", targetEntity=eaproject.dao.Trial.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	@OneToMany(targetEntity=eaproject.dao.Notification.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -124,17 +116,6 @@ public class Competition implements Serializable {
 	public java.sql.Timestamp getCreationDate() {
 		return CreationDate;
 	}
-	
-	private void setORM_Trial(java.util.Set value) {
-		this.ORM_trial = value;
-	}
-	
-	private java.util.Set getORM_Trial() {
-		return ORM_trial;
-	}
-	
-	@Transient	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_COMPETITION_TRIAL, orm.ORMConstants.KEY_TRIAL_COMPETITION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	private void setORM_Notification(java.util.Set value) {
 		this.ORM_notification = value;

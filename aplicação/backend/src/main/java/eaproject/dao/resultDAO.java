@@ -321,39 +321,6 @@ public class ResultDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Result result)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = result.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].result.remove(result);
-			}
-			return delete(result);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Result result, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = result.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].result.remove(result);
-			}
-			try {
-				session.delete(result);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Result result) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(result);

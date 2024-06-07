@@ -321,47 +321,6 @@ public class TeamDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Team team)throws PersistentException {
-		try {
-			eaproject.dao.User[] lUsers = team.user.toArray();
-			for(int i = 0; i < lUsers.length; i++) {
-				lUsers[i].setTeam(null);
-			}
-			eaproject.dao.Trial[] lTrials = team.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].team.remove(team);
-			}
-			return delete(team);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Team team, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.User[] lUsers = team.user.toArray();
-			for(int i = 0; i < lUsers.length; i++) {
-				lUsers[i].setTeam(null);
-			}
-			eaproject.dao.Trial[] lTrials = team.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].team.remove(team);
-			}
-			try {
-				session.delete(team);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Team team) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(team);

@@ -321,39 +321,6 @@ public class GradeDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Grade grade)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = grade.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setGrade(null);
-			}
-			return delete(grade);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Grade grade, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = grade.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setGrade(null);
-			}
-			try {
-				session.delete(grade);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Grade grade) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(grade);

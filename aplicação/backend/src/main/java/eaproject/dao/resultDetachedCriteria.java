@@ -25,7 +25,6 @@ public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression Observations;
 	public final TimestampExpression PenaltyTime;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public ResultDetachedCriteria() {
 		super(eaproject.dao.Result.class, eaproject.dao.ResultCriteria.class);
@@ -35,7 +34,6 @@ public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 		Observations = new StringExpression("Observations", this.getDetachedCriteria());
 		PenaltyTime = new TimestampExpression("PenaltyTime", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public ResultDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -46,11 +44,6 @@ public class ResultDetachedCriteria extends AbstractORMDetachedCriteria {
 		Observations = new StringExpression("Observations", this.getDetachedCriteria());
 		PenaltyTime = new TimestampExpression("PenaltyTime", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Result uniqueResult2(PersistentSession session) {

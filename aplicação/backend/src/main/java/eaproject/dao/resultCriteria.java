@@ -25,7 +25,6 @@ public class ResultCriteria extends AbstractORMCriteria {
 	public final StringExpression Observations;
 	public final TimestampExpression PenaltyTime;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public ResultCriteria(Criteria criteria) {
 		super(criteria);
@@ -35,7 +34,6 @@ public class ResultCriteria extends AbstractORMCriteria {
 		Observations = new StringExpression("Observations", this);
 		PenaltyTime = new TimestampExpression("PenaltyTime", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public ResultCriteria(PersistentSession session) {
@@ -44,10 +42,6 @@ public class ResultCriteria extends AbstractORMCriteria {
 	
 	public ResultCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Result uniqueResult2() {

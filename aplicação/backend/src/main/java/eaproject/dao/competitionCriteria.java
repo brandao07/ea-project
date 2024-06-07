@@ -25,7 +25,6 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 	public final TimestampExpression EndDate;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	public final CollectionExpression notification;
 	
 	public CompetitionCriteria(Criteria criteria) {
@@ -36,7 +35,6 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 		EndDate = new TimestampExpression("EndDate", this);
 		IsActive = new BooleanExpression("IsActive", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 		notification = new CollectionExpression("ORM_notification", this);
 	}
 	
@@ -46,10 +44,6 @@ public class CompetitionCriteria extends AbstractORMCriteria {
 	
 	public CompetitionCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public NotificationCriteria createNotificationCriteria() {

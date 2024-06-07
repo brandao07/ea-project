@@ -321,39 +321,6 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Competition competition)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = competition.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setCompetition(null);
-			}
-			return delete(competition);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Competition competition, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			eaproject.dao.Trial[] lTrials = competition.trial.toArray();
-			for(int i = 0; i < lTrials.length; i++) {
-				lTrials[i].setCompetition(null);
-			}
-			try {
-				session.delete(competition);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Competition competition) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(competition);

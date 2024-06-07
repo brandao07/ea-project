@@ -25,7 +25,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression MaxAge;
 	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public GradeDetachedCriteria() {
 		super(eaproject.dao.Grade.class, eaproject.dao.GradeCriteria.class);
@@ -35,7 +34,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 	}
 	
 	public GradeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -46,11 +44,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
 		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Grade uniqueGrade(PersistentSession session) {

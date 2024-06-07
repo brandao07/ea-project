@@ -22,22 +22,6 @@ public class Grade implements Serializable {
 	public Grade() {
 	}
 	
-	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_GRADE_TRIAL) {
-			return ORM_trial;
-		}
-		
-		return null;
-	}
-	
-	@Transient	
-	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public java.util.Set getSet(int key) {
-			return this_getSet(key);
-		}
-		
-	};
-	
 	@Column(name="Id", nullable=false, length=10)	
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_GRADE_ID_GENERATOR")	
@@ -58,11 +42,6 @@ public class Grade implements Serializable {
 	
 	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
-	
-	@OneToMany(mappedBy="grade", targetEntity=eaproject.dao.Trial.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private java.util.Set ORM_trial = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.Id = value;
@@ -115,17 +94,6 @@ public class Grade implements Serializable {
 	public java.sql.Timestamp getCreationDate() {
 		return CreationDate;
 	}
-	
-	private void setORM_Trial(java.util.Set value) {
-		this.ORM_trial = value;
-	}
-	
-	private java.util.Set getORM_Trial() {
-		return ORM_trial;
-	}
-	
-	@Transient	
-	public final eaproject.dao.TrialSetCollection trial = new eaproject.dao.TrialSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_GRADE_TRIAL, orm.ORMConstants.KEY_TRIAL_GRADE, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

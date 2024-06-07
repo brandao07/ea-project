@@ -7,10 +7,10 @@ SOURCE_ORM="../vp-codigo/src/orm/"
 SOURCE_DAO="../vp-codigo/src/eaproject/dao/"
 
 # Define as paths de destino
-TARGET_LIB="../ea-project/aplicação/backend/src/main/java/lib"
-TARGET_ORM="../ea-project/aplicação/backend/src/main/java/orm"
-TARGET_ORM_CFG="../ea-project/aplicação/backend/src/main/resources/ormmapping"
-TARGET_DAO="../ea-project/aplicação/backend/src/main/java/eaproject/dao"
+TARGET_LIB="../aplicação/backend/src/main/java/lib/"
+TARGET_ORM="../aplicação/backend/src/main/java/orm/"
+TARGET_ORM_CFG="../aplicação/backend/src/main/resources/ormmapping/"
+TARGET_DAO="../aplicação/backend/src/main/java/eaproject/dao/"
 
 # Função para validar a existência dos arquivos de origem
 validate_files() {
@@ -27,23 +27,45 @@ validate_files "$SOURCE_ORM"
 validate_files "$SOURCE_DAO"
 
 # Apagar arquivos existentes no destino
-echo "Limpando diretórios de destino..."
-rm -rf "$TARGET_LIB"/*
-rm -rf "$TARGET_ORM"/*
-rm -rf "$TARGET_ORM_CFG"/*
-rm -rf "$TARGET_DAO"/*
+echo "A limpar diretórios de destino..."
+sudo chmod -R 777 "$TARGET_LIB"
+sudo chmod -R 777 "$TARGET_ORM"
+sudo chmod -R 777 "$TARGET_ORM_CFG"
+sudo chmod -R 777 "$TARGET_DAO"
+sudo rm -rf $TARGET_LIB*
+sudo rm -rf $TARGET_ORM*
+sudo rm -rf $TARGET_ORM_CFG*
+sudo rm -rf $TARGET_DAO*
+
+# Verificar se os arquivos foram realmente apagados
+if [ "$(ls -A $TARGET_LIB)" ]; then
+  echo "Erro: $TARGET_LIB não está vazio após tentar apagar."
+  exit 1
+fi
+if [ "$(ls -A $TARGET_ORM)" ]; then
+  echo "Erro: $TARGET_ORM não está vazio após tentar apagar."
+  exit 1
+fi
+if [ "$(ls -A $TARGET_ORM_CFG)" ]; then
+  echo "Erro: $TARGET_ORM_CFG não está vazio após tentar apagar."
+  exit 1
+fi
+if [ "$(ls -A $TARGET_DAO)" ]; then
+  echo "Erro: $TARGET_DAO não está vazio após tentar apagar."
+  exit 1
+fi
 
 # Criar diretórios de destino caso não existam
-mkdir -p "$TARGET_LIB"
-mkdir -p "$TARGET_ORM"
-mkdir -p "$TARGET_ORM_CFG"
-mkdir -p "$TARGET_DAO"
+sudo mkdir -p "$TARGET_LIB"
+sudo mkdir -p "$TARGET_ORM"
+sudo mkdir -p "$TARGET_ORM_CFG"
+sudo mkdir -p "$TARGET_DAO"
 
 # Copiar arquivos do local de origem para o destino
-echo "Copiando arquivos..."
-cp "$SOURCE_LIB" "$TARGET_LIB"
-cp "$SOURCE_ORM_CFG" "$TARGET_ORM_CFG"
-cp -r $SOURCE_ORM "$TARGET_ORM"
-cp -r $SOURCE_DAO "$TARGET_DAO"
+echo "A copiar arquivos..."
+sudo cp "$SOURCE_LIB" "$TARGET_LIB"
+sudo cp "$SOURCE_ORM_CFG" "$TARGET_ORM_CFG"
+sudo cp -r $SOURCE_ORM/* "$TARGET_ORM"
+sudo cp -r $SOURCE_DAO/* "$TARGET_DAO"
 
 echo "Cópia concluída com sucesso!"

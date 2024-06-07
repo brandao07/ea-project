@@ -25,7 +25,6 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression EndDate;
 	public final BooleanExpression IsActive;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	public final CollectionExpression notification;
 	
 	public CompetitionDetachedCriteria() {
@@ -36,7 +35,6 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 		notification = new CollectionExpression("ORM_notification", this.getDetachedCriteria());
 	}
 	
@@ -48,12 +46,7 @@ public class CompetitionDetachedCriteria extends AbstractORMDetachedCriteria {
 		EndDate = new TimestampExpression("EndDate", this.getDetachedCriteria());
 		IsActive = new BooleanExpression("IsActive", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
-		trial = new CollectionExpression("ORM_trial", this.getDetachedCriteria());
 		notification = new CollectionExpression("ORM_notification", this.getDetachedCriteria());
-	}
-	
-	public TrialDetachedCriteria createTrialCriteria() {
-		return new TrialDetachedCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public NotificationDetachedCriteria createNotificationCriteria() {

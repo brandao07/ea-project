@@ -24,8 +24,6 @@ public class UserCriteria extends AbstractORMCriteria {
 	public final AssociationExpression club;
 	public final IntegerExpression roleId;
 	public final AssociationExpression role;
-	public final IntegerExpression teamId;
-	public final AssociationExpression team;
 	public final StringExpression Name;
 	public final StringExpression Email;
 	public final StringExpression Password;
@@ -44,8 +42,6 @@ public class UserCriteria extends AbstractORMCriteria {
 		club = new AssociationExpression("club", this);
 		roleId = new IntegerExpression("role.Id", this);
 		role = new AssociationExpression("role", this);
-		teamId = new IntegerExpression("team.Id", this);
-		team = new AssociationExpression("team", this);
 		Name = new StringExpression("Name", this);
 		Email = new StringExpression("Email", this);
 		Password = new StringExpression("Password", this);
@@ -72,10 +68,6 @@ public class UserCriteria extends AbstractORMCriteria {
 	
 	public RoleCriteria createRoleCriteria() {
 		return new RoleCriteria(createCriteria("role"));
-	}
-	
-	public TeamCriteria createTeamCriteria() {
-		return new TeamCriteria(createCriteria("team"));
 	}
 	
 	public User uniqueUser() {

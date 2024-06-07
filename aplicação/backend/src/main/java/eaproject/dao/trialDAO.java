@@ -321,63 +321,6 @@ public class TrialDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.Trial trial)throws PersistentException {
-		try {
-			if (trial.getCompetition() != null) {
-				trial.getCompetition().trial.remove(trial);
-			}
-			
-			if (trial.getGrade() != null) {
-				trial.getGrade().trial.remove(trial);
-			}
-			
-			eaproject.dao.Result[] lResults = trial.result.toArray();
-			for(int i = 0; i < lResults.length; i++) {
-				lResults[i].trial.remove(trial);
-			}
-			eaproject.dao.Team[] lTeams = trial.team.toArray();
-			for(int i = 0; i < lTeams.length; i++) {
-				lTeams[i].trial.remove(trial);
-			}
-			return delete(trial);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.Trial trial, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			if (trial.getCompetition() != null) {
-				trial.getCompetition().trial.remove(trial);
-			}
-			
-			if (trial.getGrade() != null) {
-				trial.getGrade().trial.remove(trial);
-			}
-			
-			eaproject.dao.Result[] lResults = trial.result.toArray();
-			for(int i = 0; i < lResults.length; i++) {
-				lResults[i].trial.remove(trial);
-			}
-			eaproject.dao.Team[] lTeams = trial.team.toArray();
-			for(int i = 0; i < lTeams.length; i++) {
-				lTeams[i].trial.remove(trial);
-			}
-			try {
-				session.delete(trial);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.Trial trial) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(trial);

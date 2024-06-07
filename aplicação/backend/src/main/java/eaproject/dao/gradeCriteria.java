@@ -25,7 +25,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression MaxAge;
 	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
-	public final CollectionExpression trial;
 	
 	public GradeCriteria(Criteria criteria) {
 		super(criteria);
@@ -35,7 +34,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 		MaxAge = new IntegerExpression("MaxAge", this);
 		Gender = new StringExpression("Gender", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
-		trial = new CollectionExpression("ORM_trial", this);
 	}
 	
 	public GradeCriteria(PersistentSession session) {
@@ -44,10 +42,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 	
 	public GradeCriteria() throws PersistentException {
 		this(orm.AASICProjectPersistentManager.instance().getSession());
-	}
-	
-	public TrialCriteria createTrialCriteria() {
-		return new TrialCriteria(createCriteria("ORM_trial"));
 	}
 	
 	public Grade uniqueGrade() {

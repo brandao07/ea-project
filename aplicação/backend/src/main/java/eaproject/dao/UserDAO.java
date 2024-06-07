@@ -321,39 +321,6 @@ public class UserDAO {
 		}
 	}
 	
-	public static boolean deleteAndDissociate(eaproject.dao.User user)throws PersistentException {
-		try {
-			if (user.getTeam() != null) {
-				user.getTeam().user.remove(user);
-			}
-			
-			return delete(user);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
-	public static boolean deleteAndDissociate(eaproject.dao.User user, org.orm.PersistentSession session)throws PersistentException {
-		try {
-			if (user.getTeam() != null) {
-				user.getTeam().user.remove(user);
-			}
-			
-			try {
-				session.delete(user);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			throw new PersistentException(e);
-		}
-	}
-	
 	public static boolean refresh(eaproject.dao.User user) throws PersistentException {
 		try {
 			orm.AASICProjectPersistentManager.instance().getSession().refresh(user);

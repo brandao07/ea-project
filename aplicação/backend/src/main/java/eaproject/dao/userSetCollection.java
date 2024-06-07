@@ -38,7 +38,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	 */
 	public void add(User value) {
 		if (value != null) {
-			super.add(value, value._ormAdapter);
+			super.add(value, null);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class UserSetCollection extends org.orm.util.ORMSet {
 	 * @param value the persistent object
 	 */
 	public void remove(User value) {
-		super.remove(value, value._ormAdapter);
+		super.remove(value, null);
 	}
 	
 	/**

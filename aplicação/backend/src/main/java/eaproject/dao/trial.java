@@ -33,36 +33,10 @@ public class Trial implements Serializable {
 		return null;
 	}
 	
-	private void this_setOwner(Object owner, int key) {
-		if (key == orm.ORMConstants.KEY_TRIAL_LOCATION) {
-			this.location = (eaproject.dao.Location) owner;
-		}
-		
-		else if (key == orm.ORMConstants.KEY_TRIAL_TYPE) {
-			this.type = (eaproject.dao.Type) owner;
-		}
-		
-		else if (key == orm.ORMConstants.KEY_TRIAL_GRADE) {
-			this.grade = (eaproject.dao.Grade) owner;
-		}
-		
-		else if (key == orm.ORMConstants.KEY_TRIAL_COMPETITION) {
-			this.competition = (eaproject.dao.Competition) owner;
-		}
-		
-		else if (key == orm.ORMConstants.KEY_TRIAL_STATE) {
-			this.state = (eaproject.dao.State) owner;
-		}
-	}
-	
 	@Transient	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
-		}
-		
-		public void setOwner(Object owner, int key) {
-			this_setOwner(owner, key);
 		}
 		
 	};
@@ -122,8 +96,9 @@ public class Trial implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_result = new java.util.HashSet();
 	
-	@ManyToMany(mappedBy="ORM_trial", targetEntity=eaproject.dao.Team.class)	
+	@ManyToMany(targetEntity=eaproject.dao.Team.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinTable(name="trial_team", joinColumns={ @JoinColumn(name="TrialId") }, inverseJoinColumns={ @JoinColumn(name="TeamId") })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_team = new java.util.HashSet();
 	
@@ -204,7 +179,7 @@ public class Trial implements Serializable {
 	}
 	
 	@Transient	
-	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_RESULT_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
+	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public void setType(eaproject.dao.Type value) {
 		this.type = value;
@@ -215,50 +190,18 @@ public class Trial implements Serializable {
 	}
 	
 	public void setGrade(eaproject.dao.Grade value) {
-		if (grade != null) {
-			grade.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
+		this.grade = value;
 	}
 	
 	public eaproject.dao.Grade getGrade() {
 		return grade;
 	}
 	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Grade(eaproject.dao.Grade value) {
-		this.grade = value;
-	}
-	
-	private eaproject.dao.Grade getORM_Grade() {
-		return grade;
-	}
-	
 	public void setCompetition(eaproject.dao.Competition value) {
-		if (competition != null) {
-			competition.trial.remove(this);
-		}
-		if (value != null) {
-			value.trial.add(this);
-		}
-	}
-	
-	public eaproject.dao.Competition getCompetition() {
-		return competition;
-	}
-	
-	/**
-	 * This method is for internal use only.
-	 */
-	public void setORM_Competition(eaproject.dao.Competition value) {
 		this.competition = value;
 	}
 	
-	private eaproject.dao.Competition getORM_Competition() {
+	public eaproject.dao.Competition getCompetition() {
 		return competition;
 	}
 	
@@ -279,7 +222,7 @@ public class Trial implements Serializable {
 	}
 	
 	@Transient	
-	public final eaproject.dao.TeamSetCollection team = new eaproject.dao.TeamSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_TEAM, orm.ORMConstants.KEY_TEAM_TRIAL, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
+	public final eaproject.dao.TeamSetCollection team = new eaproject.dao.TeamSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_TEAM, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());
