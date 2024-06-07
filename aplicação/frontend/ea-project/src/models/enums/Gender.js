@@ -1,6 +1,6 @@
 const GenderEnumerator = Object.freeze({
-    Male: 'Male',
-    Female: 'Female'
+    Masculino: 'Masculino',
+    Feminino: 'Feminino'
 });
 
 export default GenderEnumerator;

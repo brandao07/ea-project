@@ -1,0 +1,59 @@
+package eaproject.output;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+public class GetTypeByIdOutput extends BaseOutput implements Serializable {
+
+    @JsonProperty
+    private TypeProperties type;
+
+    public TypeProperties getType() {
+        return type;
+    }
+
+    public void setType(TypeProperties type) {
+        this.type = type;
+    }
+
+    public static class TypeProperties implements Serializable {
+        private int id;
+        private String name;
+        private int numberOfPersons;
+        private Timestamp creationDate;
+
+        // Getters e setters
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getNumberOfPersons() {
+            return numberOfPersons;
+        }
+
+        public void setNumberOfPersons(int numberOfPersons) {
+            this.numberOfPersons = numberOfPersons;
+        }
+
+        public Timestamp getCreationDate() {
+            return creationDate;
+        }
+
+        public void setCreationDate(Timestamp creationDate) {
+            this.creationDate = creationDate;
+        }
+    }
+}
