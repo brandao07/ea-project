@@ -23,8 +23,8 @@ public class GetTeamByIdOutput extends BaseOutput implements Serializable {
         private String name;
         private boolean isActive;
         private Timestamp creationDate;
-        private ClubProperties club; // Objeto Club para abordagem LAZY
-        private List<UserProperties> users; // Lista de objetos User para abordagem LAZY
+        private ClubProperties club; // LAZY
+        private List<UserProperties> users; // LAZY
 
         // Getters and setters
         public int getId() {
