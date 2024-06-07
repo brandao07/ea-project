@@ -63,9 +63,9 @@ sudo mkdir -p "$TARGET_DAO"
 
 # Copiar arquivos do local de origem para o destino
 echo "A copiar arquivos..."
-sudo cp "$SOURCE_LIB" "$TARGET_LIB"
-sudo cp "$SOURCE_ORM_CFG" "$TARGET_ORM_CFG"
-sudo cp -r $SOURCE_ORM/* "$TARGET_ORM"
-sudo cp -r $SOURCE_DAO/* "$TARGET_DAO"
+sudo cp -r $SOURCE_LIB* "$TARGET_LIB"
+sudo cp -r $SOURCE_ORM_CFG* "$TARGET_ORM_CFG"
+sudo cp -r $SOURCE_ORM* "$TARGET_ORM"
+sudo cp -r $SOURCE_DAO* "$TARGET_DAO"
 
 echo "Cópia concluída com sucesso!"
