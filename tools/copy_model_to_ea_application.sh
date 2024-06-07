@@ -3,8 +3,8 @@
 # Define as paths de origem
 SOURCE_LIB="../vp-codigo/lib/orm.jar"
 SOURCE_ORM_CFG="../vp-codigo/src/ormmapping/AASICProject.cfg.xml"
-SOURCE_ORM="../vp-codigo/src/orm/*"
-SOURCE_DAO="../vp-codigo/src/eaproject/dao/*"
+SOURCE_ORM="../vp-codigo/src/orm/"
+SOURCE_DAO="../vp-codigo/src/eaproject/dao/"
 
 # Define as paths de destino
 TARGET_LIB="../ea-project/aplicação/backend/src/main/java/lib"
