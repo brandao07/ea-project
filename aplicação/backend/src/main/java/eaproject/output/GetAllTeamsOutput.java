@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetAllTeamsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<TeamProperties> teamList;
+    private ArrayList<TeamProperties> teamList;
 
-    public List<TeamProperties> getTeamList() {
+    public ArrayList<TeamProperties> getTeamList() {
         return teamList;
     }
 
-    public void setTeamList(List<TeamProperties> teamList) {
+    public void setTeamList(ArrayList<TeamProperties> teamList) {
         this.teamList = teamList;
     }
 

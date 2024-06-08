@@ -26,13 +26,13 @@ public class Location implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_LOCATION_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_LOCATION_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@Column(name="Latitude", nullable=false)	
-	private float Latitude;
+	private Double Latitude;
 	
 	@Column(name="Longitude", nullable=false)	
-	private float Longitude;
+	private Double Longitude;
 	
 	@Column(name="Address", nullable=true, length=255)	
 	private String Address;
@@ -50,30 +50,42 @@ public class Location implements Serializable {
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	
-	public void setLatitude(float value) {
+	public void setLatitude(double value) {
+		setLatitude(Double.valueOf(value));
+	}
+	
+	public void setLatitude(Double value) {
 		this.Latitude = value;
 	}
 	
-	public float getLatitude() {
+	public Double getLatitude() {
 		return Latitude;
 	}
 	
-	public void setLongitude(float value) {
+	public void setLongitude(double value) {
+		setLongitude(Double.valueOf(value));
+	}
+	
+	public void setLongitude(Double value) {
 		this.Longitude = value;
 	}
 	
-	public float getLongitude() {
+	public Double getLongitude() {
 		return Longitude;
 	}
 	

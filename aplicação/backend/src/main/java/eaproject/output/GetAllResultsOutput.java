@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetAllResultsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<ResultProperties> resultList;
+    private ArrayList<ResultProperties> resultList;
 
-    public List<ResultProperties> getResultList() {
+    public ArrayList<ResultProperties> getResultList() {
         return resultList;
     }
 
-    public void setResultList(List<ResultProperties> resultList) {
+    public void setResultList(ArrayList<ResultProperties> resultList) {
         this.resultList = resultList;
     }
 
@@ -24,7 +25,7 @@ public class GetAllResultsOutput extends BaseOutput implements Serializable {
         private int id;
 
         @JsonProperty
-        private int position;
+        private Integer position;
 
         @JsonProperty
         private Timestamp time;
@@ -46,11 +47,11 @@ public class GetAllResultsOutput extends BaseOutput implements Serializable {
             this.id = id;
         }
 
-        public int getPosition() {
+        public Integer getPosition() {
             return position;
         }
 
-        public void setPosition(int position) {
+        public void setPosition(Integer position) {
             this.position = position;
         }
 

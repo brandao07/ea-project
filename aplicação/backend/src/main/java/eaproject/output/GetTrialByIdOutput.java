@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetTrialByIdOutput extends BaseOutput implements Serializable {
 
@@ -45,10 +45,10 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     private LocationProperties location;
 
     @JsonProperty
-    private List<ResultProperties> results;
+    private ArrayList<ResultProperties> results;
 
     @JsonProperty
-    private List<TeamProperties> teams;
+    private ArrayList<TeamProperties> teams;
 
     public int getId() {
         return id;
@@ -146,19 +146,19 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
         this.location = location;
     }
 
-    public List<ResultProperties> getResults() {
+    public ArrayList<ResultProperties> getResults() {
         return results;
     }
 
-    public void setResults(List<ResultProperties> results) {
+    public void setResults(ArrayList<ResultProperties> results) {
         this.results = results;
     }
 
-    public List<TeamProperties> getTeams() {
+    public ArrayList<TeamProperties> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<TeamProperties> teams) {
+    public void setTeams(ArrayList<TeamProperties> teams) {
         this.teams = teams;
     }
 

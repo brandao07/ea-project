@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class UpdateResultInput extends BaseInput implements Serializable {
 
     private int id;
-    private int position;
+    private Integer position;
     private Timestamp time;
     private String observations;
     private Timestamp penaltyTime;
@@ -16,7 +16,7 @@ public class UpdateResultInput extends BaseInput implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

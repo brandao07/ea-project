@@ -1,8 +1,8 @@
-import BaseOutput from './BaseOutput';
+import BaseOutput from "./BaseOutput";
 
 export default class UserRegisterOutput extends BaseOutput {
-    constructor(registrationSuccessful = false, feedbackMessages = []) {
-        super(feedbackMessages);
-        this.registrationSuccessful = registrationSuccessful;
-    }
+  constructor(registrationSuccessful = false, feedbackMessages = []) {
+    super(feedbackMessages);
+    this.registrationSuccessful = registrationSuccessful;
+  }
 }

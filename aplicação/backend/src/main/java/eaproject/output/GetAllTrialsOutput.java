@@ -4,18 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllTrialsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<TrialProperties> trials;
+    private ArrayList<TrialProperties> trials;
 
-    public List<TrialProperties> getTrials() {
+    public ArrayList<TrialProperties> getTrials() {
         return trials;
     }
 
-    public void setTrials(List<TrialProperties> trials) {
+    public void setTrials(ArrayList<TrialProperties> trials) {
         this.trials = trials;
     }
 
@@ -31,7 +32,7 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
         private Timestamp startDate;
 
         @JsonProperty
-        private double distance;
+        private Double distance;
 
         @JsonProperty
         private String distanceUnit;
@@ -66,11 +67,11 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
             this.startDate = startDate;
         }
 
-        public double getDistance() {
+        public Double getDistance() {
             return distance;
         }
 
-        public void setDistance(double distance) {
+        public void setDistance(Double distance) {
             this.distance = distance;
         }
 

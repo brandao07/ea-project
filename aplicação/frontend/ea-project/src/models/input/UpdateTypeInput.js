@@ -1,11 +1,16 @@
-import BaseInput from './BaseInput';
+import BaseInput from "./BaseInput";
 
 export default class UpdateTypeInput extends BaseInput {
-    constructor(id = 0, name = '', numberOfPersons = 0, creationDate = new Date(), lazyLoad = false) {
-        super(lazyLoad);
-        this.id = id;
-        this.name = name;
-        this.numberOfPersons = numberOfPersons;
-        this.creationDate = creationDate;
-    }
+  constructor(
+    id = 0,
+    name = "",
+    numberOfPersons = 0,
+    creationDate = new Date()
+  ) {
+    super();
+    this.id = id;
+    this.name = name;
+    this.numberOfPersons = numberOfPersons;
+    this.creationDate = creationDate;
+  }
 }

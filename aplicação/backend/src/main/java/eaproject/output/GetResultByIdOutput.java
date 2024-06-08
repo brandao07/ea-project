@@ -11,7 +11,7 @@ public class GetResultByIdOutput extends BaseOutput implements Serializable {
     private int id;
 
     @JsonProperty
-    private int position;
+    private Integer position;
 
     @JsonProperty
     private Timestamp time;
@@ -33,11 +33,11 @@ public class GetResultByIdOutput extends BaseOutput implements Serializable {
         this.id = id;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

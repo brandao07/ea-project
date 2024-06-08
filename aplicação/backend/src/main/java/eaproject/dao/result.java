@@ -26,10 +26,10 @@ public class Result implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_RESULT_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_RESULT_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@Column(name="Position", nullable=false, length=10)	
-	private int Position;
+	private Integer Position;
 	
 	@Column(name="Time", nullable=true)	
 	private java.sql.Timestamp Time;
@@ -44,22 +44,30 @@ public class Result implements Serializable {
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	
 	public void setPosition(int value) {
+		setPosition(Integer.valueOf(value));
+	}
+	
+	public void setPosition(Integer value) {
 		this.Position = value;
 	}
 	
-	public int getPosition() {
+	public Integer getPosition() {
 		return Position;
 	}
 	

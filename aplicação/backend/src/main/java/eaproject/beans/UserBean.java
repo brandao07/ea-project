@@ -323,7 +323,7 @@ public class UserBean implements UserLocal {
             // Check if users are retrieved successfully
             if (users.length > 0) {
                 // Assign retrieved users to the output object
-                output.setUsersList(Utilities.convertToDTOList(Arrays.stream(users).toList(), GetUsersOutput.UserProperties.class));
+                output.setUsersList(Utilities.convertToDTOArray(users, GetUsersOutput.UserProperties.class));
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

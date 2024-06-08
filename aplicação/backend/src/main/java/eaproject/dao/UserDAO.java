@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class UserDAO {
-	public static User loadUserByORMID(int Id) throws PersistentException {
+	public static User loadUserByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByORMID(session, Id);
@@ -30,7 +30,7 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(int Id) throws PersistentException {
+	public static User getUserByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getUserByORMID(session, Id);
@@ -41,7 +41,7 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User loadUserByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadUserByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User getUserByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getUserByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static User loadUserByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(Id));
+			return (User) session.load(eaproject.dao.User.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static User getUserByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(Id));
+			return (User) session.get(eaproject.dao.User.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User loadUserByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User loadUserByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (User) session.load(eaproject.dao.User.class, Integer.valueOf(Id), lockMode);
+			return (User) session.load(eaproject.dao.User.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class UserDAO {
 		}
 	}
 	
-	public static User getUserByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static User getUserByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (User) session.get(eaproject.dao.User.class, Integer.valueOf(Id), lockMode);
+			return (User) session.get(eaproject.dao.User.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

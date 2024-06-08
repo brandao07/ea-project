@@ -16,13 +16,13 @@ public class BasicUserInfoOutput extends BaseOutput implements Serializable {
     public String gender;
 
     @JsonProperty
-    public int age;
+    public Integer age;
 
     @JsonProperty
-    public double height;
+    public Double height;
 
     @JsonProperty
-    public double weight;
+    public Double weight;
 
     public String getName() {
         return name;
@@ -48,27 +48,27 @@ public class BasicUserInfoOutput extends BaseOutput implements Serializable {
         this.gender = gender;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public double getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 }

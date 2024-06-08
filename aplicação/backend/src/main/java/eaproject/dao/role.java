@@ -26,7 +26,7 @@ public class Role implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_ROLE_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_ROLE_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
@@ -38,14 +38,18 @@ public class Role implements Serializable {
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	

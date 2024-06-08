@@ -14,7 +14,7 @@ public class GetTypeByIdOutput extends BaseOutput implements Serializable {
     private String name;
 
     @JsonProperty
-    private int numberOfPersons;
+    private Integer numberOfPersons;
 
     @JsonProperty
     private Timestamp creationDate;
@@ -35,11 +35,11 @@ public class GetTypeByIdOutput extends BaseOutput implements Serializable {
         this.name = name;
     }
 
-    public int getNumberOfPersons() {
+    public Integer getNumberOfPersons() {
         return numberOfPersons;
     }
 
-    public void setNumberOfPersons(int numberOfPersons) {
+    public void setNumberOfPersons(Integer numberOfPersons) {
         this.numberOfPersons = numberOfPersons;
     }
 

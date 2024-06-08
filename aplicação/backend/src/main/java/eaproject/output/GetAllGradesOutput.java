@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetAllGradesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<GradeProperties> gradeList;
+    private ArrayList<GradeProperties> gradeList;
 
-    public List<GradeProperties> getGradeList() {
+    public ArrayList<GradeProperties> getGradeList() {
         return gradeList;
     }
 
-    public void setGradeList(List<GradeProperties> gradeList) {
+    public void setGradeList(ArrayList<GradeProperties> gradeList) {
         this.gradeList = gradeList;
     }
 
@@ -30,7 +31,7 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
         private int minAge;
 
         @JsonProperty
-        private int maxAge;
+        private Integer maxAge;
 
         @JsonProperty
         private String gender;
@@ -62,11 +63,11 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
             this.minAge = minAge;
         }
 
-        public int getMaxAge() {
+        public Integer getMaxAge() {
             return maxAge;
         }
 
-        public void setMaxAge(int maxAge) {
+        public void setMaxAge(Integer maxAge) {
             this.maxAge = maxAge;
         }
 

@@ -14,10 +14,10 @@ public class UpdateTrialInput extends BaseInput implements Serializable {
     private boolean isActive;
     private Timestamp creationDate;
     private int stateId;
-    private int competitionId;
-    private int gradeId;
-    private int typeId;
-    private int locationId;
+    private Integer competitionId;
+    private Integer gradeId;
+    private Integer typeId;
+    private Integer locationId;
     private List<Integer> resultIds;
     private List<Integer> teamIds;
 
@@ -77,35 +77,35 @@ public class UpdateTrialInput extends BaseInput implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public int getStateId() {
+    public Integer getStateId() {
         return stateId;
     }
 
-    public void setStateId(int stateId) {
+    public void setStateId(Integer stateId) {
         this.stateId = stateId;
     }
 
-    public int getCompetitionId() {
+    public Integer getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(int competitionId) {
+    public void setCompetitionId(Integer competitionId) {
         this.competitionId = competitionId;
     }
 
-    public int getGradeId() {
+    public Integer getGradeId() {
         return gradeId;
     }
 
-    public void setGradeId(int gradeId) {
+    public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
     }
 
-    public int getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 

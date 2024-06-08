@@ -14,10 +14,10 @@ public class GetGradeByIdOutput extends BaseOutput implements Serializable {
     private String name;
 
     @JsonProperty
-    private int minAge;
+    private Integer minAge;
 
     @JsonProperty
-    private int maxAge;
+    private Integer maxAge;
 
     @JsonProperty
     private String gender;
@@ -41,19 +41,19 @@ public class GetGradeByIdOutput extends BaseOutput implements Serializable {
         this.name = name;
     }
 
-    public int getMinAge() {
+    public Integer getMinAge() {
         return minAge;
     }
 
-    public void setMinAge(int minAge) {
+    public void setMinAge(Integer minAge) {
         this.minAge = minAge;
     }
 
-    public int getMaxAge() {
+    public Integer getMaxAge() {
         return maxAge;
     }
 
-    public void setMaxAge(int maxAge) {
+    public void setMaxAge(Integer maxAge) {
         this.maxAge = maxAge;
     }
 

@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class CompetitionDAO {
-	public static Competition loadCompetitionByORMID(int Id) throws PersistentException {
+	public static Competition loadCompetitionByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadCompetitionByORMID(session, Id);
@@ -30,7 +30,7 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition getCompetitionByORMID(int Id) throws PersistentException {
+	public static Competition getCompetitionByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getCompetitionByORMID(session, Id);
@@ -41,7 +41,7 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition loadCompetitionByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Competition loadCompetitionByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadCompetitionByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition getCompetitionByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Competition getCompetitionByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getCompetitionByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition loadCompetitionByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Competition loadCompetitionByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Competition) session.load(eaproject.dao.Competition.class, Integer.valueOf(Id));
+			return (Competition) session.load(eaproject.dao.Competition.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition getCompetitionByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Competition getCompetitionByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Competition) session.get(eaproject.dao.Competition.class, Integer.valueOf(Id));
+			return (Competition) session.get(eaproject.dao.Competition.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition loadCompetitionByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Competition loadCompetitionByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Competition) session.load(eaproject.dao.Competition.class, Integer.valueOf(Id), lockMode);
+			return (Competition) session.load(eaproject.dao.Competition.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class CompetitionDAO {
 		}
 	}
 	
-	public static Competition getCompetitionByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Competition getCompetitionByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Competition) session.get(eaproject.dao.Competition.class, Integer.valueOf(Id), lockMode);
+			return (Competition) session.get(eaproject.dao.Competition.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

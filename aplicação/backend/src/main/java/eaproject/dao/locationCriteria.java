@@ -20,8 +20,8 @@ import org.orm.criteria.*;
 
 public class LocationCriteria extends AbstractORMCriteria {
 	public final IntegerExpression Id;
-	public final FloatExpression Latitude;
-	public final FloatExpression Longitude;
+	public final DoubleExpression Latitude;
+	public final DoubleExpression Longitude;
 	public final StringExpression Address;
 	public final StringExpression City;
 	public final StringExpression Country;
@@ -31,8 +31,8 @@ public class LocationCriteria extends AbstractORMCriteria {
 	public LocationCriteria(Criteria criteria) {
 		super(criteria);
 		Id = new IntegerExpression("Id", this);
-		Latitude = new FloatExpression("Latitude", this);
-		Longitude = new FloatExpression("Longitude", this);
+		Latitude = new DoubleExpression("Latitude", this);
+		Longitude = new DoubleExpression("Longitude", this);
 		Address = new StringExpression("Address", this);
 		City = new StringExpression("City", this);
 		Country = new StringExpression("Country", this);

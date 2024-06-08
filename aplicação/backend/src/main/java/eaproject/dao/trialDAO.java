@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class TrialDAO {
-	public static Trial loadTrialByORMID(int Id) throws PersistentException {
+	public static Trial loadTrialByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTrialByORMID(session, Id);
@@ -30,7 +30,7 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(int Id) throws PersistentException {
+	public static Trial getTrialByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTrialByORMID(session, Id);
@@ -41,7 +41,7 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial loadTrialByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTrialByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial getTrialByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTrialByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Trial loadTrialByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(Id));
+			return (Trial) session.load(eaproject.dao.Trial.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Trial getTrialByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(Id));
+			return (Trial) session.get(eaproject.dao.Trial.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial loadTrialByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial loadTrialByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Trial) session.load(eaproject.dao.Trial.class, Integer.valueOf(Id), lockMode);
+			return (Trial) session.load(eaproject.dao.Trial.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class TrialDAO {
 		}
 	}
 	
-	public static Trial getTrialByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Trial getTrialByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Trial) session.get(eaproject.dao.Trial.class, Integer.valueOf(Id), lockMode);
+			return (Trial) session.get(eaproject.dao.Trial.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

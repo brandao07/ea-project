@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
-public class GetAllLocationOutput extends BaseOutput implements Serializable {
+public class GetAllLocationsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<LocationProperties> locationList;
+    private ArrayList<LocationProperties> locationList;
 
-    public List<LocationProperties> getLocationList() {
+    public ArrayList<LocationProperties> getLocationList() {
         return locationList;
     }
 
-    public void setLocationList(List<LocationProperties> locationList) {
+    public void setLocationList(ArrayList<LocationProperties> locationList) {
         this.locationList = locationList;
     }
 
@@ -24,10 +25,10 @@ public class GetAllLocationOutput extends BaseOutput implements Serializable {
         private int id;
 
         @JsonProperty
-        private float latitude;
+        private Double latitude;
 
         @JsonProperty
-        private float longitude;
+        private Double longitude;
 
         @JsonProperty
         private String address;
@@ -52,19 +53,17 @@ public class GetAllLocationOutput extends BaseOutput implements Serializable {
             this.id = id;
         }
 
-        public float getLatitude() {
+        public Double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(float latitude) {
+        public void setLatitude(Double latitude) {
             this.latitude = latitude;
         }
 
-        public float getLongitude() {
-            return longitude;
-        }
+        public Double getLongitude() { return longitude; }
 
-        public void setLongitude(float longitude) {
+        public void setLongitude(Double longitude) {
             this.longitude = longitude;
         }
 

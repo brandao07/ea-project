@@ -10,7 +10,7 @@ public class UpdateTeamInput extends BaseInput implements Serializable {
     private String name;
     private boolean isActive;
     private Timestamp creationDate;
-    private int clubId;
+    private Integer clubId;
     private List<Integer> userIds;
 
     public int getId() {
@@ -45,11 +45,11 @@ public class UpdateTeamInput extends BaseInput implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public int getClubId() {
+    public Integer getClubId() {
         return clubId;
     }
 
-    public void setClubId(int clubId) {
+    public void setClubId(Integer clubId) {
         this.clubId = clubId;
     }
 

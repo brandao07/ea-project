@@ -7,9 +7,9 @@ public class UserRegisterInput extends BaseInput implements Serializable {
     private String email;
     private String password;
     private String gender;
-    private int age;
-    private double height;
-    private double weight;
+    private Integer age;
+    private Double height;
+    private Double weight;
 
     public String getName() {
         return name;
@@ -43,11 +43,11 @@ public class UserRegisterInput extends BaseInput implements Serializable {
         this.gender = gender;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -55,7 +55,7 @@ public class UserRegisterInput extends BaseInput implements Serializable {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
@@ -63,7 +63,7 @@ public class UserRegisterInput extends BaseInput implements Serializable {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 }

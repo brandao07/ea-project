@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class StateDAO {
-	public static State loadStateByORMID(int Id) throws PersistentException {
+	public static State loadStateByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadStateByORMID(session, Id);
@@ -30,7 +30,7 @@ public class StateDAO {
 		}
 	}
 	
-	public static State getStateByORMID(int Id) throws PersistentException {
+	public static State getStateByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getStateByORMID(session, Id);
@@ -41,7 +41,7 @@ public class StateDAO {
 		}
 	}
 	
-	public static State loadStateByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static State loadStateByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadStateByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class StateDAO {
 		}
 	}
 	
-	public static State getStateByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static State getStateByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getStateByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class StateDAO {
 		}
 	}
 	
-	public static State loadStateByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static State loadStateByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (State) session.load(eaproject.dao.State.class, Integer.valueOf(Id));
+			return (State) session.load(eaproject.dao.State.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class StateDAO {
 		}
 	}
 	
-	public static State getStateByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static State getStateByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (State) session.get(eaproject.dao.State.class, Integer.valueOf(Id));
+			return (State) session.get(eaproject.dao.State.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class StateDAO {
 		}
 	}
 	
-	public static State loadStateByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static State loadStateByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (State) session.load(eaproject.dao.State.class, Integer.valueOf(Id), lockMode);
+			return (State) session.load(eaproject.dao.State.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class StateDAO {
 		}
 	}
 	
-	public static State getStateByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static State getStateByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (State) session.get(eaproject.dao.State.class, Integer.valueOf(Id), lockMode);
+			return (State) session.get(eaproject.dao.State.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

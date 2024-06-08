@@ -1,8 +1,8 @@
-import BaseOutput from './BaseOutput';
+import BaseOutput from "./BaseOutput";
 
 export default class UpdateCompetitionOutput extends BaseOutput {
-    constructor(updateSuccessful = false, feedbackMessages = []) {
-        super(feedbackMessages);
-        this.updateSuccessful = updateSuccessful;
-    }
+  constructor(updateSuccessful = false, feedbackMessages = []) {
+    super(feedbackMessages);
+    this.updateSuccessful = updateSuccessful;
+  }
 }

@@ -1,7 +1,7 @@
-import BaseInput from './BaseInput';
+import BaseInput from "./BaseInput";
 
 export default class GetAllCompetitionsInput extends BaseInput {
-    constructor(lazyLoad = false) {
-        super(lazyLoad);
-    }
+  constructor(lazyLoad = false) {
+    super(lazyLoad);
+  }
 }

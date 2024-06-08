@@ -44,7 +44,7 @@ public class User implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_USER_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_USER_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Club.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -69,13 +69,13 @@ public class User implements Serializable {
 	private String Gender;
 	
 	@Column(name="Age", nullable=false, length=10)	
-	private int Age;
+	private Integer Age;
 	
 	@Column(name="Height", nullable=false)	
-	private double Height;
+	private Double Height;
 	
 	@Column(name="Weight", nullable=false)	
-	private double Weight;
+	private Double Weight;
 	
 	@Column(name="Isactive", nullable=false)	
 	private boolean IsActive;
@@ -87,14 +87,18 @@ public class User implements Serializable {
 	private String PhotographyPath;
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	
@@ -131,26 +135,38 @@ public class User implements Serializable {
 	}
 	
 	public void setAge(int value) {
+		setAge(Integer.valueOf(value));
+	}
+	
+	public void setAge(Integer value) {
 		this.Age = value;
 	}
 	
-	public int getAge() {
+	public Integer getAge() {
 		return Age;
 	}
 	
 	public void setHeight(double value) {
+		setHeight(Double.valueOf(value));
+	}
+	
+	public void setHeight(Double value) {
 		this.Height = value;
 	}
 	
-	public double getHeight() {
+	public Double getHeight() {
 		return Height;
 	}
 	
 	public void setWeight(double value) {
+		setWeight(Double.valueOf(value));
+	}
+	
+	public void setWeight(Double value) {
 		this.Weight = value;
 	}
 	
-	public double getWeight() {
+	public Double getWeight() {
 		return Weight;
 	}
 	

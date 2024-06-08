@@ -4,18 +4,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetUsersOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<UserProperties> usersList;
+    private ArrayList<UserProperties> usersList;
 
-    public List<UserProperties> getUsersList() {
+    public ArrayList<UserProperties> getUsersList() {
         return usersList;
     }
 
-    public void setUsersList(List<UserProperties> usersList) {
+    public void setUsersList(ArrayList<UserProperties> usersList) {
         this.usersList = usersList;
     }
 
@@ -24,9 +24,9 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
         private String name;
         private String email;
         private String gender;
-        private int age;
-        private double height;
-        private double weight;
+        private Integer age;
+        private Double height;
+        private Double weight;
         private Timestamp registerDate;
         private String photographyPath;
         
@@ -58,27 +58,27 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
             this.gender = gender;
         }
 
-        public int getAge() {
+        public Integer getAge() {
             return age;
         }
 
-        public void setAge(int age) {
+        public void setAge(Integer age) {
             this.age = age;
         }
 
-        public double getHeight() {
+        public Double getHeight() {
             return height;
         }
 
-        public void setHeight(double height) {
+        public void setHeight(Double height) {
             this.height = height;
         }
 
-        public double getWeight() {
+        public Double getWeight() {
             return weight;
         }
 
-        public void setWeight(double weight) {
+        public void setWeight(Double weight) {
             this.weight = weight;
         }
 

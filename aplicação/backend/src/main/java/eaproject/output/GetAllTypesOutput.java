@@ -4,50 +4,64 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class GetAllTypesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private int id;
+    private ArrayList<GetAllTypesOutput.TypeProperties> types;
 
-    @JsonProperty
-    private String name;
-
-    @JsonProperty
-    private int numberOfPersons;
-
-    @JsonProperty
-    private Timestamp creationDate;
-
-    public int getId() {
-        return id;
+    public ArrayList<TypeProperties> getTypes() {
+        return types;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTypes(ArrayList<TypeProperties> types) {
+        this.types = types;
     }
 
-    public String getName() {
-        return name;
-    }
+    public static class TypeProperties implements Serializable {
+        @JsonProperty
+        private int id;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        @JsonProperty
+        private String name;
 
-    public int getNumberOfPersons() {
-        return numberOfPersons;
-    }
+        @JsonProperty
+        private Integer numberOfPersons;
 
-    public void setNumberOfPersons(int numberOfPersons) {
-        this.numberOfPersons = numberOfPersons;
-    }
+        @JsonProperty
+        private Timestamp creationDate;
 
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getNumberOfPersons() {
+            return numberOfPersons;
+        }
+
+        public void setNumberOfPersons(Integer numberOfPersons) {
+            this.numberOfPersons = numberOfPersons;
+        }
+
+        public Timestamp getCreationDate() {
+            return creationDate;
+        }
+
+        public void setCreationDate(Timestamp creationDate) {
+            this.creationDate = creationDate;
+        }
     }
 }

@@ -4,18 +4,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetRolesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<RoleProperties> rolesList;
+    private ArrayList<RoleProperties> rolesList;
 
-    public List<RoleProperties> getRolesList() {
+    public ArrayList<RoleProperties> getRolesList() {
         return rolesList;
     }
 
-    public void setRolesList(List<RoleProperties> rolesList) {
+    public void setRolesList(ArrayList<RoleProperties> rolesList) {
         this.rolesList = rolesList;
     }
 

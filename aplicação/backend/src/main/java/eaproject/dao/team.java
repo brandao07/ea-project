@@ -52,7 +52,7 @@ public class Team implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_TEAM_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TEAM_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Club.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
@@ -75,14 +75,18 @@ public class Team implements Serializable {
 	private java.util.Set ORM_user = new java.util.HashSet();
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	

@@ -20,8 +20,8 @@ import org.orm.criteria.*;
 
 public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression Id;
-	public final FloatExpression Latitude;
-	public final FloatExpression Longitude;
+	public final DoubleExpression Latitude;
+	public final DoubleExpression Longitude;
 	public final StringExpression Address;
 	public final StringExpression City;
 	public final StringExpression Country;
@@ -31,8 +31,8 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 	public LocationDetachedCriteria() {
 		super(eaproject.dao.Location.class, eaproject.dao.LocationCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		Latitude = new FloatExpression("Latitude", this.getDetachedCriteria());
-		Longitude = new FloatExpression("Longitude", this.getDetachedCriteria());
+		Latitude = new DoubleExpression("Latitude", this.getDetachedCriteria());
+		Longitude = new DoubleExpression("Longitude", this.getDetachedCriteria());
 		Address = new StringExpression("Address", this.getDetachedCriteria());
 		City = new StringExpression("City", this.getDetachedCriteria());
 		Country = new StringExpression("Country", this.getDetachedCriteria());
@@ -43,8 +43,8 @@ public class LocationDetachedCriteria extends AbstractORMDetachedCriteria {
 	public LocationDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, eaproject.dao.LocationCriteria.class);
 		Id = new IntegerExpression("Id", this.getDetachedCriteria());
-		Latitude = new FloatExpression("Latitude", this.getDetachedCriteria());
-		Longitude = new FloatExpression("Longitude", this.getDetachedCriteria());
+		Latitude = new DoubleExpression("Latitude", this.getDetachedCriteria());
+		Longitude = new DoubleExpression("Longitude", this.getDetachedCriteria());
 		Address = new StringExpression("Address", this.getDetachedCriteria());
 		City = new StringExpression("City", this.getDetachedCriteria());
 		Country = new StringExpression("Country", this.getDetachedCriteria());

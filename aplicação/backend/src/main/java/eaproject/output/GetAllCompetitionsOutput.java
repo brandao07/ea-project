@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetAllCompetitionsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<CompetitionProperties> competitionList;
+    private ArrayList<CompetitionProperties> competitionList;
 
-    public List<CompetitionProperties> getCompetitionList() {
+    public ArrayList<CompetitionProperties> getCompetitionList() {
         return competitionList;
     }
 
-    public void setCompetitionList(List<CompetitionProperties> competitionList) {
+    public void setCompetitionList(ArrayList<CompetitionProperties> competitionList) {
         this.competitionList = competitionList;
     }
 

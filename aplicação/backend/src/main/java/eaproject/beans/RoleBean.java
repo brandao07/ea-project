@@ -7,25 +7,19 @@ import eaproject.dao.RoleDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.GetRolesInput;
 import eaproject.output.GetRolesOutput;
-import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-import java.util.Arrays;
 
 @Stateless(name = "RoleEJB")
 @Local(UserLocal.class)
 @Component
 public class RoleBean implements RoleLocal {
-
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
 
     @PostConstruct
     public void init() {
@@ -46,7 +40,7 @@ public class RoleBean implements RoleLocal {
             // Check if roles are retrieved successfully
             if (roles.length > 0) {
                 // Assign retrieved roles to the output object
-                output.setRolesList(Utilities.convertToDTOList(Arrays.stream(roles).toList(), GetRolesOutput.RoleProperties.class));
+                output.setRolesList(Utilities.convertToDTOArray(roles, GetRolesOutput.RoleProperties.class));
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

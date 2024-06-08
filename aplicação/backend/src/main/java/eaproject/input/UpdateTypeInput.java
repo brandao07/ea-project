@@ -7,12 +7,10 @@ public class UpdateTypeInput extends BaseInput implements Serializable {
 
     private int id;
     private String name;
-    private int numberOfPersons;
+    private Integer numberOfPersons;
     private Timestamp creationDate;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public void setId(int id) {
         this.id = id;
@@ -26,11 +24,11 @@ public class UpdateTypeInput extends BaseInput implements Serializable {
         this.name = name;
     }
 
-    public int getNumberOfPersons() {
+    public Integer getNumberOfPersons() {
         return numberOfPersons;
     }
 
-    public void setNumberOfPersons(int numberOfPersons) {
+    public void setNumberOfPersons(Integer numberOfPersons) {
         this.numberOfPersons = numberOfPersons;
     }
 

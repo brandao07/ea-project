@@ -26,16 +26,16 @@ public class Grade implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_GRADE_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_GRADE_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
 	
 	@Column(name="Minage", nullable=false, length=10)	
-	private int MinAge;
+	private Integer MinAge;
 	
 	@Column(name="Maxage", nullable=false, length=10)	
-	private int MaxAge;
+	private Integer MaxAge;
 	
 	@Column(name="Gender", nullable=true, length=255)	
 	private String Gender;
@@ -44,14 +44,18 @@ public class Grade implements Serializable {
 	private java.sql.Timestamp CreationDate;
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	
@@ -64,18 +68,26 @@ public class Grade implements Serializable {
 	}
 	
 	public void setMinAge(int value) {
+		setMinAge(Integer.valueOf(value));
+	}
+	
+	public void setMinAge(Integer value) {
 		this.MinAge = value;
 	}
 	
-	public int getMinAge() {
+	public Integer getMinAge() {
 		return MinAge;
 	}
 	
 	public void setMaxAge(int value) {
+		setMaxAge(Integer.valueOf(value));
+	}
+	
+	public void setMaxAge(Integer value) {
 		this.MaxAge = value;
 	}
 	
-	public int getMaxAge() {
+	public Integer getMaxAge() {
 		return MaxAge;
 	}
 	

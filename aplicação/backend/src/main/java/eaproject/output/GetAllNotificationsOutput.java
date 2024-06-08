@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetAllNotificationsOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<NotificationProperties> notificationList;
+    private ArrayList<NotificationProperties> notificationList;
 
-    public List<NotificationProperties> getNotificationList() {
+    public ArrayList<NotificationProperties> getNotificationList() {
         return notificationList;
     }
 
-    public void setNotificationList(List<NotificationProperties> notificationList) {
+    public void setNotificationList(ArrayList<NotificationProperties> notificationList) {
         this.notificationList = notificationList;
     }
 

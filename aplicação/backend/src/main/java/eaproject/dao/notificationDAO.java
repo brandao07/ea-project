@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class NotificationDAO {
-	public static Notification loadNotificationByORMID(int Id) throws PersistentException {
+	public static Notification loadNotificationByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadNotificationByORMID(session, Id);
@@ -30,7 +30,7 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification getNotificationByORMID(int Id) throws PersistentException {
+	public static Notification getNotificationByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getNotificationByORMID(session, Id);
@@ -41,7 +41,7 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification loadNotificationByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Notification loadNotificationByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadNotificationByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification getNotificationByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Notification getNotificationByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getNotificationByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification loadNotificationByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Notification loadNotificationByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Notification) session.load(eaproject.dao.Notification.class, Integer.valueOf(Id));
+			return (Notification) session.load(eaproject.dao.Notification.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification getNotificationByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Notification getNotificationByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Notification) session.get(eaproject.dao.Notification.class, Integer.valueOf(Id));
+			return (Notification) session.get(eaproject.dao.Notification.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification loadNotificationByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Notification loadNotificationByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Notification) session.load(eaproject.dao.Notification.class, Integer.valueOf(Id), lockMode);
+			return (Notification) session.load(eaproject.dao.Notification.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class NotificationDAO {
 		}
 	}
 	
-	public static Notification getNotificationByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Notification getNotificationByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Notification) session.get(eaproject.dao.Notification.class, Integer.valueOf(Id), lockMode);
+			return (Notification) session.get(eaproject.dao.Notification.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

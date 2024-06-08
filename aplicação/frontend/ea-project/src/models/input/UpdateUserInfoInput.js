@@ -1,8 +1,8 @@
 import BaseInput from './BaseInput';
 
 export default class UpdateUserInfoInput extends BaseInput {
-    constructor(id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0, lazyLoad = false) {
-        super(lazyLoad);
+    constructor(id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0) {
+        super();
         this.id = id;
         this.name = name;
         this.email = email;

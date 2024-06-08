@@ -57,8 +57,8 @@ create table grade (
   Creationdate timestamp);
 create table location (
   Id           int4 not null, 
-  Latitude     float4 not null, 
-  Longitude    float4 not null, 
+  Latitude     float8 not null, 
+  Longitude    float8 not null, 
   Address      varchar(255), 
   City         varchar(255), 
   Country      varchar(255), 
@@ -86,7 +86,7 @@ create table team (
 create table type (
   Id              int4 not null, 
   Name            varchar(255), 
-  Numberofpersons int4 not null, 
+  Numberofpersons int4, 
   Creationdate    timestamp);
 create table state (
   Id           int4 not null, 

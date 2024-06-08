@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class LocationDAO {
-	public static Location loadLocationByORMID(int Id) throws PersistentException {
+	public static Location loadLocationByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadLocationByORMID(session, Id);
@@ -30,7 +30,7 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location getLocationByORMID(int Id) throws PersistentException {
+	public static Location getLocationByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getLocationByORMID(session, Id);
@@ -41,7 +41,7 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location loadLocationByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Location loadLocationByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadLocationByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location getLocationByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Location getLocationByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getLocationByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location loadLocationByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Location loadLocationByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Location) session.load(eaproject.dao.Location.class, Integer.valueOf(Id));
+			return (Location) session.load(eaproject.dao.Location.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location getLocationByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Location getLocationByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Location) session.get(eaproject.dao.Location.class, Integer.valueOf(Id));
+			return (Location) session.get(eaproject.dao.Location.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location loadLocationByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Location loadLocationByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Location) session.load(eaproject.dao.Location.class, Integer.valueOf(Id), lockMode);
+			return (Location) session.load(eaproject.dao.Location.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class LocationDAO {
 		}
 	}
 	
-	public static Location getLocationByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Location getLocationByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Location) session.get(eaproject.dao.Location.class, Integer.valueOf(Id), lockMode);
+			return (Location) session.get(eaproject.dao.Location.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

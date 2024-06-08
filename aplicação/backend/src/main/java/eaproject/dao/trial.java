@@ -45,7 +45,7 @@ public class Trial implements Serializable {
 	@Id	
 	@GeneratedValue(generator="EAPROJECT_DAO_TRIAL_ID_GENERATOR")	
 	@org.hibernate.annotations.GenericGenerator(name="EAPROJECT_DAO_TRIAL_ID_GENERATOR", strategy="increment")	
-	private int Id;
+	private Integer Id;
 	
 	@ManyToOne(targetEntity=eaproject.dao.State.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
@@ -79,7 +79,7 @@ public class Trial implements Serializable {
 	private java.sql.Timestamp StartDate;
 	
 	@Column(name="Distance", nullable=false)	
-	private double Distance;
+	private Double Distance;
 	
 	@Column(name="Distanceunit", nullable=true, length=255)	
 	private String DistanceUnit;
@@ -103,14 +103,18 @@ public class Trial implements Serializable {
 	private java.util.Set ORM_team = new java.util.HashSet();
 	
 	private void setId(int value) {
+		setId(Integer.valueOf(value));
+	}
+	
+	private void setId(Integer value) {
 		this.Id = value;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
-	public int getORMID() {
+	public Integer getORMID() {
 		return getId();
 	}
 	
@@ -131,10 +135,14 @@ public class Trial implements Serializable {
 	}
 	
 	public void setDistance(double value) {
+		setDistance(Double.valueOf(value));
+	}
+	
+	public void setDistance(Double value) {
 		this.Distance = value;
 	}
 	
-	public double getDistance() {
+	public Double getDistance() {
 		return Distance;
 	}
 	

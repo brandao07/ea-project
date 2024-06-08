@@ -1,20 +1,21 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
-public class GetAllStateOutput extends BaseOutput implements Serializable {
+public class GetAllStatesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<StateProperties> stateList;
+    private ArrayList<StateProperties> stateList;
 
-    public List<StateProperties> getStateList() {
+    public ArrayList<StateProperties> getStateList() {
         return stateList;
     }
 
-    public void setStateList(List<StateProperties> stateList) {
+    public void setStateList(ArrayList<StateProperties> stateList) {
         this.stateList = stateList;
     }
 

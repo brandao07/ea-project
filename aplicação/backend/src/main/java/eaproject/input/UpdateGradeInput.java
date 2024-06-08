@@ -7,8 +7,8 @@ public class UpdateGradeInput extends BaseInput implements Serializable {
 
     private int id;
     private String name;
-    private int minAge;
-    private int maxAge;
+    private Integer minAge;
+    private Integer maxAge;
     private String gender;
     private Timestamp creationDate;
 
@@ -28,19 +28,19 @@ public class UpdateGradeInput extends BaseInput implements Serializable {
         this.name = name;
     }
 
-    public int getMinAge() {
+    public Integer getMinAge() {
         return minAge;
     }
 
-    public void setMinAge(int minAge) {
+    public void setMinAge(Integer minAge) {
         this.minAge = minAge;
     }
 
-    public int getMaxAge() {
+    public Integer getMaxAge() {
         return maxAge;
     }
 
-    public void setMaxAge(int maxAge) {
+    public void setMaxAge(Integer maxAge) {
         this.maxAge = maxAge;
     }
 

@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class TeamDAO {
-	public static Team loadTeamByORMID(int Id) throws PersistentException {
+	public static Team loadTeamByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByORMID(session, Id);
@@ -30,7 +30,7 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team getTeamByORMID(int Id) throws PersistentException {
+	public static Team getTeamByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTeamByORMID(session, Id);
@@ -41,7 +41,7 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team loadTeamByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Team loadTeamByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadTeamByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team getTeamByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Team getTeamByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getTeamByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team loadTeamByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Team loadTeamByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Team) session.load(eaproject.dao.Team.class, Integer.valueOf(Id));
+			return (Team) session.load(eaproject.dao.Team.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team getTeamByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Team getTeamByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Team) session.get(eaproject.dao.Team.class, Integer.valueOf(Id));
+			return (Team) session.get(eaproject.dao.Team.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team loadTeamByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Team loadTeamByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Team) session.load(eaproject.dao.Team.class, Integer.valueOf(Id), lockMode);
+			return (Team) session.load(eaproject.dao.Team.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class TeamDAO {
 		}
 	}
 	
-	public static Team getTeamByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Team getTeamByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Team) session.get(eaproject.dao.Team.class, Integer.valueOf(Id), lockMode);
+			return (Team) session.get(eaproject.dao.Team.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

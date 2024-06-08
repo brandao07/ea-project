@@ -19,7 +19,7 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class RoleDAO {
-	public static Role loadRoleByORMID(int Id) throws PersistentException {
+	public static Role loadRoleByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadRoleByORMID(session, Id);
@@ -30,7 +30,7 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role getRoleByORMID(int Id) throws PersistentException {
+	public static Role getRoleByORMID(Integer Id) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getRoleByORMID(session, Id);
@@ -41,7 +41,7 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role loadRoleByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Role loadRoleByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return loadRoleByORMID(session, Id, lockMode);
@@ -52,7 +52,7 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role getRoleByORMID(int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Role getRoleByORMID(Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = orm.AASICProjectPersistentManager.instance().getSession();
 			return getRoleByORMID(session, Id, lockMode);
@@ -63,9 +63,9 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role loadRoleByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Role loadRoleByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Role) session.load(eaproject.dao.Role.class, Integer.valueOf(Id));
+			return (Role) session.load(eaproject.dao.Role.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role getRoleByORMID(PersistentSession session, int Id) throws PersistentException {
+	public static Role getRoleByORMID(PersistentSession session, Integer Id) throws PersistentException {
 		try {
-			return (Role) session.get(eaproject.dao.Role.class, Integer.valueOf(Id));
+			return (Role) session.get(eaproject.dao.Role.class, Id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role loadRoleByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Role loadRoleByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Role) session.load(eaproject.dao.Role.class, Integer.valueOf(Id), lockMode);
+			return (Role) session.load(eaproject.dao.Role.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class RoleDAO {
 		}
 	}
 	
-	public static Role getRoleByORMID(PersistentSession session, int Id, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Role getRoleByORMID(PersistentSession session, Integer Id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Role) session.get(eaproject.dao.Role.class, Integer.valueOf(Id), lockMode);
+			return (Role) session.get(eaproject.dao.Role.class, Id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

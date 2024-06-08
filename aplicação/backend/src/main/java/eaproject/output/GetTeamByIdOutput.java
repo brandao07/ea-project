@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetTeamByIdOutput extends BaseOutput implements Serializable {
 
@@ -24,7 +24,7 @@ public class GetTeamByIdOutput extends BaseOutput implements Serializable {
     private ClubProperties club;
 
     @JsonProperty
-    private List<UserProperties> users;
+    private ArrayList<UserProperties> users;
 
     public int getId() {
         return id;
@@ -66,11 +66,11 @@ public class GetTeamByIdOutput extends BaseOutput implements Serializable {
         this.club = club;
     }
 
-    public List<UserProperties> getUsers() {
+    public ArrayList<UserProperties> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserProperties> users) {
+    public void setUsers(ArrayList<UserProperties> users) {
         this.users = users;
     }
 
