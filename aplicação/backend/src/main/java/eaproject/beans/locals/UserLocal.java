@@ -2,7 +2,6 @@ package eaproject.beans.locals;
 
 import eaproject.input.*;
 import eaproject.output.*;
-import eaproject.input.*;
 
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,7 @@ public interface UserLocal {
      * @param request       The HTTP request containing the JWT token.
      * @return An output object containing the result of the update operation.
      */
-    UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput userInfoInput, HttpServletRequest request);
+    UpdateUserOutput updateUserInfo(UpdateUserInput userInfoInput, HttpServletRequest request);
 
     /**
      * Retrieves basic user information based on the provided user input.
@@ -41,17 +40,17 @@ public interface UserLocal {
      *
      * @param userInfoInput Input containing user ID.
      * @param request       HTTP request containing JWT token.
-     * @return BasicUserInfoOutput containing user details.
+     * @return GetUserByIdOutput containing user details.
      */
-    BasicUserInfoOutput basicUserInfo(BasicUserInfoInput userInfoInput, HttpServletRequest request);
+    GetUserByIdOutput basicUserInfo(GetUserByIdInput userInfoInput, HttpServletRequest request);
 
     /**
      * Registers a new user with the provided registration details.
      *
      * @param userRegisterInput Input containing user registration details.
-     * @return UserRegisterOutput indicating the success or failure of the registration.
+     * @return CreateUserOutput indicating the success or failure of the registration.
      */
-    UserRegisterOutput registerNewUser(UserRegisterInput userRegisterInput);
+    CreateUserOutput registerNewUser(CreateUserInput userRegisterInput);
 
     /**
      * Authenticates a user with the provided login credentials.

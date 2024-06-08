@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.TrialBean;
-import eaproject.input.GetAllTrialsInput;
-import eaproject.input.GetTrialByIdInput;
-import eaproject.input.UpdateTrialInput;
-import eaproject.output.GetAllTrialsOutput;
-import eaproject.output.GetTrialByIdOutput;
-import eaproject.output.UpdateTrialOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,19 @@ import javax.ejb.EJB;
 @RestController
 public class TrialController {
     @EJB
-    TrialBean typeBean;
+    TrialBean trialBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateTrialEntity")
+    public CreateTrialOutput createTrialEntity(@RequestBody CreateTrialInput input) {
+        return trialBean.createTrialEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
@@ -30,7 +38,7 @@ public class TrialController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/UpdateTrialEntity")
     public UpdateTrialOutput updateTrialEntity(@RequestBody UpdateTrialInput input) {
-        return typeBean.updateTrialEntity(input);
+        return trialBean.updateTrialEntity(input);
     }
 
     /**
@@ -41,7 +49,7 @@ public class TrialController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetTrialById")
-    public GetTrialByIdOutput getTrialById(@RequestBody GetTrialByIdInput input) { return typeBean.getTrialById(input); }
+    public GetTrialByIdOutput getTrialById(@RequestBody GetTrialByIdInput input) { return trialBean.getTrialById(input); }
 
     /**
      * Retrieves all entities from the database.
@@ -52,6 +60,6 @@ public class TrialController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllTrials")
     public GetAllTrialsOutput getAllTrials(@RequestBody GetAllTrialsInput input) {
-        return typeBean.getAllTrials(input);
+        return trialBean.getAllTrials(input);
     }
 }

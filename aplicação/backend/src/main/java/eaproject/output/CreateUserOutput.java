@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class UserRegisterOutput extends BaseOutput implements Serializable {
+public class CreateUserOutput extends BaseOutput implements Serializable {
     @JsonProperty
     private boolean registrationSuccessful;
 

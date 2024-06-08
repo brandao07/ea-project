@@ -2,15 +2,25 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
+import eaproject.input.CreateTrialInput;
 import eaproject.input.GetAllTrialsInput;
 import eaproject.input.GetTrialByIdInput;
 import eaproject.input.UpdateTrialInput;
+import eaproject.output.CreateTrialOutput;
 import eaproject.output.GetAllTrialsOutput;
 import eaproject.output.GetTrialByIdOutput;
 import eaproject.output.UpdateTrialOutput;
 
 @Local
 public interface TrialLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateTrialOutput createTrialEntity(CreateTrialInput input);
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.

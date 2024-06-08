@@ -1,8 +1,10 @@
 package eaproject.beans.locals;
 
+import eaproject.input.CreateNotificationInput;
 import eaproject.input.GetAllNotificationsInput;
 import eaproject.input.GetNotificationByIdInput;
 import eaproject.input.UpdateNotificationInput;
+import eaproject.output.CreateNotificationOutput;
 import eaproject.output.GetAllNotificationsOutput;
 import eaproject.output.GetNotificationByIdOutput;
 import eaproject.output.UpdateNotificationOutput;
@@ -11,6 +13,15 @@ import javax.ejb.Local;
 
 @Local
 public interface NotificationLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateNotificationOutput createNotificationEntity(CreateNotificationInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

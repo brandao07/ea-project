@@ -1,8 +1,10 @@
 package eaproject.beans.locals;
 
+import eaproject.input.CreateTypeInput;
 import eaproject.input.GetAllTypesInput;
 import eaproject.input.GetTypeByIdInput;
 import eaproject.input.UpdateTypeInput;
+import eaproject.output.CreateTypeOutput;
 import eaproject.output.GetAllTypesOutput;
 import eaproject.output.GetTypeByIdOutput;
 import eaproject.output.UpdateTypeOutput;
@@ -11,6 +13,14 @@ import javax.ejb.Local;
 
 @Local
 public interface TypeLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateTypeOutput createTypeEntity(CreateTypeInput input);
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.

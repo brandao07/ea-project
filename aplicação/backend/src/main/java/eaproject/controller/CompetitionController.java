@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.CompetitionBean;
-import eaproject.input.GetAllCompetitionsInput;
-import eaproject.input.GetCompetitionByIdInput;
-import eaproject.input.UpdateCompetitionInput;
-import eaproject.output.GetAllCompetitionsOutput;
-import eaproject.output.GetCompetitionByIdOutput;
-import eaproject.output.UpdateCompetitionOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,19 @@ import javax.ejb.EJB;
 @RestController
 public class CompetitionController {
     @EJB
-    CompetitionBean typeBean;
+    CompetitionBean competitionBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateCompetitionEntity")
+    public CreateCompetitionOutput createCompetitionEntity(@RequestBody CreateCompetitionInput input) {
+        return competitionBean.createCompetitionEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
@@ -30,7 +38,7 @@ public class CompetitionController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/UpdateCompetitionEntity")
     public UpdateCompetitionOutput updateCompetitionEntity(@RequestBody UpdateCompetitionInput input) {
-        return typeBean.updateCompetitionEntity(input);
+        return competitionBean.updateCompetitionEntity(input);
     }
 
     /**
@@ -41,7 +49,7 @@ public class CompetitionController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetCompetitionById")
-    public GetCompetitionByIdOutput getCompetitionById(@RequestBody GetCompetitionByIdInput input) { return typeBean.getCompetitionById(input); }
+    public GetCompetitionByIdOutput getCompetitionById(@RequestBody GetCompetitionByIdInput input) { return competitionBean.getCompetitionById(input); }
 
     /**
      * Retrieves all entities from the database.
@@ -52,6 +60,6 @@ public class CompetitionController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllCompetitions")
     public GetAllCompetitionsOutput getAllCompetitions(@RequestBody GetAllCompetitionsInput input) {
-        return typeBean.getAllCompetitions(input);
+        return competitionBean.getAllCompetitions(input);
     }
 }

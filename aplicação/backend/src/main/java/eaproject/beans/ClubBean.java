@@ -3,13 +3,11 @@ package eaproject.beans;
 import eaproject.beans.locals.ClubLocal;
 import eaproject.dao.Club;
 import eaproject.dao.ClubDAO;
+import eaproject.dao.Type;
+import eaproject.dao.TypeDAO;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.GetAllClubsInput;
-import eaproject.input.GetClubByIdInput;
-import eaproject.input.UpdateClubInput;
-import eaproject.output.GetAllClubsOutput;
-import eaproject.output.GetClubByIdOutput;
-import eaproject.output.UpdateClubOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,6 +24,41 @@ public class ClubBean implements ClubLocal {
 
     @PostConstruct
     public void init() {
+    }
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    public CreateClubOutput createClubEntity(CreateClubInput input) {
+        // Create a new output object to store the result of the update operation
+        CreateClubOutput output = new CreateClubOutput();
+        try {
+            // Convert object into an entity
+            Club club = Utilities.convertToDAO(input, Club.class);
+
+            // Save the entity to the database using the DAO
+            ClubDAO.save(club);
+
+            // If the save operation is successful, add a success feedback message
+            output.addFeedbackMessage(Club.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
+
+            // Indicate that the update was successful
+            output.setUpdateSuccessful(true);
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with the result of the update operation
+        return output;
     }
 
     /**

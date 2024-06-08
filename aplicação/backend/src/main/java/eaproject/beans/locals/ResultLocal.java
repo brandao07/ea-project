@@ -2,15 +2,26 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
+import eaproject.input.CreateResultInput;
 import eaproject.input.GetAllResultsInput;
 import eaproject.input.GetResultByIdInput;
 import eaproject.input.UpdateResultInput;
+import eaproject.output.CreateResultOutput;
 import eaproject.output.GetAllResultsOutput;
 import eaproject.output.GetResultByIdOutput;
 import eaproject.output.UpdateResultOutput;
 
 @Local
 public interface ResultLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateResultOutput createResultEntity(CreateResultInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

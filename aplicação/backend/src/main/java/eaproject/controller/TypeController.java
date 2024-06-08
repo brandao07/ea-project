@@ -1,9 +1,11 @@
 package eaproject.controller;
 
 import eaproject.beans.TypeBean;
+import eaproject.input.CreateTypeInput;
 import eaproject.input.GetAllTypesInput;
 import eaproject.input.GetTypeByIdInput;
 import eaproject.input.UpdateTypeInput;
+import eaproject.output.CreateTypeOutput;
 import eaproject.output.GetAllTypesOutput;
 import eaproject.output.GetTypeByIdOutput;
 import eaproject.output.UpdateTypeOutput;
@@ -20,6 +22,18 @@ import javax.ejb.EJB;
 public class TypeController {
     @EJB
     TypeBean typeBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateTypeEntity")
+    public CreateTypeOutput createTypeEntity(@RequestBody CreateTypeInput input) {
+        return typeBean.createTypeEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.

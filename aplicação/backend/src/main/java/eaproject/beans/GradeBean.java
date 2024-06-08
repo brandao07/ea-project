@@ -4,9 +4,11 @@ import eaproject.beans.locals.GradeLocal;
 import eaproject.dao.Grade;
 import eaproject.dao.GradeDAO;
 import eaproject.enums.FeedbackSeverity;
+import eaproject.input.CreateGradeInput;
 import eaproject.input.GetAllGradesInput;
 import eaproject.input.GetGradeByIdInput;
 import eaproject.input.UpdateGradeInput;
+import eaproject.output.CreateGradeOutput;
 import eaproject.output.GetAllGradesOutput;
 import eaproject.output.GetGradeByIdOutput;
 import eaproject.output.UpdateGradeOutput;
@@ -26,6 +28,41 @@ public class GradeBean implements GradeLocal {
 
     @PostConstruct
     public void init() {
+    }
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    public CreateGradeOutput createGradeEntity(CreateGradeInput input) {
+        // Create a new output object to store the result of the update operation
+        CreateGradeOutput output = new CreateGradeOutput();
+        try {
+            // Convert object into an entity
+            Grade grade = Utilities.convertToDAO(input, Grade.class);
+
+            // Save the entity to the database using the DAO
+            GradeDAO.save(grade);
+
+            // If the save operation is successful, add a success feedback message
+            output.addFeedbackMessage(Grade.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
+
+            // Indicate that the update was successful
+            output.setUpdateSuccessful(true);
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with the result of the update operation
+        return output;
     }
 
     /**

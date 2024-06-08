@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.RoleBean;
-import eaproject.input.GetRoleByIdInput;
-import eaproject.input.GetAllRolesInput;
-import eaproject.input.UpdateRoleInput;
-import eaproject.output.GetRoleByIdOutput;
-import eaproject.output.GetAllRolesOutput;
-import eaproject.output.UpdateRoleOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +18,25 @@ public class RoleController {
     RoleBean roleBean;
 
     /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateRoleEntity")
+    public CreateRoleOutput createRoleEntity(@RequestBody CreateRoleInput input) {
+        return roleBean.createRoleEntity(input);
+    }
+
+    /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
-    @PostMapping("/UpdateStateEntity")
+    @PostMapping("/UpdateRoleEntity")
     public UpdateRoleOutput updateRoleEntity(@RequestBody UpdateRoleInput input) {
         return roleBean.updateRoleEntity(input);
     }

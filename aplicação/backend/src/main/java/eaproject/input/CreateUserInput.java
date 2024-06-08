@@ -2,22 +2,14 @@ package eaproject.input;
 
 import java.io.Serializable;
 
-public class UpdateUserInfoInput extends BaseInput implements Serializable {
-    private int id;
+public class CreateUserInput extends BaseInput implements Serializable {
     private String name;
     private String email;
+    private String password;
     private String gender;
     private Integer age;
     private Double height;
     private Double weight;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -33,6 +25,14 @@ public class UpdateUserInfoInput extends BaseInput implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getGender() {

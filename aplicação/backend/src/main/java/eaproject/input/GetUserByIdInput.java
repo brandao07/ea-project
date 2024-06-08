@@ -2,7 +2,7 @@ package eaproject.input;
 
 import java.io.Serializable;
 
-public class BasicUserInfoInput extends BaseInput implements Serializable {
+public class GetUserByIdInput extends BaseInput implements Serializable {
     private int id;
 
     public int getId() {

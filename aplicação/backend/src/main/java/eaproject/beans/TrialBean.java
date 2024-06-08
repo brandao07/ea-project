@@ -3,12 +3,8 @@ package eaproject.beans;
 import eaproject.beans.locals.TrialLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.GetAllTrialsInput;
-import eaproject.input.GetTrialByIdInput;
-import eaproject.input.UpdateTrialInput;
-import eaproject.output.GetAllTrialsOutput;
-import eaproject.output.GetTrialByIdOutput;
-import eaproject.output.UpdateTrialOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +21,81 @@ public class TrialBean implements TrialLocal {
 
     @PostConstruct
     public void init() {
+    }
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    public CreateTrialOutput createTrialEntity(CreateTrialInput input) {
+        // Create a new output object to store the result of the update operation
+        CreateTrialOutput output = new CreateTrialOutput();
+        try {
+            // Convert object into an entity
+            Trial trial = Utilities.convertToDAO(input, Trial.class);
+
+            // Check for Competition Relations
+            if (input.getCompetitionId() > 0) {
+                Competition aux = CompetitionDAO.loadCompetitionByORMID(input.getCompetitionId());
+                if (aux != null && aux.getId() > 0) {
+                    trial.setCompetition(aux);
+                }
+            }
+
+            // Check for Location Relations
+            if (input.getLocationId() > 0) {
+                Location aux = LocationDAO.loadLocationByORMID(input.getLocationId());
+                if (aux != null && aux.getId() > 0) {
+                    trial.setLocation(aux);
+                }
+            }
+
+            // Check for Grade Relations
+            if (input.getGradeId() > 0) {
+                Grade aux = GradeDAO.loadGradeByORMID(input.getGradeId());
+                if (aux != null && aux.getId() > 0) {
+                    trial.setGrade(aux);
+                }
+            }
+
+            // Check for State Relations
+            if (input.getStateId() > 0) {
+                State aux = StateDAO.loadStateByORMID(input.getStateId());
+                if (aux != null && aux.getId() > 0) {
+                    trial.setState(aux);
+                }
+            }
+
+            // Check for Type Relations
+            if (input.getTypeId() > 0) {
+                Type aux = TypeDAO.loadTypeByORMID(input.getTypeId());
+                if (aux != null && aux.getId() > 0) {
+                    trial.setType(aux);
+                }
+            }
+
+            // Save the entity to the database using the DAO
+            TrialDAO.save(trial);
+
+            // If the save operation is successful, add a success feedback message
+            output.addFeedbackMessage(Trial.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
+
+            // Indicate that the update was successful
+            output.setUpdateSuccessful(true);
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with the result of the update operation
+        return output;
     }
 
     /**

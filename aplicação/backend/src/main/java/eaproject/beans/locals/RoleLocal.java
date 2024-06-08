@@ -1,8 +1,10 @@
 package eaproject.beans.locals;
 
+import eaproject.input.CreateRoleInput;
 import eaproject.input.GetRoleByIdInput;
 import eaproject.input.GetAllRolesInput;
 import eaproject.input.UpdateRoleInput;
+import eaproject.output.CreateRoleOutput;
 import eaproject.output.GetRoleByIdOutput;
 import eaproject.output.GetAllRolesOutput;
 import eaproject.output.UpdateRoleOutput;
@@ -11,6 +13,14 @@ import javax.ejb.Local;
 
 @Local
 public interface RoleLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateRoleOutput createRoleEntity(CreateRoleInput input);
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.

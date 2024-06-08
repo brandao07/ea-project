@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.TeamBean;
-import eaproject.input.GetAllTeamsInput;
-import eaproject.input.GetTeamByIdInput;
-import eaproject.input.UpdateTeamInput;
-import eaproject.output.GetAllTeamsOutput;
-import eaproject.output.GetTeamByIdOutput;
-import eaproject.output.UpdateTeamOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,19 @@ import javax.ejb.EJB;
 @RestController
 public class TeamController {
     @EJB
-    TeamBean typeBean;
+    TeamBean teamBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateTeamEntity")
+    public CreateTeamOutput createTeamEntity(@RequestBody CreateTeamInput input) {
+        return teamBean.createTeamEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
@@ -30,7 +38,7 @@ public class TeamController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/UpdateTeamEntity")
     public UpdateTeamOutput updateTeamEntity(@RequestBody UpdateTeamInput input) {
-        return typeBean.updateTeamEntity(input);
+        return teamBean.updateTeamEntity(input);
     }
 
     /**
@@ -41,7 +49,7 @@ public class TeamController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetTeamById")
-    public GetTeamByIdOutput getTeamById(@RequestBody GetTeamByIdInput input) { return typeBean.getTeamById(input); }
+    public GetTeamByIdOutput getTeamById(@RequestBody GetTeamByIdInput input) { return teamBean.getTeamById(input); }
 
     /**
      * Retrieves all entities from the database.
@@ -52,6 +60,6 @@ public class TeamController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllTeams")
     public GetAllTeamsOutput getAllTeams(@RequestBody GetAllTeamsInput input) {
-        return typeBean.getAllTeams(input);
+        return teamBean.getAllTeams(input);
     }
 }

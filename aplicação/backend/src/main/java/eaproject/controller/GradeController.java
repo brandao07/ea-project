@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.GradeBean;
-import eaproject.input.GetAllGradesInput;
-import eaproject.input.GetGradeByIdInput;
-import eaproject.input.UpdateGradeInput;
-import eaproject.output.GetAllGradesOutput;
-import eaproject.output.GetGradeByIdOutput;
-import eaproject.output.UpdateGradeOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,19 @@ import javax.ejb.EJB;
 @RestController
 public class GradeController {
     @EJB
-    GradeBean typeBean;
+    GradeBean gradeBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateGradeEntity")
+    public CreateGradeOutput createGradeEntity(@RequestBody CreateGradeInput input) {
+        return gradeBean.createGradeEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
@@ -30,7 +38,7 @@ public class GradeController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/UpdateGradeEntity")
     public UpdateGradeOutput updateGradeEntity(@RequestBody UpdateGradeInput input) {
-        return typeBean.updateGradeEntity(input);
+        return gradeBean.updateGradeEntity(input);
     }
 
     /**
@@ -41,7 +49,7 @@ public class GradeController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetGradeById")
-    public GetGradeByIdOutput getGradeById(@RequestBody GetGradeByIdInput input) { return typeBean.getGradeById(input); }
+    public GetGradeByIdOutput getGradeById(@RequestBody GetGradeByIdInput input) { return gradeBean.getGradeById(input); }
 
     /**
      * Retrieves all entities from the database.
@@ -52,6 +60,6 @@ public class GradeController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllGrades")
     public GetAllGradesOutput getAllGrades(@RequestBody GetAllGradesInput input) {
-        return typeBean.getAllGrades(input);
+        return gradeBean.getAllGrades(input);
     }
 }

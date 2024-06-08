@@ -1,12 +1,8 @@
 package eaproject.controller;
 
 import eaproject.beans.ClubBean;
-import eaproject.input.GetAllClubsInput;
-import eaproject.input.GetClubByIdInput;
-import eaproject.input.UpdateClubInput;
-import eaproject.output.GetAllClubsOutput;
-import eaproject.output.GetClubByIdOutput;
-import eaproject.output.UpdateClubOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,19 @@ import javax.ejb.EJB;
 @RestController
 public class ClubController {
     @EJB
-    ClubBean typeBean;
+    ClubBean clubBean;
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the create operation.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/CreateClubEntity")
+    public CreateClubOutput createClubEntity(@RequestBody CreateClubInput input) {
+        return clubBean.createClubEntity(input);
+    }
 
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
@@ -30,7 +38,7 @@ public class ClubController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/UpdateClubEntity")
     public UpdateClubOutput updateClubEntity(@RequestBody UpdateClubInput input) {
-        return typeBean.updateClubEntity(input);
+        return clubBean.updateClubEntity(input);
     }
 
     /**
@@ -41,7 +49,7 @@ public class ClubController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetClubById")
-    public GetClubByIdOutput getClubById(@RequestBody GetClubByIdInput input) { return typeBean.getClubById(input); }
+    public GetClubByIdOutput getClubById(@RequestBody GetClubByIdInput input) { return clubBean.getClubById(input); }
 
     /**
      * Retrieves all entities from the database.
@@ -52,6 +60,6 @@ public class ClubController {
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllClubs")
     public GetAllClubsOutput getAllClubs(@RequestBody GetAllClubsInput input) {
-        return typeBean.getAllClubs(input);
+        return clubBean.getAllClubs(input);
     }
 }

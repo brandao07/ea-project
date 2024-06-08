@@ -1,8 +1,10 @@
 package eaproject.beans.locals;
 
+import eaproject.input.CreateClubInput;
 import eaproject.input.GetAllClubsInput;
 import eaproject.input.GetClubByIdInput;
 import eaproject.input.UpdateClubInput;
+import eaproject.output.CreateClubOutput;
 import eaproject.output.GetAllClubsOutput;
 import eaproject.output.GetClubByIdOutput;
 import eaproject.output.UpdateClubOutput;
@@ -11,6 +13,15 @@ import javax.ejb.Local;
 
 @Local
 public interface ClubLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateClubOutput createClubEntity(CreateClubInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

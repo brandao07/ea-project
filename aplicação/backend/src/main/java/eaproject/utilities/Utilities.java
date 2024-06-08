@@ -99,6 +99,7 @@ public class Utilities {
      * @throws IllegalAccessException if the field is not accessible.
      */
     public static void updateNonNullFields(Object source, Object target) throws IllegalAccessException {
+        if (source == null || target == null) return;
         Field[] fields = source.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true); // Make private fields accessible

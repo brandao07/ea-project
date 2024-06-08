@@ -2,15 +2,26 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
+import eaproject.input.CreateGradeInput;
 import eaproject.input.GetAllGradesInput;
 import eaproject.input.GetGradeByIdInput;
 import eaproject.input.UpdateGradeInput;
+import eaproject.output.CreateGradeOutput;
 import eaproject.output.GetAllGradesOutput;
 import eaproject.output.GetGradeByIdOutput;
 import eaproject.output.UpdateGradeOutput;
 
 @Local
 public interface GradeLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateGradeOutput createGradeEntity(CreateGradeInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

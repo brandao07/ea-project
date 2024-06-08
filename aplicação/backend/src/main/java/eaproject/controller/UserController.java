@@ -3,7 +3,6 @@ package eaproject.controller;
 import eaproject.beans.UserBean;
 import eaproject.input.*;
 import eaproject.output.*;
-import eaproject.input.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +48,7 @@ public class UserController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateBasicUserInfo")
-    public UpdateUserInfoOutput updateBasicUserInfo(@RequestBody UpdateUserInfoInput userInfoInput, HttpServletRequest request) {
+    public UpdateUserOutput updateBasicUserInfo(@RequestBody UpdateUserInput userInfoInput, HttpServletRequest request) {
         return userBean.updateUserInfo(userInfoInput, request);
     }
 
@@ -58,23 +57,23 @@ public class UserController {
      *
      * @param userInfoInput Input containing user ID.
      * @param request       HTTP request containing JWT token.
-     * @return BasicUserInfoOutput containing user details.
+     * @return GetUserByIdOutput containing user details.
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/BasicUserInfo")
-    public BasicUserInfoOutput getBasicUserInfo(@RequestBody BasicUserInfoInput userInfoInput, HttpServletRequest request) {
+    public GetUserByIdOutput getBasicUserInfo(@RequestBody GetUserByIdInput userInfoInput, HttpServletRequest request) {
         return userBean.basicUserInfo(userInfoInput, request);
     }
 
     /**
      * Registers a new user with the provided registration details.
      *
-     * @param userRegisterInput Input containing user registration details.
-     * @return UserRegisterOutput indicating the success or failure of the registration.
+     * @param CreateUserInput Input containing user registration details.
+     * @return CreateUserOutput indicating the success or failure of the registration.
      */
     @PostMapping("/Register")
-    public UserRegisterOutput registerUser(@RequestBody UserRegisterInput userRegisterInput) {
-        return userBean.registerNewUser(userRegisterInput);
+    public CreateUserOutput registerUser(@RequestBody CreateUserInput CreateUserInput) {
+        return userBean.registerNewUser(CreateUserInput);
     }
 
     /**

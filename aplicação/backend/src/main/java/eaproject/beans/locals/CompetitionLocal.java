@@ -2,15 +2,26 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
+import eaproject.input.CreateCompetitionInput;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
 import eaproject.input.UpdateCompetitionInput;
+import eaproject.output.CreateCompetitionOutput;
 import eaproject.output.GetAllCompetitionsOutput;
 import eaproject.output.GetCompetitionByIdOutput;
 import eaproject.output.UpdateCompetitionOutput;
 
 @Local
 public interface CompetitionLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateCompetitionOutput createCompetitionEntity(CreateCompetitionInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

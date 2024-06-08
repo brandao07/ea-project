@@ -22,7 +22,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
@@ -87,10 +86,10 @@ public class UserBean implements UserLocal {
      * Registers a new user based on the provided input data.
      *
      * @param input the input data for registering a new user
-     * @return UserRegisterOutput containing the registration result and feedback messages
+     * @return CreateUserOutput containing the registration result and feedback messages
      */
-    public UserRegisterOutput registerNewUser(UserRegisterInput input) {
-        UserRegisterOutput output = new UserRegisterOutput();
+    public CreateUserOutput registerNewUser(CreateUserInput input) {
+        CreateUserOutput output = new CreateUserOutput();
         try {
             // Validate input
             if (input.getName().isEmpty() || input.getEmail().isEmpty() || input.getPassword().isEmpty()) {
@@ -126,8 +125,10 @@ public class UserBean implements UserLocal {
             // Save user to database using DAO
             UserDAO.save(user);
 
-            // If successful
+            // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage("User registered successfully.", FeedbackSeverity.SUCCESS);
+
+            // Indicate that the update was successful
             output.setRegistrationSuccessful(true);
         } catch (PersistentException e) {
             output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
@@ -141,11 +142,11 @@ public class UserBean implements UserLocal {
      * Method to retrieve basic user information.
      *
      * @param userInfoInput The input object containing the user ID.
-     * @return BasicUserInfoOutput The output object containing user information.
+     * @return GetUserByIdOutput The output object containing user information.
      * @throws UsernameNotFoundException if the user cannot be found.
      */
-    public BasicUserInfoOutput basicUserInfo(BasicUserInfoInput userInfoInput, HttpServletRequest request) throws UsernameNotFoundException {
-        BasicUserInfoOutput output = new BasicUserInfoOutput();
+    public GetUserByIdOutput basicUserInfo(GetUserByIdInput userInfoInput, HttpServletRequest request) throws UsernameNotFoundException {
+        GetUserByIdOutput output = new GetUserByIdOutput();
         try {
             // Extract the JWT token from the request
             String token = jwtTokenUtil.resolveToken(request);
@@ -167,7 +168,7 @@ public class UserBean implements UserLocal {
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Convert entity into an object
-                output = Utilities.convertToDTO(user, BasicUserInfoOutput.class);
+                output = Utilities.convertToDTO(user, GetUserByIdOutput.class);
             } else {
                 output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
             }
@@ -192,9 +193,9 @@ public class UserBean implements UserLocal {
      * @return An output object containing the result of the update operation.
      * @throws UsernameNotFoundException If the user is not found.
      */
-    public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput userInfoInput, HttpServletRequest request) {
+    public UpdateUserOutput updateUserInfo(UpdateUserInput userInfoInput, HttpServletRequest request) {
         // Create a new output object to store the result of the update operation
-        UpdateUserInfoOutput output = new UpdateUserInfoOutput();
+        UpdateUserOutput output = new UpdateUserOutput();
         try {
             // Extract the JWT token from the HTTP request
             String token = jwtTokenUtil.resolveToken(request);

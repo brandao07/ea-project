@@ -2,15 +2,26 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
+import eaproject.input.CreateTeamInput;
 import eaproject.input.GetAllTeamsInput;
 import eaproject.input.GetTeamByIdInput;
 import eaproject.input.UpdateTeamInput;
+import eaproject.output.CreateTeamOutput;
 import eaproject.output.GetAllTeamsOutput;
 import eaproject.output.GetTeamByIdOutput;
 import eaproject.output.UpdateTeamOutput;
 
 @Local
 public interface TeamLocal {
+
+    /**
+     * Creates the entity in the database based on the input, updating only non-null fields.
+     *
+     * @param input The input object containing the data to update.
+     * @return The output object containing the result of the Create operation.
+     */
+    CreateTeamOutput createTeamEntity(CreateTeamInput input);
+
     /**
      * Updates the entity in the database based on the input, updating only non-null fields.
      *

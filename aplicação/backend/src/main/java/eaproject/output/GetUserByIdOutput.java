@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class BasicUserInfoOutput extends BaseOutput implements Serializable {
+public class GetUserByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
     public String name;
