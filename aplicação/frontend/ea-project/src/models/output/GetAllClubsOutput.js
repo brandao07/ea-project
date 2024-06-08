@@ -1,13 +1,20 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetAllClubsOutput extends BaseOutput {
-    constructor(clubList = [], feedbackMessages = []) {
+    constructor(getallclubList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.clubList = clubList.map(item => new GetAllClubsOutput.ClubProperties(item));
+        this.getallclubList = getallclubList.map(
+            (getallclub) => new GetAllClubsOutput.GetAllClubProperties(
+                getallclub.id,
+                getallclub.name,
+                getallclub.isActive,
+                getallclub.creationDate
+            )
+        );
     }
 
-    static ClubProperties = class {
-        constructor(id = 0, name = '', isActive = false, creationDate = new Date()) {
+    static GetAllClubProperties = class {
+        constructor(id, name, isActive, creationDate) {
             this.id = id;
             this.name = name;
             this.isActive = isActive;

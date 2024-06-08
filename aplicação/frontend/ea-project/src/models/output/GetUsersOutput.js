@@ -1,13 +1,25 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetUsersOutput extends BaseOutput {
-  constructor(usersList = [], feedbackMessages = []) {
+    constructor(getuserList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.usersList = usersList.map(item => new GetUsersOutput.UserProperties(item));
+        this.getuserList = getuserList.map(
+            (getuser) => new GetUsersOutput.GetUserProperties(
+                getuser.id,
+                getuser.name,
+                getuser.email,
+                getuser.gender,
+                getuser.age,
+                getuser.height,
+                getuser.weight,
+                getuser.registerDate,
+                getuser.photographyPath
+            )
+        );
     }
 
-    static UserProperties = class {
-        constructor(id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0, registerDate = new Date(), photographyPath = '') {
+    static GetUserProperties = class {
+        constructor(id, name, email, gender, age, height, weight, registerDate, photographyPath) {
             this.id = id;
             this.name = name;
             this.email = email;

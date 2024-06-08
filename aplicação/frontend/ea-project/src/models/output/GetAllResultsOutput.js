@@ -1,13 +1,22 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetAllResultsOutput extends BaseOutput {
-    constructor(resultList = [], feedbackMessages = []) {
+    constructor(getallresultList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.resultList = resultList.map(item => new GetAllResultsOutput.ResultProperties(item));
+        this.getallresultList = getallresultList.map(
+            (getallresult) => new GetAllResultsOutput.GetAllResultProperties(
+                getallresult.id,
+                getallresult.position,
+                getallresult.time,
+                getallresult.observations,
+                getallresult.penaltyTime,
+                getallresult.creationDate
+            )
+        );
     }
 
-    static ResultProperties = class {
-        constructor(id = 0, position = 0, time = new Date(), observations = '', penaltyTime = new Date(), creationDate = new Date()) {
+    static GetAllResultProperties = class {
+        constructor(id, position, time, observations, penaltyTime, creationDate) {
             this.id = id;
             this.position = position;
             this.time = time;

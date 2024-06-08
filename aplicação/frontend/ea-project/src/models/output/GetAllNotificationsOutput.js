@@ -1,13 +1,22 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetAllNotificationsOutput extends BaseOutput {
-    constructor(notificationList = [], feedbackMessages = []) {
+    constructor(getallnotificationList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.notificationList = notificationList.map(item => new GetAllNotificationsOutput.NotificationProperties(item));
+        this.getallnotificationList = getallnotificationList.map(
+            (getallnotification) => new GetAllNotificationsOutput.GetAllNotificationProperties(
+                getallnotification.id,
+                getallnotification.messageHeader,
+                getallnotification.messageBody,
+                getallnotification.messageType,
+                getallnotification.photographyPath,
+                getallnotification.creationDate
+            )
+        );
     }
 
-    static NotificationProperties = class {
-        constructor(id = 0, messageHeader = '', messageBody = '', messageType = '', photographyPath = '', creationDate = new Date()) {
+    static GetAllNotificationProperties = class {
+        constructor(id, messageHeader, messageBody, messageType, photographyPath, creationDate) {
             this.id = id;
             this.messageHeader = messageHeader;
             this.messageBody = messageBody;

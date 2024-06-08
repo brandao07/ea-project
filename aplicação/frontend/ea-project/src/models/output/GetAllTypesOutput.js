@@ -1,17 +1,24 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetAllTypesOutput extends BaseOutput {
-    constructor(typeList = [], feedbackMessages = []) {
+    constructor(getalltypeList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.typeList = typeList.map(item => new GetAllTypesOutput.TypeProperties(item));
+        this.getalltypeList = getalltypeList.map(
+            (getalltype) => new GetAllTypesOutput.GetAllTypeProperties(
+                getalltype.id,
+                getalltype.name,
+                getalltype.numberOfPersons,
+                getalltype.creationDate
+            )
+        );
     }
 
-    static TypeProperties = class {
-        constructor(id = 0, name = '', numberOfPersons = 0, creationDate = new Date()) {
-        this.id = id;
-        this.name = name;
-        this.numberOfPersons = numberOfPersons;
-        this.creationDate = creationDate;
-    }
+    static GetAllTypeProperties = class {
+        constructor(id, name, numberOfPersons, creationDate) {
+            this.id = id;
+            this.name = name;
+            this.numberOfPersons = numberOfPersons;
+            this.creationDate = creationDate;
+        }
     };
 }

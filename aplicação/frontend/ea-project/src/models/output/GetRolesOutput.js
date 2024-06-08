@@ -1,13 +1,20 @@
 import BaseOutput from './BaseOutput';
 
 export default class GetRolesOutput extends BaseOutput {
-  constructor(rolesList = [], feedbackMessages = []) {
+    constructor(getroleList = [], feedbackMessages = []) {
         super(feedbackMessages);
-        this.rolesList = rolesList.map(item => new GetRolesOutput.RoleProperties(item));
+        this.getroleList = getroleList.map(
+            (getrole) => new GetRolesOutput.GetRoleProperties(
+                getrole.id,
+                getrole.name,
+                getrole.description,
+                getrole.creationDate
+            )
+        );
     }
 
-    static RoleProperties = class {
-        constructor(id = 0, name = '', description = '', creationDate = new Date()) {
+    static GetRoleProperties = class {
+        constructor(id, name, description, creationDate) {
             this.id = id;
             this.name = name;
             this.description = description;
