@@ -10,7 +10,6 @@ public class UpdateClubInput extends BaseInput implements Serializable {
     private boolean isActive;
     private Timestamp creationDate;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

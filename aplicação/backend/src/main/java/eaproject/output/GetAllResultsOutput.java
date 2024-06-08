@@ -19,14 +19,25 @@ public class GetAllResultsOutput extends BaseOutput implements Serializable {
     }
 
     public static class ResultProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private int position;
+
+        @JsonProperty
         private Timestamp time;
+
+        @JsonProperty
         private String observations;
+
+        @JsonProperty
         private Timestamp penaltyTime;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

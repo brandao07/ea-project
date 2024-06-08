@@ -19,14 +19,19 @@ public class GetAllTeamsOutput extends BaseOutput implements Serializable {
     }
 
     public static class TeamProperties implements Serializable {
-        private int id;
-        private String name;
-        private boolean isActive;
-        private Timestamp creationDate;
-        private ClubProperties club; // LAZY
-        private List<UserProperties> users; // LAZY
 
-        // Getters and setters
+        @JsonProperty
+        private int id;
+
+        @JsonProperty
+        private String name;
+
+        @JsonProperty
+        private boolean isActive;
+
+        @JsonProperty
+        private Timestamp creationDate;
+
         public int getId() {
             return id;
         }
@@ -57,66 +62,6 @@ public class GetAllTeamsOutput extends BaseOutput implements Serializable {
 
         public void setCreationDate(Timestamp creationDate) {
             this.creationDate = creationDate;
-        }
-
-        public ClubProperties getClub() {
-            return club;
-        }
-
-        public void setClub(ClubProperties club) {
-            this.club = club;
-        }
-
-        public List<UserProperties> getUsers() {
-            return users;
-        }
-
-        public void setUsers(List<UserProperties> users) {
-            this.users = users;
-        }
-    }
-
-    public static class ClubProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class UserProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
     }
 }

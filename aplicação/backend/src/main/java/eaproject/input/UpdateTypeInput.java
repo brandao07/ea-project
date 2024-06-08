@@ -10,7 +10,6 @@ public class UpdateTypeInput extends BaseInput implements Serializable {
     private int numberOfPersons;
     private Timestamp creationDate;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

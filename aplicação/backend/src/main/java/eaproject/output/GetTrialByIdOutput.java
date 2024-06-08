@@ -1,6 +1,7 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,151 +9,167 @@ import java.util.List;
 public class GetTrialByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private TrialProperties trial;
+    private int id;
 
-    public TrialProperties getTrial() {
-        return trial;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private Timestamp startDate;
+
+    @JsonProperty
+    private double distance;
+
+    @JsonProperty
+    private String distanceUnit;
+
+    @JsonProperty
+    private boolean isActive;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    @JsonProperty
+    private StateProperties state;
+
+    @JsonProperty
+    private CompetitionProperties competition;
+
+    @JsonProperty
+    private GradeProperties grade;
+
+    @JsonProperty
+    private TypeProperties type;
+
+    @JsonProperty
+    private LocationProperties location;
+
+    @JsonProperty
+    private List<ResultProperties> results;
+
+    @JsonProperty
+    private List<TeamProperties> teams;
+
+    public int getId() {
+        return id;
     }
 
-    public void setTrial(TrialProperties trial) {
-        this.trial = trial;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class TrialProperties implements Serializable {
-        private int id;
-        private String name;
-        private Timestamp startDate;
-        private double distance;
-        private String distanceUnit;
-        private boolean isActive;
-        private Timestamp creationDate;
-        private StateProperties state;
-        private CompetitionProperties competition;
-        private GradeProperties grade;
-        private TypeProperties type;
-        private LocationProperties location;
-        private List<ResultProperties> results; // LAZY
-        private List<TeamProperties> teams; // LAZY
+    public String getName() {
+        return name;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public Timestamp getStartDate() {
+        return startDate;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public double getDistance() {
+        return distance;
+    }
 
-        public Timestamp getStartDate() {
-            return startDate;
-        }
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
-        public void setStartDate(Timestamp startDate) {
-            this.startDate = startDate;
-        }
+    public String getDistanceUnit() {
+        return distanceUnit;
+    }
 
-        public double getDistance() {
-            return distance;
-        }
+    public void setDistanceUnit(String distanceUnit) {
+        this.distanceUnit = distanceUnit;
+    }
 
-        public void setDistance(double distance) {
-            this.distance = distance;
-        }
+    public boolean getIsActive() {
+        return isActive;
+    }
 
-        public String getDistanceUnit() {
-            return distanceUnit;
-        }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
-        public void setDistanceUnit(String distanceUnit) {
-            this.distanceUnit = distanceUnit;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public boolean getIsActive() {
-            return isActive;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
+    }
 
-        public void setIsActive(boolean isActive) {
-            this.isActive = isActive;
-        }
+    public StateProperties getState() {
+        return state;
+    }
 
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
+    public void setState(StateProperties state) {
+        this.state = state;
+    }
 
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public CompetitionProperties getCompetition() {
+        return competition;
+    }
 
-        public StateProperties getState() {
-            return state;
-        }
+    public void setCompetition(CompetitionProperties competition) {
+        this.competition = competition;
+    }
 
-        public void setState(StateProperties state) {
-            this.state = state;
-        }
+    public GradeProperties getGrade() {
+        return grade;
+    }
 
-        public CompetitionProperties getCompetition() {
-            return competition;
-        }
+    public void setGrade(GradeProperties grade) {
+        this.grade = grade;
+    }
 
-        public void setCompetition(CompetitionProperties competition) {
-            this.competition = competition;
-        }
+    public TypeProperties getType() {
+        return type;
+    }
 
-        public GradeProperties getGrade() {
-            return grade;
-        }
+    public void setType(TypeProperties type) {
+        this.type = type;
+    }
 
-        public void setGrade(GradeProperties grade) {
-            this.grade = grade;
-        }
+    public LocationProperties getLocation() {
+        return location;
+    }
 
-        public TypeProperties getType() {
-            return type;
-        }
+    public void setLocation(LocationProperties location) {
+        this.location = location;
+    }
 
-        public void setType(TypeProperties type) {
-            this.type = type;
-        }
+    public List<ResultProperties> getResults() {
+        return results;
+    }
 
-        public LocationProperties getLocation() {
-            return location;
-        }
+    public void setResults(List<ResultProperties> results) {
+        this.results = results;
+    }
 
-        public void setLocation(LocationProperties location) {
-            this.location = location;
-        }
+    public List<TeamProperties> getTeams() {
+        return teams;
+    }
 
-        public List<ResultProperties> getResults() {
-            return results;
-        }
-
-        public void setResults(List<ResultProperties> results) {
-            this.results = results;
-        }
-
-        public List<TeamProperties> getTeams() {
-            return teams;
-        }
-
-        public void setTeams(List<TeamProperties> teams) {
-            this.teams = teams;
-        }
+    public void setTeams(List<TeamProperties> teams) {
+        this.teams = teams;
     }
 
     public static class StateProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -171,10 +188,13 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class CompetitionProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -193,10 +213,13 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class GradeProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -215,10 +238,13 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class TypeProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -237,10 +263,13 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class LocationProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -259,10 +288,13 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class ResultProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -281,10 +313,14 @@ public class GetTrialByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class TeamProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
+
         public int getId() {
             return id;
         }

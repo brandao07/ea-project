@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class UserRegisterOutput extends BaseOutput implements Serializable {
     @JsonProperty
-    public boolean registrationSuccessful;
+    private boolean registrationSuccessful;
 
     public boolean isRegistrationSuccessful() {
         return registrationSuccessful;

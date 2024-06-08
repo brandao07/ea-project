@@ -19,12 +19,19 @@ public class GetAllClubsOutput extends BaseOutput implements Serializable {
     }
 
     public static class ClubProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
+
+        @JsonProperty
         private boolean isActive;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

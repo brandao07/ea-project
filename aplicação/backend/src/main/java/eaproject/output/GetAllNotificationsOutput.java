@@ -19,14 +19,25 @@ public class GetAllNotificationsOutput extends BaseOutput implements Serializabl
     }
 
     public static class NotificationProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String messageHeader;
+
+        @JsonProperty
         private String messageBody;
+
+        @JsonProperty
         private String messageType;
+
+        @JsonProperty
         private String photographyPath;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

@@ -1,77 +1,75 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class GetGradeByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private GradeProperties grade;
+    private int id;
 
-    public GradeProperties getGrade() {
-        return grade;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private int minAge;
+
+    @JsonProperty
+    private int maxAge;
+
+    @JsonProperty
+    private String gender;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setGrade(GradeProperties grade) {
-        this.grade = grade;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class GradeProperties implements Serializable {
-        private int id;
-        private String name;
-        private int minAge;
-        private int maxAge;
-        private String gender;
-        private Timestamp creationDate;
+    public String getName() {
+        return name;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public int getMinAge() {
+        return minAge;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setMinAge(int minAge) {
+        this.minAge = minAge;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public int getMaxAge() {
+        return maxAge;
+    }
 
-        public int getMinAge() {
-            return minAge;
-        }
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
+    }
 
-        public void setMinAge(int minAge) {
-            this.minAge = minAge;
-        }
+    public String getGender() {
+        return gender;
+    }
 
-        public int getMaxAge() {
-            return maxAge;
-        }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-        public void setMaxAge(int maxAge) {
-            this.maxAge = maxAge;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public String getGender() {
-            return gender;
-        }
-
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

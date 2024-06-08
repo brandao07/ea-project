@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class UpdateUserRoleOutput extends BaseOutput implements Serializable {
     @JsonProperty
-    public boolean updateSuccessful;
+    private boolean updateSuccessful;
 
     public boolean isUpdateSuccessful() {
         return updateSuccessful;

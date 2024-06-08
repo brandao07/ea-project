@@ -5,8 +5,6 @@ import eaproject.base.FeedbackMessage;
 import eaproject.enums.FeedbackSeverity;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public abstract class BaseOutput {
@@ -23,9 +21,5 @@ public abstract class BaseOutput {
 
     public void addFeedbackMessage(String message, FeedbackSeverity severity) {
         this.feedbackMessages.add(new FeedbackMessage(message, severity));
-    }
-
-    public void sortFeedbackMessagesBySeverity() {
-        this.feedbackMessages.sort(Comparator.comparing(FeedbackMessage::getSeverity));
     }
 }

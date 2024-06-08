@@ -1,60 +1,53 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 public class GetAllTypesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private List<TypeProperties> typeList;
+    private int id;
 
-    public List<TypeProperties> getTypeList() {
-        return typeList;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private int numberOfPersons;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setTypeList(List<TypeProperties> typeList) {
-        this.typeList = typeList;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class TypeProperties implements Serializable {
-        private int id;
-        private String name;
-        private int numberOfPersons;
-        private Timestamp creationDate;
+    public String getName() {
+        return name;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public int getNumberOfPersons() {
+        return numberOfPersons;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setNumberOfPersons(int numberOfPersons) {
+        this.numberOfPersons = numberOfPersons;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public int getNumberOfPersons() {
-            return numberOfPersons;
-        }
-
-        public void setNumberOfPersons(int numberOfPersons) {
-            this.numberOfPersons = numberOfPersons;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

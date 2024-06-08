@@ -1,77 +1,75 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class GetResultByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private ResultProperties result;
+    private int id;
 
-    public ResultProperties getResult() {
-        return result;
+    @JsonProperty
+    private int position;
+
+    @JsonProperty
+    private Timestamp time;
+
+    @JsonProperty
+    private String observations;
+
+    @JsonProperty
+    private Timestamp penaltyTime;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setResult(ResultProperties result) {
-        this.result = result;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class ResultProperties implements Serializable {
-        private int id;
-        private int position;
-        private Timestamp time;
-        private String observations;
-        private Timestamp penaltyTime;
-        private Timestamp creationDate;
+    public int getPosition() {
+        return position;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public Timestamp getTime() {
+        return time;
+    }
 
-        public int getPosition() {
-            return position;
-        }
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
 
-        public void setPosition(int position) {
-            this.position = position;
-        }
+    public String getObservations() {
+        return observations;
+    }
 
-        public Timestamp getTime() {
-            return time;
-        }
+    public void setObservations(String observations) {
+        this.observations = observations;
+    }
 
-        public void setTime(Timestamp time) {
-            this.time = time;
-        }
+    public Timestamp getPenaltyTime() {
+        return penaltyTime;
+    }
 
-        public String getObservations() {
-            return observations;
-        }
+    public void setPenaltyTime(Timestamp penaltyTime) {
+        this.penaltyTime = penaltyTime;
+    }
 
-        public void setObservations(String observations) {
-            this.observations = observations;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public Timestamp getPenaltyTime() {
-            return penaltyTime;
-        }
-
-        public void setPenaltyTime(Timestamp penaltyTime) {
-            this.penaltyTime = penaltyTime;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

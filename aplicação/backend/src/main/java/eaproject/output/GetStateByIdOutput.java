@@ -1,50 +1,42 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class GetStateByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private StateProperties state;
+    private int id;
 
-    public StateProperties getState() {
-        return state;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setState(StateProperties state) {
-        this.state = state;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class StateProperties implements Serializable {
-        private int id;
-        private String name;
-        private Timestamp creationDate;
+    public String getName() {
+        return name;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

@@ -19,11 +19,16 @@ public class GetAllStateOutput extends BaseOutput implements Serializable {
     }
 
     public static class StateProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

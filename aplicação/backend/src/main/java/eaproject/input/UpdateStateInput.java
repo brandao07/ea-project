@@ -9,7 +9,6 @@ public class UpdateStateInput extends BaseInput implements Serializable {
     private String name;
     private Timestamp creationDate;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

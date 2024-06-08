@@ -1,6 +1,7 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,22 +20,28 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
     }
 
     public static class TrialProperties implements Serializable {
-        private int id;
-        private String name;
-        private Timestamp startDate;
-        private double distance;
-        private String distanceUnit;
-        private boolean isActive;
-        private Timestamp creationDate;
-        private StateProperties state;
-        private CompetitionProperties competition;
-        private GradeProperties grade;
-        private TypeProperties type;
-        private LocationProperties location;
-        private List<ResultProperties> results; // LAZY
-        private List<TeamProperties> teams; // LAZY
 
-        // Getters and setters
+        @JsonProperty
+        private int id;
+
+        @JsonProperty
+        private String name;
+
+        @JsonProperty
+        private Timestamp startDate;
+
+        @JsonProperty
+        private double distance;
+
+        @JsonProperty
+        private String distanceUnit;
+
+        @JsonProperty
+        private boolean isActive;
+
+        @JsonProperty
+        private Timestamp creationDate;
+
         public int getId() {
             return id;
         }
@@ -89,216 +96,6 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
 
         public void setCreationDate(Timestamp creationDate) {
             this.creationDate = creationDate;
-        }
-
-        public StateProperties getState() {
-            return state;
-        }
-
-        public void setState(StateProperties state) {
-            this.state = state;
-        }
-
-        public CompetitionProperties getCompetition() {
-            return competition;
-        }
-
-        public void setCompetition(CompetitionProperties competition) {
-            this.competition = competition;
-        }
-
-        public GradeProperties getGrade() {
-            return grade;
-        }
-
-        public void setGrade(GradeProperties grade) {
-            this.grade = grade;
-        }
-
-        public TypeProperties getType() {
-            return type;
-        }
-
-        public void setType(TypeProperties type) {
-            this.type = type;
-        }
-
-        public LocationProperties getLocation() {
-            return location;
-        }
-
-        public void setLocation(LocationProperties location) {
-            this.location = location;
-        }
-
-        public List<ResultProperties> getResults() {
-            return results;
-        }
-
-        public void setResults(List<ResultProperties> results) {
-            this.results = results;
-        }
-
-        public List<TeamProperties> getTeams() {
-            return teams;
-        }
-
-        public void setTeams(List<TeamProperties> teams) {
-            this.teams = teams;
-        }
-    }
-
-    public static class StateProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class CompetitionProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class GradeProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class TypeProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class LocationProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class ResultProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public static class TeamProperties implements Serializable {
-        private int id;
-        private String name;
-
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
     }
 }

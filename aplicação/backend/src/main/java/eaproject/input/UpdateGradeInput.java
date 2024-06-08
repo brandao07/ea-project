@@ -12,7 +12,6 @@ public class UpdateGradeInput extends BaseInput implements Serializable {
     private String gender;
     private Timestamp creationDate;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

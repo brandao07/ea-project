@@ -29,8 +29,7 @@ public class GetUsersOutput extends BaseOutput implements Serializable {
         private double weight;
         private Timestamp registerDate;
         private String photographyPath;
-
-        // Getters and setters
+        
         public int getId() {
             return id;
         }

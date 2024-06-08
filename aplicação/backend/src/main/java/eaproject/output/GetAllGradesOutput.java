@@ -19,14 +19,25 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
     }
 
     public static class GradeProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
+
+        @JsonProperty
         private int minAge;
+
+        @JsonProperty
         private int maxAge;
+
+        @JsonProperty
         private String gender;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 public class UpdateClubOutput extends BaseOutput implements Serializable {
+
     @JsonProperty
     private boolean updateSuccessful;
 

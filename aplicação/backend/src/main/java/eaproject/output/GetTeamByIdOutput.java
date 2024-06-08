@@ -1,6 +1,7 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,79 +9,79 @@ import java.util.List;
 public class GetTeamByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private TeamProperties team;
+    private int id;
 
-    public TeamProperties getTeam() {
-        return team;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private boolean isActive;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    @JsonProperty
+    private ClubProperties club;
+
+    @JsonProperty
+    private List<UserProperties> users;
+
+    public int getId() {
+        return id;
     }
 
-    public void setTeam(TeamProperties team) {
-        this.team = team;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class TeamProperties implements Serializable {
-        private int id;
-        private String name;
-        private boolean isActive;
-        private Timestamp creationDate;
-        private ClubProperties club; // LAZY
-        private List<UserProperties> users; // LAZY
+    public String getName() {
+        return name;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public boolean getIsActive() {
+        return isActive;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public boolean getIsActive() {
-            return isActive;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
+    }
 
-        public void setIsActive(boolean isActive) {
-            this.isActive = isActive;
-        }
+    public ClubProperties getClub() {
+        return club;
+    }
 
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
+    public void setClub(ClubProperties club) {
+        this.club = club;
+    }
 
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public List<UserProperties> getUsers() {
+        return users;
+    }
 
-        public ClubProperties getClub() {
-            return club;
-        }
-
-        public void setClub(ClubProperties club) {
-            this.club = club;
-        }
-
-        public List<UserProperties> getUsers() {
-            return users;
-        }
-
-        public void setUsers(List<UserProperties> users) {
-            this.users = users;
-        }
+    public void setUsers(List<UserProperties> users) {
+        this.users = users;
     }
 
     public static class ClubProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }
@@ -99,10 +100,13 @@ public class GetTeamByIdOutput extends BaseOutput implements Serializable {
     }
 
     public static class UserProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private String name;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

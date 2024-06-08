@@ -19,16 +19,31 @@ public class GetAllLocationOutput extends BaseOutput implements Serializable {
     }
 
     public static class LocationProperties implements Serializable {
+
+        @JsonProperty
         private int id;
+
+        @JsonProperty
         private float latitude;
+
+        @JsonProperty
         private float longitude;
+
+        @JsonProperty
         private String address;
+
+        @JsonProperty
         private String city;
+
+        @JsonProperty
         private String country;
+
+        @JsonProperty
         private String postalCode;
+
+        @JsonProperty
         private Timestamp creationDate;
 
-        // Getters and setters
         public int getId() {
             return id;
         }

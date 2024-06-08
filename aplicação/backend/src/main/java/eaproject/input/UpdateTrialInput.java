@@ -13,15 +13,14 @@ public class UpdateTrialInput extends BaseInput implements Serializable {
     private String distanceUnit;
     private boolean isActive;
     private Timestamp creationDate;
-    private int stateId; // LAZY
-    private int competitionId; // LAZY
-    private int gradeId; // LAZY
-    private int typeId; // LAZY
-    private int locationId; // LAZY
-    private List<Integer> resultIds; // LAZY
-    private List<Integer> teamIds; // LAZY
+    private int stateId;
+    private int competitionId;
+    private int gradeId;
+    private int typeId;
+    private int locationId;
+    private List<Integer> resultIds;
+    private List<Integer> teamIds;
 
-    // Getters e setters
     public int getId() {
         return id;
     }

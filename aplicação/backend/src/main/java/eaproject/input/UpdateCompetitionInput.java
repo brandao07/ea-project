@@ -12,9 +12,8 @@ public class UpdateCompetitionInput extends BaseInput implements Serializable {
     private Timestamp endDate;
     private boolean isActive;
     private Timestamp creationDate;
-    private List<Integer> notificationIds; // LAZY
+    private List<Integer> notificationIds;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

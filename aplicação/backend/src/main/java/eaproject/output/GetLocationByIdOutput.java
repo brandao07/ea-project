@@ -1,95 +1,97 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class GetLocationByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private LocationProperties location;
+    private int id;
 
-    public LocationProperties getLocation() {
-        return location;
+    @JsonProperty
+    private float latitude;
+
+    @JsonProperty
+    private float longitude;
+
+    @JsonProperty
+    private String address;
+
+    @JsonProperty
+    private String city;
+
+    @JsonProperty
+    private String country;
+
+    @JsonProperty
+    private String postalCode;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setLocation(LocationProperties location) {
-        this.location = location;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class LocationProperties implements Serializable {
-        private int id;
-        private float latitude;
-        private float longitude;
-        private String address;
-        private String city;
-        private String country;
-        private String postalCode;
-        private Timestamp creationDate;
+    public float getLatitude() {
+        return latitude;
+    }
 
-        // Getters and setters
-        public int getId() {
-            return id;
-        }
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public float getLongitude() {
+        return longitude;
+    }
 
-        public float getLatitude() {
-            return latitude;
-        }
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
 
-        public void setLatitude(float latitude) {
-            this.latitude = latitude;
-        }
+    public String getAddress() {
+        return address;
+    }
 
-        public float getLongitude() {
-            return longitude;
-        }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-        public void setLongitude(float longitude) {
-            this.longitude = longitude;
-        }
+    public String getCity() {
+        return city;
+    }
 
-        public String getAddress() {
-            return address;
-        }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-        public void setAddress(String address) {
-            this.address = address;
-        }
+    public String getCountry() {
+        return country;
+    }
 
-        public String getCity() {
-            return city;
-        }
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-        public void setCity(String city) {
-            this.city = city;
-        }
+    public String getPostalCode() {
+        return postalCode;
+    }
 
-        public String getCountry() {
-            return country;
-        }
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
-        public void setCountry(String country) {
-            this.country = country;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public String getPostalCode() {
-            return postalCode;
-        }
-
-        public void setPostalCode(String postalCode) {
-            this.postalCode = postalCode;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

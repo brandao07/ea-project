@@ -10,10 +10,9 @@ public class UpdateTeamInput extends BaseInput implements Serializable {
     private String name;
     private boolean isActive;
     private Timestamp creationDate;
-    private int clubId; // ID do Club para abordagem LAZY
-    private List<Integer> userIds; // IDs dos usuários para abordagem LAZY
+    private int clubId;
+    private List<Integer> userIds;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

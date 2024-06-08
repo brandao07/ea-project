@@ -1,6 +1,7 @@
 package eaproject.output;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,138 +9,68 @@ import java.util.List;
 public class GetCompetitionByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private CompetitionProperties competition;
+    private int id;
 
-    public CompetitionProperties getCompetition() {
-        return competition;
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private Timestamp startDate;
+
+    @JsonProperty
+    private Timestamp endDate;
+
+    @JsonProperty
+    private boolean isActive;
+
+    @JsonProperty
+    private Timestamp creationDate;
+
+    public int getId() {
+        return id;
     }
 
-    public void setCompetition(CompetitionProperties competition) {
-        this.competition = competition;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static class CompetitionProperties implements Serializable {
-        private int id;
-        private String name;
-        private Timestamp startDate;
-        private Timestamp endDate;
-        private boolean isActive;
-        private Timestamp creationDate;
-        private List<NotificationProperties> notifications; // LAZY
-
-        // Getters e setters
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Timestamp getStartDate() {
-            return startDate;
-        }
-
-        public void setStartDate(Timestamp startDate) {
-            this.startDate = startDate;
-        }
-
-        public Timestamp getEndDate() {
-            return endDate;
-        }
-
-        public void setEndDate(Timestamp endDate) {
-            this.endDate = endDate;
-        }
-
-        public boolean getIsActive() {
-            return isActive;
-        }
-
-        public void setIsActive(boolean isActive) {
-            this.isActive = isActive;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
-
-        public List<NotificationProperties> getNotifications() {
-            return notifications;
-        }
-
-        public void setNotifications(List<NotificationProperties> notifications) {
-            this.notifications = notifications;
-        }
+    public String getName() {
+        return name;
     }
 
-    public static class NotificationProperties implements Serializable {
-        private int id;
-        private String messageHeader;
-        private String messageBody;
-        private String messageType;
-        private String photographyPath;
-        private Timestamp creationDate;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        // Getters e setters
-        public int getId() {
-            return id;
-        }
+    public Timestamp getStartDate() {
+        return startDate;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
+    }
 
-        public String getMessageHeader() {
-            return messageHeader;
-        }
+    public Timestamp getEndDate() {
+        return endDate;
+    }
 
-        public void setMessageHeader(String messageHeader) {
-            this.messageHeader = messageHeader;
-        }
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
+    }
 
-        public String getMessageBody() {
-            return messageBody;
-        }
+    public boolean getIsActive() {
+        return isActive;
+    }
 
-        public void setMessageBody(String messageBody) {
-            this.messageBody = messageBody;
-        }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
-        public String getMessageType() {
-            return messageType;
-        }
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
 
-        public void setMessageType(String messageType) {
-            this.messageType = messageType;
-        }
-
-        public String getPhotographyPath() {
-            return photographyPath;
-        }
-
-        public void setPhotographyPath(String photographyPath) {
-            this.photographyPath = photographyPath;
-        }
-
-        public Timestamp getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
-        }
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }
