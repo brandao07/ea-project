@@ -1,7 +1,7 @@
 import BaseOutput from './BaseOutput';
 
 export default class BasicUserInfoOutput extends BaseOutput {
-  constructor(name, email, gender, age, height, weight, feedbackMessages = []) {
+    constructor(weight = 0.0, height = 0.0, age = 0, gender = '', email = '', name = '', feedbackMessages = []) {
         super(feedbackMessages);
         this.name = name;
         this.email = email;

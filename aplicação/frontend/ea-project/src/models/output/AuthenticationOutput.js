@@ -1,4 +1,4 @@
-import BaseOutput from '@/models/output/BaseOutput';
+import BaseOutput from './BaseOutput';
 
 export default class AuthenticationOutput extends BaseOutput {
     constructor(token = '', feedbackMessages = []) {
