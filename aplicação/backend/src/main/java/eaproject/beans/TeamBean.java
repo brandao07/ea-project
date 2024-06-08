@@ -1,8 +1,7 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.TeamLocal;
-import eaproject.dao.Team;
-import eaproject.dao.TeamDAO;
+import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.GetAllTeamsInput;
 import eaproject.input.GetTeamByIdInput;
@@ -39,18 +38,28 @@ public class TeamBean implements TeamLocal {
         UpdateTeamOutput output = new UpdateTeamOutput();
         try {
             // Fetch entity from the database
-            Team type = TeamDAO.getTeamByORMID(input.getId());
+            Team team = TeamDAO.getTeamByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (team != null && team.getId() > 0) {
                 // Convert object into an entity
                 Team entityToUpdate = Utilities.convertToDAO(input, Team.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, team);
+
+                // Check for User Relations
+                if (!input.getUserIds().isEmpty()) {
+                    for (int userId : input.getUserIds()) {
+                        User aux = UserDAO.loadUserByORMID(userId);
+                        if (aux != null && aux.getId() > 0)  {
+                            team.user.add(aux);
+                        }
+                    }
+                }
 
                 // Save the entity to the database using the DAO
-                TeamDAO.save(type);
+                TeamDAO.save(team);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Team.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +93,12 @@ public class TeamBean implements TeamLocal {
         GetTeamByIdOutput output = new GetTeamByIdOutput();
         try {
             // Fetch entity from the database
-            Team type = Utilities.fetchEntity(input, input.getId(), TeamDAO::loadTeamByORMID, TeamDAO::getTeamByORMID, input.isLazyLoad());
+            Team team = Utilities.fetchEntity(input, input.getId(), TeamDAO::loadTeamByORMID, TeamDAO::getTeamByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (team != null && team.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetTeamByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, team, GetTeamByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Team.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +127,12 @@ public class TeamBean implements TeamLocal {
         GetAllTeamsOutput output = new GetAllTeamsOutput();
         try {
             // Fetch entities from the database
-            Team[] types = TeamDAO.listTeamByQuery(null, null);
+            Team[] teams = TeamDAO.listTeamByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (teams.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setTeamList(Utilities.convertToDTOArray(types, GetAllTeamsOutput.TeamProperties.class));
+                output.setTeamList(Utilities.convertToDTOArray(teams, GetAllTeamsOutput.TeamProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

@@ -40,18 +40,18 @@ public class RoleBean implements RoleLocal {
         UpdateRoleOutput output = new UpdateRoleOutput();
         try {
             // Fetch entity from the database
-            Role type = RoleDAO.getRoleByORMID(input.getId());
+            Role role = RoleDAO.getRoleByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (role != null && role.getId() > 0) {
                 // Convert object into an entity
                 Role entityToUpdate = Utilities.convertToDAO(input, Role.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, role);
 
                 // Save the entity to the database using the DAO
-                RoleDAO.save(type);
+                RoleDAO.save(role);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Role.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -85,12 +85,12 @@ public class RoleBean implements RoleLocal {
         GetRoleByIdOutput output = new GetRoleByIdOutput();
         try {
             // Fetch entity from the database
-            Role type = Utilities.fetchEntity(input, input.getId(), RoleDAO::loadRoleByORMID, RoleDAO::getRoleByORMID, input.isLazyLoad());
+            Role role = Utilities.fetchEntity(input, input.getId(), RoleDAO::loadRoleByORMID, RoleDAO::getRoleByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (role != null && role.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetRoleByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, role, GetRoleByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Role.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);

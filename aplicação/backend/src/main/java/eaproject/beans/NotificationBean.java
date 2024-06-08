@@ -39,18 +39,18 @@ public class NotificationBean implements NotificationLocal {
         UpdateNotificationOutput output = new UpdateNotificationOutput();
         try {
             // Fetch entity from the database
-            Notification type = NotificationDAO.getNotificationByORMID(input.getId());
+            Notification notification = NotificationDAO.getNotificationByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (notification != null && notification.getId() > 0) {
                 // Convert object into an entity
                 Notification entityToUpdate = Utilities.convertToDAO(input, Notification.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, notification);
 
                 // Save the entity to the database using the DAO
-                NotificationDAO.save(type);
+                NotificationDAO.save(notification);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Notification.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class NotificationBean implements NotificationLocal {
         GetNotificationByIdOutput output = new GetNotificationByIdOutput();
         try {
             // Fetch entity from the database
-            Notification type = Utilities.fetchEntity(input, input.getId(), NotificationDAO::loadNotificationByORMID, NotificationDAO::getNotificationByORMID, input.isLazyLoad());
+            Notification notification = Utilities.fetchEntity(input, input.getId(), NotificationDAO::loadNotificationByORMID, NotificationDAO::getNotificationByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (notification != null && notification.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetNotificationByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, notification, GetNotificationByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Notification.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class NotificationBean implements NotificationLocal {
         GetAllNotificationsOutput output = new GetAllNotificationsOutput();
         try {
             // Fetch entities from the database
-            Notification[] types = NotificationDAO.listNotificationByQuery(null, null);
+            Notification[] notifications = NotificationDAO.listNotificationByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (notifications.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setNotificationList(Utilities.convertToDTOArray(types, GetAllNotificationsOutput.NotificationProperties.class));
+                output.setNotificationList(Utilities.convertToDTOArray(notifications, GetAllNotificationsOutput.NotificationProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

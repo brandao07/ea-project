@@ -1,8 +1,7 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.TrialLocal;
-import eaproject.dao.Trial;
-import eaproject.dao.TrialDAO;
+import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.GetAllTrialsInput;
 import eaproject.input.GetTrialByIdInput;
@@ -39,18 +38,78 @@ public class TrialBean implements TrialLocal {
         UpdateTrialOutput output = new UpdateTrialOutput();
         try {
             // Fetch entity from the database
-            Trial type = TrialDAO.getTrialByORMID(input.getId());
+            Trial trial = TrialDAO.getTrialByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (trial != null && trial.getId() > 0) {
                 // Convert object into an entity
                 Trial entityToUpdate = Utilities.convertToDAO(input, Trial.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, trial);
+
+                // Check for Competition Relations
+                if (input.getCompetitionId() != null && input.getCompetitionId() > 0) {
+                    Competition aux = CompetitionDAO.loadCompetitionByORMID(input.getCompetitionId());
+                    if (aux != null && aux.getId() > 0) {
+                        trial.setCompetition(aux);
+                    }
+                }
+
+                // Check for Location Relations
+                if (input.getLocationId() > 0) {
+                    Location aux = LocationDAO.loadLocationByORMID(input.getLocationId());
+                    if (aux != null && aux.getId() > 0) {
+                        trial.setLocation(aux);
+                    }
+                }
+
+                // Check for Grade Relations
+                if (input.getGradeId() > 0) {
+                    Grade aux = GradeDAO.loadGradeByORMID(input.getGradeId());
+                    if (aux != null && aux.getId() > 0) {
+                        trial.setGrade(aux);
+                    }
+                }
+
+                // Check for State Relations
+                if (input.getStateId() > 0) {
+                    State aux = StateDAO.loadStateByORMID(input.getStateId());
+                    if (aux != null && aux.getId() > 0) {
+                        trial.setState(aux);
+                    }
+                }
+
+                // Check for Type Relations
+                if (input.getTypeId() > 0) {
+                    Type aux = TypeDAO.loadTypeByORMID(input.getTypeId());
+                    if (aux != null && aux.getId() > 0) {
+                        trial.setType(aux);
+                    }
+                }
+
+                // Check for Result Relations
+                if (!input.getResultIds().isEmpty()) {
+                    for (int resultId : input.getResultIds()) {
+                        Result aux = ResultDAO.loadResultByORMID(resultId);
+                        if (aux != null && aux.getId() > 0)  {
+                            trial.result.add(aux);
+                        }
+                    }
+                }
+
+                // Check for Team Relations
+                if (!input.getTeamIds().isEmpty()) {
+                    for (int tramId : input.getTeamIds()) {
+                        Team aux = TeamDAO.loadTeamByORMID(tramId);
+                        if (aux != null && aux.getId() > 0)  {
+                            trial.team.add(aux);
+                        }
+                    }
+                }
 
                 // Save the entity to the database using the DAO
-                TrialDAO.save(type);
+                TrialDAO.save(trial);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Trial.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +143,12 @@ public class TrialBean implements TrialLocal {
         GetTrialByIdOutput output = new GetTrialByIdOutput();
         try {
             // Fetch entity from the database
-            Trial type = Utilities.fetchEntity(input, input.getId(), TrialDAO::loadTrialByORMID, TrialDAO::getTrialByORMID, input.isLazyLoad());
+            Trial trial = Utilities.fetchEntity(input, input.getId(), TrialDAO::loadTrialByORMID, TrialDAO::getTrialByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (trial != null && trial.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetTrialByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, trial, GetTrialByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Trial.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +177,12 @@ public class TrialBean implements TrialLocal {
         GetAllTrialsOutput output = new GetAllTrialsOutput();
         try {
             // Fetch entities from the database
-            Trial[] types = TrialDAO.listTrialByQuery(null, null);
+            Trial[] trials = TrialDAO.listTrialByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (trials.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setTrials(Utilities.convertToDTOArray(types, GetAllTrialsOutput.TrialProperties.class));
+                output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

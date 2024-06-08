@@ -39,18 +39,18 @@ public class StateBean implements StateLocal {
         UpdateStateOutput output = new UpdateStateOutput();
         try {
             // Fetch entity from the database
-            State type = StateDAO.getStateByORMID(input.getId());
+            State state = StateDAO.getStateByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (state != null && state.getId() > 0) {
                 // Convert object into an entity
                 State entityToUpdate = Utilities.convertToDAO(input, State.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, state);
 
                 // Save the entity to the database using the DAO
-                StateDAO.save(type);
+                StateDAO.save(state);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(State.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class StateBean implements StateLocal {
         GetStateByIdOutput output = new GetStateByIdOutput();
         try {
             // Fetch entity from the database
-            State type = Utilities.fetchEntity(input, input.getId(), StateDAO::loadStateByORMID, StateDAO::getStateByORMID, input.isLazyLoad());
+            State state = Utilities.fetchEntity(input, input.getId(), StateDAO::loadStateByORMID, StateDAO::getStateByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (state != null && state.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetStateByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, state, GetStateByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(State.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class StateBean implements StateLocal {
         GetAllStatesOutput output = new GetAllStatesOutput();
         try {
             // Fetch entities from the database
-            State[] types = StateDAO.listStateByQuery(null, null);
+            State[] state = StateDAO.listStateByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (state.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setStateList(Utilities.convertToDTOArray(types, GetAllStatesOutput.StateProperties.class));
+                output.setStateList(Utilities.convertToDTOArray(state, GetAllStatesOutput.StateProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

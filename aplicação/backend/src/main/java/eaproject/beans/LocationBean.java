@@ -39,18 +39,18 @@ public class LocationBean implements LocationLocal {
         UpdateLocationOutput output = new UpdateLocationOutput();
         try {
             // Fetch entity from the database
-            Location type = LocationDAO.getLocationByORMID(input.getId());
+            Location location = LocationDAO.getLocationByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (location != null && location.getId() > 0) {
                 // Convert object into an entity
                 Location entityToUpdate = Utilities.convertToDAO(input, Location.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, location);
 
                 // Save the entity to the database using the DAO
-                LocationDAO.save(type);
+                LocationDAO.save(location);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Location.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class LocationBean implements LocationLocal {
         GetLocationByIdOutput output = new GetLocationByIdOutput();
         try {
             // Fetch entity from the database
-            Location type = Utilities.fetchEntity(input, input.getId(), LocationDAO::loadLocationByORMID, LocationDAO::getLocationByORMID, input.isLazyLoad());
+            Location location = Utilities.fetchEntity(input, input.getId(), LocationDAO::loadLocationByORMID, LocationDAO::getLocationByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (location != null && location.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetLocationByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, location, GetLocationByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Location.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class LocationBean implements LocationLocal {
         GetAllLocationsOutput output = new GetAllLocationsOutput();
         try {
             // Fetch entities from the database
-            Location[] types = LocationDAO.listLocationByQuery(null, null);
+            Location[] locations = LocationDAO.listLocationByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (locations.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setLocationList(Utilities.convertToDTOArray(types, GetAllLocationsOutput.LocationProperties.class));
+                output.setLocationList(Utilities.convertToDTOArray(locations, GetAllLocationsOutput.LocationProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

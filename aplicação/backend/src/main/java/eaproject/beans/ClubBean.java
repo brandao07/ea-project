@@ -39,18 +39,18 @@ public class ClubBean implements ClubLocal {
         UpdateClubOutput output = new UpdateClubOutput();
         try {
             // Fetch entity from the database
-            Club type = ClubDAO.getClubByORMID(input.getId());
+            Club club = ClubDAO.getClubByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (club != null && club.getId() > 0) {
                 // Convert object into an entity
                 Club entityToUpdate = Utilities.convertToDAO(input, Club.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, club);
 
                 // Save the entity to the database using the DAO
-                ClubDAO.save(type);
+                ClubDAO.save(club);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Club.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class ClubBean implements ClubLocal {
         GetClubByIdOutput output = new GetClubByIdOutput();
         try {
             // Fetch entity from the database
-            Club type = Utilities.fetchEntity(input, input.getId(), ClubDAO::loadClubByORMID, ClubDAO::getClubByORMID, input.isLazyLoad());
+            Club club = Utilities.fetchEntity(input, input.getId(), ClubDAO::loadClubByORMID, ClubDAO::getClubByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (club != null && club.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetClubByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, club, GetClubByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Club.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class ClubBean implements ClubLocal {
         GetAllClubsOutput output = new GetAllClubsOutput();
         try {
             // Fetch entities from the database
-            Club[] types = ClubDAO.listClubByQuery(null, null);
+            Club[] clubs = ClubDAO.listClubByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (clubs.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setClubList(Utilities.convertToDTOArray(types, GetAllClubsOutput.ClubProperties.class));
+                output.setClubList(Utilities.convertToDTOArray(clubs, GetAllClubsOutput.ClubProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

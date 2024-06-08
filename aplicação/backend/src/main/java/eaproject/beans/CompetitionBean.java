@@ -1,8 +1,7 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.CompetitionLocal;
-import eaproject.dao.Competition;
-import eaproject.dao.CompetitionDAO;
+import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
@@ -39,21 +38,32 @@ public class CompetitionBean implements CompetitionLocal {
         UpdateCompetitionOutput output = new UpdateCompetitionOutput();
         try {
             // Fetch entity from the database
-            Competition type = CompetitionDAO.getCompetitionByORMID(input.getId());
+            Competition competition = CompetitionDAO.getCompetitionByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (competition != null && competition.getId() > 0) {
                 // Convert object into an entity
                 Competition entityToUpdate = Utilities.convertToDAO(input, Competition.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, competition);
+
+                // Check for Notification Relations
+                if (!input.getNotificationIds().isEmpty()) {
+                    for (int notificationId : input.getNotificationIds()) {
+                        Notification aux = NotificationDAO.loadNotificationByORMID(notificationId);
+                        if (aux != null && aux.getId() > 0)  {
+                            competition.notification.add(aux);
+                        }
+                    }
+                }
 
                 // Save the entity to the database using the DAO
-                CompetitionDAO.save(type);
+                CompetitionDAO.save(competition);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Competition.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
+
                 // Indicate that the update was successful
                 output.setUpdateSuccessful(true);
             } else {
@@ -84,12 +94,12 @@ public class CompetitionBean implements CompetitionLocal {
         GetCompetitionByIdOutput output = new GetCompetitionByIdOutput();
         try {
             // Fetch entity from the database
-            Competition type = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
+            Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (competition != null && competition.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetCompetitionByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +128,12 @@ public class CompetitionBean implements CompetitionLocal {
         GetAllCompetitionsOutput output = new GetAllCompetitionsOutput();
         try {
             // Fetch entities from the database
-            Competition[] types = CompetitionDAO.listCompetitionByQuery(null, null);
+            Competition[] competitions = CompetitionDAO.listCompetitionByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (competitions.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setCompetitionList(Utilities.convertToDTOArray(types, GetAllCompetitionsOutput.CompetitionProperties.class));
+                output.setCompetitionList(Utilities.convertToDTOArray(competitions, GetAllCompetitionsOutput.CompetitionProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

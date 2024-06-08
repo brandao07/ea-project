@@ -39,18 +39,18 @@ public class GradeBean implements GradeLocal {
         UpdateGradeOutput output = new UpdateGradeOutput();
         try {
             // Fetch entity from the database
-            Grade type = GradeDAO.getGradeByORMID(input.getId());
+            Grade grade = GradeDAO.getGradeByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (grade != null && grade.getId() > 0) {
                 // Convert object into an entity
                 Grade entityToUpdate = Utilities.convertToDAO(input, Grade.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, grade);
 
                 // Save the entity to the database using the DAO
-                GradeDAO.save(type);
+                GradeDAO.save(grade);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Grade.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class GradeBean implements GradeLocal {
         GetGradeByIdOutput output = new GetGradeByIdOutput();
         try {
             // Fetch entity from the database
-            Grade type = Utilities.fetchEntity(input, input.getId(), GradeDAO::loadGradeByORMID, GradeDAO::getGradeByORMID, input.isLazyLoad());
+            Grade grade = Utilities.fetchEntity(input, input.getId(), GradeDAO::loadGradeByORMID, GradeDAO::getGradeByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (grade != null && grade.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetGradeByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, grade, GetGradeByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Grade.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class GradeBean implements GradeLocal {
         GetAllGradesOutput output = new GetAllGradesOutput();
         try {
             // Fetch entities from the database
-            Grade[] types = GradeDAO.listGradeByQuery(null, null);
+            Grade[] grades = GradeDAO.listGradeByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (grades.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setGradeList(Utilities.convertToDTOArray(types, GetAllGradesOutput.GradeProperties.class));
+                output.setGradeList(Utilities.convertToDTOArray(grades, GetAllGradesOutput.GradeProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

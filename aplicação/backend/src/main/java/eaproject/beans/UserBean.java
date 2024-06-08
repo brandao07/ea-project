@@ -216,15 +216,10 @@ public class UserBean implements UserLocal {
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Convert object into an entity
-                User userToUpdate = Utilities.convertToDAO(userInfoInput, User.class);
+                User entityToUpdate = Utilities.convertToDAO(userInfoInput, User.class);
 
-                // Set all items to update
-                user.setName(userToUpdate.getName());
-                user.setEmail(userToUpdate.getEmail());
-                user.setGender(userToUpdate.getGender());
-                user.setAge(userToUpdate.getAge());
-                user.setHeight(userToUpdate.getHeight());
-                user.setWeight(userToUpdate.getWeight());
+                // Update only non-null fields of the existing entity
+                Utilities.updateNonNullFields(entityToUpdate, user);
 
                 // Save the User entity to the database using the DAO
                 UserDAO.save(user);

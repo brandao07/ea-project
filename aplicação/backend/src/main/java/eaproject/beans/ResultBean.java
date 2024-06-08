@@ -39,18 +39,18 @@ public class ResultBean implements ResultLocal {
         UpdateResultOutput output = new UpdateResultOutput();
         try {
             // Fetch entity from the database
-            Result type = ResultDAO.getResultByORMID(input.getId());
+            Result result = ResultDAO.getResultByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (result != null && result.getId() > 0) {
                 // Convert object into an entity
                 Result entityToUpdate = Utilities.convertToDAO(input, Result.class);
 
                 // Update only non-null fields of the existing entity
-                Utilities.updateNonNullFields(entityToUpdate, type);
+                Utilities.updateNonNullFields(entityToUpdate, result);
 
                 // Save the entity to the database using the DAO
-                ResultDAO.save(type);
+                ResultDAO.save(result);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage(Result.class.getName() + " updated successfully.", FeedbackSeverity.SUCCESS);
@@ -84,12 +84,12 @@ public class ResultBean implements ResultLocal {
         GetResultByIdOutput output = new GetResultByIdOutput();
         try {
             // Fetch entity from the database
-            Result type = Utilities.fetchEntity(input, input.getId(), ResultDAO::loadResultByORMID, ResultDAO::getResultByORMID, input.isLazyLoad());
+            Result result = Utilities.fetchEntity(input, input.getId(), ResultDAO::loadResultByORMID, ResultDAO::getResultByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (type != null && type.getId() > 0) {
+            if (result != null && result.getId() > 0) {
                 // Assign retrieved entity to the output object
-                output = Utilities.processLazyLoad(input, type, GetResultByIdOutput.class, input.isLazyLoad());
+                output = Utilities.processLazyLoad(input, result, GetResultByIdOutput.class, input.isLazyLoad());
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Result.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -118,12 +118,12 @@ public class ResultBean implements ResultLocal {
         GetAllResultsOutput output = new GetAllResultsOutput();
         try {
             // Fetch entities from the database
-            Result[] types = ResultDAO.listResultByQuery(null, null);
+            Result[] results = ResultDAO.listResultByQuery(null, null);
 
             // Check if roles are retrieved successfully
-            if (types.length > 0) {
+            if (results.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setResultList(Utilities.convertToDTOArray(types, GetAllResultsOutput.ResultProperties.class));
+                output.setResultList(Utilities.convertToDTOArray(results, GetAllResultsOutput.ResultProperties.class));
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
