@@ -41,7 +41,7 @@ public class TeamBean implements TeamLocal {
             Team team = TeamDAO.getTeamByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (team != null && team.getId() > 0) {
+            if (team != null && team.getId() > 0 && team.getIsActive()) {
                 // Convert object into an entity
                 Team entityToUpdate = Utilities.convertToDAO(input, Team.class);
 
@@ -96,7 +96,7 @@ public class TeamBean implements TeamLocal {
             Team team = Utilities.fetchEntity(input, input.getId(), TeamDAO::loadTeamByORMID, TeamDAO::getTeamByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (team != null && team.getId() > 0) {
+            if (team != null && team.getId() > 0  && team.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, team, GetTeamByIdOutput.class, input.isLazyLoad());
             } else {

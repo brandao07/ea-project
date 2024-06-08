@@ -42,7 +42,7 @@ public class ClubBean implements ClubLocal {
             Club club = ClubDAO.getClubByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (club != null && club.getId() > 0) {
+            if (club != null && club.getId() > 0 && club.getIsActive()) {
                 // Convert object into an entity
                 Club entityToUpdate = Utilities.convertToDAO(input, Club.class);
 
@@ -87,7 +87,7 @@ public class ClubBean implements ClubLocal {
             Club club = Utilities.fetchEntity(input, input.getId(), ClubDAO::loadClubByORMID, ClubDAO::getClubByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (club != null && club.getId() > 0) {
+            if (club != null && club.getId() > 0 && club.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, club, GetClubByIdOutput.class, input.isLazyLoad());
             } else {

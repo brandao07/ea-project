@@ -41,7 +41,7 @@ public class TrialBean implements TrialLocal {
             Trial trial = TrialDAO.getTrialByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (trial != null && trial.getId() > 0) {
+            if (trial != null && trial.getId() > 0 && trial.getIsActive()) {
                 // Convert object into an entity
                 Trial entityToUpdate = Utilities.convertToDAO(input, Trial.class);
 
@@ -146,7 +146,7 @@ public class TrialBean implements TrialLocal {
             Trial trial = Utilities.fetchEntity(input, input.getId(), TrialDAO::loadTrialByORMID, TrialDAO::getTrialByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (trial != null && trial.getId() > 0) {
+            if (trial != null && trial.getId() > 0 && trial.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, trial, GetTrialByIdOutput.class, input.isLazyLoad());
             } else {

@@ -41,7 +41,7 @@ public class CompetitionBean implements CompetitionLocal {
             Competition competition = CompetitionDAO.getCompetitionByORMID(input.getId());
 
             // Check if entity is retrieved successfully
-            if (competition != null && competition.getId() > 0) {
+            if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Convert object into an entity
                 Competition entityToUpdate = Utilities.convertToDAO(input, Competition.class);
 
@@ -97,7 +97,7 @@ public class CompetitionBean implements CompetitionLocal {
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
 
             // Check if entity is retrieved successfully
-            if (competition != null && competition.getId() > 0) {
+            if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
             } else {
