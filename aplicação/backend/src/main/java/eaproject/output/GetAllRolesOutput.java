@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class GetRolesOutput extends BaseOutput implements Serializable {
+public class GetAllRolesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
     private ArrayList<RoleProperties> rolesList;
