@@ -1,70 +1,171 @@
-import UserRegisterOutput from "@/models/output/UserRegisterOutput";
 import AuthenticationOutput from "@/models/output/AuthenticationOutput";
-import BasicUserInfoOutput from "@/models/output/BasicUserInfoOutput";
-import UpdateUserInfoOutput from "@/models/output/UpdateUserInfoOutput";
+import CreateUserOutput from "@/models/output/CreateUserOutput";
+import GetAllUsersOutput from "@/models/output/GetAllUsersOutput";
+import GetUserByIdOutput from "@/models/output/GetUserByIdOutput";
+import UpdateUserOutput from "@/models/output/UpdateUserOutput";
 import UpdateUserRoleOutput from "@/models/output/UpdateUserRoleOutput";
-import GetUsersOutput from "@/models/output/GetUsersOutput";
-import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
+
+import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
 import FeedbackMessage from "@/models/base/FeedbackMessage";
+import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import EventBus from "@/eventBus";
-import ApiService from "@/services/ApiService";
 
 class UserService {
   /**
-   * Registers a new user
-   * @param {UserRegisterInput} userRegisterInput - The user registration input
-   * @returns {Promise<UserRegisterOutput>} The user registration output
+   * Getallusers
+   * @param {GetAllUsersInput} usersInput - The usersInput
+   * @returns {Promise<GetAllUsersOutput>} The GetAllUsersOutput
    */
-  async registerUser(userRegisterInput) {
+  async getAllUsers(usersInput) {
     try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.REGISTER,
-        userRegisterInput
+      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_USERS, usersInput);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UserRegisterOutput(
-        response.registrationSuccessful,
-        response.feedbackMessages
-      );
+      const output = new GetAllUsersOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during registration.",
+        "An error occurred during getAllUsers.",
         FeedbackSeverity.DANGER
       );
-      const output = new UserRegisterOutput(false, [errorMessage]);
+      const output = new GetAllUsersOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Authenticates a user
-   * @param {AuthenticationInput} authenticationInput - The authentication input
-   * @returns {Promise<AuthenticationOutput>} The authentication output
+   * Updateusercurrentrole
+   * @param {UpdateUserRoleInput} userRoleInput - The userRoleInput
+   * @returns {Promise<UpdateUserRoleOutput>} The UpdateUserRoleOutput
    */
-  async loginUser(authenticationInput) {
+  async updateUserCurrentRole(userRoleInput) {
     try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.LOGIN,
-        authenticationInput
-      );
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_USER_CURRENT_ROLE, userRoleInput);
       const feedbackMessages = response.feedbackMessages.map(
-        (msg) =>
-          new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new AuthenticationOutput(response.token, feedbackMessages);
-      ApiService.setToken(response.token); // Store the token
+      const output = new UpdateUserRoleOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during authentication.",
+        "An error occurred during updateUserCurrentRole.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new UpdateUserRoleOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Updatebasicuserinfo
+   * @param {UpdateUserInput} userInfoInput - The userInfoInput
+   * @returns {Promise<UpdateUserOutput>} The UpdateUserOutput
+   */
+  async updateBasicUserInfo(userInfoInput) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_BASIC_USER_INFO, userInfoInput);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new UpdateUserOutput(response, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during updateBasicUserInfo.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new UpdateUserOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Getbasicuserinfo
+   * @param {GetUserByIdInput} userInfoInput - The userInfoInput
+   * @returns {Promise<GetUserByIdOutput>} The GetUserByIdOutput
+   */
+  async getBasicUserInfo(userInfoInput) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.BASIC_USER_INFO, userInfoInput);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new GetUserByIdOutput(response, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during getBasicUserInfo.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new GetUserByIdOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Registeruser
+   * @param {CreateUserInput} CreateUserInput - The CreateUserInput
+   * @returns {Promise<CreateUserOutput>} The CreateUserOutput
+   */
+  async registerUser(CreateUserInput) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.REGISTER, CreateUserInput);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new CreateUserOutput(response, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during registerUser.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new CreateUserOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Loginuser
+   * @param {AuthenticationInput} authenticationInput - The authenticationInput
+   * @returns {Promise<AuthenticationOutput>} The AuthenticationOutput
+   */
+  async loginUser(authenticationInput) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.LOGIN, authenticationInput);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new AuthenticationOutput(response.token, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during loginUser.",
         FeedbackSeverity.DANGER
       );
       const output = new AuthenticationOutput("", [errorMessage]);
@@ -73,134 +174,6 @@ class UserService {
     }
   }
 
-  /**
-   * Retrieves basic user info
-   * @param {BasicUserInfoInput} userInfoInput - The basic user info input
-   * @returns {Promise<BasicUserInfoOutput>} The basic user info output
-   */
-  async getBasicUserInfo(userInfoInput) {
-    try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.BASIC_USER_INFO,
-        userInfoInput
-      );
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) =>
-          new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new BasicUserInfoOutput(
-        response.name,
-        response.email,
-        response.gender,
-        response.age,
-        response.height,
-        response.weight,
-        feedbackMessages
-      );
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
-      return output;
-    } catch (error) {
-      const errorMessage = new FeedbackMessage(
-        "An error occurred during service call.",
-        FeedbackSeverity.DANGER
-      );
-      const output = new BasicUserInfoOutput("", [errorMessage]);
-      EventBus.emit("feedback-message", errorMessage);
-      return output;
-    }
-  }
-
-  /**
-   * Updates an existing user
-   * @param {UpdateUserInfoInput} userRegisterInput - The update user basic info input
-   * @returns {Promise<UpdateUserInfoOutput>} The update user basic info output
-   */
-  async updateBasicUserInfo(userInfoInput) {
-    try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.UPDATE_BASIC_USER_INFO,
-        userInfoInput
-      );
-      const output = new UpdateUserInfoOutput(
-        response.updateSuccessful,
-        response.feedbackMessages
-      );
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
-      return output;
-    } catch (error) {
-      const errorMessage = new FeedbackMessage(
-        "An error occurred during update.",
-        FeedbackSeverity.DANGER
-      );
-      const output = new UserRegisterOutput(false, [errorMessage]);
-      EventBus.emit("feedback-message", errorMessage);
-      return output;
-    }
-  }
-  
-  /**
-   * Updates an existing user role
-   * @param {UpdateUserRoleInput} userRoleInput - The update user role input
-   * @returns {Promise<UpdateUserRoleOutput>} The update user role output
-   */
-  async updateUserCurrentRole(userRoleInput) {
-    try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.UPDATE_CURRENT_USER_ROLE,
-        userRoleInput
-      );
-      const output = new UpdateUserRoleOutput(
-        response.updateSuccessful,
-        response.feedbackMessages
-      );
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
-      return output;
-    } catch (error) {
-      const errorMessage = new FeedbackMessage(
-        "An error occurred during update.",
-        FeedbackSeverity.DANGER
-      );
-      const output = new UpdateUserRoleOutput(false, [errorMessage]);
-      EventBus.emit("feedback-message", errorMessage);
-      return output;
-    }
-  }
-
-  /**
-   * Retrieves all users from the database
-   * @param {GetUsersInput} usersInput - The get users input
-   * @returns {Promise<GetUsersOutput>} The get users output
-   */
-  async getAllUsers(usersInput) {
-    try {
-      const response = await ApiService.post(
-        API_ENDPOINTS.GET_ALL_USERS,
-        usersInput
-      );
-      const output = new GetUsersOutput(
-        response.usersList,
-        response.feedbackMessages
-      );
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
-      return output;
-    } catch (error) {
-      const errorMessage = new FeedbackMessage(
-        "An error occurred during update.",
-        FeedbackSeverity.DANGER
-      );
-      const output = new GetUsersOutput(false, [errorMessage]);
-      EventBus.emit("feedback-message", errorMessage);
-      return output;
-    }
-  }
 }
 
 export default new UserService();

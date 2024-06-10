@@ -1,7 +1,7 @@
-import CreateRoleOutput from "@/models/output/CreateRoleOutput";
-import GetAllRolesOutput from "@/models/output/GetAllRolesOutput";
-import GetRoleByIdOutput from "@/models/output/GetRoleByIdOutput";
-import UpdateRoleOutput from "@/models/output/UpdateRoleOutput";
+import CreateTypeOutput from "@/models/output/CreateTypeOutput";
+import GetAllTypesOutput from "@/models/output/GetAllTypesOutput";
+import GetTypeByIdOutput from "@/models/output/GetTypeByIdOutput";
+import UpdateTypeOutput from "@/models/output/UpdateTypeOutput";
 
 import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
@@ -9,110 +9,110 @@ import FeedbackMessage from "@/models/base/FeedbackMessage";
 import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import EventBus from "@/eventBus";
 
-class RoleService {
+class TypeService {
   /**
-   * Createroleentity
-   * @param {CreateRoleInput} input - The input
-   * @returns {Promise<CreateRoleOutput>} The CreateRoleOutput
+   * Createtypeentity
+   * @param {CreateTypeInput} input - The input
+   * @returns {Promise<CreateTypeOutput>} The CreateTypeOutput
    */
-  async createRoleEntity(input) {
+  async createTypeEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.CREATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.CREATE_TYPE_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateRoleOutput(response, feedbackMessages);
+      const output = new CreateTypeOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during createRoleEntity.",
+        "An error occurred during createTypeEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new CreateRoleOutput("", [errorMessage]);
+      const output = new CreateTypeOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Updateroleentity
-   * @param {UpdateRoleInput} input - The input
-   * @returns {Promise<UpdateRoleOutput>} The UpdateRoleOutput
+   * Updatetypeentity
+   * @param {UpdateTypeInput} input - The input
+   * @returns {Promise<UpdateTypeOutput>} The UpdateTypeOutput
    */
-  async updateRoleEntity(input) {
+  async updateTypeEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.UPDATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_TYPE_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateRoleOutput(response, feedbackMessages);
+      const output = new UpdateTypeOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during updateRoleEntity.",
+        "An error occurred during updateTypeEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new UpdateRoleOutput("", [errorMessage]);
+      const output = new UpdateTypeOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getrolebyid
-   * @param {GetRoleByIdInput} input - The input
-   * @returns {Promise<GetRoleByIdOutput>} The GetRoleByIdOutput
+   * Gettypebyid
+   * @param {GetTypeByIdInput} input - The input
+   * @returns {Promise<GetTypeByIdOutput>} The GetTypeByIdOutput
    */
-  async getRoleById(input) {
+  async getTypeById(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ROLE_BY_ID, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_TYPE_BY_ID, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetRoleByIdOutput(response, feedbackMessages);
+      const output = new GetTypeByIdOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getRoleById.",
+        "An error occurred during getTypeById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetRoleByIdOutput("", [errorMessage]);
+      const output = new GetTypeByIdOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getallroles
-   * @param {GetAllRolesInput} input - The input
-   * @returns {Promise<GetAllRolesOutput>} The GetAllRolesOutput
+   * Getalltypes
+   * @param {GetAllTypesInput} input - The input
+   * @returns {Promise<GetAllTypesOutput>} The GetAllTypesOutput
    */
-  async getAllRoles(input) {
+  async getAllTypes(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_ROLES, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_TYPES, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllRolesOutput(response, feedbackMessages);
+      const output = new GetAllTypesOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getAllRoles.",
+        "An error occurred during getAllTypes.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetAllRolesOutput("", [errorMessage]);
+      const output = new GetAllTypesOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -120,4 +120,4 @@ class RoleService {
 
 }
 
-export default new RoleService();
+export default new TypeService();

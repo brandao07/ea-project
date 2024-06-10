@@ -1,7 +1,7 @@
-import CreateRoleOutput from "@/models/output/CreateRoleOutput";
-import GetAllRolesOutput from "@/models/output/GetAllRolesOutput";
-import GetRoleByIdOutput from "@/models/output/GetRoleByIdOutput";
-import UpdateRoleOutput from "@/models/output/UpdateRoleOutput";
+import CreateClubOutput from "@/models/output/CreateClubOutput";
+import GetAllClubsOutput from "@/models/output/GetAllClubsOutput";
+import GetClubByIdOutput from "@/models/output/GetClubByIdOutput";
+import UpdateClubOutput from "@/models/output/UpdateClubOutput";
 
 import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
@@ -9,110 +9,110 @@ import FeedbackMessage from "@/models/base/FeedbackMessage";
 import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import EventBus from "@/eventBus";
 
-class RoleService {
+class ClubService {
   /**
-   * Createroleentity
-   * @param {CreateRoleInput} input - The input
-   * @returns {Promise<CreateRoleOutput>} The CreateRoleOutput
+   * Createclubentity
+   * @param {CreateClubInput} input - The input
+   * @returns {Promise<CreateClubOutput>} The CreateClubOutput
    */
-  async createRoleEntity(input) {
+  async createClubEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.CREATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.CREATE_CLUB_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateRoleOutput(response, feedbackMessages);
+      const output = new CreateClubOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during createRoleEntity.",
+        "An error occurred during createClubEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new CreateRoleOutput("", [errorMessage]);
+      const output = new CreateClubOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Updateroleentity
-   * @param {UpdateRoleInput} input - The input
-   * @returns {Promise<UpdateRoleOutput>} The UpdateRoleOutput
+   * Updateclubentity
+   * @param {UpdateClubInput} input - The input
+   * @returns {Promise<UpdateClubOutput>} The UpdateClubOutput
    */
-  async updateRoleEntity(input) {
+  async updateClubEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.UPDATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_CLUB_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateRoleOutput(response, feedbackMessages);
+      const output = new UpdateClubOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during updateRoleEntity.",
+        "An error occurred during updateClubEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new UpdateRoleOutput("", [errorMessage]);
+      const output = new UpdateClubOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getrolebyid
-   * @param {GetRoleByIdInput} input - The input
-   * @returns {Promise<GetRoleByIdOutput>} The GetRoleByIdOutput
+   * Getclubbyid
+   * @param {GetClubByIdInput} input - The input
+   * @returns {Promise<GetClubByIdOutput>} The GetClubByIdOutput
    */
-  async getRoleById(input) {
+  async getClubById(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ROLE_BY_ID, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_CLUB_BY_ID, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetRoleByIdOutput(response, feedbackMessages);
+      const output = new GetClubByIdOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getRoleById.",
+        "An error occurred during getClubById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetRoleByIdOutput("", [errorMessage]);
+      const output = new GetClubByIdOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getallroles
-   * @param {GetAllRolesInput} input - The input
-   * @returns {Promise<GetAllRolesOutput>} The GetAllRolesOutput
+   * Getallclubs
+   * @param {GetAllClubsInput} input - The input
+   * @returns {Promise<GetAllClubsOutput>} The GetAllClubsOutput
    */
-  async getAllRoles(input) {
+  async getAllClubs(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_ROLES, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_CLUBS, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllRolesOutput(response, feedbackMessages);
+      const output = new GetAllClubsOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getAllRoles.",
+        "An error occurred during getAllClubs.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetAllRolesOutput("", [errorMessage]);
+      const output = new GetAllClubsOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -120,4 +120,4 @@ class RoleService {
 
 }
 
-export default new RoleService();
+export default new ClubService();

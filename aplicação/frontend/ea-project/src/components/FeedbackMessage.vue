@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FeedbackSeverity from '../models/enums/FeedbackSeverity';
+import FeedbackSeverity from '@/models/enums/FeedbackSeverity';
 import EventBus from '@/eventBus';
 
 export default {

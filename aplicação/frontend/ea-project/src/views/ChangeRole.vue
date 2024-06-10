@@ -29,10 +29,10 @@
 import Modal from '@/components/Modal.vue';
 import UserService from '@/services/UserService';
 import RoleService from '@/services/RoleService';
-import GetRolesInput from '@/models/input/GetRolesInput';
-import GetRolesOutput from '@/models/output/GetRolesOutput';
-import GetUsersInput from '@/models/input/GetUsersInput';
-import GetUsersOutput from '@/models/output/GetUsersOutput';
+import GetAllRolesInput from '@/models/input/GetAllRolesInput';
+import GetAllRolesOutput from '@/models/output/GetAllRolesOutput';
+import GetAllUsersInput from '@/models/input/GetAllUsersInput';
+import GetAllUsersOutput from '@/models/output/GetAllUsersOutput';
 import UpdateUserRoleInput from '@/models/input/UpdateUserRoleInput';
 import UpdateUserRoleOutput from '@/models/output/UpdateUserRoleOutput';
 
@@ -49,8 +49,8 @@ export default {
     },
     data() {
         return {
-            getRolesOutput: new GetRolesOutput(),
-            getUsersOutput: new GetUsersOutput(),
+            getRolesOutput: new GetAllRolesOutput(),
+            getUsersOutput: new GetAllUsersOutput(),
             updateUserRoleInput: new UpdateUserRoleInput(),
             updateUserRoleOutput: new UpdateUserRoleOutput(),
             modalVisible: this.isVisible
@@ -58,10 +58,10 @@ export default {
     },
     methods: {
         async fetchUserInfo() {
-            this.getUsersOutput = await UserService.getAllUsers(new GetUsersInput());
+            this.getUsersOutput = await UserService.getAllUsers(new GetAllUsersInput());
         },
         async fetchRoleInfo() {
-            this.getRolesOutput = await RoleService.getAllRoles(new GetRolesInput());
+            this.getRolesOutput = await RoleService.getAllRoles(new GetAllRolesInput());
         },
         async saveProfile() {
             this.updateUserRoleOutput = await UserService.updateUserCurrentRole(this.updateUserRoleInput);

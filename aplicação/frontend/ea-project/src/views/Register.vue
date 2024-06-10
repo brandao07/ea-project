@@ -67,8 +67,8 @@
 
 <script>
 import UserService from '@/services/UserService';
-import UserRegisterInput from '@/models/input/UserRegisterInput';
-import UserRegisterOutput from '@/models/output/UserRegisterOutput';
+import CreateUserInput from '@/models/input/CreateUserInput';
+import CreateUserOutput from '@/models/output/CreateUserOutput';
 import GenderEnumerator from '@/models/enums/Gender';
 
 export default {
@@ -76,8 +76,8 @@ export default {
     data() {
         return {
             genderEnum: GenderEnumerator,
-            userRegisterInput: new UserRegisterInput(),
-            userRegisterOutput: new UserRegisterOutput(),
+            userRegisterInput: new CreateUserInput(),
+            userRegisterOutput: new CreateUserOutput(),
         };
     },
     methods: {

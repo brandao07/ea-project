@@ -159,5 +159,110 @@ def process_files(java_dirs, js_dirs):
                     else:
                         print(f'Skipped {filename} as it is a base class.')
 
+# Function to parse controllers and generate service files
+def parse_controllers_and_generate_services(controller_dir, service_dir, api_config_path):
+    api_endpoints = {}
+    service_files = {}
+
+    for root, _, files in os.walk(controller_dir):
+        for filename in files:
+            if filename.endswith('.java'):
+                with open(os.path.join(root, filename), 'r') as file:
+                    java_code = file.read()
+                
+                # Extract class name
+                class_name_match = re.search(r'class (\w+)Controller', java_code)
+                if not class_name_match:
+                    continue
+                class_name = class_name_match.group(1)
+                
+                # Extract methods
+                methods = re.findall(r'@PostMapping\("(/[\w]+)"\)\s+public (\w+) (\w+)\(@RequestBody (\w+) (\w+)', java_code)
+                
+                service_code = f'import ApiService from "@/services/ApiService";\n'
+                service_code += f'import API_ENDPOINTS from "@/config/api";\n'
+                service_code += f'import FeedbackMessage from "@/models/base/FeedbackMessage";\n'
+                service_code += f'import FeedbackSeverity from "@/models/enums/FeedbackSeverity";\n'
+                service_code += f'import EventBus from "@/eventBus";\n\n'
+                
+                service_code += f'class {class_name}Service {{\n'
+                
+                for endpoint, return_type, method_name, input_type, input_name in methods:
+                    # Format endpoint constant correctly
+                    endpoint_constant = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', endpoint.replace('/', '')).upper()
+                    api_endpoints[endpoint_constant] = f"{endpoint}"
+                    
+                    # Add import statements for input and output objects
+                    output_import = f'import {return_type} from "@/models/output/{return_type}";\n'
+                    service_files.setdefault(class_name, set()).update([output_import])
+
+                    # Generate generic comment
+                    comment = f'''  /**
+   * {method_name.replace("_", " ").capitalize()}
+   * @param {{{input_type}}} {input_name} - The {input_name.replace('_', ' ')}
+   * @returns {{Promise<{return_type}>}} The {return_type.replace('_', ' ')}
+   */\n'''
+
+                    # Generate service method
+                    service_code += comment
+                    service_code += f'  async {method_name}({input_name}) {{\n'
+                    service_code += f'    try {{\n'
+                    service_code += f'      const response = await ApiService.post(API_ENDPOINTS.{endpoint_constant}, {input_name});\n'
+                    service_code += f'      const feedbackMessages = response.feedbackMessages.map(\n'
+                    service_code += f'        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])\n'
+                    service_code += f'      );\n'
+                    service_code += f'      const output = new {return_type}(response, feedbackMessages);\n'
+                    service_code += f'      output.feedbackMessages.forEach((msg) => {{\n'
+                    service_code += f'        EventBus.emit("feedback-message", msg);\n'
+                    service_code += f'      }});\n'
+                    service_code += f'      return output;\n'
+                    service_code += f'    }} catch (error) {{\n'
+                    service_code += f'      const errorMessage = new FeedbackMessage(\n'
+                    service_code += f'        "An error occurred during {method_name}.",\n'
+                    service_code += f'        FeedbackSeverity.DANGER\n'
+                    service_code += f'      );\n'
+                    service_code += f'      const output = new {return_type}("", [errorMessage]);\n'
+                    service_code += f'      EventBus.emit("feedback-message", errorMessage);\n'
+                    service_code += f'      return output;\n'
+                    service_code += f'    }}\n'
+                    service_code += f'  }}\n\n'
+                
+                service_code += '}\n\n'
+                service_code += f'export default new {class_name}Service();\n'
+
+                # Write the service file
+                service_filename = f'{class_name}Service.js'
+                with open(os.path.join(service_dir, service_filename), 'w') as file:
+                    file.write(service_code)
+                print(f'Generated {service_filename} from {filename}')
+
+    # Generate API endpoints config file
+    api_config_code = 'const BASE_URL = \'http://localhost:7000/api\'; // Adjust based on backend URL\n\n'
+    api_config_code += 'const API_ENDPOINTS = {\n'
+    for endpoint_constant, endpoint in api_endpoints.items():
+        api_config_code += f'  {endpoint_constant}: `${{BASE_URL}}{endpoint}`,\n'
+    api_config_code += '};\n\n'
+    api_config_code += 'export default API_ENDPOINTS;\n'
+
+    with open(api_config_path, 'w') as file:
+        file.write(api_config_code)
+    print('Generated API endpoints configuration')
+
+    # Write the service files with correct imports
+    for class_name, imports in service_files.items():
+        service_filename = f'{class_name}Service.js'
+        with open(os.path.join(service_dir, service_filename), 'r+') as file:
+            existing_code = file.read()
+            file.seek(0)
+            file.write(''.join(sorted(imports)) + '\n' + existing_code)
+            file.truncate()
+
 # Process input and output files
-process_files(java_dirs, js_dirs)
+process_files(java_dirs[:2], js_dirs[:2])
+
+# Process controllers to generate services and API config
+parse_controllers_and_generate_services(
+    '../aplicação/backend/src/main/java/eaproject/controller',
+    '../aplicação/frontend/ea-project/src/services',
+    '../aplicação/frontend/ea-project/src/config/api.js'
+)

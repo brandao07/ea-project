@@ -41,10 +41,10 @@
 import Modal from '@/components/Modal.vue';
 import GenderEnumerator from '@/models/enums/Gender';
 import UserService from '@/services/UserService';
-import UpdateUserInfoInput from '@/models/input/UpdateUserInfoInput';
-import UpdateUserInfoOutput from '@/models/output/UpdateUserInfoOutput';
-import BasicUserInfoInput from '@/models/input/BasicUserInfoInput';
-import BasicUserInfoOutput from '@/models/output/BasicUserInfoOutput';
+import UpdateUserInput from '@/models/input/UpdateUserInput';
+import UpdateUserOutput from '@/models/output/UpdateUserOutput';
+import GetUserByIdOutput from '@/models/input/GetUserByIdInput';
+import GetUserByIdInput from '@/models/output/GetUserByIdOutput';
 
 export default {
     name: 'profile',
@@ -61,16 +61,16 @@ export default {
         return {
             genderEnum: GenderEnumerator,
             userId: Number(localStorage.getItem('idUser')),
-            userRegisterInput: new UpdateUserInfoInput(),
-            updateUserInfoOutput: new UpdateUserInfoOutput(),
-            basicUserInfoOutput: new BasicUserInfoOutput(),
+            userRegisterInput: new UpdateUserInput(),
+            updateUserInfoOutput: new UpdateUserOutput(),
+            basicUserInfoOutput: new GetUserByIdOutput(),
             modalVisible: this.isVisible
         };
     },
     methods: {
         async fetchUserInfo() {
-            this.basicUserInfoOutput = await UserService.getBasicUserInfo(new BasicUserInfoInput(this.userId));
-            this.userRegisterInput = new UpdateUserInfoInput(
+            this.basicUserInfoOutput = await UserService.getBasicUserInfo(new GetUserByIdInput(this.userId));
+            this.userRegisterInput = new UpdateUserInput(
                 this.userId,
                 this.basicUserInfoOutput.name,
                 this.basicUserInfoOutput.email,

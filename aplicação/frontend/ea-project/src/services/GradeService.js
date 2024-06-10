@@ -1,7 +1,7 @@
-import CreateRoleOutput from "@/models/output/CreateRoleOutput";
-import GetAllRolesOutput from "@/models/output/GetAllRolesOutput";
-import GetRoleByIdOutput from "@/models/output/GetRoleByIdOutput";
-import UpdateRoleOutput from "@/models/output/UpdateRoleOutput";
+import CreateGradeOutput from "@/models/output/CreateGradeOutput";
+import GetAllGradesOutput from "@/models/output/GetAllGradesOutput";
+import GetGradeByIdOutput from "@/models/output/GetGradeByIdOutput";
+import UpdateGradeOutput from "@/models/output/UpdateGradeOutput";
 
 import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
@@ -9,110 +9,110 @@ import FeedbackMessage from "@/models/base/FeedbackMessage";
 import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import EventBus from "@/eventBus";
 
-class RoleService {
+class GradeService {
   /**
-   * Createroleentity
-   * @param {CreateRoleInput} input - The input
-   * @returns {Promise<CreateRoleOutput>} The CreateRoleOutput
+   * Creategradeentity
+   * @param {CreateGradeInput} input - The input
+   * @returns {Promise<CreateGradeOutput>} The CreateGradeOutput
    */
-  async createRoleEntity(input) {
+  async createGradeEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.CREATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.CREATE_GRADE_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateRoleOutput(response, feedbackMessages);
+      const output = new CreateGradeOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during createRoleEntity.",
+        "An error occurred during createGradeEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new CreateRoleOutput("", [errorMessage]);
+      const output = new CreateGradeOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Updateroleentity
-   * @param {UpdateRoleInput} input - The input
-   * @returns {Promise<UpdateRoleOutput>} The UpdateRoleOutput
+   * Updategradeentity
+   * @param {UpdateGradeInput} input - The input
+   * @returns {Promise<UpdateGradeOutput>} The UpdateGradeOutput
    */
-  async updateRoleEntity(input) {
+  async updateGradeEntity(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.UPDATE_ROLE_ENTITY, input);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_GRADE_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateRoleOutput(response, feedbackMessages);
+      const output = new UpdateGradeOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during updateRoleEntity.",
+        "An error occurred during updateGradeEntity.",
         FeedbackSeverity.DANGER
       );
-      const output = new UpdateRoleOutput("", [errorMessage]);
+      const output = new UpdateGradeOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getrolebyid
-   * @param {GetRoleByIdInput} input - The input
-   * @returns {Promise<GetRoleByIdOutput>} The GetRoleByIdOutput
+   * Getgradebyid
+   * @param {GetGradeByIdInput} input - The input
+   * @returns {Promise<GetGradeByIdOutput>} The GetGradeByIdOutput
    */
-  async getRoleById(input) {
+  async getGradeById(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ROLE_BY_ID, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_GRADE_BY_ID, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetRoleByIdOutput(response, feedbackMessages);
+      const output = new GetGradeByIdOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getRoleById.",
+        "An error occurred during getGradeById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetRoleByIdOutput("", [errorMessage]);
+      const output = new GetGradeByIdOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
   }
 
   /**
-   * Getallroles
-   * @param {GetAllRolesInput} input - The input
-   * @returns {Promise<GetAllRolesOutput>} The GetAllRolesOutput
+   * Getallgrades
+   * @param {GetAllGradesInput} input - The input
+   * @returns {Promise<GetAllGradesOutput>} The GetAllGradesOutput
    */
-  async getAllRoles(input) {
+  async getAllGrades(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_ROLES, input);
+      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_GRADES, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllRolesOutput(response, feedbackMessages);
+      const output = new GetAllGradesOutput(response, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
-        "An error occurred during getAllRoles.",
+        "An error occurred during getAllGrades.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetAllRolesOutput("", [errorMessage]);
+      const output = new GetAllGradesOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -120,4 +120,4 @@ class RoleService {
 
 }
 
-export default new RoleService();
+export default new GradeService();
