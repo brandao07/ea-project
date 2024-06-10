@@ -96,11 +96,12 @@ def java_to_js(java_code):
     if len(java_class_code) > 1:
         # Define the regex pattern
         pattern = r'(public\s+static\s+class\s+\w+\s+implements\s+\w+\s*\{)'
-
-        java_class_code = re.split(pattern, java_class_code[1])
         
+        java_class_code = re.split(pattern, java_class_code[1])
+
         # Add inner classes
         for inner_class in java_class_code:
+
             # Define the regex pattern to match the class declaration and capture the class name
             pattern = r'(public\s+static\s+class\s+)?(\w+)(\s+implements\s+\w+\s*\{)'
 
@@ -109,12 +110,12 @@ def java_to_js(java_code):
             if not class_name_match:
                 continue
             
+            print(class_name_match.string)
             class_name = class_name_match.group(2)
-
-            inner_fields = re.findall(r'private (\w+(?:<\w+>)?) (\w+);', inner_class)
+            
+            inner_fields = re.findall(r'private (\w+) (\w+);', inner_class)
             inner_public_fields = re.findall(r'public (\w+) (\w+);', inner_class)
             inner_fields += inner_public_fields
-
             js_code += f'\n  static {class_name} = class ' + '{\n'
             js_code += '    constructor('
             constructor_params = []
