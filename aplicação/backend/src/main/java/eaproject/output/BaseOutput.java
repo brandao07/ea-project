@@ -10,7 +10,7 @@ public abstract class BaseOutput {
     private  ArrayList<FeedbackMessage> feedbackMessages = new ArrayList<>();
 
     @JsonProperty
-    public ArrayList<FeedbackMessage> getFeedbackMessages() {
+    private ArrayList<FeedbackMessage> getFeedbackMessages() {
         return feedbackMessages;
     }
 

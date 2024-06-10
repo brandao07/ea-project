@@ -7,22 +7,22 @@ import java.io.Serializable;
 public class GetUserByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    public String name;
+    private String name;
 
     @JsonProperty
-    public String email;
+    private String email;
 
     @JsonProperty
-    public String gender;
+    private String gender;
 
     @JsonProperty
-    public Integer age;
+    private Integer age;
 
     @JsonProperty
-    public Double height;
+    private Double height;
 
     @JsonProperty
-    public Double weight;
+    private Double weight;
 
     public String getName() {
         return name;
