@@ -24,6 +24,8 @@ def java_to_js(java_code):
 
     # Extract fields
     fields = re.findall(r'private (\w+(?:<\w+>)?) (\w+);', java_code)
+    public_fields = re.findall(r'@JsonProperty\s+public (\w+) (\w+);', java_code)
+    fields += public_fields
 
     # Extract inner classes
     inner_classes = re.findall(r'public static class (\w+)', java_code)
