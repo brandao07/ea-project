@@ -1,32 +1,13 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetAllTrialsOutput extends BaseOutput {
-  constructor(getalltrialList = [], feedbackMessages = []) {
+  constructor(trials = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.getalltrialList = getalltrialList.map(
-      (getalltrial) =>
-        new GetAllTrialsOutput.GetAllTrialProperties(
-          getalltrial.id,
-          getalltrial.name,
-          getalltrial.startDate,
-          getalltrial.distance,
-          getalltrial.distanceUnit,
-          getalltrial.isActive,
-          getalltrial.creationDate
-        )
-    );
+    this.trials = trials.map(item => new GetAllTrialsOutput.TrialProperties(item));
   }
 
-  static GetAllTrialProperties = class {
-    constructor(
-      id,
-      name,
-      startDate,
-      distance,
-      distanceUnit,
-      isActive,
-      creationDate
-    ) {
+  static TrialProperties = class {
+    constructor(id = 0, name = '', startDate = new Date(), distance = null, distanceUnit = '', isActive = false, creationDate = new Date()) {
       this.id = id;
       this.name = name;
       this.startDate = startDate;

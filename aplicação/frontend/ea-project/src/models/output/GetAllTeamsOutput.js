@@ -1,21 +1,13 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetAllTeamsOutput extends BaseOutput {
-  constructor(getallteamList = [], feedbackMessages = []) {
+  constructor(teamList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.getallteamList = getallteamList.map(
-      (getallteam) =>
-        new GetAllTeamsOutput.GetAllTeamProperties(
-          getallteam.id,
-          getallteam.name,
-          getallteam.isActive,
-          getallteam.creationDate
-        )
-    );
+    this.teamList = teamList.map(item => new GetAllTeamsOutput.TeamProperties(item));
   }
 
-  static GetAllTeamProperties = class {
-    constructor(id, name, isActive, creationDate) {
+  static TeamProperties = class {
+    constructor(id = 0, name = '', isActive = false, creationDate = new Date()) {
       this.id = id;
       this.name = name;
       this.isActive = isActive;

@@ -1,23 +1,13 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetAllGradesOutput extends BaseOutput {
-  constructor(getallgradeList = [], feedbackMessages = []) {
+  constructor(gradeList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.getallgradeList = getallgradeList.map(
-      (getallgrade) =>
-        new GetAllGradesOutput.GetAllGradeProperties(
-          getallgrade.id,
-          getallgrade.name,
-          getallgrade.minAge,
-          getallgrade.maxAge,
-          getallgrade.gender,
-          getallgrade.creationDate
-        )
-    );
+    this.gradeList = gradeList.map(item => new GetAllGradesOutput.GradeProperties(item));
   }
 
-  static GetAllGradeProperties = class {
-    constructor(id, name, minAge, maxAge, gender, creationDate) {
+  static GradeProperties = class {
+    constructor(id = 0, name = '', minAge = 0, maxAge = 0, gender = '', creationDate = new Date()) {
       this.id = id;
       this.name = name;
       this.minAge = minAge;

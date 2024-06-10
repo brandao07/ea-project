@@ -6,7 +6,7 @@ export default class GetAllUsersOutput extends BaseOutput {
     this.usersList = usersList.map(item => new GetAllUsersOutput.UserProperties(item));
   }
 
-  static UserProperties = class UserProperties {
+  static UserProperties = class {
     constructor(id = 0, name = '', email = '', gender = '', age = 0, height = null, weight = null, registerDate = new Date(), photographyPath = '') {
       this.id = id;
       this.name = name;
@@ -18,5 +18,5 @@ export default class GetAllUsersOutput extends BaseOutput {
       this.registerDate = registerDate;
       this.photographyPath = photographyPath;
     }
-  }
+  };
 }

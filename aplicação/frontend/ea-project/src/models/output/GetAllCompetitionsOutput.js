@@ -1,23 +1,13 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetAllCompetitionsOutput extends BaseOutput {
-  constructor(getallcompetitionList = [], feedbackMessages = []) {
+  constructor(competitionList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.getallcompetitionList = getallcompetitionList.map(
-      (getallcompetition) =>
-        new GetAllCompetitionsOutput.GetAllCompetitionProperties(
-          getallcompetition.id,
-          getallcompetition.name,
-          getallcompetition.startDate,
-          getallcompetition.endDate,
-          getallcompetition.isActive,
-          getallcompetition.creationDate
-        )
-    );
+    this.competitionList = competitionList.map(item => new GetAllCompetitionsOutput.CompetitionProperties(item));
   }
 
-  static GetAllCompetitionProperties = class {
-    constructor(id, name, startDate, endDate, isActive, creationDate) {
+  static CompetitionProperties = class {
+    constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date()) {
       this.id = id;
       this.name = name;
       this.startDate = startDate;

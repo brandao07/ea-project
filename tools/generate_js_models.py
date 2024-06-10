@@ -11,6 +11,16 @@ js_dirs = [
     '../aplicação/frontend/ea-project/src/models/input',
     '../aplicação/frontend/ea-project/src/models/output'
 ]
+js_type_default = {
+    'String': "''",
+     'int': '0',
+    'boolean': 'false',
+     'double': '0.0',
+    'Timestamp': 'new Date()',
+    'Integer': '0',
+    'ArrayList': '[]',
+    'List': '[]'
+}
 
 # Function to convert Java code to JavaScript
 def java_to_js(java_code):
@@ -27,12 +37,10 @@ def java_to_js(java_code):
         return None
 
     # Extract fields
-    fields = re.findall(r'private (\w+(?:<\w+>)?) (\w+);', java_code)
-    public_fields = re.findall(r'@JsonProperty\s+public (\w+) (\w+);', java_code)
+    java_class_code = re.split(r'public static ', java_code, maxsplit=1)
+    fields = re.findall(r'private (\w+(?:<\w+>)?) (\w+);', java_class_code[0])
+    public_fields = re.findall(r'public (\w+) (\w+);', java_class_code[0])
     fields += public_fields
-
-    # Extract inner classes
-    inner_classes = re.findall(r'public static class (\w+)', java_code)
 
     # Generate JavaScript code for all classes
     js_code = ''
@@ -46,17 +54,6 @@ def java_to_js(java_code):
     constructor_params = []
     constructor_body = []
     for field_type, field_name in fields:
-        js_type_default = {
-            'String': "''",
-            'int': '0',
-            'boolean': 'false',
-            'double': '0.0',
-            'Timestamp': 'new Date()',
-            'Integer': '0',
-            'ArrayList': '[]',
-            'List': '[]'
-        }
-
         if field_type.startswith('ArrayList<'):
             inner_class_name = re.search(r'ArrayList<(\w+)>', field_type).group(1)
             constructor_params.append(f"{field_name} = {js_type_default['ArrayList']}")
@@ -89,21 +86,45 @@ def java_to_js(java_code):
     js_code += '\n'.join(constructor_body)
     js_code += '\n  }\n'
 
-    # Add inner classes
-    for inner_class in inner_classes:
-        inner_fields = re.findall(r'private (\w+) (\w+);', java_code)
-        js_code += f'\n  static {inner_class} = class {inner_class} ' + '{\n'
-        js_code += '    constructor('
-        js_code += ', '.join([f"{field[1]}" for field in inner_fields if f'{inner_class}.{field[1]}' in java_code])
-        js_code += ') {\n'
-        for field in inner_fields:
-            if f'{inner_class}.{field[1]}' in java_code:
+    if len(java_class_code) > 1:
+        # Define the regex pattern
+        pattern = r'(public\s+static\s+class\s+\w+\s+implements\s+\w+\s*\{)'
+
+        java_class_code = re.split(pattern, java_class_code[1])
+        
+        # Add inner classes
+        for inner_class in java_class_code:
+            # Define the regex pattern to match the class declaration and capture the class name
+            pattern = r'(public\s+static\s+class\s+)?(\w+)(\s+implements\s+\w+\s*\{)'
+
+            # Extract class name and base class
+            class_name_match = re.search(pattern, inner_class)
+            if not class_name_match:
+                continue
+            
+            class_name = class_name_match.group(2)
+
+            inner_fields = re.findall(r'private (\w+(?:<\w+>)?) (\w+);', inner_class)
+            inner_public_fields = re.findall(r'public (\w+) (\w+);', inner_class)
+            inner_fields += inner_public_fields
+
+            js_code += f'\n  static {class_name} = class ' + '{\n'
+            js_code += '    constructor('
+            constructor_params = []
+            for field in inner_fields:
+                field_type = field[0]
+                field_name = field[1]
+                default_value = js_type_default.get(field_type, 'null')
+                constructor_params.append(f"{field_name} = {default_value}")
+            js_code += ', '.join(constructor_params)
+            js_code += ') {\n'
+            for field in inner_fields:
                 js_code += f'      this.{field[1]} = {field[1]};\n'
-        js_code += '    }\n'
-        js_code += '  }\n'
-    
+            js_code += '    }\n'
+            js_code += '  };\n'
+        
     js_code += '}'
-    
+        
     return js_code
 
 # Function to clear output directories but keep specific files
