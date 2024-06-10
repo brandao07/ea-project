@@ -21,7 +21,7 @@ class LocationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateLocationOutput(response, feedbackMessages);
+      const output = new CreateLocationOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class LocationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateLocationOutput(response, feedbackMessages);
+      const output = new UpdateLocationOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class LocationService {
   async getLocationById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_LOCATION_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetLocationByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetLocationByIdOutput(response.id, response.latitude, response.longitude, response.address, response.city, response.country, response.postalCode, response.creationDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getLocationById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetLocationByIdOutput("", [errorMessage]);
+      const output = new GetLocationByIdOutput("", "", "", "", "", "", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class LocationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllLocationsOutput(response, feedbackMessages);
+      const output = new GetAllLocationsOutput(response.locationList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

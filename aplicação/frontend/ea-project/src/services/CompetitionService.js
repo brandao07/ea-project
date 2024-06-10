@@ -21,7 +21,7 @@ class CompetitionService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateCompetitionOutput(response, feedbackMessages);
+      const output = new CreateCompetitionOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class CompetitionService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateCompetitionOutput(response, feedbackMessages);
+      const output = new UpdateCompetitionOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class CompetitionService {
   async getCompetitionById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_COMPETITION_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetCompetitionByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getCompetitionById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetCompetitionByIdOutput("", [errorMessage]);
+      const output = new GetCompetitionByIdOutput("", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class CompetitionService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllCompetitionsOutput(response, feedbackMessages);
+      const output = new GetAllCompetitionsOutput(response.competitionList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

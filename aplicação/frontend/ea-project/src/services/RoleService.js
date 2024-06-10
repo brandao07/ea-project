@@ -21,7 +21,7 @@ class RoleService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateRoleOutput(response, feedbackMessages);
+      const output = new CreateRoleOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class RoleService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateRoleOutput(response, feedbackMessages);
+      const output = new UpdateRoleOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class RoleService {
   async getRoleById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_ROLE_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetRoleByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetRoleByIdOutput(response.id, response.name, response.description, response.creationDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getRoleById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetRoleByIdOutput("", [errorMessage]);
+      const output = new GetRoleByIdOutput("", "", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class RoleService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllRolesOutput(response, feedbackMessages);
+      const output = new GetAllRolesOutput(response.rolesList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

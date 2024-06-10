@@ -1,15 +1,16 @@
 import os
 import re
-import shutil
 
 # Input and output directories
 java_dirs = [
     '../aplicação/backend/src/main/java/eaproject/input',
-    '../aplicação/backend/src/main/java/eaproject/output'
+    '../aplicação/backend/src/main/java/eaproject/output',
+    '../aplicação/backend/src/main/java/eaproject/controller'  # Added controller directory
 ]
 js_dirs = [
     '../aplicação/frontend/ea-project/src/models/input',
-    '../aplicação/frontend/ea-project/src/models/output'
+    '../aplicação/frontend/ea-project/src/models/output',
+    '../aplicação/frontend/ea-project/src/services'  # Added services directory
 ]
 js_type_default = {
     'String': "''",
@@ -25,6 +26,21 @@ js_type_default = {
     'ArrayList': '[]',
     'List': '[]'
 }
+
+# Function to extract constructor parameters of output models
+def get_output_model_constructor_params(output_dir):
+    constructor_params = {}
+    for root, _, files in os.walk(output_dir):
+        for filename in files:
+            if filename.endswith('.js'):
+                class_name = filename.replace('.js', '')
+                with open(os.path.join(root, filename), 'r') as file:
+                    content = file.read()
+                constructor_match = re.search(r'constructor\(([^)]*)\)', content)
+                if constructor_match:
+                    params = [param.strip().split('=')[0].strip() for param in constructor_match.group(1).split(',')]
+                    constructor_params[class_name] = params
+    return constructor_params
 
 # Function to convert Java code to JavaScript
 def java_to_js(java_code):
@@ -160,7 +176,7 @@ def process_files(java_dirs, js_dirs):
                         print(f'Skipped {filename} as it is a base class.')
 
 # Function to parse controllers and generate service files
-def parse_controllers_and_generate_services(controller_dir, service_dir, api_config_path):
+def parse_controllers_and_generate_services(controller_dir, service_dir, api_config_path, output_model_constructor_params):
     api_endpoints = {}
     service_files = {}
 
@@ -192,7 +208,7 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
                     endpoint_constant = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', endpoint.replace('/', '')).upper()
                     api_endpoints[endpoint_constant] = f"{endpoint}"
                     
-                    # Add import statements for input and output objects
+                    # Add import statements for output objects
                     output_import = f'import {return_type} from "@/models/output/{return_type}";\n'
                     service_files.setdefault(class_name, set()).update([output_import])
 
@@ -208,20 +224,30 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
                     service_code += f'  async {method_name}({input_name}) {{\n'
                     service_code += f'    try {{\n'
                     service_code += f'      const response = await ApiService.post(API_ENDPOINTS.{endpoint_constant}, {input_name});\n'
-                    service_code += f'      const feedbackMessages = response.feedbackMessages.map(\n'
-                    service_code += f'        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])\n'
-                    service_code += f'      );\n'
-                    service_code += f'      const output = new {return_type}(response, feedbackMessages);\n'
-                    service_code += f'      output.feedbackMessages.forEach((msg) => {{\n'
-                    service_code += f'        EventBus.emit("feedback-message", msg);\n'
-                    service_code += f'      }});\n'
+
+                    constructor_params = output_model_constructor_params.get(return_type, [])
+                    constructor_args = ', '.join([f'response.{param}' if param != 'feedbackMessages' else 'feedbackMessages' for param in constructor_params])
+
+                    if 'feedbackMessages' in constructor_params:
+                        service_code += f'      const feedbackMessages = response.feedbackMessages.map(\n'
+                        service_code += f'        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])\n'
+                        service_code += f'      );\n'
+
+                    service_code += f'      const output = new {return_type}({constructor_args});\n'
+
+                    if 'feedbackMessages' in constructor_params:
+                        service_code += f'      output.feedbackMessages.forEach((msg) => {{\n'
+                        service_code += f'        EventBus.emit("feedback-message", msg);\n'
+                        service_code += f'      }});\n'
+
                     service_code += f'      return output;\n'
                     service_code += f'    }} catch (error) {{\n'
                     service_code += f'      const errorMessage = new FeedbackMessage(\n'
                     service_code += f'        "An error occurred during {method_name}.",\n'
                     service_code += f'        FeedbackSeverity.DANGER\n'
                     service_code += f'      );\n'
-                    service_code += f'      const output = new {return_type}("", [errorMessage]);\n'
+                    error_args = ', '.join(['""' if param != 'feedbackMessages' else '[errorMessage]' for param in constructor_params])
+                    service_code += f'      const output = new {return_type}({error_args});\n'
                     service_code += f'      EventBus.emit("feedback-message", errorMessage);\n'
                     service_code += f'      return output;\n'
                     service_code += f'    }}\n'
@@ -260,9 +286,13 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
 # Process input and output files
 process_files(java_dirs[:2], js_dirs[:2])
 
+# Extract output model constructor parameters
+output_model_constructor_params = get_output_model_constructor_params(js_dirs[1])
+
 # Process controllers to generate services and API config
 parse_controllers_and_generate_services(
     '../aplicação/backend/src/main/java/eaproject/controller',
     '../aplicação/frontend/ea-project/src/services',
-    '../aplicação/frontend/ea-project/src/config/api.js'
+    '../aplicação/frontend/ea-project/src/config/api.js',
+    output_model_constructor_params
 )

@@ -21,7 +21,7 @@ class TypeService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateTypeOutput(response, feedbackMessages);
+      const output = new CreateTypeOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class TypeService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateTypeOutput(response, feedbackMessages);
+      const output = new UpdateTypeOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class TypeService {
   async getTypeById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_TYPE_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetTypeByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetTypeByIdOutput(response.id, response.name, response.numberOfPersons, response.creationDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getTypeById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetTypeByIdOutput("", [errorMessage]);
+      const output = new GetTypeByIdOutput("", "", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class TypeService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllTypesOutput(response, feedbackMessages);
+      const output = new GetAllTypesOutput(response.types, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

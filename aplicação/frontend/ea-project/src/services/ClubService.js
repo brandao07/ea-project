@@ -21,7 +21,7 @@ class ClubService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateClubOutput(response, feedbackMessages);
+      const output = new CreateClubOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class ClubService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateClubOutput(response, feedbackMessages);
+      const output = new UpdateClubOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class ClubService {
   async getClubById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_CLUB_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetClubByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetClubByIdOutput(response.id, response.name, response.isActive, response.creationDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getClubById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetClubByIdOutput("", [errorMessage]);
+      const output = new GetClubByIdOutput("", "", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class ClubService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllClubsOutput(response, feedbackMessages);
+      const output = new GetAllClubsOutput(response.clubList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

@@ -21,7 +21,7 @@ class ResultService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateResultOutput(response, feedbackMessages);
+      const output = new CreateResultOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class ResultService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateResultOutput(response, feedbackMessages);
+      const output = new UpdateResultOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class ResultService {
   async getResultById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_RESULT_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetResultByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetResultByIdOutput(response.id, response.position, response.time);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getResultById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetResultByIdOutput("", [errorMessage]);
+      const output = new GetResultByIdOutput("", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class ResultService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllResultsOutput(response, feedbackMessages);
+      const output = new GetAllResultsOutput(response.resultList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

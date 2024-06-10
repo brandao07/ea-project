@@ -23,7 +23,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllUsersOutput(response, feedbackMessages);
+      const output = new GetAllUsersOutput(response.usersList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -50,7 +50,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateUserRoleOutput(response, feedbackMessages);
+      const output = new UpdateUserRoleOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -77,7 +77,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateUserOutput(response, feedbackMessages);
+      const output = new UpdateUserOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -104,7 +104,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetUserByIdOutput(response, feedbackMessages);
+      const output = new GetUserByIdOutput(response.name, response.email, response.gender, response.age, response.height, response.weight, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -114,7 +114,7 @@ class UserService {
         "An error occurred during getBasicUserInfo.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetUserByIdOutput("", [errorMessage]);
+      const output = new GetUserByIdOutput("", "", "", "", "", "", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -131,7 +131,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateUserOutput(response, feedbackMessages);
+      const output = new CreateUserOutput(response.registrationSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

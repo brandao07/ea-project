@@ -21,7 +21,7 @@ class NotificationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new CreateNotificationOutput(response, feedbackMessages);
+      const output = new CreateNotificationOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -48,7 +48,7 @@ class NotificationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UpdateNotificationOutput(response, feedbackMessages);
+      const output = new UpdateNotificationOutput(response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -72,20 +72,14 @@ class NotificationService {
   async getNotificationById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_NOTIFICATION_BY_ID, input);
-      const feedbackMessages = response.feedbackMessages.map(
-        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
-      );
-      const output = new GetNotificationByIdOutput(response, feedbackMessages);
-      output.feedbackMessages.forEach((msg) => {
-        EventBus.emit("feedback-message", msg);
-      });
+      const output = new GetNotificationByIdOutput(response.id, response.messageHeader, response.messageBody, response.messageType, response.photographyPath, response.creationDate);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
         "An error occurred during getNotificationById.",
         FeedbackSeverity.DANGER
       );
-      const output = new GetNotificationByIdOutput("", [errorMessage]);
+      const output = new GetNotificationByIdOutput("", "", "", "", "", "");
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }
@@ -102,7 +96,7 @@ class NotificationService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new GetAllNotificationsOutput(response, feedbackMessages);
+      const output = new GetAllNotificationsOutput(response.notificationList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

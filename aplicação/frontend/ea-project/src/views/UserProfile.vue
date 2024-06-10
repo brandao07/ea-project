@@ -43,8 +43,8 @@ import GenderEnumerator from '@/models/enums/Gender';
 import UserService from '@/services/UserService';
 import UpdateUserInput from '@/models/input/UpdateUserInput';
 import UpdateUserOutput from '@/models/output/UpdateUserOutput';
-import GetUserByIdOutput from '@/models/input/GetUserByIdInput';
-import GetUserByIdInput from '@/models/output/GetUserByIdOutput';
+import GetUserByIdOutput from '@/models/output/GetUserByIdOutput';
+import GetUserByIdInput from '@/models/input/GetUserByIdInput';
 
 export default {
     name: 'profile',
