@@ -1,13 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetClubByIdOutput extends BaseOutput {
-  constructor(
-    creationDate = new Date(),
-    isActive = false,
-    name = "",
-    id = 0,
-    feedbackMessages = []
-  ) {
+  constructor(id = 0, name = '', isActive = false, creationDate = new Date(), feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.name = name;

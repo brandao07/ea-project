@@ -1,15 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetNotificationByIdOutput extends BaseOutput {
-  constructor(
-    creationDate = new Date(),
-    photographyPath = "",
-    messageType = "",
-    messageBody = "",
-    messageHeader = "",
-    id = 0,
-    feedbackMessages = []
-  ) {
+  constructor(id = 0, messageHeader = '', messageBody = '', messageType = '', photographyPath = '', creationDate = new Date(), feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.messageHeader = messageHeader;

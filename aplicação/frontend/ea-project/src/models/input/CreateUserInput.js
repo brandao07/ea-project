@@ -1,16 +1,8 @@
 import BaseInput from "./BaseInput";
 
-export default class UserRegisterInput extends BaseInput {
-  constructor(
-    name = "",
-    email = "",
-    password = "",
-    gender = "",
-    age = 0,
-    height = 0.0,
-    weight = 0.0,
-  ) {
-    super();
+export default class CreateUserInput extends BaseInput {
+  constructor(name = '', email = '', password = '', gender = '', age = 0, height = null, weight = null, lazyLoad = false) {
+    super(lazyLoad);
     this.name = name;
     this.email = email;
     this.password = password;

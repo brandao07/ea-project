@@ -1,13 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetTypeByIdOutput extends BaseOutput {
-  constructor(
-    creationDate = new Date(),
-    numberOfPersons = 0,
-    name = "",
-    id = 0,
-    feedbackMessages = []
-  ) {
+  constructor(id = 0, name = '', numberOfPersons = 0, creationDate = new Date(), feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.name = name;

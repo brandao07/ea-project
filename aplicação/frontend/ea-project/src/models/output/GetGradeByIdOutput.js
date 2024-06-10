@@ -1,15 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetGradeByIdOutput extends BaseOutput {
-  constructor(
-    creationDate = new Date(),
-    gender = "",
-    maxAge = 0,
-    minAge = 0,
-    name = "",
-    id = 0,
-    feedbackMessages = []
-  ) {
+  constructor(id = 0, name = '', minAge = 0, maxAge = 0, gender = '', creationDate = new Date(), feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.name = name;
