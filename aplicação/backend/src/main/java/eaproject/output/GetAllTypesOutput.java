@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GetAllTypesOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private ArrayList<GetAllTypesOutput.TypeProperties> types;
+    private ArrayList<TypeProperties> types;
 
     public ArrayList<TypeProperties> getTypes() {
         return types;
