@@ -305,13 +305,13 @@ public class UserBean implements UserLocal {
     }
 
     /**
-     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     * Retrieves all users from the database and returns them in a GetAllUsersOutput object.
      *
-     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @param usersInput A GetAllUsersInput object containing any input parameters needed for fetching users.
      * @return An object containing the users retrieved from the database.
      */
-    public GetUsersOutput getAllUsers(GetUsersInput usersInput) {
-        GetUsersOutput output = new GetUsersOutput();
+    public GetAllUsersOutput getAllUsers(GetAllUsersInput usersInput) {
+        GetAllUsersOutput output = new GetAllUsersOutput();
         try {
             // Fetch users from the database using UserDAO
             User[] users = UserDAO.listUserByQuery(null, null);
@@ -319,7 +319,7 @@ public class UserBean implements UserLocal {
             // Check if users are retrieved successfully
             if (users.length > 0) {
                 // Assign retrieved users to the output object
-                output.setUsersList(Utilities.convertToDTOArray(users, GetUsersOutput.UserProperties.class));
+                output.setUsersList(Utilities.convertToDTOArray(users, GetAllUsersOutput.UserProperties.class));
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);

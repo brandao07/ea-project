@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserLocal {
 
     /**
-     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     * Retrieves all users from the database and returns them in a GetAllUsersOutput object.
      *
-     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @param usersInput A GetAllUsersInput object containing any input parameters needed for fetching users.
      * @return An object containing the users retrieved from the database.
      */
-    GetUsersOutput getAllUsers(GetUsersInput usersInput);
+    GetAllUsersOutput getAllUsers(GetAllUsersInput usersInput);
 
     /**
      * Updates the role of a user based on the provided input.

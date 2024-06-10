@@ -16,14 +16,14 @@ public class UserController {
     UserBean userBean;
 
     /**
-     * Retrieves all users from the database and returns them in a GetUsersOutput object.
+     * Retrieves all users from the database and returns them in a GetAllUsersOutput object.
      *
-     * @param usersInput A GetUsersInput object containing any input parameters needed for fetching users.
+     * @param usersInput A GetAllUsersInput object containing any input parameters needed for fetching users.
      * @return An object containing the users retrieved from the database.
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetAllUsers")
-    public GetUsersOutput getAllUsers(@RequestBody GetUsersInput usersInput) {
+    public GetAllUsersOutput getAllUsers(@RequestBody GetAllUsersInput usersInput) {
         return userBean.getAllUsers(usersInput);
     }
 
