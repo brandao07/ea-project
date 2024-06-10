@@ -94,37 +94,29 @@ def java_to_js(java_code):
     js_code += '\n  }\n'
 
     if len(java_class_code) > 1:
-        # Define the regex pattern
-        pattern = r'(public\s+static\s+class\s+\w+\s+implements\s+\w+\s*\{)'
-        
-        java_class_code = re.split(pattern, java_class_code[1])
+        # Add inner classes
+        inner_classes_code = java_class_code[1]
+        inner_class_pattern = r'class\s+(\w+)( implements \w+)? \{(.*?)\n\s*\}'
+        inner_classes = re.findall(inner_class_pattern, inner_classes_code, re.DOTALL)
 
         # Add inner classes
-        for inner_class in java_class_code:
-
-            # Define the regex pattern to match the class declaration and capture the class name
-            pattern = r'(public\s+static\s+class\s+)?(\w+)(\s+implements\s+\w+\s*\{)'
-
-            # Extract class name and base class
-            class_name_match = re.search(pattern, inner_class)
-            if not class_name_match:
-                continue
+        for inner_class in inner_classes:
+            inner_class_name = inner_class[0]
+            inner_class_body = inner_class[2]
             
-            print(class_name_match.string)
-            class_name = class_name_match.group(2)
-            
-            inner_fields = re.findall(r'private (\w+) (\w+);', inner_class)
-            inner_public_fields = re.findall(r'public (\w+) (\w+);', inner_class)
+            inner_fields = re.findall(r'private (\w+) (\w+);', inner_class_body)
+            inner_public_fields = re.findall(r'public (\w+) (\w+);', inner_class_body)
             inner_fields += inner_public_fields
-            js_code += f'\n  static {class_name} = class ' + '{\n'
+            
+            js_code += f'\n  static {inner_class_name} = class ' + '{\n'
             js_code += '    constructor('
-            constructor_params = []
+            inner_constructor_params = []
             for field in inner_fields:
                 field_type = field[0]
                 field_name = field[1]
                 default_value = js_type_default.get(field_type, 'null')
-                constructor_params.append(f"{field_name} = {default_value}")
-            js_code += ', '.join(constructor_params)
+                inner_constructor_params.append(f"{field_name} = {default_value}")
+            js_code += ', '.join(inner_constructor_params)
             js_code += ') {\n'
             for field in inner_fields:
                 js_code += f'      this.{field[1]} = {field[1]};\n'

@@ -27,42 +27,42 @@ export default class GetTrialByIdOutput extends BaseOutput {
   };
 
   static CompetitionProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
   };
 
   static GradeProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
   };
 
   static TypeProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
   };
 
   static LocationProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
   };
 
   static ResultProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
   };
 
   static TeamProperties = class {
-    constructor(id = 0, name = "") {
+    constructor(id = 0, name = '') {
       this.id = id;
       this.name = name;
     }
