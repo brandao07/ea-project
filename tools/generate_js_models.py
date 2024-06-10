@@ -13,10 +13,14 @@ js_dirs = [
 ]
 js_type_default = {
     'String': "''",
-     'int': '0',
+    'int': '0',
     'boolean': 'false',
-     'double': '0.0',
+    'double': '0.0',
+    'Double': '0.0',
+    'float': '0.0',
+    'Float': '0.0',
     'Timestamp': 'new Date()',
+    'Datetime': 'new Date()',
     'Integer': '0',
     'ArrayList': '[]',
     'List': '[]'
@@ -66,10 +70,13 @@ def java_to_js(java_code):
             constructor_body.append(
                 f"    this.{field_name} = {field_name}.map(item => new {class_name}.{inner_class_name}(item));"
             )
-        else:
+        elif field_type in js_type_default:
             default_value = js_type_default.get(field_type, 'null')
             constructor_params.append(f"{field_name} = {default_value}")
             constructor_body.append(f"    this.{field_name} = {field_name};")
+        else:
+            constructor_params.append(f"{field_name} = {{}}")  # Default initialization for unknown types
+            constructor_body.append(f"    this.{field_name} = new {class_name}.{field_type}({field_name});")
 
     if base_class:
         if base_class == 'BaseInput':

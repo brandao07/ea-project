@@ -1,7 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetLocationByIdOutput extends BaseOutput {
-  constructor(id = 0, latitude = null, longitude = null, address = '', city = '', country = '', postalCode = '', creationDate = new Date(), feedbackMessages = []) {
+  constructor(id = 0, latitude = 0.0, longitude = 0.0, address = '', city = '', country = '', postalCode = '', creationDate = new Date(), feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.latitude = latitude;

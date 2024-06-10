@@ -1,7 +1,7 @@
 import BaseInput from "./BaseInput";
 
 export default class CreateLocationInput extends BaseInput {
-  constructor(id = 0, latitude = null, longitude = null, address = '', city = '', country = '', postalCode = '', creationDate = new Date(), lazyLoad = false) {
+  constructor(id = 0, latitude = 0.0, longitude = 0.0, address = '', city = '', country = '', postalCode = '', creationDate = new Date(), lazyLoad = false) {
     super(lazyLoad);
     this.id = id;
     this.latitude = latitude;
