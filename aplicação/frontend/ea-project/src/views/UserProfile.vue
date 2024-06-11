@@ -107,6 +107,11 @@ export default {
                 this.$emit('close');
             }
         }
+    },
+    async mounted() {
+        if (this.modalVisible) {
+            await this.fetchUserInfo();
+        }
     }
 };
 </script>

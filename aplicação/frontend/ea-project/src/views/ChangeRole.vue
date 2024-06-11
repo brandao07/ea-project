@@ -74,7 +74,12 @@ export default {
         },
         closeModal() {
             this.modalVisible = false;
+            this.resetData();
             this.$emit('close');
+        },
+        resetData() {
+            this.updateUserRoleInput = new UpdateUserRoleInput();
+            this.updateUserRoleOutput = new UpdateUserRoleOutput();
         }
     },
     watch: {
@@ -87,10 +92,15 @@ export default {
         },
         modalVisible(val) {
             if (!val) {
-                this.updateUserRoleInput = new UpdateUserRoleInput(),
-                this.updateUserRoleOutput = new UpdateUserRoleOutput(),
+                this.resetData();
                 this.$emit('close');
             }
+        }
+    },
+    mounted() {
+        if (this.modalVisible) {
+            this.fetchUserInfo();
+            this.fetchRoleInfo();
         }
     }
 };

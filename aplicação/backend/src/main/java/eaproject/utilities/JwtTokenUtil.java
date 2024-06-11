@@ -25,7 +25,7 @@ public class JwtTokenUtil {
     private static String ISSUER;
     private static String SUBJECT;
     private static String SECRET_KEY;
-    private static final long ACCESS_TOKEN_VALIDITY = 60 * 60 * 1000; // 1 hour in milliseconds
+    private static final long ACCESS_TOKEN_VALIDITY = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
     private static final String TOKEN_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
 
