@@ -7,7 +7,7 @@ export default class GetAllCompetitionsOutput extends BaseOutput {
   }
 
   static CompetitionProperties = class {
-    constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date()) {
+    constructor({id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date()}) {
       this.id = id;
       this.name = name;
       this.startDate = startDate;

@@ -7,7 +7,7 @@ export default class GetAllTypesOutput extends BaseOutput {
   }
 
   static TypeProperties = class {
-    constructor(id = 0, name = '', numberOfPersons = 0, creationDate = new Date()) {
+    constructor({id = 0, name = '', numberOfPersons = 0, creationDate = new Date()}) {
       this.id = id;
       this.name = name;
       this.numberOfPersons = numberOfPersons;

@@ -7,7 +7,7 @@ export default class GetAllGradesOutput extends BaseOutput {
   }
 
   static GradeProperties = class {
-    constructor(id = 0, name = '', minAge = 0, maxAge = 0, gender = '', creationDate = new Date()) {
+    constructor({id = 0, name = '', minAge = 0, maxAge = 0, gender = '', creationDate = new Date()}) {
       this.id = id;
       this.name = name;
       this.minAge = minAge;

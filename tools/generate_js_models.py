@@ -125,7 +125,7 @@ def java_to_js(java_code):
             inner_fields += inner_public_fields
             
             js_code += f'\n  static {inner_class_name} = class ' + '{\n'
-            js_code += '    constructor('
+            js_code += '    constructor({'
             inner_constructor_params = []
             for field in inner_fields:
                 field_type = field[0]
@@ -133,7 +133,7 @@ def java_to_js(java_code):
                 default_value = js_type_default.get(field_type, 'null')
                 inner_constructor_params.append(f"{field_name} = {default_value}")
             js_code += ', '.join(inner_constructor_params)
-            js_code += ') {\n'
+            js_code += '}) {\n'
             for field in inner_fields:
                 js_code += f'      this.{field[1]} = {field[1]};\n'
             js_code += '    }\n'

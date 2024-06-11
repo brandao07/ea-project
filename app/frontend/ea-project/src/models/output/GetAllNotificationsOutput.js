@@ -7,7 +7,7 @@ export default class GetAllNotificationsOutput extends BaseOutput {
   }
 
   static NotificationProperties = class {
-    constructor(id = 0, messageHeader = '', messageBody = '', messageType = '', photographyPath = '', creationDate = new Date()) {
+    constructor({id = 0, messageHeader = '', messageBody = '', messageType = '', photographyPath = '', creationDate = new Date()}) {
       this.id = id;
       this.messageHeader = messageHeader;
       this.messageBody = messageBody;
