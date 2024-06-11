@@ -95,23 +95,17 @@ export default {
         }
     },
     watch: {
-        async isVisible(val) {
+        isVisible(val) {
             this.modalVisible = val;
-            if (val) {
-                await this.fetchUserInfo();
-            }
         },
         modalVisible(val) {
             if (!val) {
-                this.basicUserInfoOutput = null;
                 this.$emit('close');
             }
         }
     },
     async mounted() {
-        if (this.modalVisible) {
-            await this.fetchUserInfo();
-        }
+        await this.fetchUserInfo()
     }
 };
 </script>
