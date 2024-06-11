@@ -5,7 +5,7 @@ TEMPLATE_FILE="./templates/database_template"
 TABLES_SQL_FILE="../vp-codigo/AASICProject_table_create.sql"
 PRIMARY_KEYS_SQL_FILE="../vp-codigo/AASICProject_pk_create.sql"
 FOREIGN_KEYS_SQL_FILE="../vp-codigo/AASICProject_fk_create.sql"
-FINAL_SQL_FILE="../aplicação/backend/initdb/database.sql"
+FINAL_SQL_FILE="../app/backend/initdb/database.sql"
 
 # Function to check if a file exists
 check_file_exists() {

@@ -7,10 +7,10 @@ SOURCE_ORM="../vp-codigo/src/orm/"
 SOURCE_DAO="../vp-codigo/src/eaproject/dao/"
 
 # Define as paths de destino
-TARGET_LIB="../aplicação/backend/src/main/java/lib/"
-TARGET_ORM="../aplicação/backend/src/main/java/orm/"
-TARGET_ORM_CFG="../aplicação/backend/src/main/resources/ormmapping/"
-TARGET_DAO="../aplicação/backend/src/main/java/eaproject/dao/"
+TARGET_LIB="../app/backend/src/main/java/lib/"
+TARGET_ORM="../app/backend/src/main/java/orm/"
+TARGET_ORM_CFG="../app/backend/src/main/resources/ormmapping/"
+TARGET_DAO="../app/backend/src/main/java/eaproject/dao/"
 
 # Função para validar a existência dos arquivos de origem
 validate_files() {
