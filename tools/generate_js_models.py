@@ -28,8 +28,6 @@ js_type_default = {
 }
 
 # Function to extract constructor parameters of output models
-
-
 def get_output_model_constructor_params(output_dir):
     constructor_params = {}
     for root, _, files in os.walk(output_dir):
@@ -38,27 +36,21 @@ def get_output_model_constructor_params(output_dir):
                 class_name = filename.replace('.js', '')
                 with open(os.path.join(root, filename), 'r') as file:
                     content = file.read()
-                constructor_match = re.search(
-                    r'constructor\(([^)]*)\)', content)
+                constructor_match = re.search(r'constructor\(([^)]*)\)', content)
                 if constructor_match:
-                    params = [param.strip().split('=')[0].strip()
-                              for param in constructor_match.group(1).split(',')]
+                    params = [param.strip().split('=')[0].strip() for param in constructor_match.group(1).split(',')]
                     constructor_params[class_name] = params
     return constructor_params
 
 # Function to convert Java code to JavaScript
-
-
 def java_to_js(java_code):
     # Extract class name and base class
-    class_name_match = re.search(
-        r'public (abstract )?class (\w+)( extends (\w+))?', java_code)
+    class_name_match = re.search(r'public (abstract )?class (\w+)( extends (\w+))?', java_code)
     if not class_name_match:
         raise ValueError("Class name not found in Java code")
-
+    
     class_name = class_name_match.group(2)
-    base_class = class_name_match.group(
-        4) if class_name_match.group(4) else None
+    base_class = class_name_match.group(4) if class_name_match.group(4) else None
 
     # Ignore base input and base output classes
     if class_name in ['BaseInput', 'BaseOutput']:
@@ -74,41 +66,33 @@ def java_to_js(java_code):
     js_code = ''
     if base_class:
         js_code += f'import {base_class} from "./{base_class}";\n\n'
-        js_code += f'export default class {
-            class_name} extends {base_class} ' + '{\n'
+        js_code += f'export default class {class_name} extends {base_class} ' + '{\n'
     else:
         js_code += f'export default class {class_name} ' + '{\n'
     js_code += '  constructor('
-
+    
     constructor_params = []
     constructor_body = []
     for field_type, field_name in fields:
         if field_type.startswith('ArrayList<'):
-            inner_class_name = re.search(
-                r'ArrayList<(\w+)>', field_type).group(1)
-            constructor_params.append(
-                f"{field_name} = {js_type_default['ArrayList']}")
+            inner_class_name = re.search(r'ArrayList<(\w+)>', field_type).group(1)
+            constructor_params.append(f"{field_name} = {js_type_default['ArrayList']}")
             constructor_body.append(
-                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{
-                    inner_class_name}(item));"
+                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{inner_class_name}(item));"
             )
         elif field_type.startswith('List<'):
             inner_class_name = re.search(r'List<(\w+)>', field_type).group(1)
-            constructor_params.append(
-                f"{field_name} = {js_type_default['List']}")
+            constructor_params.append(f"{field_name} = {js_type_default['List']}")
             constructor_body.append(
-                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{
-                    inner_class_name}(item));"
+                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{inner_class_name}(item));"
             )
         elif field_type in js_type_default:
             default_value = js_type_default.get(field_type, 'null')
             constructor_params.append(f"{field_name} = {default_value}")
             constructor_body.append(f"    this.{field_name} = {field_name};")
         else:
-            # Default initialization for unknown types
-            constructor_params.append(f"{field_name} = {{}}")
-            constructor_body.append(f"    this.{field_name} = new {
-                                    class_name}.{field_type}({field_name});")
+            constructor_params.append(f"{field_name} = {{}}")  # Default initialization for unknown types
+            constructor_body.append(f"    this.{field_name} = new {class_name}.{field_type}({field_name});")
 
     if base_class:
         if base_class == 'BaseInput':
@@ -129,20 +113,17 @@ def java_to_js(java_code):
         # Add inner classes
         inner_classes_code = java_class_code[1]
         inner_class_pattern = r'class\s+(\w+)( implements \w+)? \{(.*?)\n\s*\}'
-        inner_classes = re.findall(
-            inner_class_pattern, inner_classes_code, re.DOTALL)
+        inner_classes = re.findall(inner_class_pattern, inner_classes_code, re.DOTALL)
 
         # Add inner classes
         for inner_class in inner_classes:
             inner_class_name = inner_class[0]
             inner_class_body = inner_class[2]
-
-            inner_fields = re.findall(
-                r'private (\w+) (\w+);', inner_class_body)
-            inner_public_fields = re.findall(
-                r'public (\w+) (\w+);', inner_class_body)
+            
+            inner_fields = re.findall(r'private (\w+) (\w+);', inner_class_body)
+            inner_public_fields = re.findall(r'public (\w+) (\w+);', inner_class_body)
             inner_fields += inner_public_fields
-
+            
             js_code += f'\n  static {inner_class_name} = class ' + '{\n'
             js_code += '    constructor('
             inner_constructor_params = []
@@ -150,22 +131,19 @@ def java_to_js(java_code):
                 field_type = field[0]
                 field_name = field[1]
                 default_value = js_type_default.get(field_type, 'null')
-                inner_constructor_params.append(
-                    f"{field_name} = {default_value}")
+                inner_constructor_params.append(f"{field_name} = {default_value}")
             js_code += ', '.join(inner_constructor_params)
             js_code += ') {\n'
             for field in inner_fields:
                 js_code += f'      this.{field[1]} = {field[1]};\n'
             js_code += '    }\n'
             js_code += '  };\n'
-
+        
     js_code += '}'
-
+        
     return js_code
 
 # Function to clear output directories but keep specific files
-
-
 def clear_directory_but_keep(directory, keep_files):
     if os.path.exists(directory):
         for root, _, files in os.walk(directory):
@@ -177,21 +155,18 @@ def clear_directory_but_keep(directory, keep_files):
         os.makedirs(directory)
 
 # Function to process files in a directory and generate corresponding JS files
-
-
 def process_files(java_dirs, js_dirs):
     keep_files = ['BaseInput.js', 'BaseOutput.js']
     for java_dir, js_dir in zip(java_dirs, js_dirs):
-        # Clear output directories but keep specific files
-        clear_directory_but_keep(js_dir, keep_files)
+        clear_directory_but_keep(js_dir, keep_files)  # Clear output directories but keep specific files
         for root, _, files in os.walk(java_dir):
             for filename in files:
                 if filename.endswith('.java'):
                     with open(os.path.join(root, filename), 'r') as file:
                         java_code = file.read()
-
+                    
                     js_code = java_to_js(java_code)
-
+                    
                     if js_code:  # Ensure js_code is not None
                         js_filename = filename.replace('.java', '.js')
                         with open(os.path.join(js_dir, js_filename), 'w') as file:
@@ -201,8 +176,6 @@ def process_files(java_dirs, js_dirs):
                         print(f'Skipped {filename} as it is a base class.')
 
 # Function to parse controllers and generate service files
-
-
 def parse_controllers_and_generate_services(controller_dir, service_dir, api_config_path, output_model_constructor_params):
     api_endpoints = {}
     service_files = {}
@@ -212,37 +185,32 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
             if filename.endswith('.java'):
                 with open(os.path.join(root, filename), 'r') as file:
                     java_code = file.read()
-
+                
                 # Extract class name
-                class_name_match = re.search(
-                    r'class (\w+)Controller', java_code)
+                class_name_match = re.search(r'class (\w+)Controller', java_code)
                 if not class_name_match:
                     continue
                 class_name = class_name_match.group(1)
-
+                
                 # Extract methods
-                methods = re.findall(
-                    r'@PostMapping\("(/[\w]+)"\)\s+public (\w+) (\w+)\(@RequestBody (\w+) (\w+)', java_code)
-
+                methods = re.findall(r'@PostMapping\("(/[\w]+)"\)\s+public (\w+) (\w+)\(@RequestBody (\w+) (\w+)', java_code)
+                
                 service_code = f'import ApiService from "@/services/ApiService";\n'
                 service_code += f'import API_ENDPOINTS from "@/config/api";\n'
                 service_code += f'import FeedbackMessage from "@/models/base/FeedbackMessage";\n'
                 service_code += f'import FeedbackSeverity from "@/models/enums/FeedbackSeverity";\n'
                 service_code += f'import EventBus from "@/eventBus";\n\n'
-
+                
                 service_code += f'class {class_name}Service {{\n'
-
+                
                 for endpoint, return_type, method_name, input_type, input_name in methods:
                     # Format endpoint constant correctly
-                    endpoint_constant = re.sub(
-                        r'([a-z0-9])([A-Z])', r'\1_\2', endpoint.replace('/', '')).upper()
+                    endpoint_constant = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', endpoint.replace('/', '')).upper()
                     api_endpoints[endpoint_constant] = f"{endpoint}"
-
+                    
                     # Add import statements for output objects
-                    output_import = f'import {
-                        return_type} from "@/models/output/{return_type}";\n'
-                    service_files.setdefault(
-                        class_name, set()).update([output_import])
+                    output_import = f'import {return_type} from "@/models/output/{return_type}";\n'
+                    service_files.setdefault(class_name, set()).update([output_import])
 
                     # Generate generic comment
                     comment = f'''  /**
@@ -255,21 +223,17 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
                     service_code += comment
                     service_code += f'  async {method_name}({input_name}) {{\n'
                     service_code += f'    try {{\n'
-                    service_code += f'      const response = await ApiService.post(API_ENDPOINTS.{
-                        endpoint_constant}, {input_name});\n'
+                    service_code += f'      const response = await ApiService.post(API_ENDPOINTS.{endpoint_constant}, {input_name});\n'
 
-                    constructor_params = output_model_constructor_params.get(
-                        return_type, [])
-                    constructor_args = ', '.join([f'response.{
-                                                 param}' if param != 'feedbackMessages' else 'feedbackMessages' for param in constructor_params])
+                    constructor_params = output_model_constructor_params.get(return_type, [])
+                    constructor_args = ', '.join([f'response.{param}' if param != 'feedbackMessages' else 'feedbackMessages' for param in constructor_params])
 
                     if 'feedbackMessages' in constructor_params:
                         service_code += f'      const feedbackMessages = response.feedbackMessages.map(\n'
                         service_code += f'        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])\n'
                         service_code += f'      );\n'
 
-                    service_code += f'      const output = new {
-                        return_type}({constructor_args});\n'
+                    service_code += f'      const output = new {return_type}({constructor_args});\n'
 
                     if 'feedbackMessages' in constructor_params:
                         service_code += f'      output.feedbackMessages.forEach((msg) => {{\n'
@@ -279,19 +243,16 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
                     service_code += f'      return output;\n'
                     service_code += f'    }} catch (error) {{\n'
                     service_code += f'      const errorMessage = new FeedbackMessage(\n'
-                    service_code += f'        "An error occurred during {
-                        method_name}.",\n'
+                    service_code += f'        "An error occurred during {method_name}.",\n'
                     service_code += f'        FeedbackSeverity.DANGER\n'
                     service_code += f'      );\n'
-                    error_args = ', '.join(
-                        ['""' if param != 'feedbackMessages' else '[errorMessage]' for param in constructor_params])
-                    service_code += f'      const output = new {
-                        return_type}({error_args});\n'
+                    error_args = ', '.join(['""' if param != 'feedbackMessages' else '[errorMessage]' for param in constructor_params])
+                    service_code += f'      const output = new {return_type}({error_args});\n'
                     service_code += f'      EventBus.emit("feedback-message", errorMessage);\n'
                     service_code += f'      return output;\n'
                     service_code += f'    }}\n'
                     service_code += f'  }}\n\n'
-
+                
                 service_code += '}\n\n'
                 service_code += f'export default new {class_name}Service();\n'
 
@@ -322,13 +283,11 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
             file.write(''.join(sorted(imports)) + '\n' + existing_code)
             file.truncate()
 
-
 # Process input and output files
 process_files(java_dirs[:2], js_dirs[:2])
 
 # Extract output model constructor parameters
-output_model_constructor_params = get_output_model_constructor_params(
-    js_dirs[1])
+output_model_constructor_params = get_output_model_constructor_params(js_dirs[1])
 
 # Process controllers to generate services and API config
 parse_controllers_and_generate_services(
