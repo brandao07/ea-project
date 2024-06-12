@@ -7,7 +7,7 @@ export default class GetAllResultsOutput extends BaseOutput {
   }
 
   static ResultProperties = class {
-    constructor(id = 0, position = 0, time = new Date(), observations = '', penaltyTime = new Date(), creationDate = new Date()) {
+    constructor({id = 0, position = 0, time = new Date(), observations = '', penaltyTime = new Date(), creationDate = new Date()}) {
       this.id = id;
       this.position = position;
       this.time = time;

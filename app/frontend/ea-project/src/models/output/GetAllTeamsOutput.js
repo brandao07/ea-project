@@ -7,7 +7,7 @@ export default class GetAllTeamsOutput extends BaseOutput {
   }
 
   static TeamProperties = class {
-    constructor(id = 0, name = '', isActive = false, creationDate = new Date()) {
+    constructor({id = 0, name = '', isActive = false, creationDate = new Date()}) {
       this.id = id;
       this.name = name;
       this.isActive = isActive;

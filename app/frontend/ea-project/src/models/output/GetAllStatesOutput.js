@@ -7,7 +7,7 @@ export default class GetAllStatesOutput extends BaseOutput {
   }
 
   static StateProperties = class {
-    constructor(id = 0, name = '', creationDate = new Date()) {
+    constructor({id = 0, name = '', creationDate = new Date()}) {
       this.id = id;
       this.name = name;
       this.creationDate = creationDate;

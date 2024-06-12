@@ -7,7 +7,7 @@ export default class GetAllUsersOutput extends BaseOutput {
   }
 
   static UserProperties = class {
-    constructor(id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0, registerDate = new Date(), photographyPath = '') {
+    constructor({id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0, registerDate = new Date(), photographyPath = ''}) {
       this.id = id;
       this.name = name;
       this.email = email;

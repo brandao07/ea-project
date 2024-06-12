@@ -51,15 +51,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            System.out.println("token : " + accessToken);
-
             // Resolve the claims from the JWT token.
             Claims claims = jwtUtil.resolveClaims(request);
 
             if (claims != null && jwtUtil.validateClaims(claims)) {
                 // Extract the email (subject) from the claims.
                 String email = claims.get("email", String.class);
-                System.out.println("email : " + email);
 
                 // Extract authorities (roles) from the claims.
                 Collection<GrantedAuthority> authorities = getAuthoritiesFromClaims(claims);

@@ -1,6 +1,6 @@
 <!-- Modal.vue -->
 <template>
-    <div v-if="isVisible" class="modal-overlay" @click="cancel">
+    <div v-if="isVisible" class="modal-overlay">
         <div class="modal" @click.stop>
             <div class="modal-header">
                 <h5 class="modal-title">
@@ -64,6 +64,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: all; /* Capture all pointer events */
 }
 
 .modal {
@@ -75,5 +76,6 @@ export default {
     min-width: 400px;
     width: auto;
     height: auto;
+    pointer-events: all; /* Enable pointer events on the modal content */
 }
 </style>

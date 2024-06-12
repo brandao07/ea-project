@@ -7,7 +7,7 @@ export default class GetAllLocationsOutput extends BaseOutput {
   }
 
   static LocationProperties = class {
-    constructor(id = 0, latitude = 0.0, longitude = 0.0, address = '', city = '', country = '', postalCode = '', creationDate = new Date()) {
+    constructor({id = 0, latitude = 0.0, longitude = 0.0, address = '', city = '', country = '', postalCode = '', creationDate = new Date()}) {
       this.id = id;
       this.latitude = latitude;
       this.longitude = longitude;

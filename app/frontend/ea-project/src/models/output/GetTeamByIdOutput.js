@@ -12,14 +12,14 @@ export default class GetTeamByIdOutput extends BaseOutput {
   }
 
   static ClubProperties = class {
-    constructor(id = 0, name = '') {
+    constructor({id = 0, name = ''}) {
       this.id = id;
       this.name = name;
     }
   };
 
   static UserProperties = class {
-    constructor(id = 0, name = '') {
+    constructor({id = 0, name = ''}) {
       this.id = id;
       this.name = name;
     }
