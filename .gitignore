@@ -192,3 +192,4 @@ vp-codigo/src/orm/*.java
 vp-codigo/src/ormsamples/*.java
 
 app/backend/target/*
+app/backend/target/*.jar
