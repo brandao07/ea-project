@@ -190,3 +190,5 @@ vp-codigo/src/eaproject/dao/*.java
 vp-codigo/src/ormmapping/*.*.xml
 vp-codigo/src/orm/*.java
 vp-codigo/src/ormsamples/*.java
+
+app/backend/target/*
