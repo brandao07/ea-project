@@ -141,11 +141,11 @@ public class UserBean implements UserLocal {
     /**
      * Method to retrieve basic user information.
      *
-     * @param userInfoInput The input object containing the user ID.
+     * @param input The input object containing the user ID.
      * @return GetUserByIdOutput The output object containing user information.
      * @throws UsernameNotFoundException if the user cannot be found.
      */
-    public GetUserByIdOutput basicUserInfo(GetUserByIdInput userInfoInput, HttpServletRequest request) throws UsernameNotFoundException {
+    public GetUserByIdOutput basicUserInfo(GetUserByIdInput input, HttpServletRequest request) throws UsernameNotFoundException {
         GetUserByIdOutput output = new GetUserByIdOutput();
         try {
             // Extract the JWT token from the request
@@ -158,17 +158,17 @@ public class UserBean implements UserLocal {
             int tokenUserId = claims.get("idUser", Integer.class);
 
             // Check if the user ID from the token matches the user ID from the input
-            if (tokenUserId != userInfoInput.getId()) {
+            if (tokenUserId != input.getId()) {
                 output.addFeedbackMessage("You are not authorized to access this user's information.", FeedbackSeverity.DANGER);
             }
 
-            // Load the user from the database using the provided user ID
-            User user = UserDAO.loadUserByORMID(userInfoInput.getId());
+            // Fetch entity from the database
+            User user = Utilities.fetchEntity(input, input.getId(), UserDAO::loadUserByORMID, UserDAO::getUserByORMID, input.isLazyLoad());
 
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
-                // Convert entity into an object
-                output = Utilities.convertToDTO(user, GetUserByIdOutput.class);
+                // Assign retrieved entity to the output object
+                output = Utilities.processLazyLoad(input, user, GetUserByIdOutput.class, input.isLazyLoad());
             } else {
                 output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
             }

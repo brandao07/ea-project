@@ -95,8 +95,11 @@ export default {
         }
     },
     watch: {
-        isVisible(val) {
+        async isVisible(val) {
             this.modalVisible = val;
+            if (val) {
+                await this.fetchUserInfo()
+            }
         },
         modalVisible(val) {
             if (!val) {

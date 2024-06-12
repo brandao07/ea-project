@@ -32,24 +32,18 @@ const router = createRouter({
 
 // Navigation guard to check for authentication
 router.beforeEach((to, from, next) => {
-  console.log("Navigation guard triggered");
   // Check if the route requires authentication
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    console.log("Route requires authentication");
     // Check if token exists in localStorage
     const token = localStorage.getItem("jwt-token");
-    console.log("Token:", token);
     if (!token) {
-      console.log("Token does not exist, redirecting to login");
       // Token does not exist, redirect to login page
       next("/login");
     } else {
-      console.log("Token exists, continuing to the requested route");
       // Token exists, continue to the requested route
       next();
     }
   } else {
-    console.log("Route does not require authentication, continuing");
     // If the route doesn't require authentication, continue normally
     next();
   }
