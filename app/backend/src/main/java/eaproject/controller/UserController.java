@@ -5,6 +5,7 @@ import eaproject.input.*;
 import eaproject.output.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @EJB
     UserBean userBean;
+
+    /**
+     * Uploads a user's photo to Firebase Storage and updates the user's record in the database with the photo's URL.
+     *
+     * @param input The input object containing the user ID and the photo to be uploaded.
+     * @return An UploadUserPhotoOutput object containing the result of the operation and any feedback messages.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PostMapping("/UploadUserPhoto")
+    public UploadUserPhotoOutput uploadUserPhoto(@RequestParam("id") int id, @RequestParam("photo") MultipartFile photo) {
+        UploadUserPhotoInput input = new UploadUserPhotoInput();
+        input.setId(id);
+        input.setPhoto(photo);
+        return userBean.uploadUserPhoto(input);
+    }
 
     /**
      * Retrieves all users from the database and returns them in a GetAllUsersOutput object.

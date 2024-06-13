@@ -12,8 +12,10 @@ import eaproject.output.CreateNotificationOutput;
 import eaproject.output.GetAllNotificationsOutput;
 import eaproject.output.GetNotificationByIdOutput;
 import eaproject.output.UpdateNotificationOutput;
+import eaproject.utilities.FirebaseStorage;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,9 @@ import javax.ejb.Stateless;
 @Local(NotificationLocal.class)
 @Component
 public class NotificationBean implements NotificationLocal {
+
+    @Autowired
+    FirebaseStorage firebaseStorage;
 
     @PostConstruct
     public void init() {
@@ -42,6 +47,12 @@ public class NotificationBean implements NotificationLocal {
         try {
             // Convert object into an entity
             Notification notification = Utilities.convertToDAO(input, Notification.class);
+
+            // Upload the photo and get the URL of the uploaded photo
+            String path = firebaseStorage.uploadPhoto(input.getPhoto());
+
+            // Update the user's photo path in the user object
+            notification.setPhotographyPath(path);
 
             // Save the entity to the database using the DAO
             NotificationDAO.save(notification);
@@ -85,6 +96,15 @@ public class NotificationBean implements NotificationLocal {
 
                 // Update only non-null fields of the existing entity
                 Utilities.updateNonNullFields(entityToUpdate, notification);
+
+                // Update photo
+                if (input.getPhoto() != null) {
+                    // Upload the photo and get the URL of the uploaded photo
+                    String path = firebaseStorage.uploadPhoto(input.getPhoto());
+
+                    // Update the user's photo path in the user object
+                    notification.setPhotographyPath(path);
+                }
 
                 // Save the entity to the database using the DAO
                 NotificationDAO.save(notification);

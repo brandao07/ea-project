@@ -22,7 +22,7 @@ class AuthService {
     localStorage.setItem('name', decodedToken.name);
     localStorage.setItem('isActive', decodedToken.isActive);
     localStorage.setItem('registerDate', decodedToken.registerDate);
-    localStorage.setItem('picture', decodedToken.picture);
+    localStorage.setItem('photo', decodedToken.picture);
     localStorage.setItem('role', decodedToken.role);
 
     // Redirect to home page or any other page
@@ -40,7 +40,7 @@ class AuthService {
     localStorage.removeItem("name");
     localStorage.removeItem("isActive");
     localStorage.removeItem("registerDate");
-    localStorage.removeItem("picture");
+    localStorage.removeItem("photo");
     localStorage.removeItem("role");
     ApiService.clearToken(); // Clear the token in ApiService
 

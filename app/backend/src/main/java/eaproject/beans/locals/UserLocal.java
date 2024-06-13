@@ -10,6 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserLocal {
 
     /**
+     * Uploads a user's photo to Firebase Storage and updates the user's record in the database with the photo's URL.
+     *
+     * @param input The input object containing the user ID and the photo to be uploaded.
+     * @return An UploadUserPhotoOutput object containing the result of the operation and any feedback messages.
+     */
+    UploadUserPhotoOutput uploadUserPhoto(UploadUserPhotoInput input);
+
+    /**
      * Retrieves all users from the database and returns them in a GetAllUsersOutput object.
      *
      * @param usersInput A GetAllUsersInput object containing any input parameters needed for fetching users.

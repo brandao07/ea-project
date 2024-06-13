@@ -46,6 +46,9 @@
                             <li><a class="list-group-item list-group-item-action" href="#"
                                     @click="showProfileModal = true"><font-awesome-icon :icon="['fas', 'user']" />
                                     Profile</a></li>
+                            <li><a class="list-group-item list-group-item-action" href="#"
+                                    @click="showPhotoUploadModal = true"><font-awesome-icon :icon="['fa', 'camera']" />
+                                    Photo</a></li>
                             <div class="dropdown-divider"></div>
                             <li><a class="list-group-item list-group-item-action" href="#"
                                     @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a>
@@ -56,14 +59,16 @@
             </div>
         </div>
         <UserProfile :isVisible="showProfileModal" @close="showProfileModal = false" />
+        <UserPhotoUpload :isVisible="showPhotoUploadModal" @close="showPhotoUploadModal = false" />
     </nav>
 </template>
 
 <script>
 
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import AuthService from "@/services/AuthService";
 import UserProfile from '@/views/UserProfile.vue';
+import UserPhotoUpload from '@/views/UserPhotoUpload.vue';
 import RoleEnumerator from '@/models/enums/Roles';
 
 export default {
@@ -75,7 +80,8 @@ export default {
             roleEnum: RoleEnumerator,
             user: user,
             role: role,
-            showProfileModal: false
+            showProfileModal: false,
+            showPhotoUploadModal: false
         };
     },
     computed: {
@@ -102,84 +108,92 @@ export default {
     },
     components: {
         FontAwesomeIcon,
-        UserProfile
+        UserProfile,
+        UserPhotoUpload
     },
 };
 </script>
 
 <style scoped>
 .navbar-light {
-  background-color: var(--navbar-bg-color) !important;
-  border: 1px solid var(--color-grey);
+    background-color: var(--navbar-bg-color) !important;
+    border: 1px solid var(--color-grey);
 }
 
 .nav-link img {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 .user-avatar {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 8px;
-  font-size: small;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    font-size: small;
+    object-fit: scale-down;
+    background-size:cover;
 
-  &.user-initials {
-    background-color: var(--user-initials-bg-color);
-    color: var(--color-white);
-  }
-
-  &.user-photo {
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
+    &.user-initials {
+        background-color: var(--user-initials-bg-color);
+        color: var(--color-white);
     }
-  }
+
+    img {
+        width: inherit;
+    }
+
+    &.user-photo {
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            width: inherit;
+        }
+    }
 }
 
 .action {
-  position: absolute;
-  top: 48px;
-  right: -10px;
-  padding: 10px 20px;
-  width: auto;
-  background: var(--color-white);
-  border-radius: 0.5em;
-  box-shadow: 0 0 1em var(--color-black-rgba);
-  border: 0px;
+    position: absolute;
+    top: 48px;
+    right: -10px;
+    padding: 10px 20px;
+    width: auto;
+    background: var(--color-white);
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em var(--color-black-rgba);
+    border: 0px;
 }
 
 .action .menu ul li a {
-  display: inline-block;
-  text-decoration: none;
+    display: inline-block;
+    text-decoration: none;
 }
 
 ul li a svg {
-  width: 24px;
+    width: 24px;
 }
 
 .menu li {
-  position: relative;
-  display: block;
-  padding: 5px 0px;
+    position: relative;
+    display: block;
+    padding: 5px 0px;
 }
 
 .action .menu .profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px 0px;
 }
 
 .action .menu .profile .user-avatar {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-  font-size: xx-large;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    font-size: xx-large;
 }
 </style>

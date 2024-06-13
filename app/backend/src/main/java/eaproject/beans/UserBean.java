@@ -5,6 +5,7 @@ import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.*;
 import eaproject.output.*;
+import eaproject.utilities.FirebaseStorage;
 import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
 import io.jsonwebtoken.Claims;
@@ -42,9 +43,61 @@ public class UserBean implements UserLocal {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    FirebaseStorage firebaseStorage;
+
     @PostConstruct
     public void init() {
         System.out.println("UserBean initialized with PasswordEncoder: " + (passwordEncoder != null));
+    }
+
+    /**
+     * Uploads a user's photo to Firebase Storage and updates the user's record in the database with the photo's URL.
+     *
+     * @param input The input object containing the user ID and the photo to be uploaded.
+     * @return An UploadUserPhotoOutput object containing the result of the operation and any feedback messages.
+     */
+    public UploadUserPhotoOutput uploadUserPhoto(UploadUserPhotoInput input) {
+        // Create a new output object to store the result of the update operation
+        UploadUserPhotoOutput output = new UploadUserPhotoOutput();
+        try {
+            // Load the user from the database using the provided user ID
+            User user = UserDAO.loadUserByORMID(input.getId());
+
+            // Check if the user exists and is active
+            if (user != null && user.getId() > 0 && user.getIsActive()) {
+
+                // Upload the photo and get the URL of the uploaded photo
+                String path = firebaseStorage.uploadPhoto(input.getPhoto());
+
+                // Update the user's photo path in the user object
+                user.setPhotographyPath(path);
+
+                // Save the updated user entity to the database using the DAO
+                UserDAO.save(user);
+
+                // If the save operation is successful, add a success feedback message
+                output.addFeedbackMessage("User photo uploaded successfully.", FeedbackSeverity.SUCCESS);
+
+                // Indicate that the update was successful
+                output.setUpdateSuccessful(true);
+            } else {
+                // If the user is not found or not active, set the update as unsuccessful and add a feedback message
+                output.setUpdateSuccessful(false);
+                output.addFeedbackMessage("User not found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // If a BadCredentialsException is caught, add a danger feedback message with the exception message
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // If a PersistentException is caught, add a danger feedback message indicating a database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // If any other exception is caught, add a danger feedback message indicating an unexpected error
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with the result of the update operation
+        return output;
     }
 
     /**
