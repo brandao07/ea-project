@@ -90,7 +90,7 @@ export default {
         },
         hasUserPhoto() {
             const photo = localStorage.getItem('photo');
-            return photo !== null && photo !== undefined && photo !== '';
+            return photo !== null && typeof photo == "undefined" && photo !== '';
         },
         userInitials() {
             if (this.user) {
