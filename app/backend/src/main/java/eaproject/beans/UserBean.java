@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
@@ -155,6 +156,15 @@ public class UserBean implements UserLocal {
                 return output;
             }
 
+            var condition = "email = '" + input.getEmail() + "'";
+            var userBd = UserDAO.loadUserByQuery(condition, null );
+
+            if (userBd != null) {
+                output.addFeedbackMessage("email already exists", FeedbackSeverity.DANGER);
+                output.setRegistrationSuccessful(false);
+                return output;
+            }
+
             // Convert object into an entity
             User user = Utilities.convertToDAO(input, User.class);
 
@@ -171,7 +181,7 @@ public class UserBean implements UserLocal {
             user.setRegisterDate(Timestamp.valueOf(LocalDateTime.now()));
 
             // Set query parameters
-            String condition = "name = '" + ROLE_DEFAULT + "'";
+            condition = "name = '" + ROLE_DEFAULT + "'";
 
             // Get base role
             Role role = RoleDAO.loadRoleByQuery(condition, null);
