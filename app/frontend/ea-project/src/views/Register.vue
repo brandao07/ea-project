@@ -96,8 +96,10 @@ export default {
 
 <style scoped>
 #register {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     min-width: 400px;
-    height: 100vh;
+    /*height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: left;
