@@ -1,5 +1,7 @@
 package eaproject.input;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -9,7 +11,7 @@ public class UpdateNotificationInput extends BaseInput implements Serializable {
     private String messageHeader;
     private String messageBody;
     private String messageType;
-    private String photographyPath;
+    private MultipartFile photo;
     private Timestamp creationDate;
 
     public int getId() {
@@ -44,13 +46,9 @@ public class UpdateNotificationInput extends BaseInput implements Serializable {
         this.messageType = messageType;
     }
 
-    public String getPhotographyPath() {
-        return photographyPath;
-    }
+    public MultipartFile getPhoto() { return photo; }
 
-    public void setPhotographyPath(String photographyPath) {
-        this.photographyPath = photographyPath;
-    }
+    public void setPhoto(MultipartFile photo) { this.photo = photo; }
 
     public Timestamp getCreationDate() {
         return creationDate;

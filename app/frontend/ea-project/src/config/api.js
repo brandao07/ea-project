@@ -45,12 +45,14 @@ const API_ENDPOINTS = {
   UPDATE_TYPE_ENTITY: `${BASE_URL}/UpdateTypeEntity`,
   GET_TYPE_BY_ID: `${BASE_URL}/GetTypeById`,
   GET_ALL_TYPES: `${BASE_URL}/GetAllTypes`,
+  UPLOAD_USER_PHOTO: `${BASE_URL}/UploadUserPhoto`,
   GET_ALL_USERS: `${BASE_URL}/GetAllUsers`,
   UPDATE_USER_CURRENT_ROLE: `${BASE_URL}/UpdateUserCurrentRole`,
   UPDATE_BASIC_USER_INFO: `${BASE_URL}/UpdateBasicUserInfo`,
   BASIC_USER_INFO: `${BASE_URL}/BasicUserInfo`,
   REGISTER: `${BASE_URL}/Register`,
   LOGIN: `${BASE_URL}/Login`,
+  GET_WEATHER: `${BASE_URL}/GetWeather`,
 };
 
 export default API_ENDPOINTS;

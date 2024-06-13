@@ -52,6 +52,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    z-index: 9999;
 }
 
 .modal-overlay {
@@ -65,6 +66,7 @@ export default {
     justify-content: center;
     align-items: center;
     pointer-events: all; /* Capture all pointer events */
+    z-index: 9999;
 }
 
 .modal {
@@ -77,5 +79,6 @@ export default {
     width: auto;
     height: auto;
     pointer-events: all; /* Enable pointer events on the modal content */
+    z-index: 9999;
 }
 </style>

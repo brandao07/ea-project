@@ -4,6 +4,7 @@ import GetAllUsersOutput from "@/models/output/GetAllUsersOutput";
 import GetUserByIdOutput from "@/models/output/GetUserByIdOutput";
 import UpdateUserOutput from "@/models/output/UpdateUserOutput";
 import UpdateUserRoleOutput from "@/models/output/UpdateUserRoleOutput";
+import UploadUserPhotoOutput from "@/models/output/UploadUserPhotoOutput";
 
 import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
@@ -12,6 +13,33 @@ import FeedbackSeverity from "@/models/enums/FeedbackSeverity";
 import EventBus from "@/eventBus";
 
 class UserService {
+  /**
+   * Uploaduserphoto
+   * @param {UploadUserPhotoInput} input - The input
+   * @returns {Promise<UploadUserPhotoOutput>} The UploadUserPhotoOutput
+   */
+  async uploadUserPhoto(input) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.UPLOAD_USER_PHOTO, input);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new UploadUserPhotoOutput(response.updateSuccessful, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during uploadUserPhoto.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new UploadUserPhotoOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
   /**
    * Getallusers
    * @param {GetAllUsersInput} usersInput - The usersInput

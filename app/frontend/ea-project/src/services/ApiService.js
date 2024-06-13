@@ -70,9 +70,14 @@ class ApiService {
    */
   async post(endpoint, data) {
     try {
-      const response = await axios.post(endpoint, data, {
-        headers: this._getHeaders(),
-      });
+      const headers = this._getHeaders();
+
+      // If data is FormData, let axios set the correct Content-Type header
+      if (data instanceof FormData) {
+        delete headers["Content-Type"];
+      }
+
+      const response = await axios.post(endpoint, data, { headers });
       return response.data;
     } catch (error) {
       const errorMessage = new FeedbackMessage(

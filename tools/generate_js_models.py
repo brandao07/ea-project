@@ -24,7 +24,8 @@ js_type_default = {
     'Datetime': 'new Date()',
     'Integer': '0',
     'ArrayList': '[]',
-    'List': '[]'
+    'List': '[]',
+    'MultipartFile': 'new FormData()',
 }
 
 # Function to extract constructor parameters of output models
@@ -263,7 +264,7 @@ def parse_controllers_and_generate_services(controller_dir, service_dir, api_con
                 print(f'Generated {service_filename} from {filename}')
 
     # Generate API endpoints config file
-    api_config_code = 'const BASE_URL = \'http://localhost:7000/api\'; // Adjust based on backend URL\n\n'
+    api_config_code = 'const BASE_URL = \'http://localhost:8000/api\'; // Adjust based on backend URL\n\n'
     api_config_code += 'const API_ENDPOINTS = {\n'
     for endpoint_constant, endpoint in api_endpoints.items():
         api_config_code += f'  {endpoint_constant}: `${{BASE_URL}}{endpoint}`,\n'
