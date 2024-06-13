@@ -102,4 +102,9 @@ public class UserController {
     public AuthenticationOutput loginUser(@RequestBody AuthenticationInput authenticationInput) {
         return userBean.authenticateUser(authenticationInput);
     }
+
+    @PostMapping("/RecoverPassword")
+    public RecoverPasswordOutput recoverPassword(@RequestBody RecoverPasswordInput recoverPasswordInput) {
+        return userBean.recoverPassword(recoverPasswordInput);
+    }
 }

@@ -19,10 +19,18 @@ public class EmailService {
     public void sendRegisterEmail(String toEmail) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
-        message.setSubject("Welcome to EAProject");
-        message.setText("Welcome to EAProject");
-        message.setFrom("noreply@EAPROJECT.com");
+        message.setSubject("Welcome to Canoeing");
+        message.setText("Welcome to Canoeing");
+        message.setFrom("noreply@Canoeing.com");
+        mailSender.send(message);
+    }
 
+    public void sendRecoverPasswordEmail(String toEmail, String password) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject("Canoeing Recovery Password");
+        message.setText("New Password is " + password);
+        message.setFrom("noreply@Canoeing.com");
         mailSender.send(message);
     }
 
