@@ -5,6 +5,7 @@ import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.*;
 import eaproject.output.*;
+import eaproject.utilities.EmailService;
 import eaproject.utilities.FirebaseStorage;
 import eaproject.utilities.JwtTokenUtil;
 import eaproject.utilities.Utilities;
@@ -45,6 +46,9 @@ public class UserBean implements UserLocal {
 
     @Autowired
     FirebaseStorage firebaseStorage;
+
+    @Autowired
+    EmailService emailService;
 
     @PostConstruct
     public void init() {
@@ -181,6 +185,7 @@ public class UserBean implements UserLocal {
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage("User registered successfully.", FeedbackSeverity.SUCCESS);
 
+            emailService.sendRegisterEmail(user.getEmail());
             // Indicate that the update was successful
             output.setRegistrationSuccessful(true);
         } catch (PersistentException e) {
