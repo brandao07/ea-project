@@ -6,7 +6,7 @@
                     <div class="form-group mb-1">
                         <label for="user" class="mb-2">User</label>
                         <select class="form-select" id="user" v-model="updateUserRoleInput.userId" required>
-                            <option v-for="user in getUsersOutput.usersList" :key="user.email" :value="user.id">
+                            <option v-for="user in sortedUsers()" :key="user.email" :value="user.id">
                                 {{ user.email }}
                             </option>
                         </select>
@@ -80,7 +80,11 @@ export default {
         resetData() {
             this.updateUserRoleInput = new UpdateUserRoleInput();
             this.updateUserRoleOutput = new UpdateUserRoleOutput();
-        }
+        },
+        sortedUsers() {
+            return this.getUsersOutput.usersList.slice().sort((a, b) => {
+                return a.email.localeCompare(b.email);
+            })}
     },
     watch: {
         async isVisible(val) {
