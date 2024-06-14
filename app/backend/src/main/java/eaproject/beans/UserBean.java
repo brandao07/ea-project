@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
+import static eaproject.constants.EAProjectConstants.ROLE_PARTICIPANT;
 
 @Stateless(name = "UserEJB")
 @Local(UserLocal.class)
@@ -166,7 +167,9 @@ public class UserBean implements UserLocal {
             }
 
             // Convert object into an entity
-            User user = Utilities.convertToDAO(input, User.class);
+            record convertUser(String name, String email, String password, String gender, Integer age, Double height, Double weight) {}
+            var convertedUser = new convertUser(input.getName(), input.getEmail(), input.getPassword(), input.getGender(), input.getAge(), input.getHeight(), input.getWeight());
+            User user = Utilities.convertToDAO(convertedUser, User.class);
 
             // Hash the password using the injected PasswordEncoder
             String hashedPassword = passwordEncoder.encode(Objects.requireNonNull(user).getPassword());
@@ -181,7 +184,8 @@ public class UserBean implements UserLocal {
             user.setRegisterDate(Timestamp.valueOf(LocalDateTime.now()));
 
             // Set query parameters
-            condition = "name = '" + ROLE_DEFAULT + "'";
+            if (Objects.equals(input.getRole().toUpperCase(), "DEFAULT")) condition = "name = '" + ROLE_DEFAULT + "'";
+            else if (Objects.equals(input.getRole().toUpperCase(), "PARTICIPANT")) condition = "name = '" + ROLE_PARTICIPANT + "'";
 
             // Get base role
             Role role = RoleDAO.loadRoleByQuery(condition, null);
