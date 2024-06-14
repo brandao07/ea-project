@@ -5,10 +5,7 @@ import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.*;
 import eaproject.output.*;
-import eaproject.utilities.EmailService;
-import eaproject.utilities.FirebaseStorage;
-import eaproject.utilities.JwtTokenUtil;
-import eaproject.utilities.Utilities;
+import eaproject.utilities.*;
 import io.jsonwebtoken.Claims;
 import org.orm.PersistentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +47,9 @@ public class UserBean implements UserLocal {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    PasswordGenerator passwordGenerator;
 
     @PostConstruct
     public void init() {
@@ -403,6 +403,40 @@ public class UserBean implements UserLocal {
             output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
         }
         // Return the output object with users and feedback messages
+        return output;
+    }
+
+    public RecoverPasswordOutput recoverPassword(RecoverPasswordInput recoverPasswordInput) {
+        RecoverPasswordOutput output = new RecoverPasswordOutput();
+        String condition = "email = '" + recoverPasswordInput.getEmail() + "'";
+        try {
+            User user = UserDAO.loadUserByQuery(condition, null);
+            if (user == null) {
+                output.addFeedbackMessage("User not found with that email", FeedbackSeverity.DANGER);
+                output.setSuccessful(false);
+                return output;
+            }
+
+            // Generate a new password
+            String newPassword = passwordGenerator.generatePassword();
+
+            // Hash the password using the injected PasswordEncoder
+            String hashedPassword = passwordEncoder.encode(newPassword);
+
+            // Set the hashed password
+            user.setPassword(hashedPassword);
+
+            UserDAO.save(user);
+
+            emailService.sendRecoverPasswordEmail(recoverPasswordInput.getEmail(), newPassword);
+
+            output.setSuccessful(true);
+
+            output.addFeedbackMessage("An email was sent with your new password.", FeedbackSeverity.SUCCESS);
+        } catch (PersistentException e) {
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+            output.setSuccessful(false);
+        }
         return output;
     }
 }
