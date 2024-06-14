@@ -1,12 +1,10 @@
 package eaproject.input;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.Serializable;
 
 public class UploadUserPhotoInput extends BaseInput implements Serializable {
     private int id;
-    private MultipartFile photo;
+    private String photoBase64;
 
     public int getId() {
         return id;
@@ -16,11 +14,11 @@ public class UploadUserPhotoInput extends BaseInput implements Serializable {
         this.id = id;
     }
 
-    public MultipartFile getPhoto() {
-        return photo;
+    public String getPhotoBase64() {
+        return photoBase64;
     }
 
-    public void setPhoto(MultipartFile photo) {
-        this.photo = photo;
+    public void setPhotoBase64(String photoBase64) {
+        this.photoBase64 = photoBase64;
     }
 }

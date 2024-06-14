@@ -52,6 +52,7 @@ const API_ENDPOINTS = {
   BASIC_USER_INFO: `${BASE_URL}/BasicUserInfo`,
   REGISTER: `${BASE_URL}/Register`,
   LOGIN: `${BASE_URL}/Login`,
+  RECOVER_PASSWORD: `${BASE_URL}/RecoverPassword`,
   GET_WEATHER: `${BASE_URL}/GetWeather`,
 };
 

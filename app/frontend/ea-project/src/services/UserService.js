@@ -2,6 +2,7 @@ import AuthenticationOutput from "@/models/output/AuthenticationOutput";
 import CreateUserOutput from "@/models/output/CreateUserOutput";
 import GetAllUsersOutput from "@/models/output/GetAllUsersOutput";
 import GetUserByIdOutput from "@/models/output/GetUserByIdOutput";
+import RecoverPasswordOutput from "@/models/output/RecoverPasswordOutput";
 import UpdateUserOutput from "@/models/output/UpdateUserOutput";
 import UpdateUserRoleOutput from "@/models/output/UpdateUserRoleOutput";
 import UploadUserPhotoOutput from "@/models/output/UploadUserPhotoOutput";
@@ -42,12 +43,12 @@ class UserService {
 
   /**
    * Getallusers
-   * @param {GetAllUsersInput} usersInput - The usersInput
+   * @param {GetAllUsersInput} input - The input
    * @returns {Promise<GetAllUsersOutput>} The GetAllUsersOutput
    */
-  async getAllUsers(usersInput) {
+  async getAllUsers(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_USERS, usersInput);
+      const response = await ApiService.post(API_ENDPOINTS.GET_ALL_USERS, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -69,12 +70,12 @@ class UserService {
 
   /**
    * Updateusercurrentrole
-   * @param {UpdateUserRoleInput} userRoleInput - The userRoleInput
+   * @param {UpdateUserRoleInput} input - The input
    * @returns {Promise<UpdateUserRoleOutput>} The UpdateUserRoleOutput
    */
-  async updateUserCurrentRole(userRoleInput) {
+  async updateUserCurrentRole(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.UPDATE_USER_CURRENT_ROLE, userRoleInput);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_USER_CURRENT_ROLE, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -96,12 +97,12 @@ class UserService {
 
   /**
    * Updatebasicuserinfo
-   * @param {UpdateUserInput} userInfoInput - The userInfoInput
+   * @param {UpdateUserInput} input - The input
    * @returns {Promise<UpdateUserOutput>} The UpdateUserOutput
    */
-  async updateBasicUserInfo(userInfoInput) {
+  async updateBasicUserInfo(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.UPDATE_BASIC_USER_INFO, userInfoInput);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_BASIC_USER_INFO, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -123,12 +124,12 @@ class UserService {
 
   /**
    * Getbasicuserinfo
-   * @param {GetUserByIdInput} userInfoInput - The userInfoInput
+   * @param {GetUserByIdInput} input - The input
    * @returns {Promise<GetUserByIdOutput>} The GetUserByIdOutput
    */
-  async getBasicUserInfo(userInfoInput) {
+  async getBasicUserInfo(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.BASIC_USER_INFO, userInfoInput);
+      const response = await ApiService.post(API_ENDPOINTS.BASIC_USER_INFO, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -150,12 +151,12 @@ class UserService {
 
   /**
    * Registeruser
-   * @param {CreateUserInput} CreateUserInput - The CreateUserInput
+   * @param {CreateUserInput} input - The input
    * @returns {Promise<CreateUserOutput>} The CreateUserOutput
    */
-  async registerUser(CreateUserInput) {
+  async registerUser(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.REGISTER, CreateUserInput);
+      const response = await ApiService.post(API_ENDPOINTS.REGISTER, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -177,12 +178,12 @@ class UserService {
 
   /**
    * Loginuser
-   * @param {AuthenticationInput} authenticationInput - The authenticationInput
+   * @param {AuthenticationInput} input - The input
    * @returns {Promise<AuthenticationOutput>} The AuthenticationOutput
    */
-  async loginUser(authenticationInput) {
+  async loginUser(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.LOGIN, authenticationInput);
+      const response = await ApiService.post(API_ENDPOINTS.LOGIN, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
@@ -197,6 +198,33 @@ class UserService {
         FeedbackSeverity.DANGER
       );
       const output = new AuthenticationOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
+  /**
+   * Recoverpassword
+   * @param {RecoverPasswordInput} input - The input
+   * @returns {Promise<RecoverPasswordOutput>} The RecoverPasswordOutput
+   */
+  async recoverPassword(input) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.RECOVER_PASSWORD, input);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new RecoverPasswordOutput(response.successful, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during recoverPassword.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new RecoverPasswordOutput("", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }

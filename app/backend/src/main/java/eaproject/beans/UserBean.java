@@ -1,7 +1,10 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.UserLocal;
-import eaproject.dao.*;
+import eaproject.dao.Role;
+import eaproject.dao.RoleDAO;
+import eaproject.dao.User;
+import eaproject.dao.UserDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.*;
 import eaproject.output.*;
@@ -13,6 +16,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Local;
@@ -21,7 +25,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Base64;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
@@ -71,9 +75,14 @@ public class UserBean implements UserLocal {
 
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
+                // Delete current User photo if exists
+                firebaseStorage.deletePhoto(user.getPhotographyPath());
+
+                // Get the Photo from the Input file
+                MultipartFile photo = Utilities.convertToMultipartFile(Base64.getDecoder().decode(input.getPhotoBase64()), user.getEmail() + "_photo.jpg", "image/jpeg");
 
                 // Upload the photo and get the URL of the uploaded photo
-                String path = firebaseStorage.uploadPhoto(input.getPhoto());
+                String path = firebaseStorage.uploadPhoto(photo);
 
                 // Update the user's photo path in the user object
                 user.setPhotographyPath(path);

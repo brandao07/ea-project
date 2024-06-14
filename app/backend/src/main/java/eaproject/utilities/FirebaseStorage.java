@@ -41,4 +41,15 @@ public class FirebaseStorage {
 
         return String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media", bucketName, fileName);
     }
+
+    /**
+     * Deletes a photo from Firebase Storage if it exists.
+     *
+     * @param fileName the name of the file to delete
+     * @return true if the file was deleted, false if the file was not found
+     */
+    public static boolean deletePhoto(String fileName) {
+        BlobId blobId = BlobId.of(bucketName, fileName);
+        return storage.delete(blobId);
+    }
 }
