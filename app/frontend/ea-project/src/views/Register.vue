@@ -40,14 +40,20 @@
                                     v-model="userRegisterInput.age" required>
                             </div>
                             <div class="form-group mb-1">
-                                <label for="height" class="mb-2">Height (cm)</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="height"
-                                    v-model="userRegisterInput.height" required>
-                            </div>
-                            <div class="form-group mb-4">
                                 <label for="weight" class="mb-2">Weight (kg)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="weight"
                                     v-model="userRegisterInput.weight" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="role" class="mb-2">Role</label>
+                                <select class="form-select" id="role" v-model="userRegisterInput.roleId" required>
+                                    <option :key="DEFAULT" :value="DEFAULT">
+                                        Spectator  
+                                    </option>
+                                    <option :key="participant" :value="participant">
+                                        Athlete
+                                    </option>
+                                </select>    
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
