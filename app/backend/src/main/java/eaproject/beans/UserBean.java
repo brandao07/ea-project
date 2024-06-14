@@ -78,8 +78,11 @@ public class UserBean implements UserLocal {
                 // Delete current User photo if exists
                 firebaseStorage.deletePhoto(user.getPhotographyPath());
 
+                // Decode to byte array
+                byte[] decodedBytes = Base64.getDecoder().decode(input.getPhotoBase64());
+
                 // Get the Photo from the Input file
-                MultipartFile photo = Utilities.convertToMultipartFile(Base64.getDecoder().decode(input.getPhotoBase64()), user.getEmail() + "_photo.jpg", "image/jpeg");
+                MultipartFile photo = Utilities.convertToMultipartFile(decodedBytes, input.getFileName(), input.getContentType());
 
                 // Upload the photo and get the URL of the uploaded photo
                 String path = firebaseStorage.uploadPhoto(photo);
@@ -89,6 +92,13 @@ public class UserBean implements UserLocal {
 
                 // Save the updated user entity to the database using the DAO
                 UserDAO.save(user);
+
+                // Get updated user
+                user = UserDAO.loadUserByORMID(user.getId());
+
+                // Issue new Token
+                String token = JwtTokenUtil.createToken(user);
+                output.setToken(token);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage("User photo uploaded successfully.", FeedbackSeverity.SUCCESS);

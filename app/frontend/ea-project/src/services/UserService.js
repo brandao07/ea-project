@@ -25,7 +25,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new UploadUserPhotoOutput(response.updateSuccessful, feedbackMessages);
+      const output = new UploadUserPhotoOutput(response.token, response.updateSuccessful, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });
@@ -35,7 +35,7 @@ class UserService {
         "An error occurred during uploadUserPhoto.",
         FeedbackSeverity.DANGER
       );
-      const output = new UploadUserPhotoOutput("", [errorMessage]);
+      const output = new UploadUserPhotoOutput("", "", [errorMessage]);
       EventBus.emit("feedback-message", errorMessage);
       return output;
     }

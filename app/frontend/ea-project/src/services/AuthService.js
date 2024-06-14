@@ -1,4 +1,9 @@
 import ApiService from "@/services/ApiService";
+import {
+  setLocalStorageItems,
+  removeLocalStorageItems,
+} from "@/utils/storageUtils";
+import { StorageKeys } from "@/constants/storageKeys";
 
 class AuthService {
   /**
@@ -7,23 +12,25 @@ class AuthService {
    * @param {object} router - The Vue router instance to handle redirection
    */
   login(token, router) {
-    // Store the token
-    localStorage.setItem("jwt-token", token);
-    ApiService.setToken(token); // Set the token in ApiService
-
     // Import JWT Decode
-    const jwt_decode = require('jwt-decode');
+    const jwt_decode = require("jwt-decode");
 
     // Decode the token to get the claims
     const decodedToken = jwt_decode.jwtDecode(token);
 
-    // Store each claim separately in localStorage or sessionStorage
-    localStorage.setItem('idUser', decodedToken.idUser);
-    localStorage.setItem('name', decodedToken.name);
-    localStorage.setItem('isActive', decodedToken.isActive);
-    localStorage.setItem('registerDate', decodedToken.registerDate);
-    localStorage.setItem('photo', decodedToken.picture);
-    localStorage.setItem('role', decodedToken.role);
+    // Store the token and claims in localStorage
+    setLocalStorageItems({
+      [StorageKeys.JWT_TOKEN]: token,
+      [StorageKeys.ID_USER]: decodedToken.idUser,
+      [StorageKeys.NAME]: decodedToken.name,
+      [StorageKeys.IS_ACTIVE]: decodedToken.isActive,
+      [StorageKeys.REGISTER_DATE]: decodedToken.registerDate,
+      [StorageKeys.PHOTO]: decodedToken.photo,
+      [StorageKeys.ROLE]: decodedToken.role,
+    });
+
+    // Set the token in ApiService
+    ApiService.setToken(token);
 
     // Redirect to home page or any other page
     router.push("/");
@@ -34,15 +41,19 @@ class AuthService {
    * @param {object} router - The Vue router instance to handle redirection
    */
   logout(router) {
-    // Clear localStorage
-    localStorage.removeItem("jwt-token");
-    localStorage.removeItem("idUser");
-    localStorage.removeItem("name");
-    localStorage.removeItem("isActive");
-    localStorage.removeItem("registerDate");
-    localStorage.removeItem("photo");
-    localStorage.removeItem("role");
-    ApiService.clearToken(); // Clear the token in ApiService
+    // Remove the token and claims from localStorage
+    removeLocalStorageItems([
+      StorageKeys.JWT_TOKEN,
+      StorageKeys.ID_USER,
+      StorageKeys.NAME,
+      StorageKeys.IS_ACTIVE,
+      StorageKeys.REGISTER_DATE,
+      StorageKeys.PHOTO,
+      StorageKeys.ROLE,
+    ]);
+
+    // Clear the token in ApiService
+    ApiService.clearToken();
 
     // Redirect to login page
     router.push("/login");

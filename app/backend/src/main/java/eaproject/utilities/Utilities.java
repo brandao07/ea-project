@@ -23,12 +23,8 @@ public class Utilities {
      * @param contentType the content type
      * @return the MultipartFile
      */
-    public static MultipartFile convertToMultipartFile(byte[] fileContent, String fileName, String contentType) {
-        try {
-            return new MockMultipartFile(fileName, fileName, contentType, new ByteArrayInputStream(fileContent));
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to convert byte array to MultipartFile", e);
-        }
+    public static MultipartFile convertToMultipartFile(byte[] fileContent, String fileName, String contentType) throws IOException {
+        return new MockMultipartFile(fileName, fileName, contentType, new ByteArrayInputStream(fileContent));
     }
 
     /**
