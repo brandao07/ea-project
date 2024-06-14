@@ -17,16 +17,23 @@ public class FirebaseUtil {
     @Value("${firebase.path}")
     private Resource serviceAccountKey;
 
-    public static FirebaseApp firebaseApp;
+    @Value("${firebase.bucket-name}")
+    private String bucketName;
+
+    public FirebaseApp fireApp;
+
     @PostConstruct
     public void init() throws IOException {
         try (InputStream serviceAccount = serviceAccountKey.getInputStream()) {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setStorageBucket(bucketName)
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) { // Avoid reinitialization
-                firebaseApp = FirebaseApp.initializeApp(options);
+                fireApp = FirebaseApp.initializeApp(options);
+            } else {
+                fireApp = FirebaseApp.getInstance();
             }
         }
     }

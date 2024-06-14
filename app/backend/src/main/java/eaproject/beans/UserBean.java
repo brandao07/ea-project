@@ -1,7 +1,10 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.UserLocal;
-import eaproject.dao.*;
+import eaproject.dao.Role;
+import eaproject.dao.RoleDAO;
+import eaproject.dao.User;
+import eaproject.dao.UserDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.*;
 import eaproject.output.*;
@@ -13,6 +16,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Local;
@@ -21,7 +25,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Base64;
 import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
@@ -72,15 +76,30 @@ public class UserBean implements UserLocal {
 
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
+                // Delete current User photo if exists
+                firebaseStorage.deletePhoto(user.getPhotographyPath());
+
+                // Decode to byte array
+                byte[] decodedBytes = Base64.getDecoder().decode(input.getPhotoBase64());
+
+                // Get the Photo from the Input file
+                MultipartFile photo = Utilities.convertToMultipartFile(decodedBytes, input.getFileName(), input.getContentType());
 
                 // Upload the photo and get the URL of the uploaded photo
-                String path = firebaseStorage.uploadPhoto(input.getPhoto());
+                String path = firebaseStorage.uploadPhoto(photo);
 
                 // Update the user's photo path in the user object
                 user.setPhotographyPath(path);
 
                 // Save the updated user entity to the database using the DAO
                 UserDAO.save(user);
+
+                // Get updated user
+                user = UserDAO.loadUserByORMID(user.getId());
+
+                // Issue new Token
+                String token = JwtTokenUtil.createToken(user);
+                output.setToken(token);
 
                 // If the save operation is successful, add a success feedback message
                 output.addFeedbackMessage("User photo uploaded successfully.", FeedbackSeverity.SUCCESS);

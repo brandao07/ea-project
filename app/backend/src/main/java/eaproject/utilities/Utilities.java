@@ -1,7 +1,10 @@
 package eaproject.utilities;
 
 import org.orm.PersistentException;
-
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -11,6 +14,17 @@ public class Utilities {
     @FunctionalInterface
     public interface ThrowingFunction<T, R> {
         R apply(T t) throws PersistentException;
+    }
+
+    /**
+     * Convert byte array to MultipartFile
+     * @param fileContent the file content
+     * @param fileName the file name
+     * @param contentType the content type
+     * @return the MultipartFile
+     */
+    public static MultipartFile convertToMultipartFile(byte[] fileContent, String fileName, String contentType) throws IOException {
+        return new MockMultipartFile(fileName, fileName, contentType, new ByteArrayInputStream(fileContent));
     }
 
     /**

@@ -1,8 +1,9 @@
 import BaseOutput from "./BaseOutput";
 
 export default class UploadUserPhotoOutput extends BaseOutput {
-  constructor(updateSuccessful = false, feedbackMessages = []) {
+  constructor(token = '', updateSuccessful = false, feedbackMessages = []) {
     super(feedbackMessages);
+    this.token = token;
     this.updateSuccessful = updateSuccessful;
   }
 }

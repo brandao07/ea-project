@@ -22,12 +22,11 @@
                     <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" ref="profileMenuButton">
                         <div v-if="!hasUserPhoto" class="user-avatar user-initials">
-                            {{ userInitials }}
+                            {{ userInitials }} {{ user }}
                         </div>
                         <div v-else class="user-avatar">
-                            <img :src="userPhoto" class="user-photo rounded-circle" alt="User Photo">
+                            <img :src="userPhoto" class="rounded-circle" alt="User Photo"> {{ user }}
                         </div>
-                        {{ user }}
                     </button>
                     <ul class="action dropdown-menu" ref="profileMenu">
                         <div class="menu">
@@ -36,22 +35,20 @@
                                     {{ userInitials }}
                                 </div>
                                 <div v-else class="user-avatar">
-                                    <img :src="userPhoto" class="user-photo rounded-circle" alt="User Photo">
+                                    <img :src="userPhoto" class="rounded-circle" alt="User Photo">
                                 </div>
-                                <span>
-                                    {{ user }}
-                                </span>
+                                {{ user }}
                             </div>
                             <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="#"
-                                    @click="showProfileModal = true"><font-awesome-icon :icon="['fas', 'user']" />
+                            <li><a href="#" @click="showProfileModal = true"><font-awesome-icon
+                                        :icon="['fas', 'user']" />
                                     Profile</a></li>
-                            <li><a class="dropdown-item" href="#"
+                            <li><a href="#"
                                     @click="showPhotoUploadModal = true"><font-awesome-icon :icon="['fa', 'camera']" />
                                     Photo</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="#"
-                                    @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a>
+                            <li><a href="#" @click="logout"><font-awesome-icon
+                                        :icon="['fas', 'sign-out-alt']" /> Logout</a>
                             </li>
                         </div>
                     </ul>
@@ -90,7 +87,7 @@ export default {
         },
         hasUserPhoto() {
             const photo = localStorage.getItem('photo');
-            return photo !== null && typeof photo == "undefined" && photo !== '';
+            return photo !== null && typeof photo !== "undefined" && photo !== '';
         },
         userInitials() {
             if (this.user) {
@@ -123,6 +120,10 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+    padding: 10px 20px;
+}
+
 .navbar-light {
     background-color: var(--navbar-bg-color) !important;
     border: 1px solid var(--color-grey);
@@ -133,14 +134,14 @@ export default {
 }
 
 .user-avatar {
-    display: inline-flex;
+    display: inline;
     justify-content: center;
     align-items: center;
-    width: 30px;
+    width: fit-content;
     height: 30px;
     border-radius: 50%;
     margin-right: 8px;
-    font-size: small;
+    font-size: medium;
     object-fit: scale-down;
     background-size: cover;
 
@@ -151,15 +152,7 @@ export default {
 
     img {
         width: inherit;
-    }
-
-    &.user-photo {
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 50%;
-            width: inherit;
-        }
+        height: inherit;
     }
 }
 
@@ -170,7 +163,7 @@ export default {
     border-radius: 0.5em;
     box-shadow: 0 0 1em var(--color-black-rgba);
     border: 0px;
-    align-self:left;
+    align-self: left;
 }
 
 .action .menu ul li a {
