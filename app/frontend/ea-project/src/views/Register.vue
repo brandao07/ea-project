@@ -57,7 +57,9 @@
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">Login</button>
+                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
+                                        <font-awesome-icon :icon="['fas', 'right-left']" class="font-awesome-icon" />Login
+                                    </button>
                                 </div>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary w-100">Register</button>
@@ -118,6 +120,11 @@ export default {
 .content {
     width: 100%;
 }
+
+.font-awesome-icon {
+    margin-right: 10px;
+}
+
 @media (max-width: 768px) {
     .div-center {
         padding: 0.5rem;
