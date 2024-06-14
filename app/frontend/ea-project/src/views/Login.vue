@@ -1,6 +1,6 @@
 <template>
     <div id="login">
-        <div class="div-center vertical-center">
+        <div class="div-center">
             <div class="content">
                 <form @submit.prevent="login">
                     <div class="row">
@@ -68,8 +68,8 @@ export default {
 
 <style scoped>
 #login {
-    min-width: 300px;
-    height: 100vh;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,6 +79,7 @@ export default {
     width: 100%;
     max-width: 500px;
     padding: 1rem;
+    
 }
 
 .content {
@@ -90,8 +91,9 @@ export default {
         padding: 0.5rem;
     }
 
-    .form-group-center {
+.form-group-center {
         text-align: center;
     }
 }
+
 </style>
