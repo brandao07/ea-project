@@ -23,8 +23,9 @@
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-light w-100"
-                                        @click="navigateToLogin">Register</button>
+                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
+                                        <font-awesome-icon :icon="['fas', 'right-left']" class="font-awesome-icon" />Register
+                                    </button>
                                 </div>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -84,6 +85,10 @@ export default {
 
 .content {
     width: 100%;
+}
+
+.font-awesome-icon {
+    margin-right: 10px;
 }
 
 @media (max-width: 768px) {
