@@ -6,7 +6,7 @@
                 | Canoeing
             </span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="toggleMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -20,7 +20,7 @@
                 </ul>
                 <div class="dropdown ms-lg-auto" v-if="user">
                     <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                        aria-expanded="false" ref="profileMenuButton">
                         <div v-if="!hasUserPhoto" class="user-avatar user-initials">
                             {{ userInitials }}
                         </div>
@@ -29,7 +29,7 @@
                         </div>
                         {{ user }}
                     </button>
-                    <ul class="action dropdown-menu dropdown-menu-end">
+                    <ul class="action dropdown-menu" ref="profileMenu">
                         <div class="menu">
                             <div class="profile">
                                 <div v-if="!hasUserPhoto" class="user-avatar user-initials">
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import AuthService from "@/services/AuthService";
 import UserProfile from '@/views/UserProfile.vue';
@@ -81,7 +80,8 @@ export default {
             user: user,
             role: role,
             showProfileModal: false,
-            showPhotoUploadModal: false
+            showPhotoUploadModal: false,
+            isMenuToggled: false
         };
     },
     computed: {
@@ -102,6 +102,14 @@ export default {
         }
     },
     methods: {
+        toggleMenu() {
+            this.isMenuToggled = !this.isMenuToggled;
+            if (this.isMenuToggled) {
+                this.$refs.profileMenu.classList.add('profile-menu-left');
+            } else {
+                this.$refs.profileMenu.classList.remove('profile-menu-left');
+            }
+        },
         logout() {
             AuthService.logout(this.$router);
         },
@@ -134,7 +142,7 @@ export default {
     margin-right: 8px;
     font-size: small;
     object-fit: scale-down;
-    background-size:cover;
+    background-size: cover;
 
     &.user-initials {
         background-color: var(--user-initials-bg-color);
@@ -156,15 +164,13 @@ export default {
 }
 
 .action {
-    position: absolute;
-    top: 48px;
-    right: -10px;
     padding: 10px 20px;
     width: auto;
     background: var(--color-white);
     border-radius: 0.5em;
     box-shadow: 0 0 1em var(--color-black-rgba);
     border: 0px;
+    align-self:left;
 }
 
 .action .menu ul li a {
@@ -195,5 +201,10 @@ ul li a svg {
     height: 60px;
     margin-bottom: 10px;
     font-size: xx-large;
+}
+
+.profile-menu-left {
+    right: auto !important;
+    left: 0 !important;
 }
 </style>
