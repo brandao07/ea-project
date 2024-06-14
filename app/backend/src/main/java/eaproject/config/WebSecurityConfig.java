@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         // Configure endpoint security
         httpSecurity.authorizeRequests()
                 // Allow access to login and register endpoints without authentication
-                .antMatchers("/Login", "/Register").permitAll()
+                .antMatchers("/Login", "/Register", "/RecoverPassword").permitAll()
                 // Require authentication for all other endpoints
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
