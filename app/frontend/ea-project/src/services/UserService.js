@@ -154,6 +154,7 @@ class UserService {
    * @returns {Promise<CreateUserOutput>} The CreateUserOutput
    */
   async registerUser(CreateUserInput) {
+    console.log("OLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+JSON.stringify(CreateUserInput));
     try {
       const response = await ApiService.post(API_ENDPOINTS.REGISTER, CreateUserInput);
       const feedbackMessages = response.feedbackMessages.map(

@@ -46,14 +46,11 @@
                             </div>
                             <div class="form-group mb-4">
                                 <label for="role" class="mb-2">Role</label>
-                                <select class="form-select" id="role" v-model="userRegisterInput.roleId" required>
-                                    <option :key="DEFAULT" :value="DEFAULT">
-                                        Spectator  
+                                <select class="form-select" v-model="userRegisterInput.role" id="gender" required>
+                                    <option v-for="(label, value) in roleEnum" :key="value" :value="label">
+                                        {{value}}
                                     </option>
-                                    <option :key="participant" :value="participant">
-                                        Athlete
-                                    </option>
-                                </select>    
+                                </select>  
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
@@ -83,6 +80,10 @@ export default {
     name: 'register',
     data() {
         return {
+            roleEnum: {
+                'Spectator': 'DEFAULT',
+                'Participant': 'PARTICIPANT',
+            },
             genderEnum: GenderEnumerator,
             userRegisterInput: new CreateUserInput(),
             userRegisterOutput: new CreateUserOutput(),
