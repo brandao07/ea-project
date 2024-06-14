@@ -10,6 +10,7 @@ public class CreateUserInput extends BaseInput implements Serializable {
     private Integer age;
     private Double height;
     private Double weight;
+    private String role;
 
     public String getName() {
         return name;
@@ -65,5 +66,13 @@ public class CreateUserInput extends BaseInput implements Serializable {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
