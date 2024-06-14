@@ -1,15 +1,15 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
+        <div class="container-fluid">
             <span class="navbar-brand">
                 <font-awesome-icon :icon="['fas', 'trophy']" class="icon-color" />
                 | Canoeing
             </span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <router-link class="nav-link" to="/">Home</router-link>
@@ -18,7 +18,7 @@
                         <router-link class="nav-link" to="/administration">Administration</router-link>
                     </li>
                 </ul>
-                <div class="dropdown" v-if="user">
+                <div class="dropdown ms-lg-auto" v-if="user">
                     <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <div v-if="!hasUserPhoto" class="user-avatar user-initials">
@@ -29,7 +29,7 @@
                         </div>
                         {{ user }}
                     </button>
-                    <ul class="action dropdown-menu">
+                    <ul class="action dropdown-menu dropdown-menu-end">
                         <div class="menu">
                             <div class="profile">
                                 <div v-if="!hasUserPhoto" class="user-avatar user-initials">
@@ -43,14 +43,14 @@
                                 </span>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <li><a class="list-group-item list-group-item-action" href="#"
+                            <li><a class="dropdown-item" href="#"
                                     @click="showProfileModal = true"><font-awesome-icon :icon="['fas', 'user']" />
                                     Profile</a></li>
-                            <li><a class="list-group-item list-group-item-action" href="#"
+                            <li><a class="dropdown-item" href="#"
                                     @click="showPhotoUploadModal = true"><font-awesome-icon :icon="['fa', 'camera']" />
                                     Photo</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a class="list-group-item list-group-item-action" href="#"
+                            <li><a class="dropdown-item" href="#"
                                     @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a>
                             </li>
                         </div>

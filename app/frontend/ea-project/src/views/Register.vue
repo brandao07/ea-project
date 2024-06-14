@@ -1,15 +1,15 @@
 <template>
     <div id="register">
-        <div class="div-center vertical-center">
+        <div class="div-center">
             <div class="content">
                 <form @submit.prevent="register">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group-center my-3">
+                        <div class="col-12">
+                            <div class="form-group-center my-3 text-center">
                                 <font-awesome-icon :icon="['fas', 'trophy']" class="icon-color fa-lg" /> | Canoeing
                             </div>
                             <div class="row my-3">
-                                <h3 class="card-title">Register</h3>
+                                <h3 class="card-title text-center">Register</h3>
                             </div>
                             <div class="form-group mb-1">
                                 <label for="name" class="mb-2">Name</label>
@@ -50,11 +50,11 @@
                                     v-model="userRegisterInput.weight" required>
                             </div>
                             <div class="row mb-1">
-                                <div class="col">
-                                    <button type="button" class="btn btn-light" @click="navigateToLogin">Login</button>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">Login</button>
                                 </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary">Register</button>
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary w-100">Register</button>
                                 </div>
                             </div>
                         </div>
@@ -94,14 +94,30 @@ export default {
 };
 </script>
 
+
 <style scoped>
 #register {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    min-width: 400px;
-    /*height: 100vh;*/
     display: flex;
     justify-content: center;
-    align-items: left;
+    align-items: center;
+}
+.div-center {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    display: flex;
+}
+.content {
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .div-center {
+        padding: 0.5rem;
+    }
+    .form-group-center {
+        text-align: center;
+    }
 }
 </style>
