@@ -107,7 +107,7 @@ export default {
     width: 100%;
     max-width: 500px;
     padding: 1rem;
-    display: flex;
+    
 }
 .content {
     width: 100%;
