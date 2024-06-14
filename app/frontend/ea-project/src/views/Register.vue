@@ -40,18 +40,23 @@
                                     v-model="userRegisterInput.age" required>
                             </div>
                             <div class="form-group mb-1">
-                                <label for="height" class="mb-2">Height (cm)</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="height"
-                                    v-model="userRegisterInput.height" required>
-                            </div>
-                            <div class="form-group mb-4">
                                 <label for="weight" class="mb-2">Weight (kg)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="weight"
                                     v-model="userRegisterInput.weight" required>
                             </div>
+                            <div class="form-group mb-4">
+                                <label for="role" class="mb-2">Role</label>
+                                <select class="form-select" v-model="userRegisterInput.role" id="gender" required>
+                                    <option v-for="(label, value) in roleEnum" :key="value" :value="label">
+                                        {{value}}
+                                    </option>
+                                </select>  
+                            </div>
                             <div class="row mb-1">
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">Login</button>
+                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
+                                        <font-awesome-icon :icon="['fas', 'right-left']" class="font-awesome-icon" />Login
+                                    </button>
                                 </div>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary w-100">Register</button>
@@ -75,6 +80,10 @@ export default {
     name: 'register',
     data() {
         return {
+            roleEnum: {
+                'Spectator': 'DEFAULT',
+                'Participant': 'PARTICIPANT',
+            },
             genderEnum: GenderEnumerator,
             userRegisterInput: new CreateUserInput(),
             userRegisterOutput: new CreateUserOutput(),
@@ -112,6 +121,11 @@ export default {
 .content {
     width: 100%;
 }
+
+.font-awesome-icon {
+    margin-right: 10px;
+}
+
 @media (max-width: 768px) {
     .div-center {
         padding: 0.5rem;
