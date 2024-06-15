@@ -17,6 +17,16 @@
                     <li class="nav-item" v-if="role == roleEnum.Administrator">
                         <router-link class="nav-link" to="/administration">Administration</router-link>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            View
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><router-link class="nav-link" to="/competitions">Competitions</router-link></li>
+                            <li><router-link class="nav-link" to="/trials">Trials</router-link></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="dropdown ms-lg-auto" v-if="user">
                     <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
