@@ -190,9 +190,7 @@ public class User implements Serializable {
 		this.PhotographyPath = value;
 	}
 	
-	public String getPhotographyPath() {
-		return PhotographyPath;
-	}
+	public String getPhotographyPath() { return PhotographyPath; }
 	
 	public void setRole(eaproject.dao.Role value) {
 		this.role = value;

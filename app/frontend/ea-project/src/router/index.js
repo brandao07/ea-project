@@ -42,6 +42,16 @@ const routes = [
     path: '/create-trial',
     name: 'create-trial',
     component: () => import('@/views/CreateTrial.vue'),
+  },
+  {
+    path: '/edit-competition',
+    name: 'edit-competitions',
+    component: () => import('@/views/EditCompetitions.vue'),
+  },
+  {
+    path: '/edit-trial',
+    name: 'edit-trials',
+    component: () => import('@/views/EditTrials.vue'),
   }
 ];
 

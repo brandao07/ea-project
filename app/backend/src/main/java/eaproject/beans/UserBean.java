@@ -78,7 +78,10 @@ public class UserBean implements UserLocal {
             // Check if the user exists and is active
             if (user != null && user.getId() > 0 && user.getIsActive()) {
                 // Delete current User photo if exists
-                firebaseStorage.deletePhoto(user.getPhotographyPath());
+                if (!user.getPhotographyPath().isEmpty())
+                {
+                    firebaseStorage.deletePhoto(user.getPhotographyPath());
+                }
 
                 // Decode to byte array
                 byte[] decodedBytes = Base64.getDecoder().decode(input.getPhotoBase64());

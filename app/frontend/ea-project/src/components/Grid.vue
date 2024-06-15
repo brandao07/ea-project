@@ -12,15 +12,25 @@
                 <thead class="table-light">
                     <tr>
                         <th v-for="(header, index) in formattedHeaders" :key="index">{{ header }}</th>
-                        <th v-if="editable">Actions</th>
+                        <th v-if="editable || deletable">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(item, rowIndex) in paginatedData" :key="rowIndex">
                         <td v-for="(header, index) in headers" :key="index">{{ formatValue(item[header]) }}</td>
-                        <td v-if="editable">
-                            <button @click="editRow(item)" class="btn btn-warning btn-sm me-2">Edit</button>
-                            <button @click="deleteRow(item)" class="btn btn-danger btn-sm">Delete</button>
+                        <td v-if="editable || deletable">
+                            <div class="row">
+                                <div class="col">
+                                    <button @click="editRow(item)" class="btn btn-primary btn-sm me-2" :disabled="!editable">
+                                        <font-awesome-icon :icon="['fas', 'edit']" class="icon-color fa-md" />
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button @click="deleteRow(item)" class="btn btn-danger btn-sm" :disabled="!deletable">
+                                        <font-awesome-icon :icon="['fas', 'trash-alt']" class="icon-color fa-md" />
+                                    </button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -46,7 +56,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <div class="row">
                         <div class="col">
                             <label for="itemsPerPageSelect" class="me-2">Items per page:</label>
@@ -79,6 +89,10 @@ export default {
             required: true
         },
         editable: {
+            type: Boolean,
+            default: false
+        },
+        deletable: {
             type: Boolean,
             default: false
         },
@@ -220,6 +234,10 @@ export default {
 .page-item.active .page-link {
     background-color: var(--button-primary-darker) !important;
     border-color: var(--button-primary-darker) !important;
+    color: var(--color-white) !important;
+}
+
+svg {
     color: var(--color-white) !important;
 }
 

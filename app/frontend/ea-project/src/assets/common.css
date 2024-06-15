@@ -70,7 +70,8 @@
 
 .btn-primary:hover,
 .btn-primary:focus,
-.btn-primary:active {
+.btn-primary:active,
+.btn-primary:disabled {
   background-color: var(--button-primary-darker) !important;
   border-color: var(--button-primary-darker) !important;
 }
