@@ -4,49 +4,59 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import('@/views/Home.vue'),
-    meta: { requiresAuth: true }
+    component: () => import("@/views/Home.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/administration",
     name: "administration",
-    component: () => import('@/views/Administration.vue'),
-    meta: { requiresAuth: true }
+    component: () => import("@/views/Administration.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",
-    name: 'login',
-    component: () => import('@/views/Login.vue'),
+    name: "login",
+    component: () => import("@/views/Login.vue"),
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/Register.vue'),
+    path: "/register",
+    name: "register",
+    component: () => import("@/views/Register.vue"),
   },
   {
-    path: '/competitions',
-    name: 'view-competitions',
-    component: () => import('@/views/ViewCompetitions.vue'),
+    path: "/competitions",
+    name: "view-competitions",
+    component: () => import("@/views/ViewCompetitions.vue"),
   },
   {
-    path: '/trials',
-    name: 'view-trials',
-    component: () => import('@/views/ViewTrials.vue'),
+    path: "/trials",
+    name: "view-trials",
+    component: () => import("@/views/ViewTrials.vue"),
   },
   {
-    path: '/create-competition',
-    name: 'create-competition',
-    component: () => import('@/views/CreateCompetition.vue'),
+    path: "/create-competition",
+    name: "create-competition",
+    component: () => import("@/views/CreateCompetition.vue"),
   },
   {
-    path: '/create-trial',
-    name: 'create-trial',
-    component: () => import('@/views/CreateTrial.vue'),
+    path: "/create-trial",
+    name: "create-trial",
+    component: () => import("@/views/CreateTrial.vue"),
   },
   {
-    path: '/insert-results',
-    name: 'InsertResults',
-    component: () => import('@/views/InsertResults.vue'),
+    path: "/edit-competition",
+    name: "edit-competitions",
+    component: () => import("@/views/EditCompetitions.vue"),
+  },
+  {
+    path: "/edit-trial",
+    name: "edit-trials",
+    component: () => import("@/views/EditTrials.vue"),
+  },
+  {
+    path: "/insert-results",
+    name: "InsertResults",
+    component: () => import("@/views/InsertResults.vue"),
   }
 ];
 

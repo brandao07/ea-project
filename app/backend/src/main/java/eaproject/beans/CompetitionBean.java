@@ -80,7 +80,7 @@ public class CompetitionBean implements CompetitionLocal {
                 Utilities.updateNonNullFields(entityToUpdate, competition);
 
                 // Check for Notification Relations
-                if (!input.getNotificationIds().isEmpty()) {
+                if (input.getNotificationIds() != null && (long) input.getNotificationIds().size() > 0) {
                     for (int notificationId : input.getNotificationIds()) {
                         Notification aux = NotificationDAO.loadNotificationByORMID(notificationId);
                         if (aux != null && aux.getId() > 0)  {
