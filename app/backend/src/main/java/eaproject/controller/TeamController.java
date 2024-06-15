@@ -62,4 +62,16 @@ public class TeamController {
     public GetAllTeamsOutput getAllTeams(@RequestBody GetAllTeamsInput input) {
         return teamBean.getAllTeams(input);
     }
+
+    /**
+     * Retrieves all entities by team Id.
+     *
+     * @param input The input object containing parameters for fetching types.
+     * @return An output object containing the list of objects and feedback messages.
+     */
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PostMapping("/GetTeamsByTrialId")
+    public GetTeamsByTrialIdOutput getTeamsByTrialIdOutput(@RequestBody GetTeamsByTrialIdInput input) {
+        return teamBean.getTeamsByTrialId(input);
+    }
 }
