@@ -44,9 +44,14 @@ export default {
     },
     methods: {
         recover() {
-                console.log(this.recoverPasswordInput)
-                this.recoverPasswordOutput = UserService.recoverPassword(this.recoverPasswordInput);
-                console.log('Recovery email sent:', this.recoverPasswordOutput);
+            UserService.recoverPassword(this.recoverPasswordInput)
+                .then(response => {
+                    console.log('Recovery email sent:', response);
+                    this.navigateToLogin();
+                })
+                .catch(error => {
+                    console.error('Failed to send recovery email:', error);
+                });
         },
         navigateToLogin() {
             this.$router.push('/login');
