@@ -79,13 +79,13 @@ def java_to_js(java_code):
             inner_class_name = re.search(r'ArrayList<(\w+)>', field_type).group(1)
             constructor_params.append(f"{field_name} = {js_type_default['ArrayList']}")
             constructor_body.append(
-                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{inner_class_name}(item));"
+                f"    this.{field_name} = Array.isArray({field_name}) ? {field_name}.map(item => new {class_name}.{inner_class_name}(item)) : [];"
             )
         elif field_type.startswith('List<'):
             inner_class_name = re.search(r'List<(\w+)>', field_type).group(1)
             constructor_params.append(f"{field_name} = {js_type_default['List']}")
             constructor_body.append(
-                f"    this.{field_name} = {field_name}.map(item => new {class_name}.{inner_class_name}(item));"
+                f"    this.{field_name} = Array.isArray({field_name}) ? {field_name}.map(item => new {class_name}.{inner_class_name}(item)) : [];"
             )
         elif field_type in js_type_default:
             default_value = js_type_default.get(field_type, 'null')

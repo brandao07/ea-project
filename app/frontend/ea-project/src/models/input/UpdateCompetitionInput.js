@@ -9,6 +9,6 @@ export default class UpdateCompetitionInput extends BaseInput {
     this.endDate = endDate;
     this.isActive = isActive;
     this.creationDate = creationDate;
-    this.notificationIds = notificationIds.map(item => new UpdateCompetitionInput.Integer(item));
+    this.notificationIds = Array.isArray(notificationIds) ? notificationIds.map(item => new UpdateCompetitionInput.Integer(item)) : [];
   }
 }

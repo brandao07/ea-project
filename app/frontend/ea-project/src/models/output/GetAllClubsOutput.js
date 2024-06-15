@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllClubsOutput extends BaseOutput {
   constructor(clubList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.clubList = clubList.map(item => new GetAllClubsOutput.ClubProperties(item));
+    this.clubList = Array.isArray(clubList) ? clubList.map(item => new GetAllClubsOutput.ClubProperties(item)) : [];
   }
 
   static ClubProperties = class {

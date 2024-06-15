@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllLocationsOutput extends BaseOutput {
   constructor(locationList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.locationList = locationList.map(item => new GetAllLocationsOutput.LocationProperties(item));
+    this.locationList = Array.isArray(locationList) ? locationList.map(item => new GetAllLocationsOutput.LocationProperties(item)) : [];
   }
 
   static LocationProperties = class {

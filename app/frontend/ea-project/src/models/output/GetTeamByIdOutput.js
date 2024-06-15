@@ -8,7 +8,7 @@ export default class GetTeamByIdOutput extends BaseOutput {
     this.isActive = isActive;
     this.creationDate = creationDate;
     this.club = new GetTeamByIdOutput.ClubProperties(club);
-    this.users = users.map(item => new GetTeamByIdOutput.UserProperties(item));
+    this.users = Array.isArray(users) ? users.map(item => new GetTeamByIdOutput.UserProperties(item)) : [];
   }
 
   static ClubProperties = class {

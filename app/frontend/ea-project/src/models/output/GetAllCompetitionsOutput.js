@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllCompetitionsOutput extends BaseOutput {
   constructor(competitionList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.competitionList = competitionList.map(item => new GetAllCompetitionsOutput.CompetitionProperties(item));
+    this.competitionList = Array.isArray(competitionList) ? competitionList.map(item => new GetAllCompetitionsOutput.CompetitionProperties(item)) : [];
   }
 
   static CompetitionProperties = class {

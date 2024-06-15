@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllNotificationsOutput extends BaseOutput {
   constructor(notificationList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.notificationList = notificationList.map(item => new GetAllNotificationsOutput.NotificationProperties(item));
+    this.notificationList = Array.isArray(notificationList) ? notificationList.map(item => new GetAllNotificationsOutput.NotificationProperties(item)) : [];
   }
 
   static NotificationProperties = class {

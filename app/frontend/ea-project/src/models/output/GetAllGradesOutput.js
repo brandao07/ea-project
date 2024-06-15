@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllGradesOutput extends BaseOutput {
   constructor(gradeList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.gradeList = gradeList.map(item => new GetAllGradesOutput.GradeProperties(item));
+    this.gradeList = Array.isArray(gradeList) ? gradeList.map(item => new GetAllGradesOutput.GradeProperties(item)) : [];
   }
 
   static GradeProperties = class {

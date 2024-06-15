@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllUsersOutput extends BaseOutput {
   constructor(usersList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.usersList = usersList.map(item => new GetAllUsersOutput.UserProperties(item));
+    this.usersList = Array.isArray(usersList) ? usersList.map(item => new GetAllUsersOutput.UserProperties(item)) : [];
   }
 
   static UserProperties = class {

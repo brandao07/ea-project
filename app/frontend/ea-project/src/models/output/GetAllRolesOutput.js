@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllRolesOutput extends BaseOutput {
   constructor(rolesList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.rolesList = rolesList.map(item => new GetAllRolesOutput.RoleProperties(item));
+    this.rolesList = Array.isArray(rolesList) ? rolesList.map(item => new GetAllRolesOutput.RoleProperties(item)) : [];
   }
 
   static RoleProperties = class {

@@ -8,6 +8,6 @@ export default class UpdateTeamInput extends BaseInput {
     this.isActive = isActive;
     this.creationDate = creationDate;
     this.clubId = clubId;
-    this.userIds = userIds.map(item => new UpdateTeamInput.Integer(item));
+    this.userIds = Array.isArray(userIds) ? userIds.map(item => new UpdateTeamInput.Integer(item)) : [];
   }
 }

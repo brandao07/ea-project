@@ -57,7 +57,7 @@ public class TeamController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllTeams")
     public GetAllTeamsOutput getAllTeams(@RequestBody GetAllTeamsInput input) {
         return teamBean.getAllTeams(input);

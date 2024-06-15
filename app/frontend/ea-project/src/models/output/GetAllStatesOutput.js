@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllStatesOutput extends BaseOutput {
   constructor(stateList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.stateList = stateList.map(item => new GetAllStatesOutput.StateProperties(item));
+    this.stateList = Array.isArray(stateList) ? stateList.map(item => new GetAllStatesOutput.StateProperties(item)) : [];
   }
 
   static StateProperties = class {

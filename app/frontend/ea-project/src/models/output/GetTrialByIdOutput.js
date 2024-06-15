@@ -15,8 +15,8 @@ export default class GetTrialByIdOutput extends BaseOutput {
     this.grade = new GetTrialByIdOutput.GradeProperties(grade);
     this.type = new GetTrialByIdOutput.TypeProperties(type);
     this.location = new GetTrialByIdOutput.LocationProperties(location);
-    this.results = results.map(item => new GetTrialByIdOutput.ResultProperties(item));
-    this.teams = teams.map(item => new GetTrialByIdOutput.TeamProperties(item));
+    this.results = Array.isArray(results) ? results.map(item => new GetTrialByIdOutput.ResultProperties(item)) : [];
+    this.teams = Array.isArray(teams) ? teams.map(item => new GetTrialByIdOutput.TeamProperties(item)) : [];
   }
 
   static StateProperties = class {
