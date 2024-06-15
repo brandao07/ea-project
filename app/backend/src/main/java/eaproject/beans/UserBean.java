@@ -30,6 +30,7 @@ import java.util.Objects;
 
 import static eaproject.constants.EAProjectConstants.ROLE_DEFAULT;
 import static eaproject.constants.EAProjectConstants.ROLE_PARTICIPANT;
+import static eaproject.utilities.Utilities.normalizeTypeName;
 
 @Stateless(name = "UserEJB")
 @Local(UserLocal.class)
@@ -180,15 +181,13 @@ public class UserBean implements UserLocal {
             var userBd = UserDAO.loadUserByQuery(condition, null );
 
             if (userBd != null) {
-                output.addFeedbackMessage("email already exists", FeedbackSeverity.DANGER);
+                output.addFeedbackMessage("Input e-mail already exists!", FeedbackSeverity.DANGER);
                 output.setRegistrationSuccessful(false);
                 return output;
             }
 
             // Convert object into an entity
-            record convertUser(String name, String email, String password, String gender, Integer age, Double height, Double weight) {}
-            var convertedUser = new convertUser(input.getName(), input.getEmail(), input.getPassword(), input.getGender(), input.getAge(), input.getHeight(), input.getWeight());
-            User user = Utilities.convertToDAO(convertedUser, User.class);
+            User user = Utilities.convertToDAO(input, User.class);
 
             // Hash the password using the injected PasswordEncoder
             String hashedPassword = passwordEncoder.encode(Objects.requireNonNull(user).getPassword());
@@ -203,8 +202,15 @@ public class UserBean implements UserLocal {
             user.setRegisterDate(Timestamp.valueOf(LocalDateTime.now()));
 
             // Set query parameters
-            if (Objects.equals(input.getRole().toUpperCase(), "DEFAULT")) condition = "name = '" + ROLE_DEFAULT + "'";
-            else if (Objects.equals(input.getRole().toUpperCase(), "PARTICIPANT")) condition = "name = '" + ROLE_PARTICIPANT + "'";
+            if (normalizeTypeName(input.getRole()).equals(normalizeTypeName(ROLE_DEFAULT))) {
+                condition = "name = '" + ROLE_DEFAULT + "'";
+            } else if (normalizeTypeName(input.getRole()).equals(normalizeTypeName(ROLE_PARTICIPANT))) {
+                condition = "name = '" + ROLE_PARTICIPANT + "'";
+            } else {
+                output.addFeedbackMessage("Wrong default role!", FeedbackSeverity.DANGER);
+                output.setRegistrationSuccessful(false);
+                return output;
+            }
 
             // Get base role
             Role role = RoleDAO.loadRoleByQuery(condition, null);

@@ -1,6 +1,6 @@
 <template>
     <div id="register">
-        <div class="div-center">
+        <div class="div-center vertical-center">
             <div class="content">
                 <form @submit.prevent="register">
                     <div class="row">
@@ -40,6 +40,11 @@
                                     v-model="userRegisterInput.age" required>
                             </div>
                             <div class="form-group mb-1">
+                                <label for="height" class="mb-2">Height (cm)</label>
+                                <input type="number" step="0.01" min="0" class="form-control" id="height"
+                                    v-model="userRegisterInput.height" required>
+                            </div>
+                            <div class="form-group mb-1">
                                 <label for="weight" class="mb-2">Weight (kg)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="weight"
                                     v-model="userRegisterInput.weight" required>
@@ -47,15 +52,16 @@
                             <div class="form-group mb-4">
                                 <label for="role" class="mb-2">Role</label>
                                 <select class="form-select" v-model="userRegisterInput.role" id="gender" required>
-                                    <option v-for="(label, value) in roleEnum" :key="value" :value="label">
-                                        {{value}}
+                                    <option v-for="(label, value) in roleEnum" :key="value" :value="value">
+                                        {{ label }}
                                     </option>
-                                </select>  
+                                </select>
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
                                     <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
-                                        <font-awesome-icon :icon="['fas', 'right-left']" class="font-awesome-icon" />Login
+                                        <font-awesome-icon :icon="['fas', 'right-left']"
+                                            class="font-awesome-icon" />Login
                                     </button>
                                 </div>
                                 <div class="col-6">
@@ -75,15 +81,13 @@ import UserService from '@/services/UserService';
 import CreateUserInput from '@/models/input/CreateUserInput';
 import CreateUserOutput from '@/models/output/CreateUserOutput';
 import GenderEnumerator from '@/models/enums/Gender';
+import RoleEnumerator from '@/models/enums/Role';
 
 export default {
     name: 'register',
     data() {
         return {
-            roleEnum: {
-                'Spectator': 'DEFAULT',
-                'Participant': 'PARTICIPANT',
-            },
+            roleEnum: RoleEnumerator,
             genderEnum: GenderEnumerator,
             userRegisterInput: new CreateUserInput(),
             userRegisterOutput: new CreateUserOutput(),
@@ -101,23 +105,27 @@ export default {
         },
     },
 };
+
 </script>
 
 
 <style scoped>
 #register {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    height: 100vh;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .div-center {
     width: 100%;
     max-width: 500px;
     padding: 1rem;
-    
+
 }
+
 .content {
     width: 100%;
 }
@@ -130,8 +138,14 @@ export default {
     .div-center {
         padding: 0.5rem;
     }
+
     .form-group-center {
         text-align: center;
+    }
+
+    .vertical-center {
+        align-items: flex-start !important;
+        height: inherit !important;
     }
 }
 </style>

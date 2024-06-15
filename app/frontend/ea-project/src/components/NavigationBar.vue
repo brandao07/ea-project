@@ -22,11 +22,14 @@
                     <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" ref="profileMenuButton">
                         <div v-if="!hasUserPhoto" class="user-avatar user-initials">
-                            {{ userInitials }} {{ user }}
+                            {{ userInitials }}
                         </div>
                         <div v-else class="user-avatar">
-                            <img :src="userPhoto" class="rounded-circle" alt="User Photo"> {{ user }}
+                            <img :src="userPhoto" class="rounded-circle" alt="User Photo">
                         </div>
+                        <span>
+                            {{ user }}
+                        </span>
                     </button>
                     <ul class="action dropdown-menu" ref="profileMenu">
                         <div class="menu">
@@ -37,18 +40,20 @@
                                 <div v-else class="user-avatar">
                                     <img :src="userPhoto" class="rounded-circle" alt="User Photo">
                                 </div>
-                                {{ user }}
+                                <span>
+                                    {{ user }}
+                                </span>
                             </div>
                             <div class="dropdown-divider"></div>
                             <li><a href="#" @click="showProfileModal = true"><font-awesome-icon
                                         :icon="['fas', 'user']" />
                                     Profile</a></li>
-                            <li><a href="#"
-                                    @click="showPhotoUploadModal = true"><font-awesome-icon :icon="['fa', 'camera']" />
+                            <li><a href="#" @click="showPhotoUploadModal = true"><font-awesome-icon
+                                        :icon="['fa', 'camera']" />
                                     Photo</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a href="#" @click="logout"><font-awesome-icon
-                                        :icon="['fas', 'sign-out-alt']" /> Logout</a>
+                            <li><a href="#" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" />
+                                    Logout</a>
                             </li>
                         </div>
                     </ul>
@@ -65,7 +70,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import AuthService from "@/services/AuthService";
 import UserProfile from '@/views/UserProfile.vue';
 import UserPhotoUpload from '@/views/UserPhotoUpload.vue';
-import RoleEnumerator from '@/models/enums/Roles';
+import RoleEnumerator from '@/models/enums/Role';
 
 export default {
     name: 'NavigationBar',
@@ -87,7 +92,7 @@ export default {
         },
         hasUserPhoto() {
             const photo = localStorage.getItem('photo');
-            return photo !== null && typeof photo !== "undefined" && photo !== '';
+            return (photo != null || photo != undefined) && photo !== '' && photo !== 'undefined';
         },
         userInitials() {
             if (this.user) {
@@ -133,6 +138,21 @@ export default {
     margin-right: 8px;
 }
 
+button span {
+    padding: 0px 12px;
+}
+
+.navbar-toggler {
+    border: none !important;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: none;
+}
+
 .user-avatar {
     display: inline;
     justify-content: center;
@@ -140,12 +160,14 @@ export default {
     width: fit-content;
     height: 30px;
     border-radius: 50%;
-    margin-right: 8px;
     font-size: medium;
     object-fit: scale-down;
     background-size: cover;
 
     &.user-initials {
+        display: inline-flex;
+        width: 30px;
+        border-radius: 50%;
         background-color: var(--user-initials-bg-color);
         color: var(--color-white);
     }
