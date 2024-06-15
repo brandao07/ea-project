@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UpdateCompetitionInput extends BaseInput implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private Timestamp startDate;
     private Timestamp endDate;
@@ -14,11 +14,11 @@ public class UpdateCompetitionInput extends BaseInput implements Serializable {
     private Timestamp creationDate;
     private List<Integer> notificationIds;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

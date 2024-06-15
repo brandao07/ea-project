@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 
 public class UpdateResultInput extends BaseInput implements Serializable {
 
-    private int id;
+    private Integer id;
     private Integer position;
     private Timestamp time;
     private String observations;
     private Timestamp penaltyTime;
     private Timestamp creationDate;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -20,11 +20,11 @@ public class UpdateResultInput extends BaseInput implements Serializable {
         this.id = id;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

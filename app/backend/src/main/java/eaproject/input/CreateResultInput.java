@@ -10,11 +10,11 @@ public class CreateResultInput extends BaseInput implements Serializable {
     private Timestamp penaltyTime;
     private Timestamp creationDate;
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

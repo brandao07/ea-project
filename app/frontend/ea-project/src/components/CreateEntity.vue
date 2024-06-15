@@ -4,9 +4,14 @@
             <h2 class="form-title">{{ formTitle }}</h2>
             <form @submit.prevent="submitForm">
                 <slot></slot>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <button type="button" @click="resetForm" class="btn btn-secondary">Reset</button>
+                <div class="row form-actions">
+                    <div class="col-8"></div>
+                    <div class="col">
+                        <button type="button" @click="resetForm" class="btn btn-light">Reset</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -53,22 +58,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.btn {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: none;
-}
-
-.btn-primary {
-    background-color: var(--button-primary);
-    color: var(--color-white);
-}
-
-.btn-secondary {
-    background-color: var(--button-secondary);
-    color: var(--color-white);
 }
 
 @media (max-width: 768px) {

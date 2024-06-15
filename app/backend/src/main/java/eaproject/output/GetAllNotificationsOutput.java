@@ -22,7 +22,7 @@ public class GetAllNotificationsOutput extends BaseOutput implements Serializabl
     public static class NotificationProperties implements Serializable {
 
         @JsonProperty
-        private int id;
+        private Integer id;
 
         @JsonProperty
         private String messageHeader;
@@ -39,11 +39,11 @@ public class GetAllNotificationsOutput extends BaseOutput implements Serializabl
         @JsonProperty
         private Timestamp creationDate;
 
-        public int getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 

@@ -12,7 +12,7 @@ public class CreateTrialInput extends BaseInput implements Serializable {
     private String distanceUnit;
     private boolean isActive;
     private Timestamp creationDate;
-    private int stateId;
+    private Integer stateId;
     private Integer competitionId;
     private Integer gradeId;
     private Integer typeId;
@@ -98,11 +98,11 @@ public class CreateTrialInput extends BaseInput implements Serializable {
         this.typeId = typeId;
     }
 
-    public int getLocationId() {
+    public Integer getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(Integer locationId) {
         this.locationId = locationId;
     }
 }

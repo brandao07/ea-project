@@ -20,7 +20,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            View
+                            View Entities
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><router-link class="nav-link" to="/competitions">Competitions</router-link></li>
@@ -30,11 +30,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Entities
+                            Create Entities
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><router-link class="nav-link" to="/competition">Competitions</router-link></li>
-                            <li><router-link class="nav-link" to="/trial">Trials</router-link></li>
+                            <li><router-link class="nav-link" to="/create-competition">Competitions</router-link></li>
+                            <li><router-link class="nav-link" to="/create-trial">Trials</router-link></li>
                         </ul>
                     </li>
                 </ul>

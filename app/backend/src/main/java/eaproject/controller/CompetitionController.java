@@ -49,7 +49,9 @@ public class CompetitionController {
      */
     @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
     @PostMapping("/GetCompetitionById")
-    public GetCompetitionByIdOutput getCompetitionById(@RequestBody GetCompetitionByIdInput input) { return competitionBean.getCompetitionById(input); }
+    public GetCompetitionByIdOutput getCompetitionById(@RequestBody GetCompetitionByIdInput input) {
+        return competitionBean.getCompetitionById(input);
+    }
 
     /**
      * Retrieves all entities from the database.
