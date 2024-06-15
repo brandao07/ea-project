@@ -57,6 +57,11 @@ const routes = [
     path: "/insert-results",
     name: "InsertResults",
     component: () => import("@/views/InsertResults.vue"),
+  },
+  {
+    path: '/recover-password',
+    name: 'RecoverPassword',
+    component: () => import('@/views/RecoverPassword.vue'),
   }
 ];
 
