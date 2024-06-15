@@ -17,6 +17,9 @@
                     <li class="nav-item" v-if="role == roleEnum.Administrator">
                         <router-link class="nav-link" to="/administration">Administration</router-link>
                     </li>
+                    <li class="nav-item"><!-- v-if="role == roleEnum.Administrator">-->
+                        <router-link class="nav-link" to="/insert-results">Insert Results</router-link>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
