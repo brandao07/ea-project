@@ -21,6 +21,9 @@
                                 <input type="password" class="form-control" id="passwordId" placeholder="Password"
                                     v-model="authenticationInput.password" required>
                             </div>
+                            <div class="form-group mb-1 text-center">
+                                <button type="button" class="btn btn-link" @click="navigateToRecoverPassword">Forgot Password?</button>
+                            </div>
                             <div class="row mb-1">
                                 <div class="col-6">
                                     <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
@@ -63,6 +66,9 @@ export default {
         navigateToLogin() {
             this.$router.push('/register');
         },
+        navigateToRecoverPassword() {
+            this.$router.push('/recover-password');
+        }
     },
 };
 </script>
