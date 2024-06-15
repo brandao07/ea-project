@@ -6,20 +6,11 @@ import java.util.List;
 
 public class CreateCompetitionInput extends BaseInput implements Serializable {
 
-    private int id;
     private String name;
     private Timestamp startDate;
     private Timestamp endDate;
     private boolean isActive;
     private Timestamp creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

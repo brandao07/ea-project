@@ -10,7 +10,7 @@
   --color-white: #ffffff;
   --color-black-rgba: rgba(0, 0, 0, 0.1);
   --color-grey: #cccccc;
-  --color-grey-dark:rgb(80, 80, 80);
+  --color-grey-dark: rgb(80, 80, 80);
 }
 
 body {
@@ -75,7 +75,7 @@ input[type="number"] {
 
   button {
     margin: 5px 0px;
-    font-size: 0.9em !important;
+    font-size: 1em !important;
   }
 
   input,
@@ -83,7 +83,7 @@ input[type="number"] {
   textarea {
     width: 100% !important;
     padding: 5px !important;
-    font-size: 0.9em !important;
+    font-size: 1em !important;
   }
 
   .feedback-messages {
@@ -186,5 +186,16 @@ input[type="number"] {
 
   .form-group {
     padding: 5px 0px !important;
+  }
+
+  .dropdown-menu {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  .navbar .dropdown-menu li {
+    background-color: transparent !important;
+    border: none !important;
+    margin: 0px 15px !important;
   }
 }

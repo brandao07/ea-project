@@ -7,21 +7,12 @@ import java.sql.Timestamp;
 
 public class CreateNotificationInput extends BaseInput implements Serializable {
 
-    private int id;
     private String messageHeader;
     private String messageBody;
     private String messageType;
     private Timestamp creationDate;
 
     private MultipartFile photo;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getMessageHeader() {
         return messageHeader;

@@ -4,21 +4,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CreateResultInput extends BaseInput implements Serializable {
-
-    private int id;
     private Integer position;
     private Timestamp time;
     private String observations;
     private Timestamp penaltyTime;
     private Timestamp creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public int getPosition() {
         return position;
