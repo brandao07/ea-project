@@ -1,9 +1,8 @@
 import BaseInput from "./BaseInput";
 
 export default class CreateTypeInput extends BaseInput {
-  constructor(id = 0, name = '', numberOfPersons = 0, creationDate = new Date(), lazyLoad = false) {
+  constructor(name = '', numberOfPersons = 0, creationDate = new Date(), lazyLoad = false) {
     super(lazyLoad);
-    this.id = id;
     this.name = name;
     this.numberOfPersons = numberOfPersons;
     this.creationDate = creationDate;

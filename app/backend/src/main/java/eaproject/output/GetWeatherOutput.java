@@ -28,11 +28,11 @@ public class GetWeatherOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private double tempMax;
         @JsonProperty
-        private int pressure;
+        private Integer pressure;
         @JsonProperty
-        private int humidity;
+        private Integer humidity;
         @JsonProperty
-        private int seaLevel;
+        private Integer seaLevel;
         @JsonProperty
         private double windSpeed;
 
@@ -52,14 +52,14 @@ public class GetWeatherOutput extends BaseOutput implements Serializable {
         public double getTempMax() { return tempMax; }
         public void setTempMax(double tempMax) { this.tempMax = tempMax; }
 
-        public int getPressure() { return pressure; }
-        public void setPressure(int pressure) { this.pressure = pressure; }
+        public Integer getPressure() { return pressure; }
+        public void setPressure(Integer pressure) { this.pressure = pressure; }
 
-        public int getHumidity() { return humidity; }
-        public void setHumidity(int humidity) { this.humidity = humidity; }
+        public Integer getHumidity() { return humidity; }
+        public void setHumidity(Integer humidity) { this.humidity = humidity; }
 
-        public int getSeaLevel() { return seaLevel; }
-        public void setSeaLevel(int seaLevel) { this.seaLevel = seaLevel; }
+        public Integer getSeaLevel() { return seaLevel; }
+        public void setSeaLevel(Integer seaLevel) { this.seaLevel = seaLevel; }
 
         public double getWindSpeed() { return windSpeed; }
         public void setWindSpeed(double windSpeed) { this.windSpeed = windSpeed; }

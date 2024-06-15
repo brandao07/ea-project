@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class UpdateUserRoleInput extends BaseInput implements Serializable {
 
-    private int roleId;
-    private int userId;
+    private Integer roleId;
+    private Integer userId;
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }

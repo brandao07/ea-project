@@ -5,20 +5,11 @@ import java.sql.Timestamp;
 
 public class CreateGradeInput extends BaseInput implements Serializable {
 
-    private int id;
     private String name;
     private Integer minAge;
     private Integer maxAge;
     private String gender;
     private Timestamp creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

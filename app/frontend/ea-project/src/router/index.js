@@ -32,6 +32,16 @@ const routes = [
     path: '/trials',
     name: 'view-trials',
     component: () => import('@/views/ViewTrials.vue'),
+  },
+  {
+    path: '/create-competition',
+    name: 'create-competition',
+    component: () => import('@/views/CreateCompetition.vue'),
+  },
+  {
+    path: '/create-trial',
+    name: 'create-trial',
+    component: () => import('@/views/CreateTrial.vue'),
   }
 ];
 

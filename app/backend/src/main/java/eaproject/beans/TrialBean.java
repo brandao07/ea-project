@@ -38,7 +38,7 @@ public class TrialBean implements TrialLocal {
 
             // Check for Competition Relations
             if (input.getCompetitionId() > 0) {
-                Competition aux = CompetitionDAO.loadCompetitionByORMID(input.getCompetitionId());
+                Competition aux = CompetitionDAO.getCompetitionByORMID(input.getCompetitionId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setCompetition(aux);
                 }
@@ -46,7 +46,7 @@ public class TrialBean implements TrialLocal {
 
             // Check for Location Relations
             if (input.getLocationId() > 0) {
-                Location aux = LocationDAO.loadLocationByORMID(input.getLocationId());
+                Location aux = LocationDAO.getLocationByORMID(input.getLocationId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setLocation(aux);
                 }
@@ -54,7 +54,7 @@ public class TrialBean implements TrialLocal {
 
             // Check for Grade Relations
             if (input.getGradeId() > 0) {
-                Grade aux = GradeDAO.loadGradeByORMID(input.getGradeId());
+                Grade aux = GradeDAO.getGradeByORMID(input.getGradeId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setGrade(aux);
                 }
@@ -62,7 +62,7 @@ public class TrialBean implements TrialLocal {
 
             // Check for State Relations
             if (input.getStateId() > 0) {
-                State aux = StateDAO.loadStateByORMID(input.getStateId());
+                State aux = StateDAO.getStateByORMID(input.getStateId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setState(aux);
                 }
@@ -70,11 +70,13 @@ public class TrialBean implements TrialLocal {
 
             // Check for Type Relations
             if (input.getTypeId() > 0) {
-                Type aux = TypeDAO.loadTypeByORMID(input.getTypeId());
+                Type aux = TypeDAO.getTypeByORMID(input.getTypeId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setType(aux);
                 }
             }
+
+            trial.setDistance(input.getDistance());
 
             // Save the entity to the database using the DAO
             TrialDAO.save(trial);

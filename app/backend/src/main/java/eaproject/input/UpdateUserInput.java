@@ -3,7 +3,7 @@ package eaproject.input;
 import java.io.Serializable;
 
 public class UpdateUserInput extends BaseInput implements Serializable {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String gender;
@@ -11,11 +11,11 @@ public class UpdateUserInput extends BaseInput implements Serializable {
     private Double height;
     private Double weight;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

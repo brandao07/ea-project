@@ -3,18 +3,18 @@ package eaproject.input;
 import java.io.Serializable;
 
 public class UploadUserPhotoInput extends BaseInput implements Serializable {
-    private int id;
+    private Integer id;
     private String photoBase64;
 
     private String fileName;
 
     private String contentType;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

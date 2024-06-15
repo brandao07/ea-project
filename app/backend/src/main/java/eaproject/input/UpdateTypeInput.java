@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 
 public class UpdateTypeInput extends BaseInput implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private Integer numberOfPersons;
     private Timestamp creationDate;
 
-    public int getId() { return id; }
+    public Integer getId() { return id; }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

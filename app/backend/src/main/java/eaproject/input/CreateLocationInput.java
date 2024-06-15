@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 public class CreateLocationInput extends BaseInput implements Serializable {
 
-    private int id;
     private Double latitude;
     private Double longitude;
     private String address;
@@ -13,14 +12,6 @@ public class CreateLocationInput extends BaseInput implements Serializable {
     private String country;
     private String postalCode;
     private Timestamp creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Double getLatitude() {
         return latitude;

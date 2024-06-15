@@ -22,7 +22,7 @@ public class GetAllLocationsOutput extends BaseOutput implements Serializable {
     public static class LocationProperties implements Serializable {
 
         @JsonProperty
-        private int id;
+        private Integer id;
 
         @JsonProperty
         private Double latitude;
@@ -45,11 +45,11 @@ public class GetAllLocationsOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private Timestamp creationDate;
 
-        public int getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 

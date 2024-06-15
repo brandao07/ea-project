@@ -22,13 +22,13 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
     public static class GradeProperties implements Serializable {
 
         @JsonProperty
-        private int id;
+        private Integer id;
 
         @JsonProperty
         private String name;
 
         @JsonProperty
-        private int minAge;
+        private Integer minAge;
 
         @JsonProperty
         private Integer maxAge;
@@ -39,11 +39,11 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private Timestamp creationDate;
 
-        public int getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 
@@ -55,11 +55,11 @@ public class GetAllGradesOutput extends BaseOutput implements Serializable {
             this.name = name;
         }
 
-        public int getMinAge() {
+        public Integer getMinAge() {
             return minAge;
         }
 
-        public void setMinAge(int minAge) {
+        public void setMinAge(Integer minAge) {
             this.minAge = minAge;
         }
 

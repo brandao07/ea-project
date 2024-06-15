@@ -6,18 +6,18 @@ import java.util.List;
 
 public class UpdateTeamInput extends BaseInput implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private boolean isActive;
     private Timestamp creationDate;
     private Integer clubId;
     private List<Integer> userIds;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

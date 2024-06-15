@@ -2,7 +2,7 @@
     <div class="view-trials">
         <NavigationBar />
         <div class="container">
-            <generic-grid :data="getAllTrialsOutput.competitionList" :headers="gridheaders" :editable="false" grid-title="View Trials"/>
+            <generic-grid :data="getAllTrialsOutput.trials" :headers="gridheaders" :editable="false" grid-title="View Trials"/>
         </div>
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
         return {
             getAllTrialsInput: new GetAllTrialsInput(),
             getAllTrialsOutput: new GetAllTrialsOutput(),
-            gridheaders: ['name', 'startDate', 'endDate', 'distance', 'distanceUnit', 'creationDate']
+            gridheaders: ['name', 'startDate', 'distance', 'distanceUnit', 'creationDate']
         }
     },
     methods: {

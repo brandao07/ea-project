@@ -151,11 +151,15 @@ export default {
                 .replace(/^./, function (str) { return str.toUpperCase(); });
         },
         formatValue(value) {
-            if (typeof value === 'string' && Date.parse(value)) {
+            if (typeof value === 'string' && this.isIsoDateString(value)) {
                 const date = new Date(value);
                 return date.toLocaleString();
             }
             return value;
+        },
+        isIsoDateString(value) {
+            const isoDatePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+            return isoDatePattern.test(value);
         }
     }
 };

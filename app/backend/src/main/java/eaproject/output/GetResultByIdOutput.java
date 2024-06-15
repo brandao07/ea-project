@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class GetResultByIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private int id;
+    private Integer id;
 
     @JsonProperty
     private Integer position;
@@ -25,11 +25,11 @@ public class GetResultByIdOutput extends BaseOutput implements Serializable {
     @JsonProperty
     private Timestamp creationDate;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

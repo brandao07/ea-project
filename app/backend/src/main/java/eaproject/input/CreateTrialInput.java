@@ -6,26 +6,17 @@ import java.util.List;
 
 public class CreateTrialInput extends BaseInput implements Serializable {
 
-    private int id;
     private String name;
     private Timestamp startDate;
     private double distance;
     private String distanceUnit;
     private boolean isActive;
     private Timestamp creationDate;
-    private int stateId;
+    private Integer stateId;
     private Integer competitionId;
     private Integer gradeId;
     private Integer typeId;
     private Integer locationId;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -107,11 +98,11 @@ public class CreateTrialInput extends BaseInput implements Serializable {
         this.typeId = typeId;
     }
 
-    public int getLocationId() {
+    public Integer getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(Integer locationId) {
         this.locationId = locationId;
     }
 }
