@@ -42,6 +42,11 @@ const routes = [
     path: '/create-trial',
     name: 'create-trial',
     component: () => import('@/views/CreateTrial.vue'),
+  },
+  {
+    path: '/insert-results',
+    name: 'InsertResults',
+    component: () => import('@/views/InsertResults.vue'),
   }
 ];
 
