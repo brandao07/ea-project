@@ -1,8 +1,7 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.NotificationLocal;
-import eaproject.dao.Notification;
-import eaproject.dao.NotificationDAO;
+import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.CreateNotificationInput;
 import eaproject.input.GetAllNotificationsInput;
@@ -56,6 +55,14 @@ public class NotificationBean implements NotificationLocal {
 
             // Save the entity to the database using the DAO
             NotificationDAO.save(notification);
+
+            // Check for Competition Relations
+            if (input.getCompetitionId() > 0) {
+                Competition aux = CompetitionDAO.getCompetitionByORMID(input.getCompetitionId());
+                if (aux != null && aux.getId() > 0) {
+                    aux.notification.add(notification);
+                }
+            }
 
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage(Notification.class.getName() + " created successfully.", FeedbackSeverity.SUCCESS);

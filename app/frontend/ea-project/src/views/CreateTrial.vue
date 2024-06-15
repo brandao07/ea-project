@@ -14,7 +14,7 @@
           </div>
           <div class="form-group mb-1">
             <label for="distance" class="mb-2">Distance</label>
-            <input type="number" step="0.01" class="form-control" id="distance" v-model="createTrialInput.distance"
+            <input type="decimal" step="0.01" class="form-control" id="distance" v-model="createTrialInput.distance"
               required>
           </div>
           <div class="form-group mb-1">
