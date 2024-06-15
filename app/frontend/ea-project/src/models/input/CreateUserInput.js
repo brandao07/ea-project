@@ -1,7 +1,7 @@
 import BaseInput from "./BaseInput";
 
 export default class CreateUserInput extends BaseInput {
-  constructor(name = '', email = '', password = '', gender = '', age = 0, height = 0.0, weight = 0.0, role="",lazyLoad = false) {
+  constructor(name = '', email = '', password = '', gender = '', age = 0, height = 0.0, weight = 0.0, role = '', lazyLoad = false) {
     super(lazyLoad);
     this.name = name;
     this.email = email;

@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllTypesOutput extends BaseOutput {
   constructor(types = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.types = types.map(item => new GetAllTypesOutput.TypeProperties(item));
+    this.types = Array.isArray(types) ? types.map(item => new GetAllTypesOutput.TypeProperties(item)) : [];
   }
 
   static TypeProperties = class {

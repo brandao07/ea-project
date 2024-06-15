@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllTeamsOutput extends BaseOutput {
   constructor(teamList = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.teamList = teamList.map(item => new GetAllTeamsOutput.TeamProperties(item));
+    this.teamList = Array.isArray(teamList) ? teamList.map(item => new GetAllTeamsOutput.TeamProperties(item)) : [];
   }
 
   static TeamProperties = class {

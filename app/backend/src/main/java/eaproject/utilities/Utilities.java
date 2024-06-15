@@ -245,8 +245,10 @@ public class Utilities {
      * @return true if the normalized type names are equal, false otherwise.
      */
     public static boolean compareFieldTypes(Field dtoField, Field daoField) {
-        String dtoFieldType = dtoField.getName();
-        String daoFieldType = daoField.getName();
-        return normalizeTypeName(dtoFieldType).equals(normalizeTypeName(daoFieldType));
+        String dtoFieldName = dtoField.getName();
+        String daoFieldName = daoField.getName();
+        String dtoFieldType = dtoField.getType().getName();
+        String daoFieldType = daoField.getType().getName();
+        return normalizeTypeName(dtoFieldType).equals(normalizeTypeName(daoFieldType)) && normalizeTypeName(dtoFieldName).equals(normalizeTypeName(daoFieldName));
     }
 }

@@ -15,7 +15,7 @@ export default class UpdateTrialInput extends BaseInput {
     this.gradeId = gradeId;
     this.typeId = typeId;
     this.locationId = locationId;
-    this.resultIds = resultIds.map(item => new UpdateTrialInput.Integer(item));
-    this.teamIds = teamIds.map(item => new UpdateTrialInput.Integer(item));
+    this.resultIds = Array.isArray(resultIds) ? resultIds.map(item => new UpdateTrialInput.Integer(item)) : [];
+    this.teamIds = Array.isArray(teamIds) ? teamIds.map(item => new UpdateTrialInput.Integer(item)) : [];
   }
 }

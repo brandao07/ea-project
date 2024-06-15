@@ -3,7 +3,7 @@ import BaseOutput from "./BaseOutput";
 export default class GetAllTrialsOutput extends BaseOutput {
   constructor(trials = [], feedbackMessages = []) {
     super(feedbackMessages);
-    this.trials = trials.map(item => new GetAllTrialsOutput.TrialProperties(item));
+    this.trials = Array.isArray(trials) ? trials.map(item => new GetAllTrialsOutput.TrialProperties(item)) : [];
   }
 
   static TrialProperties = class {
