@@ -2,22 +2,27 @@
     <div id="recover-password">
         <div class="div-center vertical-center">
             <div class="content">
-                <form @submit.prevent="recover">
+                <form @submit.prevent="recoverPassword">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div class="form-group-center my-3">
                                 <font-awesome-icon :icon="['fas', 'trophy']" class="icon-color fa-lg" /> | Canoeing
                             </div>
                             <div class="row my-3">
-                                <h3 class="card-title">Recover Password</h3>
+                                <h3 class="card-title text-center">Recover Password</h3>
                             </div>
-                            <div class="form-group mb-1">
+                            <div class="form-group mb-4">
                                 <label for="emailId" class="mb-1">Email address</label>
                                 <input type="email" class="form-control" id="emailId" placeholder="Enter email"
                                     v-model="recoverPasswordInput.email" required>
                             </div>
                             <div class="row mb-1">
-                                <div class="col">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
+                                        Login
+                                    </button>
+                                </div>
+                                <div class="col-6">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
@@ -43,7 +48,7 @@ export default {
         };
     },
     methods: {
-        recover() {
+        recoverPassword() {
             UserService.recoverPassword(this.recoverPasswordInput)
                 .then(response => {
                     console.log('Recovery email sent:', response);
