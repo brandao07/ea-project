@@ -54,13 +54,13 @@ const routes = [
     component: () => import("@/views/EditTrials.vue"),
   },
   {
-    path: "/insert-results",
-    name: "InsertResults",
-    component: () => import("@/views/InsertResults.vue"),
+    path: "/create-results",
+    name: "create-results",
+    component: () => import("@/views/CreateResults.vue"),
   },
   {
     path: '/recover-password',
-    name: 'RecoverPassword',
+    name: 'recover-password',
     component: () => import('@/views/RecoverPassword.vue'),
   }
 ];

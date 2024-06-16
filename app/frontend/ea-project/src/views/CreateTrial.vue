@@ -1,5 +1,5 @@
 <template>
-  <div id="create-Trial">
+  <div id="create-trial">
     <NavigationBar />
     <div class="container">
       <CreateEntity formTitle="Create Trial" @create="handleCreate" @reset="resetForm">
@@ -54,8 +54,9 @@
             <label for="locationId" class="mb-2">Location</label>
             <select class="form-select" v-model="createTrialInput.locationId" id="locationId" required>
               <option v-for="location in getAllLocationsOutput.locationList" :key="location.id" :value="location.id">
-                {{ location.postalCode }} {{ location.address }} {{ location.city }} {{ location.latitude }} {{ location.longitude }}
-                </option>
+                {{ location.postalCode }} {{ location.address }} {{ location.city }} {{ location.latitude }} {{
+                  location.longitude }}
+              </option>
             </select>
           </div>
         </template>
@@ -136,7 +137,7 @@ export default {
 </script>
 
 <style scoped>
-.create-Trial {
+.create-trial {
   margin: 20px;
   background: var(--color-white);
   border-radius: 8px;
