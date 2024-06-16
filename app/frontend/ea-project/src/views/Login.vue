@@ -16,22 +16,24 @@
                                 <input type="email" class="form-control" id="emailId" placeholder="Enter email"
                                     v-model="authenticationInput.email" required>
                             </div>
-                            <div class="form-group mb-4">
+                            <div class="form-group mb-1">
                                 <label for="passwordId" class="mb-1">Password</label>
                                 <input type="password" class="form-control" id="passwordId" placeholder="Password"
                                     v-model="authenticationInput.password" required>
                             </div>
-                            <div class="form-group mb-1 text-center">
-                                <button type="button" class="btn btn-link" @click="navigateToRecoverPassword">Forgot Password?</button>
+                            <div class="form-group mb-4">
+                                <a type="button" class="btn btn-link" @click="navigateToRecoverPassword">Forgot
+                                    Password?</a>
                             </div>
                             <div class="row mb-1">
                                 <div class="col-6">
                                     <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
-                                        <font-awesome-icon :icon="['fas', 'right-left']" class="font-awesome-icon" />Register
+                                        <font-awesome-icon :icon="['fas', 'right-left']"
+                                            class="font-awesome-icon" />Register
                                     </button>
                                 </div>
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +89,7 @@ export default {
     width: 100%;
     max-width: 500px;
     padding: 1rem;
-    
+
 }
 
 .content {
@@ -98,14 +100,18 @@ export default {
     margin-right: 10px;
 }
 
+.form-group a {
+    width: auto;
+    color: var(--button-primary);
+}
+
 @media (max-width: 768px) {
     .div-center {
         padding: 0.5rem;
     }
 
-.form-group-center {
+    .form-group-center {
         text-align: center;
     }
 }
-
 </style>
