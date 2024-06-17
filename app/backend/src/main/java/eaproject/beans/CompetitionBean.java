@@ -1,13 +1,19 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.CompetitionLocal;
-import eaproject.dao.*;
+import eaproject.dao.Competition;
+import eaproject.dao.CompetitionDAO;
+import eaproject.dao.Notification;
+import eaproject.dao.NotificationDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.CreateCompetitionInput;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
 import eaproject.input.UpdateCompetitionInput;
-import eaproject.output.*;
+import eaproject.output.CreateCompetitionOutput;
+import eaproject.output.GetAllCompetitionsOutput;
+import eaproject.output.GetCompetitionByIdOutput;
+import eaproject.output.UpdateCompetitionOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -129,15 +135,15 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-            var condition = "'competitionid = " + competition.getId() + "'";
-            Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
+//            String condition = "'competitionid = " + competition.getId() + "'";
+            //          Trial[] trials = TrialDAO.listTrialByQuery(null, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
-                if (trials != null && trials.length > 0) {
+           /*     if (trials != null && trials.length > 0) {
                     output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
-                }
+                }*/
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);

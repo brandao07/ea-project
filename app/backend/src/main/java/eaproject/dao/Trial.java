@@ -53,15 +53,10 @@ public class Trial implements Serializable {
 	private eaproject.dao.State state;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="competitionId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns(value = {@JoinColumn(name = "competitionId", referencedColumnName = "Id", nullable = false)}, foreignKey = @ForeignKey(name = "Fulfill"))
 	private eaproject.dao.Competition competition;
 
-	@ManyToOne(targetEntity=eaproject.dao.Type.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="typeId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
-	private eaproject.dao.Type type;
-	
 	@ManyToOne(targetEntity=eaproject.dao.Location.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="locationId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
@@ -186,14 +181,6 @@ public class Trial implements Serializable {
 	
 	@Transient	
 	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
-	public void setType(eaproject.dao.Type value) {
-		this.type = value;
-	}
-	
-	public eaproject.dao.Type getType() {
-		return type;
-	}
 
 	public void setCompetition(eaproject.dao.Competition value) {
 		this.competition = value;

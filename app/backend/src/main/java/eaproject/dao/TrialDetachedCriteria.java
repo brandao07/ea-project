@@ -28,8 +28,6 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression gradeId;
 	public final StringExpression Modality;
 	public final AssociationExpression grade;
-	public final IntegerExpression typeId;
-	public final AssociationExpression type;
 	public final IntegerExpression locationId;
 	public final AssociationExpression location;
 	public final StringExpression Name;
@@ -51,8 +49,6 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		Modality = new StringExpression("Modality", this.getDetachedCriteria());
 		gradeId = new IntegerExpression("grade.Id", this.getDetachedCriteria());
 		grade = new AssociationExpression("grade", this.getDetachedCriteria());
-		typeId = new IntegerExpression("type.Id", this.getDetachedCriteria());
-		type = new AssociationExpression("type", this.getDetachedCriteria());
 		locationId = new IntegerExpression("location.Id", this.getDetachedCriteria());
 		location = new AssociationExpression("location", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
@@ -74,8 +70,6 @@ public class TrialDetachedCriteria extends AbstractORMDetachedCriteria {
 		competition = new AssociationExpression("competition", this.getDetachedCriteria());
 		gradeId = new IntegerExpression("grade.Id", this.getDetachedCriteria());
 		grade = new AssociationExpression("grade", this.getDetachedCriteria());
-		typeId = new IntegerExpression("type.Id", this.getDetachedCriteria());
-		type = new AssociationExpression("type", this.getDetachedCriteria());
 		locationId = new IntegerExpression("location.Id", this.getDetachedCriteria());
 		location = new AssociationExpression("location", this.getDetachedCriteria());
 		Name = new StringExpression("Name", this.getDetachedCriteria());
