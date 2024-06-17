@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: '/competition-detail/:id',
-    name:'/competition-detail',
+    name:'competition-detail',
     component: () => import('@/views/CompetitionDetail.vue'),
     props: true,
   },
