@@ -63,8 +63,6 @@ export default {
             console.log(await UserService.loginUser(this.authenticationInput));
             this.authenticationOutput = await UserService.loginUser(this.authenticationInput);
             if (this.authenticationOutput.token) {
-                console.log("OLEEEEEEEEEEEEEEEEEE");
-                console.log(this.authenticationOutput);
                 AuthService.login(this.authenticationOutput.token,this.authenticationOutput.userId,this.authenticationOutput.role,this.$router);
 
 
