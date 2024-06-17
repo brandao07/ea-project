@@ -16,8 +16,6 @@ class CompetitionService {
    * @returns {Promise<CreateCompetitionOutput>} The CreateCompetitionOutput
    */
   async createCompetitionEntity(input) {
-    console.log("AQUI")
-    console.log(input)
     try {
       const response = await ApiService.post(API_ENDPOINTS.CREATE_COMPETITION_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
@@ -73,8 +71,11 @@ class CompetitionService {
    */
   async getCompetitionById(input) {
     try {
+      console.log(input);
+      console.log("teste");
       const response = await ApiService.post(API_ENDPOINTS.GET_COMPETITION_BY_ID, input);
-      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.category);
+      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.gender,response.category,response.trials);
+      console.log(output);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
