@@ -73,7 +73,12 @@ const routes = [
     path: '/teams',
     name: 'view-teams',
     component: () => import('@/views/ViewTeams.vue'),
-  }
+  },
+  {
+    path: "/view-results",
+    name: "view-results",
+    component: () => import("@/views/ViewResults.vue"),
+  },
 ];
 
 const router = createRouter({
