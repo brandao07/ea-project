@@ -6,24 +6,24 @@
         <div class="competition-info container my-5">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h1 class="display-4">{{ competition.name }}</h1>
-                    <p class="lead">Gender: {{ competition.gender }}</p>
-                    <p class="lead">Grade: {{ competition.grade }}</p>
-                    <p class="lead">Category: {{ competition.category }}</p>
-                    <p class="lead">Data de Início: {{ formatDate(competition.Startdate) }}</p>
-                    <p class="lead">Data de Término: {{ formatDate(competition.Enddate) }}</p>
+                    <h1 class="display-4">{{ this.competition.name }}</h1>
+                    <p class="lead">Gender: {{  this.competition.gender }}</p>
+                    <p class="lead">Grade: {{  this.competition.grade }}</p>
+                    <p class="lead">Category: {{  this.competition.category }}</p>
+                    <p class="lead">Data de Início: {{ formatDate( this.competition.Startdate) }}</p>
+                    <p class="lead">Data de Término: {{ formatDate( this.competition.Enddate) }}</p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img :src="competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
+                    <img :src=" this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
                 </div>
             </div>
         </div>
 
         <!-- Carousel de Provas -->
-        <div class="race-carousel mt-4 container">
+        <div v-if="this.competition" class="race-carousel mt-4 container">
             <div id="raceCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div v-for="(race, index) in races" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
+                    <div v-for="(race, index) in this.roles" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
                                 <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
@@ -91,7 +91,6 @@ export default {
     methods: {
         async fetchCompetition() {
             this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
-
             // Simule o carregamento das provas
             this.races = [
                 {

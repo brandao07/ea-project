@@ -74,8 +74,7 @@ class CompetitionService {
   async getCompetitionById(input) {
     try {
       const response = await ApiService.post(API_ENDPOINTS.GET_COMPETITION_BY_ID, input);
-      console.log("AQUIIIIIIIIIIIIIIIIIIIII"+ JSON.stringify(response))
-      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate);
+      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.category);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
