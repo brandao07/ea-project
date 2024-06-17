@@ -1,7 +1,7 @@
 import BaseOutput from "./BaseOutput";
 
 export default class GetCompetitionByIdOutput extends BaseOutput {
-  constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(), feedbackMessages = []) {
+  constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(),gender="", feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.name = name;
@@ -9,5 +9,6 @@ export default class GetCompetitionByIdOutput extends BaseOutput {
     this.endDate = endDate;
     this.isActive = isActive;
     this.creationDate = creationDate;
+    this.gender=gender;
   }
 }
