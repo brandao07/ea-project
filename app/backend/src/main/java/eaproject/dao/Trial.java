@@ -13,8 +13,8 @@
  */
 package eaproject.dao;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 @Entity
 @org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="trial")
@@ -53,20 +53,10 @@ public class Trial implements Serializable {
 	private eaproject.dao.State state;
 	
 	@ManyToOne(targetEntity=eaproject.dao.Competition.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="competitionId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Fulfill"))	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns(value = {@JoinColumn(name = "competitionId", referencedColumnName = "Id", nullable = false)}, foreignKey = @ForeignKey(name = "Fulfill"))
 	private eaproject.dao.Competition competition;
-	
-	@ManyToOne(targetEntity=eaproject.dao.Grade.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="gradeId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Requires"))	
-	private eaproject.dao.Grade grade;
-	
-	@ManyToOne(targetEntity=eaproject.dao.Type.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns(value={ @JoinColumn(name="typeId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Restricts"))	
-	private eaproject.dao.Type type;
-	
+
 	@ManyToOne(targetEntity=eaproject.dao.Location.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="locationId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="Occurs"))	
@@ -80,6 +70,9 @@ public class Trial implements Serializable {
 	
 	@Column(name="Distance", nullable=false)	
 	private Double Distance;
+
+	@Column(name = "Modality", nullable = true, length = 255)
+	private String Modality;
 	
 	@Column(name="Distanceunit", nullable=true, length=255)	
 	private String DistanceUnit;
@@ -188,23 +181,7 @@ public class Trial implements Serializable {
 	
 	@Transient	
 	public final eaproject.dao.ResultSetCollection result = new eaproject.dao.ResultSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_TRIAL_RESULT, orm.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
-	public void setType(eaproject.dao.Type value) {
-		this.type = value;
-	}
-	
-	public eaproject.dao.Type getType() {
-		return type;
-	}
-	
-	public void setGrade(eaproject.dao.Grade value) {
-		this.grade = value;
-	}
-	
-	public eaproject.dao.Grade getGrade() {
-		return grade;
-	}
-	
+
 	public void setCompetition(eaproject.dao.Competition value) {
 		this.competition = value;
 	}
@@ -235,5 +212,12 @@ public class Trial implements Serializable {
 	public String toString() {
 		return String.valueOf(getId());
 	}
-	
+
+	public String getModality() {
+		return Modality;
+	}
+
+	public void setModality(String modality) {
+		Modality = modality;
+	}
 }

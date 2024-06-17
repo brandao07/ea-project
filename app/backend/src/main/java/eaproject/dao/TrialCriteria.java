@@ -24,10 +24,7 @@ public class TrialCriteria extends AbstractORMCriteria {
 	public final AssociationExpression state;
 	public final IntegerExpression competitionId;
 	public final AssociationExpression competition;
-	public final IntegerExpression gradeId;
-	public final AssociationExpression grade;
-	public final IntegerExpression typeId;
-	public final AssociationExpression type;
+	public final StringExpression Modality;
 	public final IntegerExpression locationId;
 	public final AssociationExpression location;
 	public final StringExpression Name;
@@ -46,10 +43,7 @@ public class TrialCriteria extends AbstractORMCriteria {
 		state = new AssociationExpression("state", this);
 		competitionId = new IntegerExpression("competition.Id", this);
 		competition = new AssociationExpression("competition", this);
-		gradeId = new IntegerExpression("grade.Id", this);
-		grade = new AssociationExpression("grade", this);
-		typeId = new IntegerExpression("type.Id", this);
-		type = new AssociationExpression("type", this);
+		Modality = new StringExpression("Modality", this);
 		locationId = new IntegerExpression("location.Id", this);
 		location = new AssociationExpression("location", this);
 		Name = new StringExpression("Name", this);
@@ -81,11 +75,8 @@ public class TrialCriteria extends AbstractORMCriteria {
 	public GradeCriteria createGradeCriteria() {
 		return new GradeCriteria(createCriteria("grade"));
 	}
-	
-	public TypeCriteria createTypeCriteria() {
-		return new TypeCriteria(createCriteria("type"));
-	}
-	
+
+
 	public LocationCriteria createLocationCriteria() {
 		return new LocationCriteria(createCriteria("location"));
 	}

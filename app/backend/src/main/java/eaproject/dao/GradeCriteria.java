@@ -16,14 +16,16 @@ package eaproject.dao;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
+import org.orm.criteria.TimestampExpression;
 
 public class GradeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
-	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
 	
 	public GradeCriteria(Criteria criteria) {
@@ -32,7 +34,6 @@ public class GradeCriteria extends AbstractORMCriteria {
 		Name = new StringExpression("Name", this);
 		MinAge = new IntegerExpression("MinAge", this);
 		MaxAge = new IntegerExpression("MaxAge", this);
-		Gender = new StringExpression("Gender", this);
 		CreationDate = new TimestampExpression("CreationDate", this);
 	}
 	

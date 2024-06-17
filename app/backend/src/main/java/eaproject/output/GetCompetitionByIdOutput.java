@@ -4,15 +4,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GetCompetitionByIdOutput extends BaseOutput implements Serializable {
+
+    @JsonProperty
+    private ArrayList<GetAllTrialsOutput.TrialProperties> trials;
 
     @JsonProperty
     private Integer id;
 
     @JsonProperty
     private String name;
+
+    @JsonProperty
+    private String gender;
+
+    @JsonProperty
+    private String type;
+
+    @JsonProperty
+    private String grade;
 
     @JsonProperty
     private Timestamp startDate;
@@ -25,6 +37,14 @@ public class GetCompetitionByIdOutput extends BaseOutput implements Serializable
 
     @JsonProperty
     private Timestamp creationDate;
+
+    public ArrayList<GetAllTrialsOutput.TrialProperties> getTrials() {
+        return trials;
+    }
+
+    public void setTrials(ArrayList<GetAllTrialsOutput.TrialProperties> trials) {
+        this.trials = trials;
+    }
 
     public Integer getId() {
         return id;
@@ -72,5 +92,29 @@ public class GetCompetitionByIdOutput extends BaseOutput implements Serializable
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

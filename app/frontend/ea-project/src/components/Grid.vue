@@ -16,17 +16,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, rowIndex) in paginatedData" :key="rowIndex">
+                    <tr v-for="(item, rowIndex) in paginatedData" :key="rowIndex" @click="rowClick(item)">
                         <td v-for="(header, index) in headers" :key="index">{{ formatValue(item[header]) }}</td>
                         <td v-if="editable || deletable">
                             <div class="row">
                                 <div class="col">
-                                    <button @click="editRow(item)" class="btn btn-primary btn-sm me-2" :disabled="!editable">
+                                    <button @click.stop="editRow(item)" class="btn btn-primary btn-sm me-2" :disabled="!editable">
                                         <font-awesome-icon :icon="['fas', 'edit']" class="icon-color fa-md" />
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button @click="deleteRow(item)" class="btn btn-danger btn-sm" :disabled="!deletable">
+                                    <button @click.stop="deleteRow(item)" class="btn btn-danger btn-sm" :disabled="!deletable">
                                         <font-awesome-icon :icon="['fas', 'trash-alt']" class="icon-color fa-md" />
                                     </button>
                                 </div>
@@ -78,7 +78,7 @@
 
 <script>
 export default {
-    name: "data-grid",
+    name: "generic-grid",
     props: {
         data: {
             type: Array,
@@ -159,6 +159,9 @@ export default {
         },
         deleteRow(item) {
             this.$emit('delete', item);
+        },
+        rowClick(item) {
+            this.$emit('row-click', item);
         },
         camelCaseToSpaces(str) {
             return str.replace(/([a-z])([A-Z])/g, '$1 $2')

@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from "vue-router";
+import {createWebHistory, createRouter } from "vue-router";
 
 const routes = [
   {
@@ -22,6 +22,12 @@ const routes = [
     path: "/register",
     name: "register",
     component: () => import("@/views/Register.vue"),
+  },
+  {
+    path: '/competition-detail/:id',
+    name:'competition-detail',
+    component: () => import('@/views/CompetitionDetail.vue'),
+    props: true,
   },
   {
     path: "/competitions",
@@ -76,7 +82,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
 

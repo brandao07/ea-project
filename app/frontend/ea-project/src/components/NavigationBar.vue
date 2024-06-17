@@ -92,6 +92,7 @@
                     </ul>
                 </div>
             </div>
+        <router-view :key="$route.path"></router-view>
         </div>
         <UserProfile :isVisible="showProfileModal" @close="showProfileModal = false" />
         <UserPhotoUpload :isVisible="showPhotoUploadModal" @close="showPhotoUploadModal = false" />
