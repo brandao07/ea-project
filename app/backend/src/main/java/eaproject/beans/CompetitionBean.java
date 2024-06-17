@@ -129,8 +129,8 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-            var condition = "'competitionid = " + competition.getId() + "'";
-            Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
+            String condition = "'competitionid = " + competition.getId() + "'";
+            Trial[] trials = TrialDAO.listTrialByQuery(null, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
