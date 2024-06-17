@@ -13,17 +13,20 @@
  */
 package eaproject.dao;
 
-import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
+import org.orm.criteria.TimestampExpression;
+
+import java.util.List;
 
 public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression Id;
 	public final StringExpression Name;
 	public final IntegerExpression MinAge;
 	public final IntegerExpression MaxAge;
-	public final StringExpression Gender;
 	public final TimestampExpression CreationDate;
 	
 	public GradeDetachedCriteria() {
@@ -32,7 +35,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
-		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 	}
 	
@@ -42,7 +44,6 @@ public class GradeDetachedCriteria extends AbstractORMDetachedCriteria {
 		Name = new StringExpression("Name", this.getDetachedCriteria());
 		MinAge = new IntegerExpression("MinAge", this.getDetachedCriteria());
 		MaxAge = new IntegerExpression("MaxAge", this.getDetachedCriteria());
-		Gender = new StringExpression("Gender", this.getDetachedCriteria());
 		CreationDate = new TimestampExpression("CreationDate", this.getDetachedCriteria());
 	}
 	

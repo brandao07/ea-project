@@ -3,8 +3,14 @@ package eaproject.beans;
 import eaproject.beans.locals.TrialLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateTrialInput;
+import eaproject.input.GetAllTrialsInput;
+import eaproject.input.GetTrialByIdInput;
+import eaproject.input.UpdateTrialInput;
+import eaproject.output.CreateTrialOutput;
+import eaproject.output.GetAllTrialsOutput;
+import eaproject.output.GetTrialByIdOutput;
+import eaproject.output.UpdateTrialOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -52,14 +58,14 @@ public class TrialBean implements TrialLocal {
                 }
             }
 
-            // Check for Grade Relations
+   /*         // Check for Grade Relations
             if (input.getGradeId() != null && input.getGradeId() > 0) {
                 Grade aux = GradeDAO.getGradeByORMID(input.getGradeId());
                 if (aux != null && aux.getId() > 0) {
                     trial.setGrade(aux);
                 }
             }
-
+*/
             // Check for State Relations
             if (input.getStateId() != null && input.getStateId() > 0) {
                 State aux = StateDAO.getStateByORMID(input.getStateId());
@@ -138,13 +144,13 @@ public class TrialBean implements TrialLocal {
                     }
                 }
 
-                // Check for Grade Relations
+/*                // Check for Grade Relations
                 if (input.getGradeId() != null && input.getGradeId() > 0) {
                     Grade aux = GradeDAO.getGradeByORMID(input.getGradeId());
                     if (aux != null && aux.getId() > 0) {
                         trial.setGrade(aux);
                     }
-                }
+                }*/
 
                 // Check for State Relations
                 if (input.getStateId() != null && input.getStateId() > 0) {

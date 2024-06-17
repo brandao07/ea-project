@@ -13,8 +13,8 @@
  */
 package eaproject.dao;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 @Entity
 @org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="grade")
@@ -36,9 +36,6 @@ public class Grade implements Serializable {
 	
 	@Column(name="Maxage", nullable=false, length=10)	
 	private Integer MaxAge;
-	
-	@Column(name="Gender", nullable=true, length=255)	
-	private String Gender;
 	
 	@Column(name="Creationdate", nullable=true)	
 	private java.sql.Timestamp CreationDate;
@@ -89,14 +86,6 @@ public class Grade implements Serializable {
 	
 	public Integer getMaxAge() {
 		return MaxAge;
-	}
-	
-	public void setGender(String value) {
-		this.Gender = value;
-	}
-	
-	public String getGender() {
-		return Gender;
 	}
 	
 	public void setCreationDate(java.sql.Timestamp value) {

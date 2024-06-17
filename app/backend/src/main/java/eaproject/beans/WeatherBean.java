@@ -77,6 +77,7 @@ public class WeatherBean implements WeatherLocal {
             // Extract required weather data fields from the JSON response
             String main = rootNode.path("weather").get(0).path("main").asText();
             String description = rootNode.path("weather").get(0).path("description").asText();
+            String icon = rootNode.path("weather").get(0).path("icon").asText();
             double temp = rootNode.path("main").path("temp").asDouble();
             double tempMin = rootNode.path("main").path("temp_min").asDouble();
             double tempMax = rootNode.path("main").path("temp_max").asDouble();
@@ -89,6 +90,7 @@ public class WeatherBean implements WeatherLocal {
             GetWeatherOutput.Weather weatherApiOutput = new GetWeatherOutput.Weather();
             weatherApiOutput.setMain(main);
             weatherApiOutput.setDescription(description);
+            weatherApiOutput.setIcon(icon);
             weatherApiOutput.setTemp(temp);
             weatherApiOutput.setTempMin(tempMin);
             weatherApiOutput.setTempMax(tempMax);
