@@ -2,72 +2,80 @@
     <div id="insert-results">
         <NavigationBar />
         <div class="container">
-            <h2>Inserir Resultados da Prova de Canoagem</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Modalidade</th>
-                        <th>Prova</th>
-                        <th>Data</th>
-                        <th>Tempo (minutos)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="canoeist in canoeists" :key="canoeist.id">
-                        <td>{{ canoeist.name }}</td>
-                        <td>{{ canoeist.modalidade }}</td>
-                        <td>{{ canoeist.prova }}</td>
-                        <td>{{ canoeist.date }}</td>
-                        <td>
-                            <input type="number" v-model="canoeist.time" placeholder="Colocar tempo aqui">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button @click="submitResults">Enviar Resultados</button>
+            <div>
+                <label for="trialSelect">Select Trial:</label>
+                <select v-model="selectedTrial" @change="fetchTeams">
+                    <option v-for="trial in getAllTrialsOutput.trials" :key="trial.id" :value="trial.id">{{ trial.name }}</option>
+                </select>
+            </div>
+
+            <div v-if="getTeamsByTrialIdInput.id">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Creation Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="team in getTeamsByTrialIdOutput.teamList" :key="team.id">
+                            <td>{{ team.name }}</td>
+                            <td>{{ team.creationDate }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import GetAllTrialsInput from '@/models/input/GetAllTrialsInput';
+import GetAllTrialsOutput from '@/models/output/GetAllTrialsOutput';
+import GetTeamsByTrialIdInput from '@/models/input/GetTeamsByTrialIdInput';
+import GetTeamsByTrialIdOutput from '@/models/output/GetTeamsByTrialIdOutput';
+import TrialService from '@/services/TrialService';
+import TeamService from '@/services/TeamService';
 import NavigationBar from '@/components/NavigationBar.vue';
-//import CanoeingService from '@/services/RessultsService';
+//import GenericGrid from '@/components/Grid.vue';
 
 export default {
     name: 'InsertResults',
-    data() {
-        return {
-            canoeists: []
-        };
-    },
     components: {
+        //GenericGrid,
         NavigationBar
     },
+    data() {
+        return {
+            selectedTrial: null,
+            getAllTrialsInput: new GetAllTrialsInput(),
+            getAllTrialsOutput: new GetAllTrialsOutput(),
+            getTeamsByTrialIdInput: new GetTeamsByTrialIdInput(),
+            getTeamsByTrialIdOutput: new GetTeamsByTrialIdOutput(),
+        }
+    },
     methods: {
-        async fetchCanoeists() {
-            try {
-                //this.canoeists = await CanoeingService.getAllCanoeists();
-            } catch (error) {
-                console.error('Erro ao buscar os atletas:', error);
-            }
+        async fetchTeams() {
+            this.getTeamsByTrialIdInput.id = this.selectedTrial;
+            this.getTeamsByTrialIdOutput = await TeamService.getTeamsByTrialIdOutput(this.getTeamsByTrialIdInput);
+            console.log(this.getTeamsByTrialIdOutput);
         },
-        async submitResults() {
-            try {
-                //await CanoeingService.submitResults(this.canoeists);
-                alert('Resultados enviados com sucesso!');
-                // Opcional: Atualizar a lista de canoístas após enviar os resultados
-                await this.fetchCanoeists();
-            } catch (error) {
-                alert('Erro ao enviar resultados: ' + error.message);
-            }
+        async fetchTrialInfo() {
+            this.getAllTrialsOutput = await TrialService.getAllTrials(this.getAllTrialsInput);
+        },
+        handleCreate() {
+            // Implement your create logic if needed
+        },
+        resetForm() {
+            // Implement reset form logic if needed
         }
     },
     async mounted() {
-        await this.fetchCanoeists();
+        await this.fetchTrialInfo()
     }
-}
+};
 </script>
+
 
 <style scoped>
 .container {
@@ -110,3 +118,4 @@ button:hover {
     background-color: #0056b3;
 }
 </style>
+
