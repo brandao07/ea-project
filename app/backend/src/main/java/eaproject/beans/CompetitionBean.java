@@ -1,16 +1,21 @@
 package eaproject.beans;
 
 import eaproject.beans.locals.CompetitionLocal;
-import eaproject.dao.*;
+import eaproject.dao.Competition;
+import eaproject.dao.CompetitionDAO;
+import eaproject.dao.Notification;
+import eaproject.dao.NotificationDAO;
 import eaproject.enums.FeedbackSeverity;
 import eaproject.input.CreateCompetitionInput;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
 import eaproject.input.UpdateCompetitionInput;
-import eaproject.output.*;
+import eaproject.output.CreateCompetitionOutput;
+import eaproject.output.GetAllCompetitionsOutput;
+import eaproject.output.GetCompetitionByIdOutput;
+import eaproject.output.UpdateCompetitionOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +27,6 @@ import javax.ejb.Stateless;
 @Local(CompetitionLocal.class)
 @Component
 public class CompetitionBean implements CompetitionLocal {
-
-    @Autowired
-    TrialBean trialBean;
 
     @PostConstruct
     public void init() {
@@ -43,28 +45,8 @@ public class CompetitionBean implements CompetitionLocal {
             // Convert object into an entity
             Competition competition = Utilities.convertToDAO(input, Competition.class);
 
-            var typeCondition = "name = '" + input.getType() + "'";
-            Type type = TypeDAO.loadTypeByQuery(typeCondition, null);
-            competition.setType(type);
-
-            var gradeCondition = "name = '" + input.getGrade() + "'";
-            Grade grade = GradeDAO.loadGradeByQuery(gradeCondition, null);
-            competition.setGrade(grade);
-
-            var userCondition = "id = '" + input.getUserId() + "'";
-            User user = UserDAO.loadUserByQuery(userCondition, null);
-            competition.setUser(user);
-
             // Save the entity to the database using the DAO
             CompetitionDAO.save(competition);
-
-            competition = CompetitionDAO.loadCompetitionByQuery("name = '" + input.getName() + "'", null);
-
-            Competition finalCompetition = competition;
-            input.getTrialList().forEach(trial -> {
-                trial.setCompetitionId(finalCompetition.getId());
-                trialBean.createTrialEntity(trial);
-            });
 
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage(Competition.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
@@ -156,13 +138,8 @@ public class CompetitionBean implements CompetitionLocal {
 
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
-                var condition = "'competitionid = " + competition.getId() + "'";
-                Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
-                if (trials != null && trials.length > 0) {
-                    output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
-                }
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -192,7 +169,6 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entities from the database
             Competition[] competitions = CompetitionDAO.listCompetitionByQuery(null, null);
-            var condition = "'competitionid = '" + input.
 
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {
