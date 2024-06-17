@@ -9,9 +9,9 @@
                     <h1 class="display-4">{{ this.competition.name }}</h1>
                     <p class="lead">Gender: {{  this.competition.gender }}</p>
                     <p class="lead">Grade: {{  this.competition.grade }}</p>
-                    <p class="lead">Category: {{  this.competition.category }}</p>
-                    <p class="lead">Data de Início: {{ formatDate( this.competition.Startdate) }}</p>
-                    <p class="lead">Data de Término: {{ formatDate( this.competition.Enddate) }}</p>
+                    <p class="lead">Category: {{  this.competition.type }}</p>
+                    <p class="lead">Data de Início: {{ formatDate( this.competition.startdate) }}</p>
+                    <p class="lead">Data de Término: {{ formatDate( this.competition.enddate) }}</p>
                 </div>
                 <div class="col-md-6 text-center">
                     <img :src=" this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
@@ -91,6 +91,7 @@ export default {
     methods: {
         async fetchCompetition() {
             this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
+            console.log(this.competition);
             // Simule o carregamento das provas
             this.races = [
                 {
