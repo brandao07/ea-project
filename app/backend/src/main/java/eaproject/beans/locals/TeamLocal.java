@@ -2,14 +2,8 @@ package eaproject.beans.locals;
 
 import javax.ejb.Local;
 
-import eaproject.input.CreateTeamInput;
-import eaproject.input.GetAllTeamsInput;
-import eaproject.input.GetTeamByIdInput;
-import eaproject.input.UpdateTeamInput;
-import eaproject.output.CreateTeamOutput;
-import eaproject.output.GetAllTeamsOutput;
-import eaproject.output.GetTeamByIdOutput;
-import eaproject.output.UpdateTeamOutput;
+import eaproject.input.*;
+import eaproject.output.*;
 
 @Local
 public interface TeamLocal {
@@ -45,4 +39,7 @@ public interface TeamLocal {
      * @return an output object containing the list of objects and feedback messages
      */
     GetAllTeamsOutput getAllTeams(GetAllTeamsInput input);
+
+    
+    GetTeamsByTrialIdOutput getTeamsByTrialId(GetTeamsByTrialIdInput input);
 }

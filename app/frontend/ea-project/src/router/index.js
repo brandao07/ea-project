@@ -68,6 +68,11 @@ const routes = [
     name: 'RecoverPassword',
     component: () => import('@/views/RecoverPassword.vue'),
   },
+  {
+    path: '/teams',
+    name: 'view-teams',
+    component: () => import('@/views/ViewTeams.vue'),
+  }
 ];
 
 const router = createRouter({

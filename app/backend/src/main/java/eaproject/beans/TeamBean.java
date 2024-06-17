@@ -181,4 +181,34 @@ public class TeamBean implements TeamLocal {
         // Return the output object with roles and feedback messages
         return output;
     }
+
+    public GetTeamsByTrialIdOutput getTeamsByTrialId(GetTeamsByTrialIdInput input) {
+        GetTeamsByTrialIdOutput output = new GetTeamsByTrialIdOutput();
+        try {
+            Trial trial = TrialDAO.getTrialByORMID(input.getId());
+
+            // Fetch entities from the database
+            Team[] teams = trial.team.toArray();
+
+            // Check if roles are retrieved successfully
+            if (teams.length > 0) {
+                // Assign retrieved entities to the output object
+                output.setTeamList(Utilities.convertToDTOArray(teams, GetTeamsByTrialIdOutput.TeamProperties.class));
+            } else {
+                // Add feedback message if no entities are found
+                output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // Add feedback message for bad credentials
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // Add feedback message for database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // Add feedback message for unexpected errors
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with roles and feedback messages
+        return output;
+    }
 }
