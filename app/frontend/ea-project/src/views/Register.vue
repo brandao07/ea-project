@@ -61,7 +61,7 @@
                                 <div class="col-6">
                                     <button type="button" class="btn btn-light w-100" @click="navigateToLogin">
                                         <font-awesome-icon :icon="['fas', 'right-left']"
-                                            class="font-awesome-icon" />Login
+                                            class="font-awesome-icon"/> Login
                                     </button>
                                 </div>
                                 <div class="col-6">
