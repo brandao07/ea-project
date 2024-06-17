@@ -24,6 +24,11 @@ const routes = [
     component: () => import("@/views/Register.vue"),
   },
   {
+    path: '/competition-detail/:id',
+    name:'/competition-detail',
+    component: () => import('@/views/CompetitionDetail.vue'),
+  },
+  {
     path: "/competitions",
     name: "view-competitions",
     component: () => import("@/views/ViewCompetitions.vue"),
@@ -62,11 +67,10 @@ const routes = [
     path: '/recover-password',
     name: 'RecoverPassword',
     component: () => import('@/views/RecoverPassword.vue'),
-  }
+  },
 ];
 
 const router = createRouter({
-  //history: createMemoryHistory(),
   history: createWebHistory(),
   routes,
 });

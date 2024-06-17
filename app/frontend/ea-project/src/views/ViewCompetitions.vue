@@ -32,8 +32,9 @@ export default {
         async fetchCompetitionInfo() {
             this.getAllCompetitionsOutput = await CompetitionService.getAllCompetitions(this.getAllCompetitionsInput);
         },
-        viewCompetition(competition) { // Add this method
-            router.push({ name: 'competition-detail', params: { id: competition.id } });
+        viewCompetition(competition) { 
+           
+            router.push({ name: `/competition-detail`, params: { id: competition.id } });
         }
     },
     async mounted() {
