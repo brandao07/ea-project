@@ -60,10 +60,10 @@ export default {
     },
     methods: {
         async login() {
-            console.log(await UserService.loginUser(this.authenticationInput));
+
             this.authenticationOutput = await UserService.loginUser(this.authenticationInput);
             if (this.authenticationOutput.token) {
-                AuthService.login(this.authenticationOutput.token,this.authenticationOutput.userId,this.authenticationOutput.role,this.$router);
+                AuthService.login(this.authenticationOutput.token,this.$router);
 
 
             }
