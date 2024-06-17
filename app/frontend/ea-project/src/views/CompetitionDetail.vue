@@ -1,50 +1,57 @@
 <template>
-    <div>
-      <h1>Detalhes da Competição</h1>
-      <div v-if="competition">
-        <p><strong>Nome:</strong> {{ competition.name }}</p>
-        <p><strong>Data de Início:</strong> {{ competition.startDate }}</p>
-        <p><strong>Data de Fim:</strong> {{ competition.endDate }}</p>
-        <p><strong>Data de Criação:</strong> {{ competition.creationDate }}</p>
-      </div>
-      <div v-else>
-        <p>Carregando...</p>
-      </div>
+    <div class="CompetitionDetails">
+        <NavigationBar />
+        <h1>Detalhes da Competição</h1>
+        <div v-if="competition">
+            <p><strong>Nome:</strong> {{ competition.name }}</p>
+            <p><strong>Data de Início:</strong> {{ competition.startDate }}</p>
+            <p><strong>Data de Fim:</strong> {{ competition.endDate }}</p>
+            <p><strong>Data de Criação:</strong> {{ competition.creationDate }}</p>
+            <p><strong>Gênero:</strong> {{ competition.gender}}</p>
+        </div>
+        <div v-else>
+            <p>Carregando...</p>
+        </div>
     </div>
-  </template>
-  
-  <script>
-  import GetCompetitionByIdOutput from '@/models/output/GetCompetitionByIdOutput';
-  import GetCompetitionByIdInput from '@/models/input/GetCompetitionByIdInput';
-  
-  export default {
+</template>
+
+
+<script>
+import GetCompetitionByIdOutput from '@/models/output/GetCompetitionByIdOutput';
+import GetCompetitionByIdInput from '@/models/input/GetCompetitionByIdInput';
+import CompetitionService from '@/services/CompetitionService';
+import NavigationBar from '@/components/NavigationBar.vue';
+
+export default {
     name: 'CompetitionDetails',
     props: ['id'],
+    components: {
+        NavigationBar
+    },
     data() {
-      return {
-        competition: new GetCompetitionByIdOutput(),
-      };
+        return {
+            competition: new GetCompetitionByIdOutput(),
+        };
     },
     created() {
-      this.fetchCompetition();
+        this.fetchCompetition();
     },
     methods: {
-      fetchCompetition() {
-        // Simular uma chamada de API para buscar os detalhes da competição
-        this.competition = competitions.find(c => c.id === this.id);
-      },
+        async fetchCompetition() {
+            this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
+        },
     },
-  };
-  </script>
-  
-  <style scoped>
-  h1 {
+};
+</script>
+
+<style scoped>
+h1 {
     font-size: 2em;
     margin-bottom: 20px;
-  }
-  p {
+}
+
+p {
     font-size: 1.2em;
     margin: 10px 0;
-  }
-  </style>
-  
+}
+</style>

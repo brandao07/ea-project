@@ -16,6 +16,22 @@
             <label for="endDate" class="mb-2">End Date</label>
             <input type="date" class="form-control" id="endDate" v-model="createCompetitionInput.endDate" required>
           </div>
+          <div class="form-group mb-1">
+            <label for="gender" class="mb-2">Gender</label>
+            <select class="form-select" v-model="createCompetitionInput.gender" id="gender" required>
+              <option v-for="(label, value) in genderEnum" :key="value" :value="value">
+                {{ label }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-1">
+            <label for="category" class="mb-2">Category</label>
+            <select class="form-select" v-model="createCompetitionInput.category" id="category" required>
+              <option v-for="(label, value) in categoryEnum" :key="value" :value="value">
+                {{ label }}
+              </option>
+            </select>
+          </div>
         </template>
       </CreateEntity>
     </div>
@@ -28,6 +44,8 @@ import CompetitionService from '@/services/CompetitionService';
 import CreateCompetitionInput from '@/models/input/CreateCompetitionInput';
 import CreateCompetitionOutput from '@/models/output/CreateCompetitionOutput';
 import NavigationBar from '@/components/NavigationBar.vue';
+import GenderEnumerator from '@/models/enums/Gender';
+import CategoryEnumerator from '@/models/enums/Category';
 
 export default {
   name: 'create-competition',
@@ -37,6 +55,8 @@ export default {
   },
   data() {
     return {
+      genderEnum: GenderEnumerator,
+      categoryEnum: CategoryEnumerator,
       createCompetitionInput: new CreateCompetitionInput(),
       createCompetitionOutput: new CreateCompetitionOutput(),
     };
