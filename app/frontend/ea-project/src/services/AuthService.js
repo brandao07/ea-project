@@ -11,7 +11,7 @@ class AuthService {
    * @param {string} token - The JWT token
    * @param {object} router - The Vue router instance to handle redirection
    */
-  login(token, router) {
+  login(token,userId,role, router) {
     // Import JWT Decode
     const jwt_decode = require("jwt-decode");
 
@@ -21,12 +21,12 @@ class AuthService {
     // Store the token and claims in localStorage
     setLocalStorageItems({
       [StorageKeys.JWT_TOKEN]: token,
-      [StorageKeys.ID_USER]: decodedToken.idUser,
       [StorageKeys.NAME]: decodedToken.name,
       [StorageKeys.IS_ACTIVE]: decodedToken.isActive,
       [StorageKeys.REGISTER_DATE]: decodedToken.registerDate,
       [StorageKeys.PHOTO]: decodedToken.photo,
-      [StorageKeys.ROLE]: decodedToken.role,
+      [StorageKeys.ID_USER]: userId,
+      [StorageKeys.ROLE]: role,
     });
 
     // Set the token in ApiService
@@ -34,6 +34,14 @@ class AuthService {
 
     // Redirect to home page or any other page
     router.push("/");
+  }
+
+  storeUser(userId) {
+    [StorageKeys.ID_USER1 = userId]
+  } 
+
+  storeRole(role) {
+    [StorageKeys.ROLE1 = role]
   }
 
   /**
@@ -50,6 +58,8 @@ class AuthService {
       StorageKeys.REGISTER_DATE,
       StorageKeys.PHOTO,
       StorageKeys.ROLE,
+      StorageKeys.ROLE1,
+      StorageKeys.ID_USER1,
     ]);
 
     // Clear the token in ApiService
