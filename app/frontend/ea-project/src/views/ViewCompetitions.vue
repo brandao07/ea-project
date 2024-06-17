@@ -3,7 +3,7 @@
         <NavigationBar />
         <div class="container">
             <!-- Grid para Editar Competições -->
-            <generic-grid v-if="this.StorageKeys.ROLE == 'admin'" :data="getAllCompetitionsOutput.competitionList"
+            <generic-grid v-if="this.role == 'Administrator'" :data="getAllCompetitionsOutput.competitionList"
                 :headers="gridheaders" :editable="true" :deletable="true" grid-title="Competitions"
                 @row-click="viewCompetition" @edit="openEditModal" @delete="deleteCompetition" />
             <generic-grid v-else :data="getAllCompetitionsOutput.competitionList"
@@ -57,8 +57,6 @@ export default {
 
     },
     data() {
-        console.log("TESTEEEEEEEEEEEEEEEEEEEEE")
-        console.log(StorageKeys)
         return {
             getAllCompetitionsInput: new GetAllCompetitionsInput(),
             getAllCompetitionsOutput: new GetAllCompetitionsOutput(),
@@ -66,6 +64,7 @@ export default {
             updateCompetitionOutput: new UpdateCompetitionOutput(),
             gridheaders: ['name', 'startDate', 'endDate', 'creationDate'],
             modalVisible: false,
+            role:localStorage.getItem(StorageKeys.ROLE),
             StorageKeys:StorageKeys,
             selectedItem: {
                 name: '',

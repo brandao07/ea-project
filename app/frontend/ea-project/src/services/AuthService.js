@@ -36,13 +36,6 @@ class AuthService {
     router.push("/");
   }
 
-  storeUser(userId) {
-    [StorageKeys.ID_USER1 = userId]
-  } 
-
-  storeRole(role) {
-    [StorageKeys.ROLE1 = role]
-  }
 
   /**
    * Logs out the user by clearing localStorage and redirecting to the login page
@@ -58,8 +51,6 @@ class AuthService {
       StorageKeys.REGISTER_DATE,
       StorageKeys.PHOTO,
       StorageKeys.ROLE,
-      StorageKeys.ROLE1,
-      StorageKeys.ID_USER1,
     ]);
 
     // Clear the token in ApiService
