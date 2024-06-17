@@ -7,10 +7,7 @@ import eaproject.input.CreateCompetitionInput;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
 import eaproject.input.UpdateCompetitionInput;
-import eaproject.output.CreateCompetitionOutput;
-import eaproject.output.GetAllCompetitionsOutput;
-import eaproject.output.GetCompetitionByIdOutput;
-import eaproject.output.UpdateCompetitionOutput;
+import eaproject.output.*;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,8 +156,13 @@ public class CompetitionBean implements CompetitionLocal {
 
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
+                var condition = "'competitionid = " + competition.getId() + "'";
+                Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
+                if (trials != null && trials.length > 0) {
+                    output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
+                }
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -190,6 +192,7 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entities from the database
             Competition[] competitions = CompetitionDAO.listCompetitionByQuery(null, null);
+            var condition = "'competitionid = '" + input.
 
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {
