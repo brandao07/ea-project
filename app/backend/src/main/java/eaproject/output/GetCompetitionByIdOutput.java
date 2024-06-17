@@ -18,6 +18,15 @@ public class GetCompetitionByIdOutput extends BaseOutput implements Serializable
     private String name;
 
     @JsonProperty
+    private String gender;
+
+    @JsonProperty
+    private String type;
+
+    @JsonProperty
+    private String grade;
+
+    @JsonProperty
     private Timestamp startDate;
 
     @JsonProperty
@@ -85,5 +94,27 @@ public class GetCompetitionByIdOutput extends BaseOutput implements Serializable
         this.creationDate = creationDate;
     }
 
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 }
