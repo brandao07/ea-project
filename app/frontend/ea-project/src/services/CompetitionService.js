@@ -16,6 +16,8 @@ class CompetitionService {
    * @returns {Promise<CreateCompetitionOutput>} The CreateCompetitionOutput
    */
   async createCompetitionEntity(input) {
+    console.log("AQUI")
+    console.log(input)
     try {
       const response = await ApiService.post(API_ENDPOINTS.CREATE_COMPETITION_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(

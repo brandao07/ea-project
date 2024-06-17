@@ -10,6 +10,6 @@ export default class GetCompetitionByIdOutput extends BaseOutput {
     this.isActive = isActive;
     this.creationDate = creationDate;
     this.gender=gender;
-    this.category=category;
+    this.type=category;
   }
 }

@@ -37,7 +37,7 @@
             </div>
             <div class="form-group mb-1">
               <label for="category" class="mb-2">Category</label>
-              <select class="form-select" v-model="createCompetitionInput.category" id="category" required>
+              <select class="form-select" v-model="createCompetitionInput.type" id="category" required>
                 <option v-for="(label, value) in categoryEnum" :key="value" :value="value">
                   {{ label }}
                 </option>
@@ -59,8 +59,8 @@
                   </div>
                   <div class="form-group mb-1">
                     <label for="modality" class="mb-2">Modality</label>
-                    <select class="form-select" v-model="createCompetitionInput.modality" id="modality" required>
-                      <option v-for="(label, value) in modalityEnum" :key="label" :value="label">
+                    <select class="form-select" v-model="newTrial.modality" id="modality" required>
+                      <option v-for="(label, value) in modalityEnum" :key="value" :value="value">
                         {{ value }}
                       </option>
                     </select>
@@ -77,13 +77,6 @@
                     <label for="trialDistanceUnit" class="mb-2">Distance Unit</label>
                     <select class="form-select" v-model="newTrial.distanceUnit" required>
                       <option v-for="(label, key) in unitsEnumerator" :key="key" :value="key">{{ label }}</option>
-                    </select>
-                  </div>
-                  <div class="form-group mb-1">
-                    <label for="trialTypeId" class="mb-2">Type</label>
-                    <select class="form-select" v-model="newTrial.typeId" required>
-                      <option v-for="type in getAllTypesOutput.types" :key="type.id" :value="type.id">{{ type.name }}
-                      </option>
                     </select>
                   </div>
                   <div class="form-group mb-1">
@@ -212,7 +205,7 @@ export default {
       getAllLocationsOutput: new GetAllLocationsOutput(),
       newTrial: null,
       editTrial: null,
-      gridHeaders: ['name', 'startDate', 'category', 'distance', 'distanceUnit', 'creationDate']
+      gridHeaders: ['name', 'startDate', 'modality', 'distance', 'distanceUnit']
     };
   },
   async created() {

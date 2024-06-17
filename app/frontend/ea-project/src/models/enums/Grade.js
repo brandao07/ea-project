@@ -4,31 +4,31 @@ const Grade = Object.freeze({
 
   Menor: 'Minor',
 
-  IniciadoA: 'Started A',
+  "Iniciado-A": 'Started A',
 
-  IniciadoB: 'Started B',
+  "Iniciado-B": 'Started B',
 
-  InfantilA: 'Child A',
+  "Infantil-A": 'Child A',
 
-  InfantilB: 'Child B',
+  "Infantil-B": 'Child B',
 
   Cadete: 'Cadet',
 
-  Sub16: 'Under 16',
+  "Sub16": 'Under 16',
 
   Júnior: 'Junior',
 
   Sénior: 'Senior',
 
-  Sub23: 'Under 23',
+  "Sub -23": 'Under 23',
 
-  MasterA: 'Master A',
+  "Master-A": 'Master A',
 
-  MasterB: 'Master B',
+  "Master-B": 'Master B',
 
-  MasterC: 'Master C',
-
-  MasterD: 'Master D',
+  "Master-C": 'Master C',
+ 
+  "Master-D": 'Master D',
 
 });
   
