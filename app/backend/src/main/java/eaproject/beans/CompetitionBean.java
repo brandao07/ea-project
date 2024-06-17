@@ -141,6 +141,8 @@ public class CompetitionBean implements CompetitionLocal {
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
+                output.setType(competition.getType().getName());
+                output.setGrade(competition.getGrade().getName());
            /*     if (trials != null && trials.length > 0) {
                     output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
                 }*/
