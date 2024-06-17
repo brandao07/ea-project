@@ -26,6 +26,7 @@
                             <li><router-link class="nav-link" to="/competitions">Competitions</router-link></li>
                             <li><router-link class="nav-link" to="/trials">Trials</router-link></li>
                             <li><router-link class="nav-link" to="/teams">Teams</router-link></li>
+                            <li><router-link class="nav-link" to="/clubs">Clubs</router-link></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
