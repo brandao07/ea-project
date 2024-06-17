@@ -2,7 +2,6 @@ package eaproject.input;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 public class CreateTrialInput extends BaseInput implements Serializable {
 
@@ -11,11 +10,10 @@ public class CreateTrialInput extends BaseInput implements Serializable {
     private double distance;
     private String distanceUnit;
     private boolean isActive;
+    private String modality;
     private Timestamp creationDate;
     private Integer stateId;
     private Integer competitionId;
-    private Integer gradeId;
-    private Integer typeId;
     private Integer locationId;
 
     public String getName() {
@@ -82,20 +80,12 @@ public class CreateTrialInput extends BaseInput implements Serializable {
         this.competitionId = competitionId;
     }
 
-    public Integer getGradeId() {
-        return gradeId;
+    public String getModality() {
+        return modality;
     }
 
-    public void setGradeId(Integer gradeId) {
-        this.gradeId = gradeId;
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setModality(String modality) {
+        this.modality = modality;
     }
 
     public Integer getLocationId() {

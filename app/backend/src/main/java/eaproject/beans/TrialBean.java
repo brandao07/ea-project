@@ -3,8 +3,14 @@ package eaproject.beans;
 import eaproject.beans.locals.TrialLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateTrialInput;
+import eaproject.input.GetAllTrialsInput;
+import eaproject.input.GetTrialByIdInput;
+import eaproject.input.UpdateTrialInput;
+import eaproject.output.CreateTrialOutput;
+import eaproject.output.GetAllTrialsOutput;
+import eaproject.output.GetTrialByIdOutput;
+import eaproject.output.UpdateTrialOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -52,14 +58,6 @@ public class TrialBean implements TrialLocal {
                 }
             }
 
-            // Check for Grade Relations
-            if (input.getGradeId() != null && input.getGradeId() > 0) {
-                Grade aux = GradeDAO.getGradeByORMID(input.getGradeId());
-                if (aux != null && aux.getId() > 0) {
-                    trial.setGrade(aux);
-                }
-            }
-
             // Check for State Relations
             if (input.getStateId() != null && input.getStateId() > 0) {
                 State aux = StateDAO.getStateByORMID(input.getStateId());
@@ -68,13 +66,6 @@ public class TrialBean implements TrialLocal {
                 }
             }
 
-            // Check for Type Relations
-            if (input.getTypeId() != null && input.getTypeId() > 0) {
-                Type aux = TypeDAO.getTypeByORMID(input.getTypeId());
-                if (aux != null && aux.getId() > 0) {
-                    trial.setType(aux);
-                }
-            }
 
             // Set distance
             trial.setDistance(input.getDistance());
@@ -135,14 +126,6 @@ public class TrialBean implements TrialLocal {
                     Location aux = LocationDAO.getLocationByORMID(input.getLocationId());
                     if (aux != null && aux.getId() > 0) {
                         trial.setLocation(aux);
-                    }
-                }
-
-                // Check for Grade Relations
-                if (input.getGradeId() != null && input.getGradeId() > 0) {
-                    Grade aux = GradeDAO.getGradeByORMID(input.getGradeId());
-                    if (aux != null && aux.getId() > 0) {
-                        trial.setGrade(aux);
                     }
                 }
 

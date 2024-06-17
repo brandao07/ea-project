@@ -13,8 +13,8 @@
  */
 package eaproject.dao;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 @Entity
 @org.hibernate.annotations.Proxy(lazy=true)
 @Table(name="competition")
@@ -46,7 +46,25 @@ public class Competition implements Serializable {
 	
 	@Column(name="Name", nullable=true, length=255)	
 	private String Name;
-	
+
+	@Column(name = "Gender", nullable = true, length = 255)
+	private String Gender;
+
+	@ManyToOne(targetEntity = eaproject.dao.Grade.class, fetch = FetchType.LAZY)
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns(value = {@JoinColumn(name = "gradeId", referencedColumnName = "Id", nullable = false)}, foreignKey = @ForeignKey(name = "Requires"))
+	private eaproject.dao.Grade grade;
+
+	@ManyToOne(targetEntity = eaproject.dao.Type.class, fetch = FetchType.LAZY)
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns(value = {@JoinColumn(name = "typeId", referencedColumnName = "Id", nullable = false)}, foreignKey = @ForeignKey(name = "Requires"))
+	private eaproject.dao.Type type;
+
+	@ManyToOne(targetEntity = eaproject.dao.User.class, fetch = FetchType.LAZY)
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns(value = {@JoinColumn(name = "userId", referencedColumnName = "Id", nullable = false)}, foreignKey = @ForeignKey(name = "Requires"))
+	private eaproject.dao.User user;
+
 	@Column(name="Startdate", nullable=true)	
 	private java.sql.Timestamp StartDate;
 	
@@ -64,7 +82,7 @@ public class Competition implements Serializable {
 	@JoinColumns({ @JoinColumn(name="competitionId", nullable=false) })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private java.util.Set ORM_notification = new java.util.HashSet();
-	
+
 	private void setId(int value) {
 		setId(Integer.valueOf(value));
 	}
@@ -135,5 +153,36 @@ public class Competition implements Serializable {
 	public String toString() {
 		return String.valueOf(getId());
 	}
-	
+
+	public eaproject.dao.Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(eaproject.dao.Grade value) {
+		this.grade = value;
+	}
+
+	public eaproject.dao.Type getType() {
+		return type;
+	}
+
+	public void setType(eaproject.dao.Type type) {
+		this.type = type;
+	}
+
+	public String getGender() {
+		return Gender;
+	}
+
+	public void setGender(String gender) {
+		Gender = gender;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
