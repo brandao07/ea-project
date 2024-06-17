@@ -1,35 +1,10 @@
-const Category = Object.freeze({
-
-  Mínimo: 'Minimum',
-
-  Menor: 'Minor',
-
-  IniciadoA: 'Started A',
-
-  IniciadoB: 'Started B',
-
-  InfantilA: 'Child A',
-
-  InfantilB: 'Child B',
-
-  Cadete: 'Cadet',
-
-  Sub16: 'Under 16',
-
-  Júnior: 'Junior',
-
-  Sénior: 'Senior',
-
-  Sub23: 'Under 23',
-
-  MasterA: 'Master A',
-
-  MasterB: 'Master B',
-
-  MasterC: 'Master C',
-
-  MasterD: 'Master D',
-
+const categoryEnumerator = Object.freeze({
+    C1: 'C1',
+    C2: 'C2',
+    C4: 'C4',
+    K1: 'K1',
+    K2: 'K2',
+    K4: 'K4'
 });
-  
-  export default Category;
+
+export default categoryEnumerator;

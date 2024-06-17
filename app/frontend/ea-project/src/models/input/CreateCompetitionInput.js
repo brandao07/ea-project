@@ -1,7 +1,7 @@
 import BaseInput from "./BaseInput";
 
 export default class CreateCompetitionInput extends BaseInput {
-  constructor(name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(),gender="",grade="", lazyLoad = false) {
+  constructor(name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(),gender="",grade="", trials=[],lazyLoad = false) {
     super(lazyLoad);
     this.name = name;
     this.startDate = startDate;
@@ -10,5 +10,6 @@ export default class CreateCompetitionInput extends BaseInput {
     this.creationDate = creationDate;
     this.gender=gender;
     this.grade=grade;
+    this.trials=trials;
   }
 }

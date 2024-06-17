@@ -113,6 +113,28 @@ class CompetitionService {
     }
   }
 
+  async deleteCompetition(input) {
+    try {
+      const response = await ApiService.post(API_ENDPOINTS.DELETE_COMPETITION, input);
+      const feedbackMessages = response.feedbackMessages.map(
+        (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+      );
+      const output = new GetAllCompetitionsOutput(response.competitionList, feedbackMessages);
+      output.feedbackMessages.forEach((msg) => {
+        EventBus.emit("feedback-message", msg);
+      });
+      return output;
+    } catch (error) {
+      const errorMessage = new FeedbackMessage(
+        "An error occurred during deleteCompetition.",
+        FeedbackSeverity.DANGER
+      );
+      const output = new GetAllCompetitionsOutput("", [errorMessage]);
+      EventBus.emit("feedback-message", errorMessage);
+      return output;
+    }
+  }
+
 }
 
 export default new CompetitionService();
