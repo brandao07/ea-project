@@ -137,14 +137,6 @@ public class TrialBean implements TrialLocal {
                     }
                 }
 
-                // Check for Type Relations
-                if (input.getTypeId() != null && input.getTypeId() > 0) {
-                    Type aux = TypeDAO.getTypeByORMID(input.getTypeId());
-                    if (aux != null && aux.getId() > 0) {
-                        trial.setType(aux);
-                    }
-                }
-
                 // Set distance
                 trial.setDistance(input.getDistance());
 
