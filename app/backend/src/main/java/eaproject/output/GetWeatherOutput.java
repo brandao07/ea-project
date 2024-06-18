@@ -22,6 +22,8 @@ public class GetWeatherOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private String description;
         @JsonProperty
+        private String icon;
+        @JsonProperty
         private double temp;
         @JsonProperty
         private double tempMin;
@@ -63,5 +65,13 @@ public class GetWeatherOutput extends BaseOutput implements Serializable {
 
         public double getWindSpeed() { return windSpeed; }
         public void setWindSpeed(double windSpeed) { this.windSpeed = windSpeed; }
+
+        public String getIcon() {
+            return icon;
+        }
+
+        public void setIcon(String icon) {
+            this.icon = icon;
+        }
     }
 }

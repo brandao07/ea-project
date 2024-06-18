@@ -3,10 +3,17 @@ package eaproject.beans;
 import eaproject.beans.locals.CompetitionLocal;
 import eaproject.dao.*;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateCompetitionInput;
+import eaproject.input.GetAllCompetitionsInput;
+import eaproject.input.GetCompetitionByIdInput;
+import eaproject.input.UpdateCompetitionInput;
+import eaproject.output.CreateCompetitionOutput;
+import eaproject.output.GetAllCompetitionsOutput;
+import eaproject.output.GetCompetitionByIdOutput;
+import eaproject.output.UpdateCompetitionOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +25,9 @@ import javax.ejb.Stateless;
 @Local(CompetitionLocal.class)
 @Component
 public class CompetitionBean implements CompetitionLocal {
+
+    @Autowired
+    TrialBean trialBean;
 
     @PostConstruct
     public void init() {
@@ -35,6 +45,29 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Convert object into an entity
             Competition competition = Utilities.convertToDAO(input, Competition.class);
+
+            var typeCondition = "name = '" + input.getType() + "'";
+            Type type = TypeDAO.loadTypeByQuery(typeCondition, null);
+            competition.setType(type);
+
+            var gradeCondition = "name = '" + input.getGrade() + "'";
+            Grade grade = GradeDAO.loadGradeByQuery(gradeCondition, null);
+            competition.setGrade(grade);
+
+            var userCondition = "id = '" + input.getUserId() + "'";
+            User user = UserDAO.loadUserByQuery(userCondition, null);
+            competition.setUser(user);
+
+            // Save the entity to the database using the DAO
+            CompetitionDAO.save(competition);
+
+            competition = CompetitionDAO.loadCompetitionByQuery("name = '" + input.getName() + "'", null);
+
+            Competition finalCompetition = competition;
+            input.getTrialList().forEach(trial -> {
+                trial.setCompetitionId(finalCompetition.getId());
+                trialBean.createTrialEntity(trial);
+            });
 
             // Save the entity to the database using the DAO
             CompetitionDAO.save(competition);
@@ -126,11 +159,17 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-
+//            String condition = "'competitionid = " + competition.getId() + "'";
+            //          Trial[] trials = TrialDAO.listTrialByQuery(null, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
+                output.setType(competition.getType().getName());
+                output.setGrade(competition.getGrade().getName());
+           /*     if (trials != null && trials.length > 0) {
+                    output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
+                }*/
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);

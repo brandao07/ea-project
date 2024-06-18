@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: '/competition-detail/:id',
-    name:'/competition-detail',
+    name:'competition-detail',
     component: () => import('@/views/CompetitionDetail.vue'),
     props: true,
   },
@@ -33,6 +33,12 @@ const routes = [
     path: "/competitions",
     name: "view-competitions",
     component: () => import("@/views/ViewCompetitions.vue"),
+  },
+  {
+    path: '/race/:raceId',
+    name: 'RaceDetails',
+    component: () => import("@/views/RaceDetails.vue"),
+    props: true
   },
   {
     path: "/trials",
@@ -78,6 +84,11 @@ const routes = [
     path: '/clubs',
     name: 'view-clubs',
     component: () => import('@/views/ViewClubs.vue'),
+  },
+  {
+    path: "/view-results",
+    name: "view-results",
+    component: () => import("@/views/ViewResults.vue"),
   }
 ];
 

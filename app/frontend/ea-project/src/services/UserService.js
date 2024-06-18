@@ -187,7 +187,7 @@ class UserService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
-      const output = new AuthenticationOutput(response.token, feedbackMessages);
+      const output = new AuthenticationOutput(response.token,response.userId,response.role, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
       });

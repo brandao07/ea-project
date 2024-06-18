@@ -24,7 +24,7 @@ export default {
         return {
             getAllResultsInput: new GetAllResultsInput(),
             getAllResultsOutput: new GetAllResultsOutput(),
-            gridheaders: ['name', 'position', 'time']
+            gridheaders: ['position', 'time', 'observations', 'penaltyTime', ]
         };
     },
     methods: {

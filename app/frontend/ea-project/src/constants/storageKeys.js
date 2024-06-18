@@ -1,6 +1,6 @@
 // src/constants/storageKeys.js
 
-export const StorageKeys = Object.freeze({
+export var StorageKeys = {
   JWT_TOKEN: "jwt-token",
   ID_USER: "idUser",
   NAME: "name",
@@ -8,4 +8,4 @@ export const StorageKeys = Object.freeze({
   REGISTER_DATE: "registerDate",
   PHOTO: "photo",
   ROLE: "role",
-});
+};

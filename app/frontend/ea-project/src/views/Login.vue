@@ -1,6 +1,6 @@
 <template>
     <div id="login">
-        <div class="div-center vertical-center">
+        <div class="div-center">
             <div class="content">
                 <form @submit.prevent="login">
                     <div class="row">
@@ -60,9 +60,12 @@ export default {
     },
     methods: {
         async login() {
+
             this.authenticationOutput = await UserService.loginUser(this.authenticationInput);
             if (this.authenticationOutput.token) {
-                AuthService.login(this.authenticationOutput.token, this.$router);
+                AuthService.login(this.authenticationOutput.token,this.$router);
+
+
             }
         },
         navigateToLogin() {
@@ -77,7 +80,7 @@ export default {
 
 <style scoped>
 #login {
-    height: 100vh;
+    height: 100%;
     margin-top: 0rem;
     margin-bottom: 0rem;
     display: flex;

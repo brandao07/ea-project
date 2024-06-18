@@ -45,18 +45,33 @@ export default {
         return {
             recoverPasswordInput: new RecoverPasswordInput(),
             recoverPasswordOutput: new RecoverPasswordOutput(),
+            recoveryInProgress: false, // Flag para indicar se o processo de recuperação está em andamento
         };
     },
     methods: {
-        recoverPassword() {
-            UserService.recoverPassword(this.recoverPasswordInput)
-                .then(response => {
-                    console.log('Recovery email sent:', response);
+        async recoverPassword() {
+            // Evita enviar múltiplas vezes enquanto o processo está em andamento
+            if (this.recoveryInProgress) return;
+
+            try {
+                this.recoveryInProgress = true;
+                const response = await UserService.recoverPassword(this.recoverPasswordInput);
+                console.log('Recovery email sent:', response);
+                
+                // Verifica se o email é válido antes de redirecionar para o login
+                if (response.successful) {
                     this.navigateToLogin();
-                })
-                .catch(error => {
-                    console.error('Failed to send recovery email:', error);
-                });
+                } else {
+                    // Lógica para lidar com email inválido (ex: exibir mensagem de erro)
+                    console.error('Invalid email entered for recovery');
+                    // Exibir mensagem de erro ao usuário, se necessário
+                }
+            } catch (error) {
+                console.error('Failed to send recovery email:', error);
+                // Exibir mensagem de erro ao usuário, se necessário
+            } finally {
+                this.recoveryInProgress = false;
+            }
         },
         navigateToLogin() {
             this.$router.push('/login');

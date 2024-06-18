@@ -49,29 +49,25 @@ VALUES
     (4, 'Cancelado', CURRENT_TIMESTAMP),
     (5, 'Adiado', CURRENT_TIMESTAMP);
 
--- Insert competition data
-INSERT INTO public.competition(Id, Name, Startdate, Enddate, Isactive, Creationdate)
-VALUES
-    (1, 'Campeonato Nacional de Canoagem', '2024-07-01 09:00:00', '2024-07-10 18:00:00', true, CURRENT_TIMESTAMP),
-    (2, 'Taça Regional de Canoagem', '2024-08-01 09:00:00', '2024-08-05 18:00:00', true, CURRENT_TIMESTAMP),
-    (3, 'Desafio de Canoagem de Verão', '2024-09-01 09:00:00', '2024-09-03 18:00:00', true, CURRENT_TIMESTAMP),
-    (4, 'Clássico de Canoagem de Outono', '2024-10-01 09:00:00', '2024-10-05 18:00:00', true, CURRENT_TIMESTAMP),
-    (5, 'Desafio de Paddling de Inverno', '2024-11-01 09:00:00', '2024-11-03 18:00:00', true, CURRENT_TIMESTAMP);
-
 -- Insert grade data
-INSERT INTO public.grade(Id, Name, Minage, Maxage, Gender, Creationdate)
-VALUES
-    (1, 'Masculino', 18, 60, 'Masculino', CURRENT_TIMESTAMP),
-    (2, 'Feminino', 18, 60, 'Feminino', CURRENT_TIMESTAMP);
+INSERT INTO public.grade(Id, Name, Minage, Maxage, Creationdate)
+VALUES (1, 'Mínimo', 5, 8, CURRENT_TIMESTAMP),
+       (2, 'Menor', 9, 10, CURRENT_TIMESTAMP),
+       (3, 'Iniciado-A', 11, 11, CURRENT_TIMESTAMP),
+       (4, 'Iniciado-B', 12, 12, CURRENT_TIMESTAMP),
+       (5, 'Infantil-A', 13, 13, CURRENT_TIMESTAMP),
+       (6, 'Infantil-B', 14, 14, CURRENT_TIMESTAMP),
+       (7, 'Cadete', 15, 16, CURRENT_TIMESTAMP),
+       (8, 'Sub16', 12, 16, CURRENT_TIMESTAMP),
+       (9, 'Júnior', 17, 18, CURRENT_TIMESTAMP),
+       (10, 'Sénior', 19, 19, CURRENT_TIMESTAMP),
+       (11, 'Sub23', 19, 23, CURRENT_TIMESTAMP),
+       (12, 'Master-A', 35, 44, CURRENT_TIMESTAMP),
+       (13, 'Master-B', 45, 54, CURRENT_TIMESTAMP),
+       (14, 'Master-C', 55, 64, CURRENT_TIMESTAMP),
+       (15, 'Master-D', 65, 99, CURRENT_TIMESTAMP);
 
--- Insert notification data
-INSERT INTO public.notification(Id, competitionId, Messageheader, Messagebody, Messagetype, Creationdate)
-VALUES
-    (1, 1, 'Nova Prova Adicionada', 'Uma nova prova foi adicionada ao Campeonato Nacional de Canoagem.', 'Info', CURRENT_TIMESTAMP),
-    (2, 2, 'Atualização da Competição', 'O cronograma da Taça Regional de Canoagem foi atualizado.', 'Update', CURRENT_TIMESTAMP),
-    (3, 3, 'Lembrete', 'Não se esqueça de se inscrever no Desafio de Canoagem de Verão.', 'Reminder', CURRENT_TIMESTAMP),
-    (4, 4, 'Novo Evento Adicionado', 'Um novo evento foi adicionado ao Clássico de Canoagem de Outono.', 'Info', CURRENT_TIMESTAMP),
-    (5, 5, 'Alerta de Clima', 'Devido ao mau tempo esperado, o Desafio de Paddling de Inverno pode ser adiado.', 'Alert', CURRENT_TIMESTAMP);
+
 
 -- Insert type data
 INSERT INTO public.type(Id, Name, Numberofpersons, Creationdate)
@@ -120,13 +116,45 @@ VALUES
     (32, null, 3, 9, 'André Lopes', 'alopes@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Masculino', 29, 178, 70, true, CURRENT_TIMESTAMP, null),
     (33, null, 3, 9, 'Carla Silva', 'csilva@mail.com', '$2a$10$e32oMMN2z4Jnhg8O471ekeAkyuxXtyq.BbzF8sqx9FCyWln8mPER.', 'Feminino', 26, 167, 61, true, CURRENT_TIMESTAMP, null);
 
--- Insert trial data
-INSERT INTO public.trial(Id, stateId, competitionId, gradeId, typeId, locationId, Name, Startdate, Distance, Distanceunit, Isactive, Creationdate)
-    VALUES
-        (1, 3, 1, 1, 1, 1, 'Prova 1 - Nacional', ('2024-07-01 09:00:00')::timestamp, 500.0, 'metros', true, CURRENT_TIMESTAMP),
-        (2, 3, 2, 1, 1, 1, 'Prova 2 - Regional', ('2024-08-02 09:00:00')::timestamp, 1000.0, 'metros', true, CURRENT_TIMESTAMP),
-        (3, 3, 3, 1, 1, 1, 'Prova 3 - Verão', ('2024-09-03 09:00:00')::timestamp, 1500.0, 'metros', true, CURRENT_TIMESTAMP),
-        (4, 3, 4, 2, 2, 2, 'Prova 4 - Outono', ('2024-10-04 09:00:00')::timestamp, 2000.0, 'metros', true, CURRENT_TIMESTAMP),
-        (5, 3, 5, 2, 2, 2, 'Prova 5 - Inverno', ('2024-11-05 09:00:00')::timestamp, 2500.0, 'metros', true, CURRENT_TIMESTAMP);
+-- Insert competition data
+INSERT INTO public.competition(Id, Name, Startdate, Enddate, Isactive, Creationdate, Gender, GradeId, TypeId, UserId)
+VALUES (1, 'Campeonato Nacional de Canoagem', '2024-07-01 09:00:00', '2024-07-10 18:00:00', true, CURRENT_TIMESTAMP,
+        'Masculino', 2, 1, 5),
+       (2, 'Taça Regional de Canoagem', '2024-08-01 09:00:00', '2024-08-05 18:00:00', true, CURRENT_TIMESTAMP,
+        'Feminino', 1, 1, 5),
+       (3, 'Desafio de Canoagem de Verão', '2024-09-01 09:00:00', '2024-09-03 18:00:00', true, CURRENT_TIMESTAMP,
+        'Masculino', 3, 2, 5),
+       (4, 'Clássico de Canoagem de Outono', '2024-10-01 09:00:00', '2024-10-05 18:00:00', true, CURRENT_TIMESTAMP,
+        'Masculino', 4, 2, 5),
+       (5, 'Desafio de Paddling de Inverno', '2024-11-01 09:00:00', '2024-11-03 18:00:00', true, CURRENT_TIMESTAMP,
+        'Feminino', 10, 3, 5);
 
+-- Insert trial data
+INSERT INTO public.trial(Id, stateId, competitionId, locationId, Name, Startdate, Distance, Distanceunit, Isactive,
+                         Creationdate, Modality)
+VALUES (1, 3, 1, 1, 'Prova 1 - Nacional', ('2024-07-01 09:00:00')::timestamp, 500.0, 'metros', true, CURRENT_TIMESTAMP,
+        'Maratona'),
+       (2, 3, 2, 1, 'Prova 2 - Regional', ('2024-08-02 09:00:00')::timestamp, 1000.0, 'metros', true, CURRENT_TIMESTAMP,
+        'Velocidade'),
+       (3, 3, 3, 1, 'Prova 3 - Verão', ('2024-09-03 09:00:00')::timestamp, 1500.0, 'metros', true, CURRENT_TIMESTAMP,
+        'Maratona'),
+       (4, 3, 4, 2, 'Prova 4 - Outono', ('2024-10-04 09:00:00')::timestamp, 2000.0, 'metros', true, CURRENT_TIMESTAMP,
+        'Slalom'),
+       (5, 3, 5, 2, 'Prova 5 - Inverno', ('2024-11-05 09:00:00')::timestamp, 2500.0, 'metros', true, CURRENT_TIMESTAMP,
+        'Slalom');
+
+-- Insert notification data
+INSERT INTO public.notification(Id, competitionId, Messageheader, Messagebody, Messagetype, Creationdate)
+VALUES (1, 1, 'Nova Prova Adicionada', 'Uma nova prova foi adicionada ao Campeonato Nacional de Canoagem.', 'Info',
+        CURRENT_TIMESTAMP),
+       (2, 2, 'Atualização da Competição', 'O cronograma da Taça Regional de Canoagem foi atualizado.', 'Update',
+        CURRENT_TIMESTAMP),
+       (3, 3, 'Lembrete', 'Não se esqueça de se inscrever no Desafio de Canoagem de Verão.', 'Reminder',
+        CURRENT_TIMESTAMP),
+       (4, 4, 'Novo Evento Adicionado', 'Um novo evento foi adicionado ao Clássico de Canoagem de Outono.', 'Info',
+        CURRENT_TIMESTAMP),
+       (5, 5, 'Alerta de Clima', 'Devido ao mau tempo esperado, o Desafio de Paddling de Inverno pode ser adiado.',
+        'Alert', CURRENT_TIMESTAMP);
 COMMIT;
+
+
