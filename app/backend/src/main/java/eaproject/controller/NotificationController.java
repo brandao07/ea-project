@@ -1,8 +1,14 @@
 package eaproject.controller;
 
 import eaproject.beans.NotificationBean;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateNotificationInput;
+import eaproject.input.GetAllNotificationsInput;
+import eaproject.input.GetNotificationByIdInput;
+import eaproject.input.UpdateNotificationInput;
+import eaproject.output.CreateNotificationOutput;
+import eaproject.output.GetAllNotificationsOutput;
+import eaproject.output.GetNotificationByIdOutput;
+import eaproject.output.UpdateNotificationOutput;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +29,7 @@ public class NotificationController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateNotificationEntity")
     public CreateNotificationOutput createNotificationEntity(@RequestBody CreateNotificationInput input) {
         return notificationBean.createNotificationEntity(input);
@@ -35,7 +41,7 @@ public class NotificationController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateNotificationEntity")
     public UpdateNotificationOutput updateNotificationEntity(@RequestBody UpdateNotificationInput input) {
         return notificationBean.updateNotificationEntity(input);
@@ -47,7 +53,7 @@ public class NotificationController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetNotificationById")
     public GetNotificationByIdOutput getNotificationById(@RequestBody GetNotificationByIdInput input) { return notificationBean.getNotificationById(input); }
 
@@ -57,7 +63,7 @@ public class NotificationController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllNotifications")
     public GetAllNotificationsOutput getAllNotifications(@RequestBody GetAllNotificationsInput input) {
         return notificationBean.getAllNotifications(input);

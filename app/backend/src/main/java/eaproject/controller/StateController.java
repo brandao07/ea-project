@@ -1,8 +1,14 @@
 package eaproject.controller;
 
 import eaproject.beans.StateBean;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateStateInput;
+import eaproject.input.GetAllStatesInput;
+import eaproject.input.GetStateByIdInput;
+import eaproject.input.UpdateStateInput;
+import eaproject.output.CreateStateOutput;
+import eaproject.output.GetAllStatesOutput;
+import eaproject.output.GetStateByIdOutput;
+import eaproject.output.UpdateStateOutput;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +29,7 @@ public class StateController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateStateEntity")
     public CreateStateOutput createStateEntity(@RequestBody CreateStateInput input) {
         return stateBean.createStateEntity(input);
@@ -35,7 +41,7 @@ public class StateController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateStateEntity")
     public UpdateStateOutput updateStateEntity(@RequestBody UpdateStateInput input) {
         return stateBean.updateStateEntity(input);
@@ -47,7 +53,7 @@ public class StateController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetStateById")
     public GetStateByIdOutput getStateById(@RequestBody GetStateByIdInput input) { return stateBean.getStateById(input); }
 
@@ -57,7 +63,7 @@ public class StateController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllStates")
     public GetAllStatesOutput getAllStates(@RequestBody GetAllStatesInput input) {
         return stateBean.getAllStates(input);

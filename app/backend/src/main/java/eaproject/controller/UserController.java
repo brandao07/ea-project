@@ -24,7 +24,7 @@ public class UserController {
      * @param input The input object containing the user ID and the photo to be uploaded.
      * @return An UploadUserPhotoOutput object containing the result of the operation and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UploadUserPhoto")
     public UploadUserPhotoOutput uploadUserPhoto(@RequestBody UploadUserPhotoInput input) {
         return userBean.uploadUserPhoto(input);
@@ -36,7 +36,7 @@ public class UserController {
      * @param input A GetAllUsersInput object containing any input parameters needed for fetching users.
      * @return An object containing the users retrieved from the database.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllUsers")
     public GetAllUsersOutput getAllUsers(@RequestBody GetAllUsersInput input) {
         return userBean.getAllUsers(input);
@@ -48,7 +48,7 @@ public class UserController {
      * @param input A JSON object (in the request body) containing the user ID and the new role ID.
      * @return An output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateUserCurrentRole")
     public UpdateUserRoleOutput updateUserCurrentRole(@RequestBody UpdateUserRoleInput input) {
         return userBean.updateUserRole(input);
@@ -61,7 +61,7 @@ public class UserController {
      * @param request The HTTP request containing the JWT token.
      * @return An output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateBasicUserInfo")
     public UpdateUserOutput updateBasicUserInfo(@RequestBody UpdateUserInput input, HttpServletRequest request) {
         return userBean.updateUserInfo(input, request);
@@ -74,7 +74,7 @@ public class UserController {
      * @param request       HTTP request containing JWT token.
      * @return GetUserByIdOutput containing user details.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/BasicUserInfo")
     public GetUserByIdOutput getBasicUserInfo(@RequestBody GetUserByIdInput input, HttpServletRequest request) {
         return userBean.basicUserInfo(input, request);
@@ -111,5 +111,11 @@ public class UserController {
     @PostMapping("/RecoverPassword")
     public RecoverPasswordOutput recoverPassword(@RequestBody RecoverPasswordInput input) {
         return userBean.recoverPassword(input);
+    }
+
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PostMapping("/GetUsersByTeamId")
+    public GetUsersByTeamIdOutput getUsersByTeamIdOutput(@RequestBody GetUsersByTeamIdInput input) {
+        return userBean.getUsersByTeamIdInput(input);
     }
 }

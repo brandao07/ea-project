@@ -29,7 +29,7 @@ public class TypeController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateTypeEntity")
     public CreateTypeOutput createTypeEntity(@RequestBody CreateTypeInput input) {
         return typeBean.createTypeEntity(input);
@@ -41,7 +41,7 @@ public class TypeController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateTypeEntity")
     public UpdateTypeOutput updateTypeEntity(@RequestBody UpdateTypeInput input) {
         return typeBean.updateTypeEntity(input);
@@ -53,7 +53,7 @@ public class TypeController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetTypeById")
     public GetTypeByIdOutput getTypeById(@RequestBody GetTypeByIdInput input) { return typeBean.getTypeById(input); }
 
@@ -63,7 +63,7 @@ public class TypeController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllTypes")
     public GetAllTypesOutput getAllTypes(@RequestBody GetAllTypesInput input) {
         return typeBean.getAllTypes(input);
