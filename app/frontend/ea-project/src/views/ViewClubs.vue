@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         async fetchClubInfo() {
-            this.getAllCLubsOutput = await ClubService.getAllClubs({});
+            this.getAllClubsOutput = await ClubService.getAllClubs(this.getAllClubsInput);
         }
     },
     async mounted() {
