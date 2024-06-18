@@ -7,10 +7,7 @@ import eaproject.input.CreateCompetitionInput;
 import eaproject.input.GetAllCompetitionsInput;
 import eaproject.input.GetCompetitionByIdInput;
 import eaproject.input.UpdateCompetitionInput;
-import eaproject.output.CreateCompetitionOutput;
-import eaproject.output.GetAllCompetitionsOutput;
-import eaproject.output.GetCompetitionByIdOutput;
-import eaproject.output.UpdateCompetitionOutput;
+import eaproject.output.*;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
 
 @Stateless(name = "CompetitionEJB")
 @Local(CompetitionLocal.class)
@@ -159,17 +157,17 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-//            String condition = "'competitionid = " + competition.getId() + "'";
-            //          Trial[] trials = TrialDAO.listTrialByQuery(null, null);
+            String condition = "competitionid = " + competition.getId();
+            Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
                 // Assign retrieved entity to the output object
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
                 output.setType(competition.getType().getName());
                 output.setGrade(competition.getGrade().getName());
-           /*     if (trials != null && trials.length > 0) {
+                if (trials != null && trials.length > 0) {
                     output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
-                }*/
+                }
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -203,7 +201,20 @@ public class CompetitionBean implements CompetitionLocal {
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setCompetitionList(Utilities.convertToDTOArray(competitions, GetAllCompetitionsOutput.CompetitionProperties.class));
+                ArrayList<GetAllCompetitionsOutput.CompetitionProperties> competitionProperties = new ArrayList<>();
+                for (Competition c : competitions) {
+                    var cp = new GetAllCompetitionsOutput.CompetitionProperties();
+                    cp.setId(c.getId());
+                    cp.setName(c.getName());
+                    cp.setType(c.getType().getName());
+                    cp.setGender(c.getGender());
+                    cp.setGrade(c.getGrade().getName());
+                    cp.setStartDate(c.getStartDate());
+                    cp.setEndDate(c.getEndDate());
+                    cp.setIsActive(c.getIsActive());
+                    competitionProperties.add(cp);
+                }
+                output.setCompetitionList(competitionProperties);
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
