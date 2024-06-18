@@ -154,7 +154,7 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-            String condition = "competitionid = " + competition.getId();
+            String condition = "competitionid = " + competition.getId() + " and isactive = true";
             Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
@@ -206,7 +206,8 @@ public class CompetitionBean implements CompetitionLocal {
         GetAllCompetitionsOutput output = new GetAllCompetitionsOutput();
         try {
             // Fetch entities from the database
-            Competition[] competitions = CompetitionDAO.listCompetitionByQuery(null, null);
+            String condition = "isactive = true";
+            Competition[] competitions = CompetitionDAO.listCompetitionByQuery(condition, null);
 
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {
