@@ -1,5 +1,6 @@
 import CreateTeamOutput from "@/models/output/CreateTeamOutput";
 import GetAllTeamsOutput from "@/models/output/GetAllTeamsOutput";
+import GetTeamsByClubIdOutput from "@/models/output/GetTeamsByClubIdOutput";
 import GetTeamByIdOutput from "@/models/output/GetTeamByIdOutput";
 import GetTeamsByTrialIdOutput from "@/models/output/GetTeamsByTrialIdOutput";
 import UpdateTeamOutput from "@/models/output/UpdateTeamOutput";
@@ -112,6 +113,33 @@ class TeamService {
       return output;
     }
   }
+
+    /**
+   * Getallteams
+   * @param {GetTeamsByClubIdInput} input - The input
+   * @returns {Promise<GetTeamsByClubIdOutput>} The GetAllTeamsOutput
+   */
+    async getTeamsByClubId(input) {
+      try {
+        const response = await ApiService.post(API_ENDPOINTS.GET_TEAMS_BY_CLUB_ID, input);
+        const feedbackMessages = response.feedbackMessages.map(
+          (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+        );
+        const output = new GetTeamsByClubIdOutput(response.teamList, feedbackMessages);
+        output.feedbackMessages.forEach((msg) => {
+          EventBus.emit("feedback-message", msg);
+        });
+        return output;
+      } catch (error) {
+        const errorMessage = new FeedbackMessage(
+          "An error occurred during getAllTeams.",
+          FeedbackSeverity.DANGER
+        );
+        const output = new GetTeamsByClubIdOutput("", [errorMessage]);
+        EventBus.emit("feedback-message", errorMessage);
+        return output;
+      }
+    }
 
   /**
    * Getteamsbytrialidoutput
