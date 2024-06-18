@@ -1,8 +1,14 @@
 package eaproject.controller;
 
 import eaproject.beans.ClubBean;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateClubInput;
+import eaproject.input.GetAllClubsInput;
+import eaproject.input.GetClubByIdInput;
+import eaproject.input.UpdateClubInput;
+import eaproject.output.CreateClubOutput;
+import eaproject.output.GetAllClubsOutput;
+import eaproject.output.GetClubByIdOutput;
+import eaproject.output.UpdateClubOutput;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +29,7 @@ public class ClubController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateClubEntity")
     public CreateClubOutput createClubEntity(@RequestBody CreateClubInput input) {
         return clubBean.createClubEntity(input);
@@ -35,7 +41,7 @@ public class ClubController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateClubEntity")
     public UpdateClubOutput updateClubEntity(@RequestBody UpdateClubInput input) {
         return clubBean.updateClubEntity(input);
@@ -47,7 +53,7 @@ public class ClubController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetClubById")
     public GetClubByIdOutput getClubById(@RequestBody GetClubByIdInput input) { return clubBean.getClubById(input); }
 
@@ -57,7 +63,7 @@ public class ClubController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllClubs")
     public GetAllClubsOutput getAllClubs(@RequestBody GetAllClubsInput input) {
         return clubBean.getAllClubs(input);
