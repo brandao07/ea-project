@@ -80,6 +80,7 @@ import CompetitionService from '@/services/CompetitionService';
 import NavigationBar from '@/components/NavigationBar.vue';
 import GenericGrid from '@/components/Grid.vue';
 import { StorageKeys } from '@/constants/storageKeys';
+import router from '@/router';
 
 export default {
     name: 'CompetitionDetails',
@@ -209,8 +210,9 @@ export default {
         editCompetition() {
             // Lógica para editar campeonato
         },
-        removeCompetition() {
-            // Lógica para remover campeonato
+        async removeCompetition() {
+            await CompetitionService.deleteCompetition({id:this.competition.id,isActive:false});
+            router.push({ name: 'view-competitions' });
         }
     }
 };
