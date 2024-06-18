@@ -2,37 +2,58 @@
     <div class="competitions">
         <NavigationBar />
         <div class="container">
+            <!-- Botão para mostrar/ocultar o filtro -->
+            <button @click="toggleFilter" class="toggle-filter-btn">Filtro</button>
+            <CompetitionFilter v-if="filterVisible" @apply-filters="applyFilters" />
+
             <!-- Grid para Editar Competições -->
-            <generic-grid v-if="this.role == 'Administrator'" :data="getAllCompetitionsOutput.competitionList"
-                :headers="gridheaders" :editable="true" :deletable="true" grid-title="Competitions"
-                @row-click="viewCompetition" @edit="openEditModal" @delete="deleteCompetition" />
-            <generic-grid v-else :data="getAllCompetitionsOutput.competitionList"
-                :headers="gridheaders" :editable="false" :deletable="false" grid-title="Competitions"
-                @row-click="viewCompetition" />
+            <generic-grid v-if="role === 'Administrator'" 
+                :data="filteredCompetitions"
+                :headers="gridHeaders" 
+                :editable="true" 
+                :deletable="true" 
+                grid-title="Competições"
+                @row-click="viewCompetition" 
+                @edit="openEditModal" 
+                @delete="deleteCompetition" 
+            />
+            <generic-grid v-else 
+                :data="filteredCompetitions"
+                :headers="gridHeaders" 
+                :editable="false" 
+                :deletable="false" 
+                grid-title="Competições"
+                @row-click="viewCompetition" 
+            />
         </div>
 
         <!-- Modal para Editar Competição -->
-        <Modal :isVisible="modalVisible" @cancel="cancelEdit" @save="saveCompetition" @delete="deleteCompetition"
-            title="Edit Competition">
+        <Modal :isVisible="modalVisible" 
+            @cancel="cancelEdit" 
+            @save="saveCompetition" 
+            @delete="deleteCompetition"
+            title="Editar Competição"
+        >
             <template v-slot>
                 <form>
                     <div class="form-group mb-1">
-                        <label for="name" class="mb-2">Name</label>
+                        <label for="name" class="mb-2">Nome</label>
                         <input type="text" class="form-control" id="name" v-model="selectedItem.name" required />
                     </div>
                     <div class="form-group mb-1">
-                        <label for="startDate" class="mb-2">Start Date</label>
+                        <label for="startDate" class="mb-2">Data de Início</label>
                         <input type="datetime-local" class="form-control" id="startDate"
                             v-model="selectedItem.startDate" required />
                     </div>
                     <div class="form-group mb-1">
-                        <label for="endDate" class="mb-2">End Date</label>
+                        <label for="endDate" class="mb-2">Data de Fim</label>
                         <input type="datetime-local" class="form-control" id="endDate" v-model="selectedItem.endDate"
                             required />
                     </div>
                 </form>
             </template>
         </Modal>
+        <Footer />
     </div>
 </template>
 
@@ -45,8 +66,10 @@ import UpdateCompetitionOutput from '@/models/output/UpdateCompetitionOutput';
 import CompetitionService from '@/services/CompetitionService';
 import NavigationBar from '@/components/NavigationBar.vue';
 import Modal from '@/components/Modal.vue';
-import router from '@/router'; // Importe o router se ainda não estiver importado
+import router from '@/router';
 import { StorageKeys } from "@/constants/storageKeys";
+import Footer from '@/components/footer.vue';
+import CompetitionFilter from '@/components/CompetitionFilter.vue';
 
 export default {
     name: "Competitions",
@@ -54,7 +77,8 @@ export default {
         GenericGrid,
         NavigationBar,
         Modal,
-
+        Footer,
+        CompetitionFilter
     },
     data() {
         return {
@@ -62,32 +86,35 @@ export default {
             getAllCompetitionsOutput: new GetAllCompetitionsOutput(),
             updateCompetitionInput: new UpdateCompetitionInput(),
             updateCompetitionOutput: new UpdateCompetitionOutput(),
-            gridheaders: ['name', 'startDate', 'endDate', 'creationDate'],
+            gridHeaders: ['name', 'startDate', 'endDate', 'creationDate'],
             modalVisible: false,
-            role:localStorage.getItem(StorageKeys.ROLE),
-            StorageKeys:StorageKeys,
+            role: localStorage.getItem(StorageKeys.ROLE),
+            StorageKeys: StorageKeys,
             selectedItem: {
                 name: '',
                 startDate: '',
                 endDate: ''
-            }
+            },
+            filters: {},
+            filteredCompetitions: [],
+            filterVisible: false // Controla a visibilidade do filtro
         };
     },
     computed: {
         editable() {
-            // Determina se estamos na visualização de edição ou visualização
             return this.$route.name === 'edit-competitions';
         }
     },
     methods: {
         async fetchCompetitionInfo() {
             this.getAllCompetitionsOutput = await CompetitionService.getAllCompetitions(this.getAllCompetitionsInput);
+            this.applyFilters(); // Aplica os filtros após buscar as competições
         },
         openEditModal(item) {
             this.selectedItem = {
                 ...item,
-                startDate: new Date(item.startDate).toISOString().slice(0, 16), // para coincidir com o formato datetime-local
-                endDate: new Date(item.endDate).toISOString().slice(0, 16) // para coincidir com o formato datetime-local
+                startDate: new Date(item.startDate).toISOString().slice(0, 16),
+                endDate: new Date(item.endDate).toISOString().slice(0, 16)
             };
             this.updateCompetitionInput = { ...item };
             this.modalVisible = true;
@@ -103,7 +130,7 @@ export default {
         async deleteCompetition() {
             await CompetitionService.deleteCompetition(this.updateCompetitionInput);
             this.modalVisible = false;
-            await this.fetchCompetitionInfo(); // Atualiza a lista de competições após excluir
+            await this.fetchCompetitionInfo();
         },
         async saveCompetition() {
             this.updateCompetitionInput.startDate = new Date(this.selectedItem.startDate).toISOString();
@@ -111,11 +138,26 @@ export default {
             this.updateCompetitionOutput = await CompetitionService.updateCompetitionEntity(this.updateCompetitionInput);
             this.modalVisible = false;
             this.updateCompetitionInput = new UpdateCompetitionInput();
-            await this.fetchCompetitionInfo(); // Refresh the competition list after save
+            await this.fetchCompetitionInfo();
         },
         viewCompetition(competition) {
-            // Navega para a página de detalhes da competição
             router.push({ name: 'competition-detail', params: { id: competition.id } });
+        },
+        applyFilters(filters) {
+            console.log('filters')
+            console.log(this.getAllCompetitionsOutput.competitionList)
+            this.filters = filters;
+            this.filteredCompetitions = this.getAllCompetitionsOutput.competitionList.filter(competition => {
+                return !this.filters || (!this.filters.competitionName || competition.name.toLowerCase().includes(this.filters.competitionName.toLowerCase())) &&
+                    (!this.filters.gender || competition.gender === this.filters.gender) &&
+                    (!this.filters.category.length || this.filters.category.includes(competition.category)) &&
+                    (!this.filters.startDate || new Date(competition.startDate) >= new Date(this.filters.startDate)) &&
+                    (!this.filters.endDate || new Date(competition.endDate) <= new Date(this.filters.endDate)) &&
+                    (!this.filters.grade.length || this.filters.grade.includes(competition.grade));
+            });
+        },
+        toggleFilter() {
+            this.filterVisible = !this.filterVisible;
         }
     },
     async mounted() {
@@ -125,5 +167,17 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos específicos podem ser adicionados aqui conforme necessário */
+.toggle-filter-btn {
+    background-color: #f0f0f0; /* Cor de fundo clara */
+    border: 1px solid #ccc; /* Borda discreta */
+    color: #333; /* Cor do texto */
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espaço abaixo do botão */
+}
+
+.toggle-filter-btn:hover {
+    background-color: #e0e0e0; /* Cor de fundo ao passar o mouse */
+}
 </style>
