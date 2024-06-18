@@ -37,7 +37,13 @@ public class GetAllCompetitionsOutput extends BaseOutput implements Serializable
         private boolean isActive;
 
         @JsonProperty
-        private Timestamp creationDate;
+        private String grade;
+
+        @JsonProperty
+        private String type;
+
+        @JsonProperty
+        private String gender;
 
         public Integer getId() {
             return id;
@@ -79,12 +85,28 @@ public class GetAllCompetitionsOutput extends BaseOutput implements Serializable
             this.isActive = isActive;
         }
 
-        public Timestamp getCreationDate() {
-            return creationDate;
+        public String getGrade() {
+            return grade;
         }
 
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
+        public void setGrade(String grade) {
+            this.grade = grade;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
         }
     }
 }

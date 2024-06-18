@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
 
 @Stateless(name = "CompetitionEJB")
 @Local(CompetitionLocal.class)
@@ -200,7 +201,20 @@ public class CompetitionBean implements CompetitionLocal {
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {
                 // Assign retrieved entities to the output object
-                output.setCompetitionList(Utilities.convertToDTOArray(competitions, GetAllCompetitionsOutput.CompetitionProperties.class));
+                ArrayList<GetAllCompetitionsOutput.CompetitionProperties> competitionProperties = new ArrayList<>();
+                for (Competition c : competitions) {
+                    var cp = new GetAllCompetitionsOutput.CompetitionProperties();
+                    cp.setId(c.getId());
+                    cp.setName(c.getName());
+                    cp.setType(c.getType().getName());
+                    cp.setGender(c.getGender());
+                    cp.setGrade(c.getGrade().getName());
+                    cp.setStartDate(c.getStartDate());
+                    cp.setEndDate(c.getEndDate());
+                    cp.setIsActive(c.getIsActive());
+                    competitionProperties.add(cp);
+                }
+                output.setCompetitionList(competitionProperties);
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
