@@ -26,7 +26,7 @@
         </div>
 
         <!-- Carousel de Provas -->
-        <div v-if="this.competition.trials.length > 10" class="race-carousel mt-4 container">
+        <div v-if="this.competition.trials.length > 0" class="race-carousel mt-4 container">
             <div id="raceCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div v-for="(race, index) in this.competition.trials" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
@@ -41,14 +41,12 @@
                                 <p class="lead">Prova de {{ race.modality }}</p>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <p><small><strong>Data:</strong> {{ race.date }}</small></p>
-                                        <p><small><strong>Category:</strong> {{ competition.category }}</small></p>
-                                        <p><small><strong>Distância:</strong> {{ race.Distance }} {{ race.Distanceunit }}</small></p>
-                                        <p><small><strong>Início:</strong> {{ race.Startdate }}</small></p>
-                                        <p><small><strong>Local:</strong> {{ race.locationId }}</small></p>
-                                        <p><small><strong>Árbitro:</strong> {{ race.judgeName }}</small></p>
+                                        <p><small><strong>Category:</strong> {{ race.category }}</small></p>
+                                        <p><small><strong>Distance:</strong> {{ race.distance }} {{ race.distanceUnit }}</small></p>
+                                        <p><small><strong>Start Date:</strong> {{ race.startDate }}</small></p>
+                                        <p><small><strong>Location:</strong> {{ race.locationId }}</small></p>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" v-if ="race.weather">
                                         <p><small> <i class="weather-icon"> </i> <img :src="'https://openweathermap.org/img/wn/' + race.weather.icon + '@2x.png'" :alt="race.weather.main"> {{ convertKelvinToCelsius(race.weather.temp) }} °C</small></p>
                                         <p><small><font-awesome-icon :icon="['fas', 'wind']" class="font-awesome-icon" /> {{ race.weather.windSpeed }} m/s</small></p>
                                         <p><small><font-awesome-icon :icon="['fas', 'cloud-arrow-down']" class="font-awesome-icon" /> {{ race.weather.pressure }} hPa</small></p>
@@ -70,8 +68,8 @@
             </div>
         </div>
         <div v-else class="container mt-4">
-            <generic-grid :data="this.competition.trials" :headers="gridHeaders" :editable="true"
-                :deletable="true" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
+            <generic-grid :data="this.competition.trials" :headers=[] :editable="false"
+                :deletable="false" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
         </div>
     </div>
 </template>
@@ -105,6 +103,7 @@ export default {
     methods: {
         async fetchCompetition() {
             this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
+            console.log("TESTEEEEEEEEEEEEEEEEEEEE")
             console.log(this.competition);
             // Simule o carregamento das provas
             this.races = [
@@ -206,7 +205,7 @@ export default {
         },
         formatDate(date) {
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            return new Date(date).toLocaleDateString('pt-BR', options);
+            return new Date(date).toLocaleDateString('pt-PT', options);
         },
         editCompetition() {
             // Lógica para editar campeonato

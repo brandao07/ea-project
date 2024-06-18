@@ -202,8 +202,6 @@
     async created() {
       await this.fetchData();
       const competitionId = this.$route.params.id;
-      console.log("testeeeeeeeeeeeeeeeee");
-      console.log("testeeeeeeeeeeeeeeeee");
       this.competiton = await CompetitionService.getCompetitionById(competitionId);
       console.log(this.competition);
     },
