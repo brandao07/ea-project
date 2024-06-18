@@ -77,8 +77,8 @@ export default {
         openEditModal(item) {
            this.$router.push({ name: 'edit-competitions', params: { id: item.id } });
         },
-        async deleteCompetition() {
-            await CompetitionService.deleteCompetition(this.updateCompetitionInput);
+        async deleteCompetition(item) {
+            await CompetitionService.deleteCompetition({id:item.id,isActive:false});
             await this.fetchCompetitionInfo();
         },
         viewCompetition(competition) {
