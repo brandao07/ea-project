@@ -2,25 +2,25 @@
     <div id="edit-competition">
       <NavigationBar />
       <div class="container">
-        <CreateEntity formTitle="Edit Competition" @create="handleUpdate" @reset="resetForm">
+        <EditEntity formTitle="Edit Competition" @edit="handleUpdate" @cancel="handleCancel">
           <template v-slot>
             <!-- Competition Form Section -->
             <div class="competition-form">
               <div class="form-group mb-1">
                 <label for="name" class="mb-2">Name</label>
-                <input type="text" class="form-control" id="name" v-model="this.competition.name" required>
+                <input type="text" class="form-control" id="name" v-model="competition.name" required>
               </div>
               <div class="form-group mb-1">
                 <label for="startDate" class="mb-2">Start Date</label>
-                <input type="date" class="form-control" id="startDate" v-model="this.competition.startDate" required>
+                <input type="date" class="form-control" id="startDate" v-model="competition.startDate" required>
               </div>
               <div class="form-group mb-1">
                 <label for="endDate" class="mb-2">End Date</label>
-                <input type="date" class="form-control" id="endDate" v-model="this.competition.endDate" required>
+                <input type="date" class="form-control" id="endDate" v-model="competition.endDate" required>
               </div>
               <div class="form-group mb-1">
                 <label for="gender" class="mb-2">Gender</label>
-                <select class="form-select" v-model="this.competition.gender" id="gender" required>
+                <select class="form-select" ref="competition.gender" id="gender" required>
                   <option v-for="(label, value) in genderEnum" :key="value" :value="value">
                     {{ label }}
                   </option>
@@ -28,15 +28,15 @@
               </div>
               <div class="form-group mb-1">
                 <label for="grade" class="mb-2">Grade</label>
-                <select class="form-select" v-model="this.competition.grade" id="grade" required>
-                  <option v-for="(label, value) in gradeEnum" :key="value" :value="value">
+                <select class="form-select" ref="competition.grade" id="grade" required>
+                  <option v-for="(label, value) in gradeEnum" :key="value" :value="value" >
                     {{ label }}
                   </option>
                 </select>
               </div>
               <div class="form-group mb-1">
                 <label for="category" class="mb-2">Category</label>
-                <select class="form-select" v-model="this.competition.type" id="category" required>
+                <select class="form-select" ref="competition.type" id="category" required>
                   <option v-for="(label, value) in categoryEnum" :key="value" :value="value">
                     {{ label }}
                   </option>
@@ -58,7 +58,7 @@
                     <div class="form-group mb-1">
                       <label for="modality" class="mb-2">Modality</label>
                       <select class="form-select" v-model="newTrial.modality" id="modality" required>
-                        <option v-for="(label, value) in modalityEnum" :key="value" :value="value">
+                        <option v-for="(label, value) in modalityEnum" :key="value" :value="value" :selected="newTrial.modality === value">
                           {{ value }}
                         </option>
                       </select>
@@ -74,13 +74,13 @@
                     <div class="form-group mb-1">
                       <label for="trialDistanceUnit" class="mb-2">Distance Unit</label>
                       <select class="form-select" v-model="newTrial.distanceUnit" required>
-                        <option v-for="(label, key) in unitsEnumerator" :key="key" :value="key">{{ label }}</option>
+                        <option v-for="(label, key) in unitsEnumerator" :key="key" :value="key" :selected="newTrial.distanceUnit === key">{{ label }}</option>
                       </select>
                     </div>
                     <div class="form-group mb-1">
                       <label for="trialLocationId" class="mb-2">Location</label>
                       <select class="form-select" v-model="newTrial.locationId" required>
-                        <option v-for="location in getAllLocationsOutput.locationList" :key="location.id" :value="location.id">
+                        <option v-for="location in getAllLocationsOutput.locationList" :key="location.id" :value="location.id" :selected="newTrial.locationId === location.id">
                           {{ location.postalCode }} {{ location.address }} {{ location.city }} {{ location.latitude }} {{ location.longitude }}
                         </option>
                       </select>
@@ -97,7 +97,7 @@
             </div>
   
           </template>
-        </CreateEntity>
+        </EditEntity>
       </div>
       <!-- Edit Trials-->
       <b-modal v-if="editTrial" id="edit-trial-modal" ref="editTrialModal" title="Edit Trial" @ok="updateTrial">
@@ -116,31 +116,31 @@
         <div class="form-group mb-1">
           <label for="editTrialDistanceUnit" class="mb-2">Distance Unit</label>
           <select class="form-select" v-model="editTrial.distanceUnit" required>
-            <option v-for="(label, key) in unitsEnumerator" :key="key" :value="key">{{ label }}</option>
+            <option v-for="(label, key) in unitsEnumerator" :key="key" :value="key" :selected="editTrial.distanceUnit === key">{{ label }}</option>
           </select>
         </div>
         <div class="form-group mb-1">
           <label for="editTrialStateId" class="mb-2">State</label>
           <select class="form-select" v-model="editTrial.stateId" required>
-            <option v-for="state in getAllStatesOutput.stateList" :key="state.id" :value="state.id">{{ state.name }}</option>
+            <option v-for="state in getAllStatesOutput.stateList" :key="state.id" :value="state.id" :selected="editTrial.stateId === state.id">{{ state.name }}</option>
           </select>
         </div>
         <div class="form-group mb-1">
           <label for="editTrialGradeId" class="mb-2">Grade</label>
           <select class="form-select" v-model="editTrial.gradeId" required>
-            <option v-for="grade in getAllGradesOutput.gradeList" :key="grade.id" :value="grade.id">{{ grade.name }}</option>
+            <option v-for="grade in getAllGradesOutput.gradeList" :key="grade.id" :value="grade.id" :selected="editTrial.gradeId === grade.id">{{ grade.name }}</option>
           </select>
         </div>
         <div class="form-group mb-1">
           <label for="editTrialTypeId" class="mb-2">Type</label>
           <select class="form-select" v-model="editTrial.typeId" required>
-            <option v-for="type in getAllTypesOutput.types" :key="type.id" :value="type.id">{{ type.name }}</option>
+            <option v-for="type in getAllTypesOutput.types" :key="type.id" :value="type.id" :selected="editTrial.typeId === type.id">{{ type.name }}</option>
           </select>
         </div>
         <div class="form-group mb-1">
           <label for="editTrialLocationId" class="mb-2">Location</label>
           <select class="form-select" v-model="editTrial.locationId" required>
-            <option v-for="location in getAllLocationsOutput.locationList" :key="location.id" :value="location.id">
+            <option v-for="location in getAllLocationsOutput.locationList" :key="location.id" :value="location.id" :selected="editTrial.locationId === location.id">
               {{ location.postalCode }} {{ location.address }} {{ location.city }} {{ location.latitude }} {{ location.longitude }}
             </option>
           </select>
@@ -149,8 +149,9 @@
     </div>
   </template>
   
+  
   <script>
-  import CreateEntity from '@/components/CreateEntity.vue';
+  import EditEntity from '@/components/EditEntity.vue';
   import CompetitionService from '@/services/CompetitionService';
   import TrialService from '@/services/TrialService';
   import StateService from '@/services/StateService';
@@ -172,11 +173,13 @@
   import GetAllLocationsOutput from '@/models/output/GetAllLocationsOutput';
   import GenericGrid from '@/components/Grid.vue'; // Assuming the generic grid component is in components folder
   import { StorageKeys } from '@/constants/storageKeys';
+  import GetCompetitionByIdInput from '@/models/input/GetCompetitionByIdInput';
+  import router from '@/router';
   
   export default {
     name: 'edit-competition',
     components: {
-      CreateEntity,
+      EditEntity,
       NavigationBar,
       GenericGrid
     },
@@ -202,8 +205,9 @@
     async created() {
       await this.fetchData();
       const competitionId = this.$route.params.id;
-      this.competiton = await CompetitionService.getCompetitionById(competitionId);
-      console.log(this.competition);
+      this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(competitionId));
+      this.competition.startDate = new Date(this.competition.startDate).toISOString().slice(0, 10);
+      this.competition.endDate = new Date(this.competition.endDate).toISOString().slice(0, 10);
     },
     methods: {
       async fetchData() {
@@ -253,8 +257,8 @@
       async handleUpdate() {
         this.competition.isActive = true;
         this.competition.userId = localStorage.getItem(StorageKeys.ID_USER);
-        this.editCompetitionOutput = await CompetitionService.updateCompetitionEntity(this.competition);
-        if (this.editCompetitionOutput.updateSuccessful) {
+        const updateCompetitionResponse = await CompetitionService.updateCompetitionEntity(this.competition);
+        if (updateCompetitionResponse.updateSuccessful) {
           for (let trial of this.competition.trials) {
             trial.competitionId = this.competition.id;
             await TrialService.updateTrialEntity(trial);
@@ -262,8 +266,13 @@
           this.resetForm();
         }
       },
+      handleCancel() {
+        console.log('cancel');
+        router.push({ name: 'competition-detail' }, { params: { id: this.competition.id } });
+      },
       async resetForm() {
-        this.competition = await CompetitionService.getCompetitionById(this.competition.Id);
+        const competitionId = this.$route.params.id;
+        this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(competitionId));
         this.newTrial = null;
       }
     }
