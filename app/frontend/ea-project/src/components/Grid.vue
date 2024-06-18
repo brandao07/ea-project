@@ -3,10 +3,6 @@
         <div class="table-responsive-sm">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="grid-title">{{ gridTitle }}</h2>
-                <div class="d-flex" v-if="hasData">
-                    <input type="text" v-model="localFilterCriteria" class="form-control filter-input"
-                        placeholder="Filter..." />
-                </div>
             </div>
             <table class="table table-striped table-hover table-bordered" v-if="hasData">
                 <thead class="table-light">
@@ -96,10 +92,6 @@ export default {
             type: Boolean,
             default: false
         },
-        filterCriteria: {
-            type: String,
-            default: ''
-        },
         gridTitle: {
             type: String,
             default: 'Data Grid'
@@ -114,18 +106,10 @@ export default {
             currentPage: 1,
             itemsPerPage: this.defaultItemsPerPage,
             itemsPerPageOptions: [10, 25, 50, 75, 100],
-            localFilterCriteria: this.filterCriteria,
         };
     },
     computed: {
         filteredData() {
-            if (this.localFilterCriteria) {
-                return this.data.filter(item => {
-                    return this.headers.some(header =>
-                        item[header] && item[header].toString().toLowerCase().includes(this.localFilterCriteria.toLowerCase())
-                    );
-                });
-            }
             return this.data;
         },
         totalPages() {

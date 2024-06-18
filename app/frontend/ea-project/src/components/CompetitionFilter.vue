@@ -9,7 +9,7 @@
                 <label for="gender" class="form-label">Gender</label>
                 <select v-model="filters.gender" class="form-select" id="gender">
                     <option value="">All</option>
-                    <option v-for="gender,label in genderEnum" :key="label" :value="label">{{ gender }}</option>
+                    <option v-for="gender, label in genderEnum" :key="label" :value="label">{{ gender }}</option>
                 </select>
             </div>
             <div class="col-md-5">
@@ -33,8 +33,8 @@
             <div class="row mb-0"></div>
             <label class="form-label mt-3">Grade</label>
             <div>
-                <label v-for="grade in gradeEnum" :key="grade" class="form-check form-check-inline">
-                    <input type="checkbox" v-model="filters.grade" :value="grade" class="form-check-input">
+                <label v-for="grade,label in gradeEnum" :key="grade" class="form-check form-check-inline">
+                    <input type="checkbox" v-model="filters.grade" :value="label" class="form-check-input">
                     {{ grade }}
                 </label>
             </div>

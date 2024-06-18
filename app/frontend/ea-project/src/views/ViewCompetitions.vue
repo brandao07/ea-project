@@ -2,38 +2,28 @@
     <div class="competitions">
         <NavigationBar />
         <div class="container">
+            <div class="row">
+                <div class="col-md-12 bg-light mt-3">
+                    <button @click="toggleFilter" type="button" class="btn btn-secondary">Filter</button>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <!-- Botão para mostrar/ocultar o filtro -->
-            <button @click="toggleFilter" class="toggle-filter-btn">Filtro</button>
             <CompetitionFilter v-if="filterVisible" @apply-filters="applyFilters" />
 
             <!-- Grid para Editar Competições -->
-            <generic-grid v-if="role === 'Administrator'" 
-                :data="filteredCompetitions"
-                :headers="gridHeaders" 
-                :editable="true" 
-                :deletable="true" 
-                grid-title="Competições"
-                @row-click="viewCompetition" 
-                @edit="openEditModal" 
-                @delete="deleteCompetition" 
-            />
-            <generic-grid v-else 
-                :data="filteredCompetitions"
-                :headers="gridHeaders" 
-                :editable="false" 
-                :deletable="false" 
-                grid-title="Competições"
-                @row-click="viewCompetition" 
-            />
+            <generic-grid v-if="role === 'Administrator'" :data="filteredCompetitions" :headers="gridHeaders"
+                :editable="true" :deletable="true" grid-title="Competições" @row-click="viewCompetition"
+                @edit="openEditModal" @delete="deleteCompetition" />
+            <generic-grid v-else :data="filteredCompetitions" :headers="gridHeaders" :editable="false"
+                :deletable="false" grid-title="Competições" @row-click="viewCompetition" />
         </div>
 
         <!-- Modal para Editar Competição -->
-        <Modal :isVisible="modalVisible" 
-            @cancel="cancelEdit" 
-            @save="saveCompetition" 
-            @delete="deleteCompetition"
-            title="Editar Competição"
-        >
+        <Modal :isVisible="modalVisible" @cancel="cancelEdit" @save="saveCompetition" @delete="deleteCompetition"
+            title="Editar Competição">
             <template v-slot>
                 <form>
                     <div class="form-group mb-1">
@@ -168,16 +158,17 @@ export default {
 
 <style scoped>
 .toggle-filter-btn {
-    background-color: #f0f0f0; /* Cor de fundo clara */
-    border: 1px solid #ccc; /* Borda discreta */
-    color: #333; /* Cor do texto */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 10px; /* Espaço abaixo do botão */
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .toggle-filter-btn:hover {
-    background-color: #e0e0e0; /* Cor de fundo ao passar o mouse */
+    background-color: #e0e0e0;
 }
 </style>
