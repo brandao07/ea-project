@@ -174,6 +174,7 @@ public class CompetitionBean implements CompetitionLocal {
                     tp.setDistanceUnit(trial.getDistanceUnit());
                     tp.setDistance(trial.getDistance());
                     tp.setLocation(trial.getLocation().getCity());
+                    tp.setModality(trial.getModality());
                     trialProperties.add(tp);
                 }
                 output.setTrials(trialProperties);
