@@ -62,13 +62,10 @@ public class CompetitionBean implements CompetitionLocal {
             competition = CompetitionDAO.loadCompetitionByQuery("name = '" + input.getName() + "'", null);
 
             Competition finalCompetition = competition;
-            input.getTrialList().forEach(trial -> {
+            input.getTrials().forEach(trial -> {
                 trial.setCompetitionId(finalCompetition.getId());
                 trialBean.createTrialEntity(trial);
             });
-
-            // Save the entity to the database using the DAO
-            CompetitionDAO.save(competition);
 
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage(Competition.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
