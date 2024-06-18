@@ -45,6 +45,9 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private double lat;
 
+        @JsonProperty
+        private String location;
+
         public Integer getId() {
             return id;
         }
@@ -107,6 +110,14 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
 
         public void setLat(double lat) {
             this.lat = lat;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
         }
     }
 }
