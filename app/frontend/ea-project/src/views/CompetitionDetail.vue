@@ -26,10 +26,10 @@
         </div>
 
         <!-- Carousel de Provas -->
-        <div v-if="this.competition.trials.length > 0" class="race-carousel mt-4 container">
+        <div v-if="this.competition.trials.length > 10" class="race-carousel mt-4 container">
             <div id="raceCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div v-for="(race, index) in this.races" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
+                    <div v-for="(race, index) in this.competition.trials" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
                                 <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
