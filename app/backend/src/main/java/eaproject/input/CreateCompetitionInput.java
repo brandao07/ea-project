@@ -15,7 +15,7 @@ public class CreateCompetitionInput extends BaseInput implements Serializable {
     private Timestamp endDate;
     private boolean isActive;
     private Timestamp creationDate;
-    private ArrayList<CreateTrialInput> trialList;
+    private ArrayList<CreateTrialInput> trials;
 
     public String getGrade() {
         return grade;
@@ -81,12 +81,12 @@ public class CreateCompetitionInput extends BaseInput implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public ArrayList<CreateTrialInput> getTrialList() {
-        return trialList;
+    public ArrayList<CreateTrialInput> getTrials() {
+        return trials;
     }
 
-    public void setTrialList(ArrayList<CreateTrialInput> trialList) {
-        this.trialList = trialList;
+    public void setTrials(ArrayList<CreateTrialInput> trials) {
+        this.trials = trials;
     }
 
     public int getUserId() {
