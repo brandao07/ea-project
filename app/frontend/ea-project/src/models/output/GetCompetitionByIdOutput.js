@@ -1,9 +1,10 @@
 import BaseOutput from "./BaseOutput";
 import GenderEnumerator from "../enums/Gender";
 import GradeEnumerator from "../enums/Grade";
+import WeatherService from "../../services/WeatherService";
 
 export default class GetCompetitionByIdOutput extends BaseOutput {
-  constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(),gender="",grade="",category="", feedbackMessages = []) {
+  constructor(id = 0, name = '', startDate = new Date(), endDate = new Date(), isActive = false, creationDate = new Date(),gender="",grade="",category="",trials=[], feedbackMessages = []) {
     super(feedbackMessages);
     this.id = id;
     this.name = name;
@@ -27,6 +28,9 @@ export default class GetCompetitionByIdOutput extends BaseOutput {
       }
     }
     this.type=category;
-    this.trials=[];
+    this.trials=trials;
+    console.log(trials)
+    this.trials=trials.map(item => item["weather"] = WeatherService.getCurrentWeather({item["lat"],item["lon"]}));
+    
   }
 }
