@@ -122,7 +122,7 @@ class CompetitionService {
 
   async deleteCompetition(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.DELETE_COMPETITION, input);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_COMPETITION_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
