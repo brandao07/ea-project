@@ -1,6 +1,6 @@
 <template>
     <div id="login">
-        <div class="div-center vertical-center">
+        <div class="div-center">
             <div class="content">
                 <form @submit.prevent="login">
                     <div class="row">
@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 #login {
-    height: 100vh;
+    height: 100%;
     margin-top: 0rem;
     margin-bottom: 0rem;
     display: flex;

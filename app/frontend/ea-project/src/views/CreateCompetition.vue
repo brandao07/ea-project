@@ -90,7 +90,7 @@
                     </select>
                   </div>
                   <button class="btn btn-success mb-2" type="submit">Save Trial</button>
-                  <button class="btn btn-danger mb-2" @click="cancelTrial">Cancel</button>
+                  <button class="btn btn-light mb-2" @click="cancelTrial">Cancel</button>
                 </div>
               </form>
               <!-- Trials Table -->
@@ -180,6 +180,7 @@ import GetAllTypesOutput from '@/models/output/GetAllTypesOutput';
 import GetAllLocationsInput from '@/models/input/GetAllLocationsInput';
 import GetAllLocationsOutput from '@/models/output/GetAllLocationsOutput';
 import GenericGrid from '@/components/Grid.vue'; // Assuming the generic grid component is in components folder
+import { StorageKeys } from '@/constants/storageKeys';
 
 export default {
   name: 'create-competition',
@@ -260,6 +261,7 @@ export default {
     },
     async handleCreate() {
       this.createCompetitionInput.isActive = true;
+      this.createCompetitionInput.userId= localStorage.getItem(StorageKeys.ID_USER);
       this.createCompetitionOutput = await CompetitionService.createCompetitionEntity(this.createCompetitionInput);
       if (this.createCompetitionOutput.updateSuccessful) {
         // Create each trial
