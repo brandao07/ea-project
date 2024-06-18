@@ -38,6 +38,7 @@
 
 import NavigationBar from '@/components/NavigationBar.vue';
 import ChangeRole from '@/views/ChangeRole.vue';
+//import Footer from '@/components/footer.vue';
 
 export default {
     name: 'administration',
@@ -48,7 +49,7 @@ export default {
     },
     components: {
         NavigationBar,
-        ChangeRole
+        ChangeRole,
     }
 }
 

@@ -154,6 +154,7 @@
         </select>
       </div>
     </b-modal>
+    <Footer></footer>
   </div>
 </template>
 
@@ -181,13 +182,15 @@ import GetAllLocationsInput from '@/models/input/GetAllLocationsInput';
 import GetAllLocationsOutput from '@/models/output/GetAllLocationsOutput';
 import GenericGrid from '@/components/Grid.vue'; // Assuming the generic grid component is in components folder
 import { StorageKeys } from '@/constants/storageKeys';
+import Footer from '@/components/footer.vue';
 
 export default {
   name: 'create-competition',
   components: {
     CreateEntity,
     NavigationBar,
-    GenericGrid
+    GenericGrid,
+    Footer
   },
   data() {
     return {

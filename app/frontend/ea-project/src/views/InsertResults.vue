@@ -40,6 +40,11 @@
                 </template>
             </CreateEntity>
         </div>
+        <Footer style=" position: absolute;
+
+bottom: 0;
+
+width: 100%;"/>
     </div>
 </template>
 
@@ -55,6 +60,7 @@ import GetTeamsByTrialIdInput from '@/models/input/GetTeamsByTrialIdInput';
 import GetTeamsByTrialIdOutput from '@/models/output/GetTeamsByTrialIdOutput';
 import CreateResultInput from '@/models/input/CreateResultInput';
 import CreateResultOutput from '@/models/output/CreateResultOutput';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: 'insert-results',
@@ -71,7 +77,8 @@ export default {
     },
     components: {
         CreateEntity,
-        NavigationBar
+        NavigationBar,
+        Footer,
     },
     methods: {
         async fetchTrials() {

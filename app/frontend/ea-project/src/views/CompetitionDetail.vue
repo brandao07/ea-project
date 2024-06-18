@@ -19,9 +19,6 @@
                     <p class="lead">Data de Início: {{ new Date(this.competition.startDate).toISOString().slice(0, 16) }}</p>
                     <p class="lead">Data de Término: {{ new Date(this.competition.endDate).toISOString().slice(0, 16) }}</p>
                 </div>
-                <div class="col-md-6 text-center">
-                    <img :src="this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
-                </div>
             </div>
         </div>
 
@@ -32,7 +29,7 @@
                     <div v-for="(race, index) in this.competition.trials" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
-                                <img v-if="race.modality==='Sprint'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
+                                <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                                 <img v-if="race.modality==='Slalom'" src="../assets/default_images/slalom.jpeg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                                 <img v-if="race.modality==='Marathon'" src="../assets/default_images/maratona.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                             </div>
@@ -70,6 +67,7 @@
             <generic-grid :data="this.competition.trials" :headers=[] :editable="false"
                 :deletable="false" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
         </div>
+    <Footer></footer>
     </div>
 </template>
 
@@ -81,13 +79,15 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import GenericGrid from '@/components/Grid.vue';
 import { StorageKeys } from '@/constants/storageKeys';
 import router from '@/router';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: 'CompetitionDetails',
     props: ['id', 'userRole'],
     components: {
         NavigationBar,
-        GenericGrid
+        GenericGrid,
+        Footer
     },
     data() {
         return {
