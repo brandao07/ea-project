@@ -4,6 +4,7 @@
         <div class="container">
             <generic-grid :data="getAllTeamsOutput.teamList" :headers="gridheaders" :editable="false" grid-title="View Teams"/>
         </div>
+        <Footer />
     </div>
 </template>
 
@@ -13,12 +14,14 @@ import GetAllTeamsInput from '@/models/input/GetAllTeamsInput';
 import GetAllTeamsOutput from '@/models/output/GetAllTeamsOutput';
 import TeamService from '@/services/TeamService';
 import NavigationBar from '@/components/NavigationBar.vue';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: "view-teams",
     components: {
         GenericGrid,
-        NavigationBar
+        NavigationBar,
+        Footer
     },
     data() {
         return {
