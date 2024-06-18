@@ -165,9 +165,20 @@ public class CompetitionBean implements CompetitionLocal {
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
                 output.setType(competition.getType().getName());
                 output.setGrade(competition.getGrade().getName());
-                if (trials != null && trials.length > 0) {
-                    output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
+
+                ArrayList<GetAllTrialsOutput.TrialProperties> trialProperties = new ArrayList<>();
+                for (Trial trial : trials) {
+                    var tp = new GetAllTrialsOutput.TrialProperties();
+                    tp.setLat(trial.getLocation().getLatitude());
+                    tp.setLon(trial.getLocation().getLongitude());
+                    tp.setId(trial.getId());
+                    tp.setName(trial.getName());
+                    tp.setStartDate(trial.getStartDate());
+                    tp.setDistanceUnit(trial.getDistanceUnit());
+                    tp.setDistance(trial.getDistance());
+                    trialProperties.add(tp);
                 }
+                output.setTrials(trialProperties);
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);

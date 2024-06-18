@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GetAllTrialsOutput extends BaseOutput implements Serializable {
 
@@ -41,7 +40,10 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
         private boolean isActive;
 
         @JsonProperty
-        private Timestamp creationDate;
+        private double lon;
+
+        @JsonProperty
+        private double lat;
 
         public Integer getId() {
             return id;
@@ -91,12 +93,20 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
             this.isActive = isActive;
         }
 
-        public Timestamp getCreationDate() {
-            return creationDate;
+        public double getLon() {
+            return lon;
         }
 
-        public void setCreationDate(Timestamp creationDate) {
-            this.creationDate = creationDate;
+        public void setLon(double lon) {
+            this.lon = lon;
+        }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public void setLat(double lat) {
+            this.lat = lat;
         }
     }
 }
