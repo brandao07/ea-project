@@ -41,10 +41,9 @@
                                 <p class="lead">Prova de {{ race.modality }}</p>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <p><small><strong>Category:</strong> {{ race.category }}</small></p>
                                         <p><small><strong>Distance:</strong> {{ race.distance }} {{ race.distanceUnit }}</small></p>
                                         <p><small><strong>Start Date:</strong> {{ race.startDate }}</small></p>
-                                        <p><small><strong>Location:</strong> {{ race.locationId }}</small></p>
+                                        <p><small><strong>Location:</strong> {{ race.location }}</small></p>
                                     </div>
                                     <div class="col-sm-6" v-if ="race.weather">
                                         <p><small> <i class="weather-icon"> </i> <img :src="'https://openweathermap.org/img/wn/' + race.weather.icon + '@2x.png'" :alt="race.weather.main"> {{ convertKelvinToCelsius(race.weather.temp) }} °C</small></p>
