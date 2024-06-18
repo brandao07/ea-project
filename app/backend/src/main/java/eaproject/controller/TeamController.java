@@ -74,4 +74,10 @@ public class TeamController {
     public GetTeamsByTrialIdOutput getTeamsByTrialIdOutput(@RequestBody GetTeamsByTrialIdInput input) {
         return teamBean.getTeamsByTrialId(input);
     }
+
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PostMapping("/GetTeamsByClubId")
+    public GetTeamsByClubIdOutput getTeamsByClubIdOutput(@RequestBody GetTeamsByClubIdInput input) {
+        return teamBean.getTeamsByClubId(input);
+    }
 }
