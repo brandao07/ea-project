@@ -48,6 +48,9 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
         @JsonProperty
         private String location;
 
+        @JsonProperty
+        private String modality;
+
         public Integer getId() {
             return id;
         }
@@ -118,6 +121,14 @@ public class GetAllTrialsOutput extends BaseOutput implements Serializable {
 
         public void setLocation(String location) {
             this.location = location;
+        }
+
+        public String getModality() {
+            return modality;
+        }
+
+        public void setModality(String modality) {
+            this.modality = modality;
         }
     }
 }
