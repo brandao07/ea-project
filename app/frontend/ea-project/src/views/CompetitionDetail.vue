@@ -4,26 +4,32 @@
 
         <!-- Detalhes da Competição -->
         <div class="competition-info container my-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="display-4">{{ this.competition.name }}</h1>
+                <div v-if="this.role==='Administrator'" class="admin-buttons">
+                    <button class="btn btn-primary me-2" @click="editCompetition">Edit</button>
+                    <button class="btn btn-danger" @click="removeCompetition">Delete</button>
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h1 class="display-4">{{ this.competition.name }}</h1>
-                    <p class="lead">Gender: {{  this.competition.gender }}</p>
-                    <p class="lead">Grade: {{  this.competition.grade }}</p>
-                    <p class="lead">Category: {{  this.competition.type }}</p>
-                    <p class="lead">Data de Início: {{ formatDate( this.competition.startdate) }}</p>
-                    <p class="lead">Data de Término: {{ formatDate( this.competition.enddate) }}</p>
+                    <p class="lead">Gender: {{ this.competition.gender }}</p>
+                    <p class="lead">Grade: {{ this.competition.grade }}</p>
+                    <p class="lead">Category: {{ this.competition.type }}</p>
+                    <p class="lead">Data de Início: {{ new Date(this.competition.startDate).toISOString().slice(0, 16) }}</p>
+                    <p class="lead">Data de Término: {{ new Date(this.competition.endDate).toISOString().slice(0, 16) }}</p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img :src=" this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
+                    <img :src="this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
                 </div>
             </div>
         </div>
 
         <!-- Carousel de Provas -->
-        <div v-if="this.competition" class="race-carousel mt-4 container">
+        <div v-if="this.competition.trials.length > 0" class="race-carousel mt-4 container">
             <div id="raceCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div v-for="(race, index) in this.roles" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
+                    <div v-for="(race, index) in this.races" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
                                 <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
@@ -63,6 +69,10 @@
                 </button>
             </div>
         </div>
+        <div v-else class="container mt-4">
+            <generic-grid :data="this.competition.trials" :headers="gridHeaders" :editable="true"
+                :deletable="true" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
+        </div>
     </div>
 </template>
 
@@ -71,18 +81,22 @@ import GetCompetitionByIdOutput from '@/models/output/GetCompetitionByIdOutput';
 import GetCompetitionByIdInput from '@/models/input/GetCompetitionByIdInput';
 import CompetitionService from '@/services/CompetitionService';
 import NavigationBar from '@/components/NavigationBar.vue';
+import GenericGrid from '@/components/Grid.vue';
+import { StorageKeys } from '@/constants/storageKeys';
 
 export default {
     name: 'CompetitionDetails',
-    props: ['id'],
+    props: ['id', 'userRole'],
     components: {
-        NavigationBar
+        NavigationBar,
+        GenericGrid
     },
     data() {
         return {
             competition: new GetCompetitionByIdOutput(),
             races: [],
-            currentCard: 0 // Índice do slide atual
+            currentCard: 0, // Índice do slide atual
+            role: localStorage.getItem(StorageKeys.ROLE)
         };
     },
     created() {
@@ -193,86 +207,96 @@ export default {
         formatDate(date) {
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             return new Date(date).toLocaleDateString('pt-BR', options);
+        },
+        editCompetition() {
+            // Lógica para editar campeonato
+        },
+        removeCompetition() {
+            // Lógica para remover campeonato
         }
     }
 };
 </script>
+
 <style scoped>
-    .competition-info h1 {
-        color: #343a40;
-        font-weight: bold;
+.competition-info h1 {
+    color: #343a40;
+    font-weight: bold;
+}
+
+.competition-info p {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.race-carousel .carousel-inner .carousel-item {
+    transition: transform 0.6s ease;
+    margin-bottom: 50px;
+}
+
+.race-carousel .carousel-item img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-inner .row {
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item h5 {
+    color: #343a40;
+    font-weight: bold;
+}
+
+.carousel-item p {
+    color: #6c757d;
+}
+
+.carousel-item small {
+    display: block;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem; /* Aumenta o tamanho da fonte */
+}
+
+.caption-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather-icon {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+@media (max-width: 576px) {
+    .carousel-item .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
-    
-    .competition-info p {
-        color: #6c757d;
-        margin-bottom: 0.5rem;
-    }
-    
-    .race-carousel .carousel-inner .carousel-item {
-        transition: transform 0.6s ease;
-        margin-bottom: 50px;
-    }
-    
-    .race-carousel .carousel-item img {
-        max-height: 400px;
-        object-fit: cover;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        padding: 10px;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 5%;
-    }
-    
-    .carousel-inner .row {
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .carousel-item h5 {
-        color: #343a40;
-        font-weight: bold;
-    }
-    
-    .carousel-item p {
-        color: #6c757d;
-    }
-    
-    .carousel-item small {
-        display: block;
-        color: #6c757d;
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem; /* Aumenta o tamanho da fonte */
-    }
-    
-    .caption-box {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        
-    }
-    
-    .weather-icon {
-        font-size: 1.2rem;
-        margin-right: 5px;
-        
-    }
-    
-    @media (max-width: 576px) {
-        .carousel-item .col-md-6 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-    }
-    
-    .font-awesome-icon {
-        margin-right: 10px;
-    }
-    </style>
+}
+
+.font-awesome-icon {
+    margin-right: 10px;
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 10px;
+}
+</style>

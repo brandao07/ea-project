@@ -147,8 +147,6 @@ public class UserBean implements UserLocal {
                 if (passwordEncoder.matches(userInput.getPassword(), user.getPassword())) {
                     String token = JwtTokenUtil.createToken(user);
                     output.setToken(token);
-                    output.setRole(user.getRole().getName());
-                    output.setUserId(user.getId());
                     output.addFeedbackMessage("Login successful", FeedbackSeverity.SUCCESS);
                 } else {
                     throw new BadCredentialsException("Invalid email or password");

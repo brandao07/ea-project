@@ -74,7 +74,7 @@ class CompetitionService {
       console.log(input);
       console.log("teste");
       const response = await ApiService.post(API_ENDPOINTS.GET_COMPETITION_BY_ID, input);
-      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.gender,response.category,response.trials);
+      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.grade,response.category);
       console.log(output);
       return output;
     } catch (error) {
