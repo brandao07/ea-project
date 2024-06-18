@@ -32,9 +32,9 @@
                     <div v-for="(race, index) in this.competition.trials" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
-                                <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
+                                <img v-if="race.modality==='Sprint'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                                 <img v-if="race.modality==='Slalom'" src="../assets/default_images/slalom.jpeg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
-                                <img v-if="race.modality==='Maratona'" src="../assets/default_images/maratona.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
+                                <img v-if="race.modality==='Marathon'" src="../assets/default_images/maratona.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                             </div>
                             <div class="col-md-6 d-flex flex-column justify-content-center p-3 bg-white rounded caption-box">
                                 <h5 class="display-6">{{ race.name }}</h5>
