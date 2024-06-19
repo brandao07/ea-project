@@ -1,8 +1,14 @@
 package eaproject.controller;
 
 import eaproject.beans.ResultBean;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateResultInput;
+import eaproject.input.GetAllResultsInput;
+import eaproject.input.GetResultByIdInput;
+import eaproject.input.UpdateResultInput;
+import eaproject.output.CreateResultOutput;
+import eaproject.output.GetAllResultsOutput;
+import eaproject.output.GetResultByIdOutput;
+import eaproject.output.UpdateResultOutput;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +29,7 @@ public class ResultController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateResultEntity")
     public CreateResultOutput createResultEntity(@RequestBody CreateResultInput input) {
         return resultBean.createResultEntity(input);
@@ -36,7 +42,7 @@ public class ResultController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateResultEntity")
     public UpdateResultOutput updateResultEntity(@RequestBody UpdateResultInput input) {
         return resultBean.updateResultEntity(input);
@@ -48,7 +54,7 @@ public class ResultController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetResultById")
     public GetResultByIdOutput getResultById(@RequestBody GetResultByIdInput input) { return resultBean.getResultById(input); }
 
@@ -58,7 +64,7 @@ public class ResultController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllResults")
     public GetAllResultsOutput getAllResults(@RequestBody GetAllResultsInput input) {
         return resultBean.getAllResults(input);

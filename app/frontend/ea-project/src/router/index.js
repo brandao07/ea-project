@@ -56,7 +56,7 @@ const routes = [
     component: () => import("@/views/CreateTrial.vue"),
   },
   {
-    path: "/edit-competition",
+    path: "/edit-competition/:id",
     name: "edit-competitions",
     component: () => import("@/views/EditCompetitions.vue"),
   },

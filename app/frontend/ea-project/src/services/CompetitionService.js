@@ -2,6 +2,7 @@ import CreateCompetitionOutput from "@/models/output/CreateCompetitionOutput";
 import GetAllCompetitionsOutput from "@/models/output/GetAllCompetitionsOutput";
 import GetCompetitionByIdOutput from "@/models/output/GetCompetitionByIdOutput";
 import UpdateCompetitionOutput from "@/models/output/UpdateCompetitionOutput";
+import WeatherService from "@/services/WeatherService";
 
 import ApiService from "@/services/ApiService";
 import API_ENDPOINTS from "@/config/api";
@@ -74,8 +75,12 @@ class CompetitionService {
       console.log(input);
       console.log("teste");
       const response = await ApiService.post(API_ENDPOINTS.GET_COMPETITION_BY_ID, input);
-      const output = new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.grade,response.category);
-      console.log(output);
+      response.trials = await Promise.all(response.trials.map(async (trial) => {
+        const weather = await WeatherService.getCurrentWeather({ lat: trial.lat, lon: trial.lon });
+        trial.weather = weather.weather;
+        return trial;
+      }));
+      const output = await new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.grade,response.category,response.trials);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
@@ -117,7 +122,7 @@ class CompetitionService {
 
   async deleteCompetition(input) {
     try {
-      const response = await ApiService.post(API_ENDPOINTS.DELETE_COMPETITION, input);
+      const response = await ApiService.post(API_ENDPOINTS.UPDATE_COMPETITION_ENTITY, input);
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );

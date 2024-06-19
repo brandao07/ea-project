@@ -9,6 +9,7 @@
                 </template>
             </GridLayout>
         </div>
+    <Footer/>
     </div>
 </template>
 
@@ -20,6 +21,7 @@ import Card from '@/components/Card.vue';
 import GetAllNotificationsOutput from '@/models/output/GetAllNotificationsOutput';
 import GetAllNotificationsInput from '@/models/input/GetAllNotificationsInput';
 import NotificationService from '@/services/NotificationService';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: 'home',
@@ -32,7 +34,8 @@ export default {
     components: {
         NavigationBar,
         GridLayout,
-        Card
+        Card,
+        Footer
     },
     methods: {
         async fetchNotificationInfo() {

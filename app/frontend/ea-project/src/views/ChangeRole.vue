@@ -22,6 +22,11 @@
                 </form>
             </template>
         </Modal>
+        <Footer style=" position: absolute;
+
+bottom: 0;
+
+width: 100%;"/>
     </div>
 </template>
 
@@ -35,11 +40,12 @@ import GetAllUsersInput from '@/models/input/GetAllUsersInput';
 import GetAllUsersOutput from '@/models/output/GetAllUsersOutput';
 import UpdateUserRoleInput from '@/models/input/UpdateUserRoleInput';
 import UpdateUserRoleOutput from '@/models/output/UpdateUserRoleOutput';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: 'change-role',
     components: {
-        Modal
+        Modal,Footer
     },
     props: {
         isVisible: {

@@ -20,29 +20,6 @@
             <generic-grid v-else :data="filteredCompetitions" :headers="gridHeaders" :editable="false"
                 :deletable="false" grid-title="Competições" @row-click="viewCompetition" />
         </div>
-
-        <!-- Modal para Editar Competição -->
-        <Modal :isVisible="modalVisible" @cancel="cancelEdit" @save="saveCompetition" @delete="deleteCompetition"
-            title="Editar Competição">
-            <template v-slot>
-                <form>
-                    <div class="form-group mb-1">
-                        <label for="name" class="mb-2">Nome</label>
-                        <input type="text" class="form-control" id="name" v-model="selectedItem.name" required />
-                    </div>
-                    <div class="form-group mb-1">
-                        <label for="startDate" class="mb-2">Data de Início</label>
-                        <input type="datetime-local" class="form-control" id="startDate"
-                            v-model="selectedItem.startDate" required />
-                    </div>
-                    <div class="form-group mb-1">
-                        <label for="endDate" class="mb-2">Data de Fim</label>
-                        <input type="datetime-local" class="form-control" id="endDate" v-model="selectedItem.endDate"
-                            required />
-                    </div>
-                </form>
-            </template>
-        </Modal>
         <Footer />
     </div>
 </template>
@@ -55,7 +32,6 @@ import UpdateCompetitionInput from '@/models/input/UpdateCompetitionInput';
 import UpdateCompetitionOutput from '@/models/output/UpdateCompetitionOutput';
 import CompetitionService from '@/services/CompetitionService';
 import NavigationBar from '@/components/NavigationBar.vue';
-import Modal from '@/components/Modal.vue';
 import router from '@/router';
 import { StorageKeys } from "@/constants/storageKeys";
 import Footer from '@/components/footer.vue';
@@ -66,7 +42,6 @@ export default {
     components: {
         GenericGrid,
         NavigationBar,
-        Modal,
         Footer,
         CompetitionFilter
     },
@@ -77,7 +52,6 @@ export default {
             updateCompetitionInput: new UpdateCompetitionInput(),
             updateCompetitionOutput: new UpdateCompetitionOutput(),
             gridHeaders: ['name', 'startDate', 'endDate', 'creationDate'],
-            modalVisible: false,
             role: localStorage.getItem(StorageKeys.ROLE),
             StorageKeys: StorageKeys,
             selectedItem: {
@@ -101,33 +75,10 @@ export default {
             this.applyFilters(); // Aplica os filtros após buscar as competições
         },
         openEditModal(item) {
-            this.selectedItem = {
-                ...item,
-                startDate: new Date(item.startDate).toISOString().slice(0, 16),
-                endDate: new Date(item.endDate).toISOString().slice(0, 16)
-            };
-            this.updateCompetitionInput = { ...item };
-            this.modalVisible = true;
+           this.$router.push({ name: 'edit-competitions', params: { id: item.id } });
         },
-        cancelEdit() {
-            this.modalVisible = false;
-            this.selectedItem = {
-                name: '',
-                startDate: '',
-                endDate: ''
-            };
-        },
-        async deleteCompetition() {
-            await CompetitionService.deleteCompetition(this.updateCompetitionInput);
-            this.modalVisible = false;
-            await this.fetchCompetitionInfo();
-        },
-        async saveCompetition() {
-            this.updateCompetitionInput.startDate = new Date(this.selectedItem.startDate).toISOString();
-            this.updateCompetitionInput.endDate = new Date(this.selectedItem.endDate).toISOString();
-            this.updateCompetitionOutput = await CompetitionService.updateCompetitionEntity(this.updateCompetitionInput);
-            this.modalVisible = false;
-            this.updateCompetitionInput = new UpdateCompetitionInput();
+        async deleteCompetition(item) {
+            await CompetitionService.deleteCompetition({id:item.id,isActive:false});
             await this.fetchCompetitionInfo();
         },
         viewCompetition(competition) {

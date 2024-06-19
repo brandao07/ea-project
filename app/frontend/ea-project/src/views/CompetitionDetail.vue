@@ -19,9 +19,6 @@
                     <p class="lead">Data de Início: {{ new Date(this.competition.startDate).toISOString().slice(0, 16) }}</p>
                     <p class="lead">Data de Término: {{ new Date(this.competition.endDate).toISOString().slice(0, 16) }}</p>
                 </div>
-                <div class="col-md-6 text-center">
-                    <img :src="this.competition.imageUrl" class="img-fluid rounded" :alt="competition.name">
-                </div>
             </div>
         </div>
 
@@ -29,26 +26,23 @@
         <div v-if="this.competition.trials.length > 0" class="race-carousel mt-4 container">
             <div id="raceCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div v-for="(race, index) in this.races" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
+                    <div v-for="(race, index) in this.competition.trials" :key="index" :class="['carousel-item', { 'active': index === currentCard }]">
                         <div class="row">
                             <div class="col-md-6">
                                 <img v-if="race.modality==='Velocidade'" src="../assets/default_images/sprint.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                                 <img v-if="race.modality==='Slalom'" src="../assets/default_images/slalom.jpeg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
-                                <img v-if="race.modality==='Maratona'" src="../assets/default_images/maratona.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
+                                <img v-if="race.modality==='Marathon'" src="../assets/default_images/maratona.jpg" class="img-fluid rounded" :alt="'Imagem da Prova ' + (index + 1)">
                             </div>
                             <div class="col-md-6 d-flex flex-column justify-content-center p-3 bg-white rounded caption-box">
                                 <h5 class="display-6">{{ race.name }}</h5>
                                 <p class="lead">Prova de {{ race.modality }}</p>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <p><small><strong>Data:</strong> {{ race.date }}</small></p>
-                                        <p><small><strong>Category:</strong> {{ competition.category }}</small></p>
-                                        <p><small><strong>Distância:</strong> {{ race.Distance }} {{ race.Distanceunit }}</small></p>
-                                        <p><small><strong>Início:</strong> {{ race.Startdate }}</small></p>
-                                        <p><small><strong>Local:</strong> {{ race.locationId }}</small></p>
-                                        <p><small><strong>Árbitro:</strong> {{ race.judgeName }}</small></p>
+                                        <p><small><strong>Distance:</strong> {{ race.distance }} {{ race.distanceUnit }}</small></p>
+                                        <p><small><strong>Start Date:</strong> {{ race.startDate }}</small></p>
+                                        <p><small><strong>Location:</strong> {{ race.location }}</small></p>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" v-if ="race.weather">
                                         <p><small> <i class="weather-icon"> </i> <img :src="'https://openweathermap.org/img/wn/' + race.weather.icon + '@2x.png'" :alt="race.weather.main"> {{ convertKelvinToCelsius(race.weather.temp) }} °C</small></p>
                                         <p><small><font-awesome-icon :icon="['fas', 'wind']" class="font-awesome-icon" /> {{ race.weather.windSpeed }} m/s</small></p>
                                         <p><small><font-awesome-icon :icon="['fas', 'cloud-arrow-down']" class="font-awesome-icon" /> {{ race.weather.pressure }} hPa</small></p>
@@ -70,9 +64,10 @@
             </div>
         </div>
         <div v-else class="container mt-4">
-            <generic-grid :data="this.competition.trials" :headers="gridHeaders" :editable="true"
-                :deletable="true" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
+            <generic-grid :data="this.competition.trials" :headers=[] :editable="false"
+                :deletable="false" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
         </div>
+    <Footer></footer>
     </div>
 </template>
 
@@ -83,13 +78,16 @@ import CompetitionService from '@/services/CompetitionService';
 import NavigationBar from '@/components/NavigationBar.vue';
 import GenericGrid from '@/components/Grid.vue';
 import { StorageKeys } from '@/constants/storageKeys';
+import router from '@/router';
+import Footer from '@/components/footer.vue';
 
 export default {
     name: 'CompetitionDetails',
     props: ['id', 'userRole'],
     components: {
         NavigationBar,
-        GenericGrid
+        GenericGrid,
+        Footer
     },
     data() {
         return {
@@ -105,6 +103,7 @@ export default {
     methods: {
         async fetchCompetition() {
             this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
+            console.log("TESTEEEEEEEEEEEEEEEEEEEE")
             console.log(this.competition);
             // Simule o carregamento das provas
             this.races = [
@@ -206,13 +205,14 @@ export default {
         },
         formatDate(date) {
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            return new Date(date).toLocaleDateString('pt-BR', options);
+            return new Date(date).toLocaleDateString('pt-PT', options);
         },
         editCompetition() {
             // Lógica para editar campeonato
         },
-        removeCompetition() {
-            // Lógica para remover campeonato
+        async removeCompetition() {
+            await CompetitionService.deleteCompetition({id:this.competition.id,isActive:false});
+            router.push({ name: 'view-competitions' });
         }
     }
 };

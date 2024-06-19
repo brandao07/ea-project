@@ -62,13 +62,10 @@ public class CompetitionBean implements CompetitionLocal {
             competition = CompetitionDAO.loadCompetitionByQuery("name = '" + input.getName() + "'", null);
 
             Competition finalCompetition = competition;
-            input.getTrialList().forEach(trial -> {
+            input.getTrials().forEach(trial -> {
                 trial.setCompetitionId(finalCompetition.getId());
                 trialBean.createTrialEntity(trial);
             });
-
-            // Save the entity to the database using the DAO
-            CompetitionDAO.save(competition);
 
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage(Competition.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);
@@ -157,7 +154,7 @@ public class CompetitionBean implements CompetitionLocal {
         try {
             // Fetch entity from the database
             Competition competition = Utilities.fetchEntity(input, input.getId(), CompetitionDAO::loadCompetitionByORMID, CompetitionDAO::getCompetitionByORMID, input.isLazyLoad());
-            String condition = "competitionid = " + competition.getId();
+            String condition = "competitionid = " + competition.getId() + " and isactive = true";
             Trial[] trials = TrialDAO.listTrialByQuery(condition, null);
             // Check if entity is retrieved successfully
             if (competition != null && competition.getId() > 0 && competition.getIsActive()) {
@@ -165,9 +162,22 @@ public class CompetitionBean implements CompetitionLocal {
                 output = Utilities.processLazyLoad(input, competition, GetCompetitionByIdOutput.class, input.isLazyLoad());
                 output.setType(competition.getType().getName());
                 output.setGrade(competition.getGrade().getName());
-                if (trials != null && trials.length > 0) {
-                    output.setTrials(Utilities.convertToDTOArray(trials, GetAllTrialsOutput.TrialProperties.class));
+
+                ArrayList<GetAllTrialsOutput.TrialProperties> trialProperties = new ArrayList<>();
+                for (Trial trial : trials) {
+                    var tp = new GetAllTrialsOutput.TrialProperties();
+                    tp.setLat(trial.getLocation().getLatitude());
+                    tp.setLon(trial.getLocation().getLongitude());
+                    tp.setId(trial.getId());
+                    tp.setName(trial.getName());
+                    tp.setStartDate(trial.getStartDate());
+                    tp.setDistanceUnit(trial.getDistanceUnit());
+                    tp.setDistance(trial.getDistance());
+                    tp.setLocation(trial.getLocation().getCity());
+                    tp.setModality(trial.getModality());
+                    trialProperties.add(tp);
                 }
+                output.setTrials(trialProperties);
             } else {
                 // Add feedback message if no entities are found
                 output.addFeedbackMessage(Competition.class.getName() + " entity with id " + input.getId() + " not found in our database.", FeedbackSeverity.DANGER);
@@ -196,7 +206,8 @@ public class CompetitionBean implements CompetitionLocal {
         GetAllCompetitionsOutput output = new GetAllCompetitionsOutput();
         try {
             // Fetch entities from the database
-            Competition[] competitions = CompetitionDAO.listCompetitionByQuery(null, null);
+            String condition = "isactive = true";
+            Competition[] competitions = CompetitionDAO.listCompetitionByQuery(condition, null);
 
             // Check if roles are retrieved successfully
             if (competitions.length > 0) {

@@ -1,8 +1,14 @@
 package eaproject.controller;
 
 import eaproject.beans.CompetitionBean;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateCompetitionInput;
+import eaproject.input.GetAllCompetitionsInput;
+import eaproject.input.GetCompetitionByIdInput;
+import eaproject.input.UpdateCompetitionInput;
+import eaproject.output.CreateCompetitionOutput;
+import eaproject.output.GetAllCompetitionsOutput;
+import eaproject.output.GetCompetitionByIdOutput;
+import eaproject.output.UpdateCompetitionOutput;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +29,7 @@ public class CompetitionController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the create operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/CreateCompetitionEntity")
     public CreateCompetitionOutput createCompetitionEntity(@RequestBody CreateCompetitionInput input) {
         return competitionBean.createCompetitionEntity(input);
@@ -35,7 +41,7 @@ public class CompetitionController {
      * @param input The input object containing the data to update.
      * @return The output object containing the result of the update operation.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/UpdateCompetitionEntity")
     public UpdateCompetitionOutput updateCompetitionEntity(@RequestBody UpdateCompetitionInput input) {
         return competitionBean.updateCompetitionEntity(input);
@@ -47,7 +53,7 @@ public class CompetitionController {
      * @param input The input object containing parameters for fetching the entity by ID.
      * @return An output object containing the DTO and any feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetCompetitionById")
     public GetCompetitionByIdOutput getCompetitionById(@RequestBody GetCompetitionByIdInput input) {
         return competitionBean.getCompetitionById(input);
@@ -59,7 +65,7 @@ public class CompetitionController {
      * @param input The input object containing parameters for fetching types.
      * @return An output object containing the list of objects and feedback messages.
      */
-    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
+    @PreAuthorize("hasAnyRole(T(eaproject.constants.EAProjectConstants).ROLE_PARTICIPANT, T(eaproject.constants.EAProjectConstants).ROLE_ADMIN, T(eaproject.constants.EAProjectConstants).ROLE_DEFAULT)")
     @PostMapping("/GetAllCompetitions")
     public GetAllCompetitionsOutput getAllCompetitions(@RequestBody GetAllCompetitionsInput input) {
         return competitionBean.getAllCompetitions(input);

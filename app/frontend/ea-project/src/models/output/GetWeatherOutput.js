@@ -7,7 +7,7 @@ export default class GetWeatherOutput extends BaseOutput {
   }
 
   static Weather = class {
-    constructor({main = '', description = '', temp = 0.0, tempMin = 0.0, tempMax = 0.0, pressure = 0, humidity = 0, seaLevel = 0, windSpeed = 0.0}) {
+    constructor({main = '', description = '', temp = 0.0, tempMin = 0.0, tempMax = 0.0, pressure = 0, humidity = 0, seaLevel = 0, windSpeed = 0.0,icon=""}) {
       this.main = main;
       this.description = description;
       this.temp = temp;
@@ -17,6 +17,7 @@ export default class GetWeatherOutput extends BaseOutput {
       this.humidity = humidity;
       this.seaLevel = seaLevel;
       this.windSpeed = windSpeed;
+      this.icon= icon;
     }
   };
 }

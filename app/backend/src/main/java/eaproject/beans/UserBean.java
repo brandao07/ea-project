@@ -471,4 +471,34 @@ public class UserBean implements UserLocal {
         }
         return output;
     }
+
+    public GetUsersByTeamIdOutput getUsersByTeamIdInput(GetUsersByTeamIdInput input) {
+        GetUsersByTeamIdOutput output = new GetUsersByTeamIdOutput();
+        String condition = "clubid = " + input.getId();
+        try {
+            // Fetch users from the database using UserDAO
+            User[] users = UserDAO.listUserByQuery(condition, null);
+
+            // Check if users are retrieved successfully
+            if (users.length > 0) {
+                // Assign retrieved users to the output object
+                output.setUsersList(Utilities.convertToDTOArray(users, GetAllUsersOutput.UserProperties.class));
+            } else {
+                // Add feedback message if no roles are found
+                output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
+            }
+        } catch (BadCredentialsException e) {
+            // Add feedback message for bad credentials
+            output.addFeedbackMessage(e.getMessage(), FeedbackSeverity.DANGER);
+        } catch (PersistentException e) {
+            // Add feedback message for database access error
+            output.addFeedbackMessage("An error occurred while accessing the database", FeedbackSeverity.DANGER);
+        } catch (Exception e) {
+            // Add feedback message for unexpected errors
+            output.addFeedbackMessage("An unexpected error occurred", FeedbackSeverity.DANGER);
+        }
+        // Return the output object with users and feedback messages
+        return output;
+
+    }
 }
