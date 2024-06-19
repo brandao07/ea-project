@@ -488,6 +488,7 @@ public class UserBean implements UserLocal {
                     tmp.setId(user.getId());
                     tmp.setEmail(user.getEmail());
                     tmp.setAge(user.getAge());
+                    tmp.setName(user.getName());
                     tmp.setClubid(user.getClub().getId());
                     tmp.setGender(user.getGender());
                     tmp.setHeight(user.getHeight());
