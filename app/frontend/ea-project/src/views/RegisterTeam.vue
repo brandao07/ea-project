@@ -107,9 +107,9 @@ export default {
     },
     methods: {
         async fetchClubData() {
-            console.log(this.competition.grade);
+            console.log(this);
             if (this.selectedClub) {
-                this.availableMembers = this.users.filter(user =>  this.competition.gender === user.gender && this.mapAgeToCategory(user.age) === this.competition.grade);
+                this.availableMembers = this.users.filter(user => user.clubid === this.selectedClub.id && this.competition.gender === user.gender && this.mapAgeToCategory(user.age) === this.competition.grade);
                 this.availableCoaches = this.users.filter(user => user.clubid === this.selectedClub && user.role === 'Coach');
             }
         },
