@@ -78,8 +78,10 @@ export default {
            this.$router.push({ name: 'edit-competitions', params: { id: item.id } });
         },
         async deleteCompetition(item) {
-            await CompetitionService.deleteCompetition({id:item.id,isActive:false});
-            await this.fetchCompetitionInfo();
+            if (confirm("Are you sure you want to delete this competition?")) {
+                await CompetitionService.deleteCompetition({id:item.id,isActive:false});
+                await this.fetchCompetitionInfo();
+            }
         },
         viewCompetition(competition) {
             router.push({ name: 'competition-detail', params: { id: competition.id } });

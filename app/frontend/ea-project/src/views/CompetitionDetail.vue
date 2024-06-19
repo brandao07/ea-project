@@ -7,8 +7,9 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="display-4">{{ this.competition.name }}</h1>
                 <div v-if="this.role==='Administrator'" class="admin-buttons">
+                    <button v-if="Date.now() < new Date(this.competition.startDate) " class="btn btn-success me-2" @click="registerTeam">Register Team</button>
                     <button class="btn btn-primary me-2" @click="editCompetition">Edit</button>
-                    <button class="btn btn-danger" @click="removeCompetition">Delete</button>
+                    <button class="btn btn-danger me-2" @click="confirmRemoveCompetition">Delete</button>
                 </div>
             </div>
             <div class="row align-items-center">
@@ -65,9 +66,9 @@
         </div>
         <div v-else class="container mt-4">
             <generic-grid :data="this.competition.trials" :headers=[] :editable="false"
-                :deletable="false" grid-title="Trials" @edit="openEditModal" @delete="confirmRemoveTrial" />
+                :deletable="false" grid-title="Trials" />
         </div>
-    <Footer></footer>
+    <Footer></Footer>
     </div>
 </template>
 
@@ -102,103 +103,7 @@ export default {
     },
     methods: {
         async fetchCompetition() {
-            this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.id));
-            console.log("TESTEEEEEEEEEEEEEEEEEEEE")
-            console.log(this.competition);
-            // Simule o carregamento das provas
-            this.races = [
-                {
-                    name: 'Prova 1',
-                    description: 'Descrição da Prova 1',
-                    date: '01/07/2024',
-                    imageUrl: 'https://via.placeholder.com/600x400',
-                    Id: 1,
-                    stateId: 1,
-                    modality: "Velocidade",
-                    competitionId: 1,
-                    typeId: 1,
-                    locationId: 'Praia de Copacabana, Rio de Janeiro',
-                    judgeName: 'Carlos Silva',
-                    Startdate: '2024-06-15 08:00:00',
-                    Distance: 5,
-                    Distanceunit: 'km',
-                    Isactive: true,
-                    Creationdate: '2024-01-01 00:00:00',
-                    weather: {
-                        main: 'Rain',
-                        description: 'chuva leve',
-                        temp: 299.5,
-                        icon: '10d',
-                        tempMin: 299.5,
-                        tempMax: 299.5,
-                        pressure: 1015,
-                        humidity: 80,
-                        seaLevel: 1015,
-                        windSpeed: 10.48
-                    }
-                },
-                {
-                    name: 'Prova 2',
-                    description: 'Descrição da Prova 2',
-                    date: '15/07/2024',
-                    imageUrl: 'https://via.placeholder.com/600x400',
-                    Id: 2,
-                    stateId: 1,
-                    modality: "Slalom",
-                    competitionId: 1,
-                    typeId: 1,
-                    locationId: 'Parque Ibirapuera, São Paulo',
-                    judgeName: 'Ana Souza',
-                    Startdate: '2024-06-15 08:00:00',
-                    Distance: 10,
-                    Distanceunit: 'km',
-                    Isactive: true,
-                    Creationdate: '2024-01-01 00:00:00',
-                    weather: {
-                        main: 'Clouds',
-                        description: 'nublado',
-                        temp: 301.5,
-                        tempMin: 301.5,
-                        icon: '10d',
-                        tempMax: 301.5,
-                        pressure: 1013,
-                        humidity: 75,
-                        seaLevel: 1013,
-                        windSpeed: 5.0
-                    }
-                },
-                {
-                    name: 'Prova 3',
-                    description: 'Descrição da Prova 3',
-                    date: '30/07/2024',
-                    imageUrl: 'https://via.placeholder.com/600x400',
-                    Id: 3,
-                    stateId: 1,
-                    competitionId: 1,
-                    typeId: 1,
-                    modality: "Maratona",
-                    locationId: 'Lagoa Rodrigo de Freitas, Rio de Janeiro',
-                    judgeName: 'João Pereira',
-                    Startdate: '2024-06-15 08:00:00',
-                    Distance: 21,
-                    Distanceunit: 'km',
-                    Isactive: true,
-                    Creationdate: '2024-01-01 00:00:00',
-                    weather: {
-                        main: 'Clear',
-                        description: 'céu limpo',
-                        temp: 303.0,
-                        icon: '10d',
-                        tempMin: 303.0,
-                        tempMax: 303.0,
-                        pressure: 1012,
-                        humidity: 60,
-                        seaLevel: 1012,
-                        windSpeed: 3.0
-                    }
-                }
-                // Adicione mais provas conforme necessário
-            ];
+            this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.$route.params.id));
         },
         convertKelvinToCelsius(temp) {
             return (temp - 273.15).toFixed(1);
@@ -208,7 +113,15 @@ export default {
             return new Date(date).toLocaleDateString('pt-PT', options);
         },
         editCompetition() {
-            // Lógica para editar campeonato
+            router.push({ name: 'edit-competitions', params: { id: this.competition.id } });
+        },
+        registerTeam() {
+            router.push({ name: 'register-team', params: { competitionId: this.competition.id } });
+        },
+        confirmRemoveCompetition() {
+            if (confirm("Are you sure you want to delete this competition?")) {
+                this.removeCompetition();
+            }
         },
         async removeCompetition() {
             await CompetitionService.deleteCompetition({id:this.competition.id,isActive:false});
@@ -297,6 +210,5 @@ export default {
 
 .admin-buttons {
     display: flex;
-    gap: 10px;
 }
 </style>
