@@ -60,7 +60,6 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import GetAllClubsInput from '@/models/input/GetAllClubsInput';
 import UserService from '@/services/UserService';
 import GetAllUsersInput from '@/models/input/GetAllUsersInput';
-import GetAllUsersOutput from '@/models/output/GetAllUsersOutput';
 import TeamService from '@/services/TeamService';
 
 export default {
