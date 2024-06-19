@@ -36,8 +36,13 @@ public class TeamBean implements TeamLocal {
             // Convert object into an entity
             Team team = Utilities.convertToDAO(input, Team.class);
 
+            Club club = ClubDAO.getClubByORMID(input.getClubid());
+
+            team.setClub(club);
+
             // Save the entity to the database using the DAO
             TeamDAO.save(team);
+
 
             // If the save operation is successful, add a success feedback message
             output.addFeedbackMessage(Team.class.getName() + input.getName() + " created successfully.", FeedbackSeverity.SUCCESS);

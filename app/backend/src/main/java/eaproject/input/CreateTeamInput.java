@@ -2,11 +2,11 @@ package eaproject.input;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 public class CreateTeamInput extends BaseInput implements Serializable {
     private String name;
     private boolean isActive;
+    private Integer clubid;
     private Timestamp creationDate;
 
     public String getName() {
@@ -31,5 +31,13 @@ public class CreateTeamInput extends BaseInput implements Serializable {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Integer getClubid() {
+        return clubid;
+    }
+
+    public void setClubid(Integer clubid) {
+        this.clubid = clubid;
     }
 }
