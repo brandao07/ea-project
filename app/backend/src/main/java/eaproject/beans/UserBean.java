@@ -422,6 +422,9 @@ public class UserBean implements UserLocal {
                 // Assign retrieved users to the output object
                 ArrayList<GetAllUsersOutput.UserProperties> up = new ArrayList<>();
                 for (User user : users) {
+                    if (user.getClub() == null)
+                        continue;
+
                     var tmp = new GetAllUsersOutput.UserProperties();
                     tmp.setId(user.getId());
                     tmp.setEmail(user.getEmail());
