@@ -3,11 +3,15 @@ package eaproject.beans;
 import eaproject.beans.locals.ClubLocal;
 import eaproject.dao.Club;
 import eaproject.dao.ClubDAO;
-import eaproject.dao.Type;
-import eaproject.dao.TypeDAO;
 import eaproject.enums.FeedbackSeverity;
-import eaproject.input.*;
-import eaproject.output.*;
+import eaproject.input.CreateClubInput;
+import eaproject.input.GetAllClubsInput;
+import eaproject.input.GetClubByIdInput;
+import eaproject.input.UpdateClubInput;
+import eaproject.output.CreateClubOutput;
+import eaproject.output.GetAllClubsOutput;
+import eaproject.output.GetClubByIdOutput;
+import eaproject.output.UpdateClubOutput;
 import eaproject.utilities.Utilities;
 import org.orm.PersistentException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -150,8 +154,9 @@ public class ClubBean implements ClubLocal {
     public GetAllClubsOutput getAllClubs(GetAllClubsInput input) {
         GetAllClubsOutput output = new GetAllClubsOutput();
         try {
+            String condition = "isactive = true";
             // Fetch entities from the database
-            Club[] clubs = ClubDAO.listClubByQuery(null, null);
+            Club[] clubs = ClubDAO.listClubByQuery(condition, null);
 
             // Check if roles are retrieved successfully
             if (clubs.length > 0) {
