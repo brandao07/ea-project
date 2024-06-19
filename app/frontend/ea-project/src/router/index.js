@@ -96,6 +96,12 @@ const routes = [
     component: () => import("@/views/ViewClubTeams.vue"),
     props: true
   },
+  {
+    path: '/team/:id',
+    name: 'team-users',
+    component: () => import("@/views/ViewTeamUsers.vue"),
+    props: true 
+  }
 ];
 
 const router = createRouter({

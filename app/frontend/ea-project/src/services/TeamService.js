@@ -132,7 +132,7 @@ class TeamService {
         return output;
       } catch (error) {
         const errorMessage = new FeedbackMessage(
-          "An error occurred during getAllTeams.",
+          "An error occurred during getTeamsByClubId.",
           FeedbackSeverity.DANGER
         );
         const output = new GetTeamsByClubIdOutput("", [errorMessage]);

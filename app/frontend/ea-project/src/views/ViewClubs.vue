@@ -21,6 +21,7 @@
                 </form>
             </template>
         </Modal>
+        <Footer style=" position: absolute; bottom: 0; width: 100%;"/>
     </div>
 </template>
 
@@ -35,13 +36,15 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import Modal from '@/components/Modal.vue';
 import router from '@/router'; // Importe o router se ainda não estiver importado
 import { StorageKeys } from "@/constants/storageKeys";
+import Footer from '@/components/footer.vue';
 
 export default {
     name: "view-clubs",
     components: {
         GenericGrid,
         NavigationBar,
-        Modal
+        Modal,
+        Footer
     },
     data() {
         return {
