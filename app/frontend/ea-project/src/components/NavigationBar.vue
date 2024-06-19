@@ -25,6 +25,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><router-link class="nav-link" to="/competitions">Competitions</router-link></li>
                             <li><router-link class="nav-link" to="/teams">Teams</router-link></li>
+                            <li><router-link class="nav-link" to="/clubs">Clubs</router-link></li>
                             <li><router-link class="nav-link" to="/view-results">Results</router-link></li>
                         </ul>
                     </li>

@@ -1,6 +1,7 @@
 import AuthenticationOutput from "@/models/output/AuthenticationOutput";
 import CreateUserOutput from "@/models/output/CreateUserOutput";
 import GetAllUsersOutput from "@/models/output/GetAllUsersOutput";
+import GetUsersByTeamIdOutput from "@/models/output/GetUsersByTeamIdOutput";
 import GetUserByIdOutput from "@/models/output/GetUserByIdOutput";
 import RecoverPasswordOutput from "@/models/output/RecoverPasswordOutput";
 import UpdateUserOutput from "@/models/output/UpdateUserOutput";
@@ -67,6 +68,33 @@ class UserService {
       return output;
     }
   }
+
+    /**
+   * Getallusers
+   * @param {GetUsersByTeamIdInput} input - The input
+   * @returns {Promise<GetUsersByTeamIdOutput>} The GetAllUsersOutput
+   */
+    async getUsersByTeamId(input) {
+      try {
+        const response = await ApiService.post(API_ENDPOINTS.GET_USERS_BY_TEAM_ID, input);
+        const feedbackMessages = response.feedbackMessages.map(
+          (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
+        );
+        const output = new GetUsersByTeamIdOutput(response.usersList, feedbackMessages);
+        output.feedbackMessages.forEach((msg) => {
+          EventBus.emit("feedback-message", msg);
+        });
+        return output;
+      } catch (error) {
+        const errorMessage = new FeedbackMessage(
+          "An error occurred during getUsersByTeamId.",
+          FeedbackSeverity.DANGER
+        );
+        const output = new GetUsersByTeamIdOutput("", [errorMessage]);
+        EventBus.emit("feedback-message", errorMessage);
+        return output;
+      }
+    }
 
   /**
    * Updateusercurrentrole

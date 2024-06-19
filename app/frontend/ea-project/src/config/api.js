@@ -55,6 +55,8 @@ const API_ENDPOINTS = {
   UPDATE_TRIAL_ENTITY: `${BASE_URL}/UpdateTrialEntity`,
   GET_TRIAL_BY_ID: `${BASE_URL}/GetTrialById`,
   GET_ALL_TRIALS: `${BASE_URL}/GetAllTrials`,
+  GET_TEAMS_BY_CLUB_ID: `${BASE_URL}/GetTeamsByClubId`,
+  GET_USERS_BY_TEAM_ID: `${BASE_URL}/GetUsersByTeamId`
 };
 
 export default API_ENDPOINTS;

@@ -81,10 +81,27 @@ const routes = [
     component: () => import('@/views/ViewTeams.vue'),
   },
   {
+    path: '/clubs',
+    name: 'view-clubs',
+    component: () => import('@/views/ViewClubs.vue'),
+  },
+  {
     path: "/view-results",
     name: "view-results",
     component: () => import("@/views/ViewResults.vue"),
   },
+  {
+    path: '/club/:id',
+    name: 'club-teams',
+    component: () => import("@/views/ViewClubTeams.vue"),
+    props: true
+  },
+  {
+    path: '/team/:id',
+    name: 'team-users',
+    component: () => import("@/views/ViewTeamUsers.vue"),
+    props: true 
+  }
 ];
 
 const router = createRouter({

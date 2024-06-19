@@ -96,6 +96,7 @@ class ClubService {
       const feedbackMessages = response.feedbackMessages.map(
         (msg) => new FeedbackMessage(msg.message, FeedbackSeverity[msg.severity])
       );
+      console.log(response)
       const output = new GetAllClubsOutput(response.clubList, feedbackMessages);
       output.feedbackMessages.forEach((msg) => {
         EventBus.emit("feedback-message", msg);
