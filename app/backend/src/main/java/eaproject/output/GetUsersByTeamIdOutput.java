@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class GetUsersByTeamIdOutput extends BaseOutput implements Serializable {
 
     @JsonProperty
-    private ArrayList<GetAllUsersOutput.UserProperties> usersList;
+    private ArrayList<GetUsersByTeamIdOutput.UserProperties> usersList;
 
-    public ArrayList<GetAllUsersOutput.UserProperties> getUsersList() {
+    public ArrayList<GetUsersByTeamIdOutput.UserProperties> getUsersList() {
         return usersList;
     }
 
-    public void setUsersList(ArrayList<GetAllUsersOutput.UserProperties> usersList) {
+    public void setUsersList(ArrayList<GetUsersByTeamIdOutput.UserProperties> usersList) {
         this.usersList = usersList;
     }
 
@@ -24,6 +24,7 @@ public class GetUsersByTeamIdOutput extends BaseOutput implements Serializable {
         private String name;
         private String email;
         private String gender;
+        private Integer clubid;
         private Integer age;
         private Double height;
         private Double weight;
@@ -100,6 +101,14 @@ public class GetUsersByTeamIdOutput extends BaseOutput implements Serializable {
 
         public void setPhotographyPath(String photographyPath) {
             this.photographyPath = photographyPath;
+        }
+
+        public Integer getClubid() {
+            return clubid;
+        }
+
+        public void setClubid(Integer clubid) {
+            this.clubid = clubid;
         }
     }
 }
