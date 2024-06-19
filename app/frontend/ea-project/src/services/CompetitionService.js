@@ -80,7 +80,7 @@ class CompetitionService {
         trial.weather = weather.weather;
         return trial;
       }));
-      const output = await new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.grade,response.category,response.trials);
+      const output = await new GetCompetitionByIdOutput(response.id, response.name, response.startDate,response.endDate,response.isActive,response.creationDate,response.gender,response.grade,response.type,response.trials);
       return output;
     } catch (error) {
       const errorMessage = new FeedbackMessage(
