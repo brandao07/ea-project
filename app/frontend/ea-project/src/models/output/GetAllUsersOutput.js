@@ -1,4 +1,5 @@
 import BaseOutput from "./BaseOutput";
+import GenderEnumerator from "../enums/Gender";
 
 export default class GetAllUsersOutput extends BaseOutput {
   constructor(usersList = [], feedbackMessages = []) {
@@ -7,13 +8,18 @@ export default class GetAllUsersOutput extends BaseOutput {
   }
 
   static UserProperties = class {
-    constructor({id = 0, name = '', email = '', gender = '', age = 0, height = 0.0, weight = 0.0, registerDate = new Date(), photographyPath = ''}) {
+    constructor({id = 0, name = '',clubid='',email = '', gender = '', age = 0, weight = 0.0, registerDate = new Date(), photographyPath = ''}) {
       this.id = id;
       this.name = name;
+      this.clubid= clubid;
       this.email = email;
-      this.gender = gender;
+      for (const key in GenderEnumerator) {
+        if (key === gender) {
+          this.gender = GenderEnumerator[key];
+          break;
+        }
+      }
       this.age = age;
-      this.height = height;
       this.weight = weight;
       this.registerDate = registerDate;
       this.photographyPath = photographyPath;

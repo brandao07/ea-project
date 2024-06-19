@@ -5,9 +5,10 @@
             <h1 class="display-4 mb-4">Register Team for {{ competition.name }}</h1>
             <form @submit.prevent="submitForm">
                 <div class="mb-3">
+                    {{ this.clubs }}
                     <label for="club" class="form-label">Club</label>
                     <select class="form-control" id="club" v-model="selectedClub" @change="fetchClubData">
-                        <option v-for="club in this.clubs" :key="club.id" :value="club.id">{{ club }}</option>
+                        <option v-for="club in this.clubs" :key="club.id" :value="club.id">{{ club.name }}</option>
                     </select>
                 </div>
                 <div v-if="selectedClub">
@@ -54,6 +55,7 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import GetAllClubsInput from '@/models/input/GetAllClubsInput';
 import UserService from '@/services/UserService';
 import GetAllUsersInput from '@/models/input/GetAllUsersInput';
+import GetAllUsersOutput from '@/models/output/GetAllUsersOutput';
 
 export default {
     name: 'RegisterTeam',
@@ -67,7 +69,7 @@ export default {
             competition: new GetCompetitionByIdOutput(),
             clubs: [],
             selectedClub: null,
-            users: [],
+            users: new GetAllUsersOutput().usersList,
             availableMembers: [],
             availableCoaches: [],
             selectedMember: null,
@@ -75,21 +77,45 @@ export default {
                 name: '',
                 members: [],
                 coach: '',
-            }
+                contactEmail: ''
+            },
+            categories: [
+                { name: 'Minimum', sub: '', minAge: 5, maxAge: 8 },
+                { name: 'Minor', sub: '', minAge: 9, maxAge: 10 },
+                { name: 'Initiate', sub: 'A', minAge: 11, maxAge: 11 },
+                { name: 'Initiate', sub: 'B', minAge: 12, maxAge: 12 },
+                { name: 'Infant', sub: 'A', minAge: 13, maxAge: 13 },
+                { name: 'Infant', sub: 'B', minAge: 14, maxAge: 14 },
+                { name: 'Cadet', sub: '', minAge: 15, maxAge: 16 },
+                { name: 'Sub16', sub: '', minAge: 12, maxAge: 16 },
+                { name: 'Junior', sub: '', minAge: 17, maxAge: 18 },
+                { name: 'Senior', sub: '', minAge: 19, maxAge: 19 },
+                { name: 'Sub23', sub: '', minAge: 19, maxAge: 23 },
+                { name: 'Master', sub: 'A', minAge: 35, maxAge: 44 },
+                { name: 'Master', sub: 'B', minAge: 45, maxAge: 54 },
+                { name: 'Master', sub: 'C', minAge: 55, maxAge: 64 },
+                { name: 'Master', sub: 'D', minAge: 65, maxAge: Infinity }
+            ]
         };
     },
     async created() {
         this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.$route.params.id));
         this.clubs = await (await ClubService.getAllClubs(new GetAllClubsInput())).clubList;
-        this.users = await UserService.getAllUsers(new GetAllUsersInput());
+        this.users = await (await UserService.getAllUsers(new GetAllUsersInput())).usersList;
+        console.log(this.users);
         console.log(this.clubs);
     },
     methods: {
         async fetchClubData() {
+            console.log(this.competition.grade);
             if (this.selectedClub) {
-                this.availableMembers = this.users.filter(user => user.clubId === this.selectedClub && !this.team.members.includes(user));
-                this.availableCoaches = this.users.filter(user => user.clubId === this.selectedClub && user.role === 'Coach');
+                this.availableMembers = this.users.filter(user =>  this.competition.gender === user.gender && this.mapAgeToCategory(user.age) === this.competition.grade);
+                this.availableCoaches = this.users.filter(user => user.clubid === this.selectedClub && user.role === 'Coach');
             }
+        },
+        mapAgeToCategory(age) {
+            const category = this.categories.find(cat => age >= cat.minAge && age <= cat.maxAge);
+            return category ? `${category.name}${category.sub ? ` ${category.sub}` : ''}` : 'Invalid age';
         },
         addMember() {
             if (this.selectedMember && !this.team.members.includes(this.selectedMember)) {
