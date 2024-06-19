@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
 
@@ -481,8 +482,20 @@ public class UserBean implements UserLocal {
 
             // Check if users are retrieved successfully
             if (users.length > 0) {
-                // Assign retrieved users to the output object
-                output.setUsersList(Utilities.convertToDTOArray(users, GetUsersByTeamIdOutput.UserProperties.class));
+                ArrayList<GetUsersByTeamIdOutput.UserProperties> up = new ArrayList<>();
+                for (User user : users) {
+                    var tmp = new GetUsersByTeamIdOutput.UserProperties();
+                    tmp.setId(user.getId());
+                    tmp.setEmail(user.getEmail());
+                    tmp.setAge(user.getAge());
+                    tmp.setClubid(user.getClub().getId());
+                    tmp.setGender(user.getGender());
+                    tmp.setHeight(user.getHeight());
+                    tmp.setWeight(user.getWeight());
+                    tmp.setPhotographyPath(user.getPhotographyPath());
+                    up.add(tmp);
+                }
+                output.setUsersList(up);
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
