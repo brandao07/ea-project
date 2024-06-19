@@ -420,7 +420,24 @@ public class UserBean implements UserLocal {
             // Check if users are retrieved successfully
             if (users.length > 0) {
                 // Assign retrieved users to the output object
-                output.setUsersList(Utilities.convertToDTOArray(users, GetAllUsersOutput.UserProperties.class));
+                ArrayList<GetAllUsersOutput.UserProperties> up = new ArrayList<>();
+                for (User user : users) {
+                    if (user.getClub() == null)
+                        continue;
+
+                    var tmp = new GetAllUsersOutput.UserProperties();
+                    tmp.setId(user.getId());
+                    tmp.setEmail(user.getEmail());
+                    tmp.setAge(user.getAge());
+                    tmp.setName(user.getName());
+                    tmp.setClubid(user.getClub().getId());
+                    tmp.setGender(user.getGender());
+                    tmp.setHeight(user.getHeight());
+                    tmp.setWeight(user.getWeight());
+                    tmp.setPhotographyPath(user.getPhotographyPath());
+                    up.add(tmp);
+                }
+                output.setUsersList(up);
             } else {
                 // Add feedback message if no roles are found
                 output.addFeedbackMessage("No roles found in our database.", FeedbackSeverity.DANGER);
@@ -488,6 +505,7 @@ public class UserBean implements UserLocal {
                     tmp.setId(user.getId());
                     tmp.setEmail(user.getEmail());
                     tmp.setAge(user.getAge());
+                    tmp.setName(user.getName());
                     tmp.setClubid(user.getClub().getId());
                     tmp.setGender(user.getGender());
                     tmp.setHeight(user.getHeight());

@@ -26,6 +26,7 @@ public class GetAllUsersOutput extends BaseOutput implements Serializable {
         private String gender;
         private Integer age;
         private Double height;
+        private Integer clubid;
         private Double weight;
         private Timestamp registerDate;
         private String photographyPath;
@@ -96,6 +97,14 @@ public class GetAllUsersOutput extends BaseOutput implements Serializable {
 
         public void setPhotographyPath(String photographyPath) {
             this.photographyPath = photographyPath;
+        }
+
+        public Integer getClubid() {
+            return clubid;
+        }
+
+        public void setClubid(Integer clubid) {
+            this.clubid = clubid;
         }
     }
 }
