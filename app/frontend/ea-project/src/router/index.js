@@ -30,6 +30,12 @@ const routes = [
     props: true,
   },
   {
+    path:'/register-team/:id',
+    name:'register-team',
+    component: () => import("@/views/RegisterTeam.vue"),
+    props: true,
+  },
+  {
     path: "/competitions",
     name: "view-competitions",
     component: () => import("@/views/ViewCompetitions.vue"),
