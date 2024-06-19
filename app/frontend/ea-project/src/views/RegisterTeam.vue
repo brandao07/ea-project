@@ -2,13 +2,12 @@
     <div>
         <NavigationBar />
         <div class="register-team container my-5">
-            <h1 class="display-4 mb-4">Register Team for {{ competition.name }}</h1>
+            <h1 class="display-4 mb-4">Register Team for {{ competition.name }} {{ competition.type }}</h1>
             <form @submit.prevent="submitForm">
                 <div class="mb-3">
-                    {{ this.clubs }}
                     <label for="club" class="form-label">Club</label>
                     <select class="form-control" id="club" v-model="selectedClub" @change="fetchClubData">
-                        <option v-for="club in this.clubs" :key="club.id" :value="club.id">{{ club.name }}</option>
+                        <option v-for="club in clubs" :key="club.id" :value="club.id">{{ club.name }}</option>
                     </select>
                 </div>
                 <div v-if="selectedClub">
@@ -18,29 +17,35 @@
                     </div>
                     <div class="mb-3">
                         <label for="teamMembers" class="form-label">Team Members</label>
-                        <generic-grid :data="team.members" :headers="['Name', 'Role']" :editable="false" :deletable="true"
-                            grid-title="Selected Members" @delete="deleteMember" />
+                        <generic-grid :data="this.team.members" :headers="['name', 'email']" :editable="false"
+                            :deletable="true" grid-title="Selected Members" @delete="deleteMember" />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" v-if="validateCategories_teste()">
                         <label for="addMember" class="form-label">Add Member</label>
                         <select class="form-control" id="addMember" v-model="selectedMember">
-                            <option v-for="member in availableMembers" :key="member.id" :value="member">{{ member.name }}
+                            <option v-for="member in availableMembers" :key="member.id" :value="member">
+                                {{ member.name }}, {{ member.email }}
                             </option>
                         </select>
                         <button type="button" class="btn btn-primary mt-2" @click="addMember">Add Member</button>
                     </div>
                     <div class="mb-3">
                         <label for="coach" class="form-label">Coach</label>
-                        <v-select v-model="team.coach" :options="availableCoaches" label="name"
-                            placeholder="Select a coach"></v-select>
+                        <select class="form-control" id="coach" v-model="team.coach">
+                            <option v-for="member in availableCoaches" :key="member.id" :value="member">
+                                {{ member.name }}, {{ member.email }}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div v-else>
                     <p>Please select a club to see available members and coaches.</p>
                 </div>
                 <button type="submit" class="btn btn-success" :disabled="!selectedClub">Submit</button>
+                <button type="button" class="btn btn-danger" @click="cancel">Cancel</button>
             </form>
         </div>
+        <Footer/>
     </div>
 </template>
 
@@ -56,28 +61,30 @@ import GetAllClubsInput from '@/models/input/GetAllClubsInput';
 import UserService from '@/services/UserService';
 import GetAllUsersInput from '@/models/input/GetAllUsersInput';
 import GetAllUsersOutput from '@/models/output/GetAllUsersOutput';
+import TeamService from '@/services/TeamService';
 
 export default {
     name: 'RegisterTeam',
-    props: ['competitionId'],
+    props: [],
     components: {
         GenericGrid,
-        NavigationBar
+        NavigationBar,
     },
     data() {
         return {
             competition: new GetCompetitionByIdOutput(),
             clubs: [],
             selectedClub: null,
-            users: new GetAllUsersOutput().usersList,
+            users: [],
             availableMembers: [],
             availableCoaches: [],
             selectedMember: null,
             team: {
                 name: '',
                 members: [],
-                coach: '',
-                contactEmail: ''
+                coach: null,
+                clubid: null,
+
             },
             categories: [
                 { name: 'Minimum', sub: '', minAge: 5, maxAge: 8 },
@@ -95,23 +102,35 @@ export default {
                 { name: 'Master', sub: 'B', minAge: 45, maxAge: 54 },
                 { name: 'Master', sub: 'C', minAge: 55, maxAge: 64 },
                 { name: 'Master', sub: 'D', minAge: 65, maxAge: Infinity }
-            ]
+            ],
         };
     },
     async created() {
-        this.competition = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.$route.params.id));
-        this.clubs = await (await ClubService.getAllClubs(new GetAllClubsInput())).clubList;
-        this.users = await (await UserService.getAllUsers(new GetAllUsersInput())).usersList;
-        console.log(this.users);
-        console.log(this.clubs);
+        const competitionData = await CompetitionService.getCompetitionById(new GetCompetitionByIdInput(this.$route.params.id));
+        this.competition = competitionData;
+        const clubsData = await ClubService.getAllClubs(new GetAllClubsInput());
+        this.clubs = clubsData.clubList;
+        const usersData = await UserService.getAllUsers(new GetAllUsersInput());
+        this.users = usersData.usersList;
     },
     methods: {
-        async fetchClubData() {
-            console.log(this);
+        fetchClubData() {
             if (this.selectedClub) {
-                this.availableMembers = this.users.filter(user => user.clubid === this.selectedClub.id && this.competition.gender === user.gender && this.mapAgeToCategory(user.age) === this.competition.grade);
-                this.availableCoaches = this.users.filter(user => user.clubid === this.selectedClub && user.role === 'Coach');
+                this.team.clubid = this.selectedClub;
+                this.availableMembers = this.users.filter(user => 
+                    user.clubid === this.selectedClub && 
+                    this.competition.gender === user.gender && 
+                    this.mapAgeToCategory(user.age) === this.competition.grade
+                );
+                this.fetchCoaches();
             }
+        },
+        fetchCoaches() {
+            this.availableCoaches = this.users.filter(user => 
+                user.clubid === this.selectedClub && 
+                !this.team.members.includes(user)
+            );
+            this.availableMembers = this.availableMembers.filter(member => !this.team.members.includes(member));
         },
         mapAgeToCategory(age) {
             const category = this.categories.find(cat => age >= cat.minAge && age <= cat.maxAge);
@@ -119,25 +138,52 @@ export default {
         },
         addMember() {
             if (this.selectedMember && !this.team.members.includes(this.selectedMember)) {
+               if (this.validateCategories_teste()) {
                 this.team.members.push(this.selectedMember);
                 this.selectedMember = null;
+                this.fetchCoaches();
+               }
+               else {
+                    alert('You can\'t add more members to this category');
+               }
             }
         },
         deleteMember(member) {
             this.team.members = this.team.members.filter(m => m.id !== member.id);
         },
+        validateCategories() {
+            const category = parseInt(this.competition.type[1]);
+            const memberCount = this.team.members.length;
+            return memberCount ===  category;
+        },
+        validateCategories_teste() {
+            const category = parseInt(this.competition.type[1]);
+            const memberCount = this.team.members.length;
+            return memberCount +1<= category;
+        },
         async submitForm() {
+            if (!this.validateCategories()) {
+                alert(`Please ensure the number of members for the ${this.competition.categoria} category is correct.`);
+                return;
+            }
+
             const registerTeamInput = {
                 competitionId: this.competitionId,
                 name: this.team.name,
                 members: this.team.members.map(member => member.id),
                 coach: this.team.coach.id,
-                contactEmail: this.team.contactEmail
+                clubid: this.team.clubid,
             };
 
-            await CompetitionService.registerTeam(registerTeamInput);
+            await TeamService.createTeamEntity(registerTeamInput);
             alert('Team registered successfully!');
-            router.push({ name: 'competition-details', params: { id: this.competitionId } });
+            router.push({ name: 'competition-detail', params: { id: this.competition.id } });
+        },
+        cancel() {
+            // Redireciona o usuário para outra página ou limpa o formulário
+            if (confirm('Are you sure you want to cancel?')) {
+            router.push({ name: 'competition-detail', params: { id: this.competition.id } });
+            }
         }
     }
 };

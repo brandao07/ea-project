@@ -87,8 +87,6 @@ export default {
             router.push({ name: 'competition-detail', params: { id: competition.id } });
         },
         applyFilters(filters) {
-            console.log('filters')
-            console.log(this.getAllCompetitionsOutput.competitionList)
             this.filters = filters;
             this.filteredCompetitions = this.getAllCompetitionsOutput.competitionList.filter(competition => {
                 return !this.filters || (!this.filters.competitionName || competition.name.toLowerCase().includes(this.filters.competitionName.toLowerCase())) &&
