@@ -21,7 +21,6 @@
                                         <th>Name</th>
                                         <th>Time (ms)</th>
                                         <th>Penalti Time (ms)</th>
-                                        <th>Observations</th>
                                         <th>Position</th>
                                     </tr>
                                 </thead>
@@ -30,7 +29,6 @@
                                         <td>{{ team.name }}</td>
                                         <td><input type="time" step="0.001" class="form-control" id="time" v-model="teamData[index].time" required></td>
                                         <td><input type="time" step="0.001" class="form-control" id="penalty" v-model="teamData[index].penaltyTime" required></td>
-                                        <td><input type="text" class="form-control" id="observations" v-model="teamData[index].observations" required></td>
                                         <td><input type="number" class="form-control" id="position" v-model="teamData[index].position" required></td>
                                     </tr>
                                 </tbody>
@@ -89,7 +87,6 @@ export default {
                 let createResultInput = new CreateResultInput();
                 createResultInput.time = this.convertToTimestamp(this.teamData[i].time);
                 createResultInput.penaltyTime = this.convertToTimestamp(this.teamData[i].penaltyTime);
-                createResultInput.observations = this.teamData[i].observations;
                 createResultInput.position = this.teamData[i].position;
                 createResultInput.teamId = this.getTeamsByTrialIdOutput.teamList[i].id;
                 this.createResultOutput = await ResultService.createResultEntity(createResultInput);
@@ -133,7 +130,6 @@ export default {
                 return {
                     time: '',
                     penaltyTime: '',
-                    observations: '',
                     position: ''
                 };
             });
